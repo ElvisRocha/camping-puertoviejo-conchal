@@ -56,14 +56,14 @@ export default function ContactPage() {
       {/* Main Content */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
             {/* Left Column - Form */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border">
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full">
                 <h2 className="text-2xl font-bold text-foreground mb-6">
                   {t('contact.form.title')}
                 </h2>
@@ -71,27 +71,32 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            {/* Right Column - Info & Map */}
+            {/* Right Column - Info */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-8"
             >
-              {/* Contact Info */}
-              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border">
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full">
                 <h2 className="text-2xl font-bold text-foreground mb-6">
                   {t('contact.info.title')}
                 </h2>
                 <ContactInfo />
               </div>
-
-              {/* Map */}
-              <div className="bg-card rounded-2xl p-4 shadow-lg border h-[400px]">
-                <ContactMap accessToken={mapboxToken} />
-              </div>
             </motion.div>
           </div>
+
+          {/* Map - Full width */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-12"
+          >
+            <div className="bg-card rounded-2xl p-4 shadow-lg border h-[400px]">
+              <ContactMap accessToken={mapboxToken} />
+            </div>
+          </motion.div>
         </div>
       </section>
 
