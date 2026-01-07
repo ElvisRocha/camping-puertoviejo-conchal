@@ -2,15 +2,18 @@ import { useTranslation } from 'react-i18next';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
-import { format, addDays, isBefore, startOfDay } from 'date-fns';
+import { isBefore, startOfDay } from 'date-fns';
 import { CalendarIcon, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getDateLocale, getWeekStartsOn, formatLocalizedDate } from '@/lib/dateLocale';
 
 export function Step1Dates() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { booking, setDates, nextStep } = useBookingStore();
   
   const today = startOfDay(new Date());
+  const currentLocale = getDateLocale(i18n.language);
+  const weekStartsOn = getWeekStartsOn(i18n.language);
   
   const handleSelect = (range: { from?: Date; to?: Date } | undefined) => {
     if (range?.from && range?.to) {
@@ -46,6 +49,8 @@ export function Step1Dates() {
             onSelect={handleSelect}
             numberOfMonths={2}
             disabled={(date) => isBefore(date, today)}
+            locale={currentLocale}
+            weekStartsOn={weekStartsOn}
             className="rounded-xl"
           />
         </div>
@@ -60,12 +65,16 @@ export function Step1Dates() {
           <div className="flex items-center justify-center gap-4 text-lg">
             <div className="flex items-center gap-2">
               <CalendarIcon className="w-5 h-5 text-forest" />
-              <span className="font-semibold">{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</span>
+              <span className="font-semibold">
+                {formatLocalizedDate(booking.checkIn, 'PPP', i18n.language)}
+              </span>
             </div>
             <ArrowRight className="w-5 h-5 text-muted-foreground" />
             <div className="flex items-center gap-2">
               <CalendarIcon className="w-5 h-5 text-forest" />
-              <span className="font-semibold">{format(new Date(booking.checkOut), 'MMM dd, yyyy')}</span>
+              <span className="font-semibold">
+                {formatLocalizedDate(booking.checkOut, 'PPP', i18n.language)}
+              </span>
             </div>
           </div>
           <p className="text-forest font-medium mt-2">
