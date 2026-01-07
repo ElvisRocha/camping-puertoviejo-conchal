@@ -71,13 +71,13 @@ export function ContactMap({ accessToken }: ContactMapProps) {
   }
 
   return (
-    <div className="relative w-full h-full min-h-[400px] rounded-xl overflow-hidden shadow-lg">
+    <div className="relative w-full h-full rounded-xl overflow-hidden">
       <div ref={mapContainer} className="absolute inset-0" />
       <a
         href={GOOGLE_MAPS_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute bottom-4 left-4 z-10"
+        className="absolute bottom-4 right-4 z-10"
       >
         <Button className="shadow-lg gap-2">
           <Navigation className="w-4 h-4" />
