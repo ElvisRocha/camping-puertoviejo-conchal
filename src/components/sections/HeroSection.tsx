@@ -71,7 +71,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
           >
             <Link to="/book">
-              <Button className="btn-hero text-lg px-10 py-6">
+              <Button className="btn-cta text-xl px-10 py-6">
                 {t('hero.cta')}
               </Button>
             </Link>
