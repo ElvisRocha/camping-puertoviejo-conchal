@@ -97,7 +97,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12"
           >
-            <div className="bg-card rounded-2xl p-4 shadow-lg border h-[400px]">
+            <div className="bg-card rounded-2xl p-4 shadow-lg border h-[800px]">
               <ContactMap accessToken={mapboxToken} />
             </div>
           </motion.div>
