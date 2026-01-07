@@ -37,6 +37,41 @@
       "sunset4": "Silhouettes at sunset"
     }
   },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Have questions about your adventure? We'd love to hear from you!",
+    "form": {
+      "title": "Send Us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone (optional)",
+      "phonePlaceholder": "+1 234 567 8900",
+      "subject": "Subject",
+      "subjectPlaceholder": "Question about my booking",
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "successTitle": "Message Sent!",
+      "successMessage": "Thank you for reaching out. We'll get back to you within 24 hours."
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Office Hours",
+      "hoursContent": "Daily 7:00 AM - 8:00 PM (Costa Rica Time)"
+    },
+    "whatsapp": {
+      "description": "Need a quick response? Chat with us on WhatsApp!",
+      "button": "Chat on WhatsApp"
+    },
+    "faqPrompt": "Looking for answers to common questions?",
+    "faqLink": "Check out our FAQ section →"
+  },
   "hero": {
     "headline": "Wake Up to the Sound of Waves and Howler Monkeys",
     "subheadline": "Experience the magic of sleeping under the stars on Costa Rica's most pristine beaches. Where the jungle meets the Pacific, your adventure begins.",
