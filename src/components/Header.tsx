@@ -20,6 +20,13 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   // Check if we're on the home page (hero has transparent header)
   const isHomePage = location.pathname === '/';
 
@@ -60,7 +67,7 @@ const Header = () => {
     >
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" onClick={handleHomeClick} className="flex items-center gap-2">
           <span className="text-2xl">🌴</span>
           <div className="flex flex-col">
             <span
@@ -88,6 +95,9 @@ const Header = () => {
             <Link
               key={item.key}
               to={item.href}
+              onClick={(e) => {
+                if (item.key === 'home') handleHomeClick(e);
+              }}
               className={cn(
                 'font-body font-medium text-sm transition-colors hover:text-accent',
                 hasBackground ? 'text-foreground' : 'text-cream'
@@ -168,7 +178,10 @@ const Header = () => {
                 <Link
                   key={item.key}
                   to={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    if (item.key === 'home') handleHomeClick(e);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="font-body font-medium text-foreground hover:text-accent transition-colors py-2"
                 >
                   {t(`nav.${item.key}`)}
