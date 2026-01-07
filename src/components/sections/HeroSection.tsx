@@ -1,23 +1,45 @@
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun } from 'lucide-react';
-import heroImage from '@/assets/hero-playa-guanacaste.png';
+import heroPlaya from '@/assets/hero-playa-guanacaste.png';
+import heroPlayaBahia from '@/assets/hero-playa-bahia.png';
+import heroCamping from '@/assets/hero-beach-sunset.jpg';
+import heroCampingSunset from '@/assets/hero-camping-sunset.png';
+
+const heroImages = [heroPlaya, heroPlayaBahia, heroCamping, heroCampingSunset];
 
 const HeroSection = () => {
   const { t } = useTranslation();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-hero" />
-      </div>
+      {/* Background Images Carousel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentImageIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImages[currentImageIndex]})` }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-hero" />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Content */}
       <div className="relative z-10 container-wide text-center py-32 pt-40">
@@ -73,6 +95,22 @@ const HeroSection = () => {
             <span className="font-body text-sm sm:text-base">{t('hero.features.sunsets')}</span>
           </div>
         </motion.div>
+      </div>
+
+      {/* Image Indicators */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {heroImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentImageIndex(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === currentImageIndex 
+                ? 'bg-cream w-6' 
+                : 'bg-cream/50 hover:bg-cream/70 w-2'
+            }`}
+            aria-label={`Ver imagen ${index + 1}`}
+          />
+        ))}
       </div>
 
       {/* Scroll Indicator */}
