@@ -296,6 +296,16 @@
     "copyright": "© 2025 Camping Puerto Viejo Conchal. All rights reserved. Made with 🌴 in Costa Rica."
   },
   "booking": {
+    "steps": {
+      "dates": "Dates",
+      "guests": "Guests",
+      "extras": "Extras",
+      "details": "Details",
+      "confirm": "Confirm",
+      "completed": "Step completed",
+      "current": "Current step",
+      "upcoming": "Upcoming step"
+    },
     "step1": {
       "title": "When Does Your Adventure Begin?",
       "subtitle": "Select your check-in and check-out dates. Minimum stay: 1 night.",
@@ -310,7 +320,10 @@
       "infants": "Infants (0-3)",
       "infantsFree": "Free",
       "needTent": "Do you need tent rental?",
-      "bringOwn": "I'm bringing my own tent"
+      "bringOwn": "I'm bringing my own tent",
+      "bringOwnNote": "Just campsite fee applies",
+      "campsiteRate": "Campsite",
+      "sleeps": "Sleeps"
     },
     "step3": {
       "title": "Make It Unforgettable",
@@ -318,11 +331,16 @@
     },
     "step4": {
       "title": "Review Your Adventure",
+      "summary": "Booking Summary",
       "dates": "Dates",
       "nights": "nights",
       "guests": "Guests",
       "adults": "Adults",
       "children": "Children",
+      "infants": "Infants",
+      "accommodation": "Accommodation",
+      "bringOwnTent": "Bringing own tent",
+      "addonsLabel": "Add-ons",
       "campsite": "Campsite fee",
       "tentRental": "Tent rental",
       "addons": "Add-ons",
@@ -368,7 +386,13 @@
     },
     "next": "Continue",
     "back": "Back",
-    "findAvailability": "Find Availability"
+    "findAvailability": "Find Availability",
+    "priceTypes": {
+      "person": "person",
+      "night": "night",
+      "day": "day",
+      "personNight": "person/night"
+    }
   },
   "addons": {
     "breakfast": { "name": "Breakfast Package", "description": "Fresh tropical fruits, gallo pinto, eggs, Costa Rican coffee. Fuel up for adventure." },

@@ -78,7 +78,7 @@ export function Step4Summary() {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Booking Summary */}
         <div className="card-nature p-6 space-y-4">
-          <h3 className="font-heading font-bold text-xl mb-4">Booking Summary</h3>
+          <h3 className="font-heading font-bold text-xl mb-4">{t('booking.step4.summary')}</h3>
 
           {/* Dates */}
           <div className="flex items-center gap-3 pb-3 border-b border-border/50">
@@ -99,7 +99,7 @@ export function Step4Summary() {
               <p className="font-medium">{t('booking.step4.guests')}</p>
               <p className="text-sm text-muted-foreground">
                 {guests.adults} {t('booking.step4.adults')}, {guests.children} {t('booking.step4.children')}
-                {guests.infants > 0 && `, ${guests.infants} infants`}
+                {guests.infants > 0 && `, ${guests.infants} ${t('booking.step4.infants')}`}
               </p>
             </div>
           </div>
@@ -108,15 +108,15 @@ export function Step4Summary() {
           <div className="flex items-center gap-3 pb-3 border-b border-border/50">
             <Tent className="w-5 h-5 text-forest" />
             <div>
-              <p className="font-medium">Accommodation</p>
+              <p className="font-medium">{t('booking.step4.accommodation')}</p>
               {booking.accommodation?.bringOwnTent ? (
-                <p className="text-sm text-muted-foreground">Bringing own tent</p>
+                <p className="text-sm text-muted-foreground">{t('booking.step4.bringOwnTent')}</p>
               ) : (
                 <div className="text-sm text-muted-foreground">
                   {booking.accommodation?.rentedTents?.map(selection => {
                     const tent = TENT_OPTIONS.find(t => t.id === selection.tentId);
                     return tent && (
-                      <p key={selection.tentId}>{tent.name} x{selection.quantity}</p>
+                      <p key={selection.tentId}>{t(tent.nameKey)} x{selection.quantity}</p>
                     );
                   })}
                 </div>
@@ -129,11 +129,11 @@ export function Step4Summary() {
             <div className="flex items-start gap-3 pb-3 border-b border-border/50">
               <Sparkles className="w-5 h-5 text-forest mt-0.5" />
               <div>
-                <p className="font-medium">Add-ons</p>
+                <p className="font-medium">{t('booking.step4.addonsLabel')}</p>
                 <div className="text-sm text-muted-foreground">
                   {booking.addOns.map(id => {
                     const addon = ADD_ONS.find(a => a.id === id);
-                    return addon && <p key={id}>{addon.icon} {addon.name}</p>;
+                    return addon && <p key={id}>{addon.icon} {t(addon.nameKey)}</p>;
                   })}
                 </div>
               </div>

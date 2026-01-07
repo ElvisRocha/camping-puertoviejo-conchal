@@ -78,7 +78,7 @@ export function Step2Guests() {
 
         <div className="pt-4 text-center">
           <p className="text-muted-foreground">
-            Campsite: <span className="font-semibold text-forest">${PRICING.campsitePerPersonPerNight}/person/night</span>
+            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">${PRICING.campsitePerPersonPerNight}/{t('booking.priceTypes.personNight')}</span>
           </p>
         </div>
       </div>
@@ -108,7 +108,7 @@ export function Step2Guests() {
           </div>
           <div>
             <p className="font-semibold">{t('booking.step2.bringOwn')}</p>
-            <p className="text-sm text-muted-foreground">Just campsite fee applies</p>
+            <p className="text-sm text-muted-foreground">{t('booking.step2.bringOwnNote')}</p>
           </div>
         </button>
 
@@ -124,21 +124,21 @@ export function Step2Guests() {
                   quantity > 0 ? 'border-forest bg-forest/5' : 'border-border'
                 )}
               >
-                <div className="flex gap-4">
+                  <div className="flex gap-4">
                   <img
                     src={tent.image}
-                    alt={tent.name}
+                    alt={t(tent.nameKey)}
                     className="w-24 h-24 object-cover rounded-lg"
                   />
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-semibold">{tent.icon} {tent.name}</h4>
-                        <p className="text-sm text-muted-foreground">Sleeps {tent.capacity}</p>
+                        <h4 className="font-semibold">{tent.icon} {t(tent.nameKey)}</h4>
+                        <p className="text-sm text-muted-foreground">{t('booking.step2.sleeps')} {tent.capacity}</p>
                       </div>
-                      <p className="font-bold text-forest">${tent.pricePerNight}/night</p>
+                      <p className="font-bold text-forest">${tent.pricePerNight}/{t('booking.priceTypes.night')}</p>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-1">{tent.description}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t(tent.descriptionKey)}</p>
                     <div className="flex items-center gap-3 mt-3">
                       <Button
                         variant="outline"

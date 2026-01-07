@@ -20,6 +20,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Check if we're on the home page (hero has transparent header)
+  const isHomePage = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -27,6 +30,9 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Header should have solid background on non-home pages or when scrolled
+  const hasBackground = !isHomePage || isScrolled;
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -47,7 +53,7 @@ const Header = () => {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
+        hasBackground
           ? 'bg-card/95 backdrop-blur-md shadow-soft py-3'
           : 'bg-transparent py-5'
       )}
@@ -60,7 +66,7 @@ const Header = () => {
             <span
               className={cn(
                 'font-heading font-bold text-lg leading-tight transition-colors',
-                isScrolled ? 'text-forest' : 'text-cream'
+                hasBackground ? 'text-forest' : 'text-cream'
               )}
             >
               Camping Puerto Viejo
@@ -68,7 +74,7 @@ const Header = () => {
             <span
               className={cn(
                 'text-xs font-medium tracking-wider uppercase transition-colors',
-                isScrolled ? 'text-sage' : 'text-cream/80'
+                hasBackground ? 'text-sage' : 'text-cream/80'
               )}
             >
               Conchal
@@ -84,7 +90,7 @@ const Header = () => {
               to={item.href}
               className={cn(
                 'font-body font-medium text-sm transition-colors hover:text-accent',
-                isScrolled ? 'text-foreground' : 'text-cream'
+                hasBackground ? 'text-foreground' : 'text-cream'
               )}
             >
               {t(`nav.${item.key}`)}
@@ -102,7 +108,7 @@ const Header = () => {
                 size="sm"
                 className={cn(
                   'gap-2 font-body',
-                  isScrolled
+                  hasBackground
                     ? 'text-foreground hover:bg-muted'
                     : 'text-cream hover:bg-cream/10'
                 )}
@@ -140,7 +146,7 @@ const Header = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={cn(
               'lg:hidden p-2 rounded-lg transition-colors',
-              isScrolled ? 'text-foreground' : 'text-cream'
+              hasBackground ? 'text-foreground' : 'text-cream'
             )}
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
