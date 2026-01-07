@@ -31,6 +31,13 @@ export function ContactMap({ accessToken }: ContactMapProps) {
       pitch: 45,
     });
 
+    // Force scroll to top after map loads to prevent map from stealing scroll
+    map.current.on('load', () => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }, 50);
+    });
+
     // Add navigation controls
     map.current.addControl(
       new mapboxgl.NavigationControl({
@@ -72,7 +79,7 @@ export function ContactMap({ accessToken }: ContactMapProps) {
 
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden">
-      <div ref={mapContainer} className="absolute inset-0" />
+      <div ref={mapContainer} className="absolute inset-0" tabIndex={-1} style={{ outline: 'none' }} />
       <a
         href={GOOGLE_MAPS_URL}
         target="_blank"
