@@ -40,9 +40,9 @@ export function ContactInfo() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col h-full">
       {/* Contact items */}
-      <div className="space-y-4">
+      <div className="space-y-4 flex-grow">
         {contactItems.map((item, index) => (
           <div key={index} className="flex items-start gap-4">
             <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -68,7 +68,7 @@ export function ContactInfo() {
       </div>
 
       {/* WhatsApp button */}
-      <div className="pt-4 border-t">
+      <div className="pt-4 border-t mt-auto">
         <p className="text-sm text-muted-foreground mb-3">
           {t('contact.whatsapp.description')}
         </p>
