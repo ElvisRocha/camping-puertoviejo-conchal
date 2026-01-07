@@ -59,7 +59,7 @@
     --radius: 0.75rem;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(93 52% 21% / 0.9), hsl(146 53% 43% / 0.7));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0% / 0.35) 0%, hsl(0 0% 0% / 0.1) 40%, hsl(0 0% 0% / 0.45) 100%);
     --gradient-sunset: linear-gradient(180deg, hsl(16 100% 60% / 0.2), hsl(25 100% 55% / 0.1));
     --gradient-sand: linear-gradient(180deg, hsl(56 100% 97%), hsl(39 77% 88%));
     --gradient-ocean: linear-gradient(135deg, hsl(200 100% 29%), hsl(200 70% 50%));
@@ -131,7 +131,16 @@
 @layer components {
   /* Hero Button Variants */
   .btn-hero {
-    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-heading font-semibold text-lg shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 hover:bg-forest-light;
+    @apply bg-gradient-to-r from-sunset to-sunset-warm text-white px-10 py-5 rounded-full font-heading font-bold text-xl shadow-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl relative overflow-hidden;
+  }
+  
+  .btn-hero::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-100%] skew-x-12 transition-transform duration-700;
+  }
+  
+  .btn-hero:hover::before {
+    @apply translate-x-[100%];
   }
   
   .btn-hero-outline {
@@ -139,7 +148,16 @@
   }
   
   .btn-cta {
-    @apply bg-accent text-accent-foreground px-6 py-3 rounded-full font-heading font-semibold shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-sunset to-sunset-warm text-white px-8 py-4 rounded-full font-heading font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl relative overflow-hidden;
+  }
+  
+  .btn-cta::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 translate-x-[-100%] skew-x-12 transition-transform duration-500;
+  }
+  
+  .btn-cta:hover::before {
+    @apply translate-x-[100%];
   }
   
   .btn-secondary {

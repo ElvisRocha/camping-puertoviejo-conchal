@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun } from 'lucide-react';
-import heroImage from '@/assets/hero-beach-sunset.jpg';
+import heroImage from '@/assets/hero-playa-guanacaste.png';
 
 const HeroSection = () => {
   const { t } = useTranslation();
