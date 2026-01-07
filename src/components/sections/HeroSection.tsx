@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -25,80 +25,83 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images Carousel */}
-      <AnimatePresence mode="wait">
+      {/* Background Images - Crossfade simultáneo */}
+      {heroImages.map((image, index) => (
         <motion.div
-          key={currentImageIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
+          key={index}
+          initial={false}
+          animate={{ 
+            opacity: index === currentImageIndex ? 1 : 0,
+            scale: index === currentImageIndex ? 1 : 1.05
+          }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImages[currentImageIndex]})` }}
-        >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-hero" />
-        </motion.div>
-      </AnimatePresence>
+          style={{ backgroundImage: `url(${image})` }}
+        />
+      ))}
+      {/* Overlay siempre visible */}
+      <div className="absolute inset-0 bg-gradient-hero" />
 
       {/* Content */}
       <div className="relative z-10 container-wide text-center py-32 pt-40">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-hero text-cream mb-6 max-w-5xl mx-auto text-balance">
-            {t('hero.headline')}
-          </h1>
-        </motion.div>
+        <div className="inline-block bg-black/30 backdrop-blur-sm rounded-3xl px-6 py-10 sm:px-12 sm:py-14">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white mb-6 max-w-5xl mx-auto text-balance drop-shadow-lg">
+              {t('hero.headline')}
+            </h1>
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-body text-xl text-cream/90 max-w-3xl mx-auto mb-8"
-        >
-          {t('hero.subheadline')}
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-body text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-8 font-medium drop-shadow-md"
+          >
+            {t('hero.subheadline')}
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-        >
-          <Link to="/book">
-            <Button className="btn-hero text-lg px-10 py-6">
-              {t('hero.cta')}
-            </Button>
-          </Link>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
+          >
+            <Link to="/book">
+              <Button className="btn-hero text-lg px-10 py-6">
+                {t('hero.cta')}
+              </Button>
+            </Link>
+          </motion.div>
 
-        {/* Feature Tags */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-wrap justify-center gap-4 sm:gap-8"
-        >
-          <div className="flex items-center gap-2 text-cream/90">
-            <Palmtree className="h-5 w-5" />
-            <span className="font-body text-sm sm:text-base">{t('hero.features.beachfront')}</span>
-          </div>
-          <div className="flex items-center gap-2 text-cream/90">
-            <Bird className="h-5 w-5" />
-            <span className="font-body text-sm sm:text-base">{t('hero.features.wildlife')}</span>
-          </div>
-          <div className="flex items-center gap-2 text-cream/90">
-            <Sun className="h-5 w-5" />
-            <span className="font-body text-sm sm:text-base">{t('hero.features.sunsets')}</span>
-          </div>
-        </motion.div>
+          {/* Feature Tags */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-wrap justify-center gap-4 sm:gap-8"
+          >
+            <div className="flex items-center gap-2 text-white/90">
+              <Palmtree className="h-5 w-5" />
+              <span className="font-body text-sm sm:text-base">{t('hero.features.beachfront')}</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/90">
+              <Bird className="h-5 w-5" />
+              <span className="font-body text-sm sm:text-base">{t('hero.features.wildlife')}</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/90">
+              <Sun className="h-5 w-5" />
+              <span className="font-body text-sm sm:text-base">{t('hero.features.sunsets')}</span>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Image Indicators */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {heroImages.map((_, index) => (
           <button
             key={index}
