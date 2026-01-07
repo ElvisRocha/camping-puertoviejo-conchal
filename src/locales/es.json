@@ -184,7 +184,47 @@
     "note": "Importante: Practicamos interacción responsable con la fauna. Por favor no alimentes a los animales—prosperan mejor con su dieta natural, y tu respeto ayuda a mantenerlos salvajes."
   },
   "testimonials": {
-    "title": "Historias Desde la Arena"
+    "title": "Historias Desde la Arena",
+    "subtitle": "Experiencias reales de aventureros que encontraron su paraíso con nosotros",
+    "ratingCount": "de más de 200 reseñas",
+    "reviews": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "location": "California, EE.UU.",
+        "text": "Despertar con monos aulladores y caminar a la playa en segundos—esta fue la experiencia de camping más mágica de mi vida. El personal fue increíblemente servicial y la ubicación es absolutamente impresionante.",
+        "date": "Dic 2025"
+      },
+      "michael": {
+        "name": "Michael Chen",
+        "location": "Toronto, Canadá",
+        "text": "Vimos tucanes, monos y los atardeceres más increíbles. Mis hijos todavía hablan de ello meses después. Mezcla perfecta de aventura y comodidad. ¡Definitivamente volveremos!",
+        "date": "Nov 2025"
+      },
+      "emma": {
+        "name": "Emma Williams",
+        "location": "Londres, Reino Unido",
+        "text": "Viajé sola y me sentí completamente segura y bienvenida. La comunidad alrededor de la fogata cada noche fue maravillosa. Hice amigos de todo el mundo. Verdaderamente transformador.",
+        "date": "Ene 2026"
+      },
+      "carlos": {
+        "name": "Carlos Mendez",
+        "location": "Ciudad de México, México",
+        "text": "La experiencia perfecta para reconectarse con la naturaleza. La playa de Conchal es un paraíso, y tenerla tan cerca del campamento hizo que cada día se sintiera como un sueño.",
+        "date": "Oct 2025"
+      },
+      "lisa": {
+        "name": "Lisa Anderson",
+        "location": "Sídney, Australia",
+        "text": "¡Valió la pena el largo vuelo! La fauna aquí es increíble—vimos guacamayos escarlata cada mañana. Las tiendas de alquiler fueron sorprendentemente cómodas y las comodidades excelentes.",
+        "date": "Sep 2025"
+      },
+      "david": {
+        "name": "David Müller",
+        "location": "Berlín, Alemania",
+        "text": "La mejor decisión que tomamos para nuestra luna de miel. Atardeceres románticos, playas privadas y la observación de estrellas más increíble. El personal nos ayudó a organizar excursiones de kayak y snorkel.",
+        "date": "Dic 2025"
+      }
+    }
   },
   "location": {
     "title": "Donde la Jungla Conoce el Océano",

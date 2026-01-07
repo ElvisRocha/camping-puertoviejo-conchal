@@ -184,7 +184,47 @@
     "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals—they thrive best on their natural diet, and your respect helps keep them wild."
   },
   "testimonials": {
-    "title": "Stories From the Sand"
+    "title": "Stories From the Sand",
+    "subtitle": "Real experiences from adventurers who found their paradise with us",
+    "ratingCount": "from 200+ reviews",
+    "reviews": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "location": "California, USA",
+        "text": "Waking up to howler monkeys and walking to the beach in seconds—this was the most magical camping experience of my life. The staff was incredibly helpful and the location is absolutely stunning.",
+        "date": "Dec 2025"
+      },
+      "michael": {
+        "name": "Michael Chen",
+        "location": "Toronto, Canada",
+        "text": "We saw toucans, monkeys, and the most incredible sunsets. My kids are still talking about it months later. Perfect blend of adventure and comfort. Will definitely return!",
+        "date": "Nov 2025"
+      },
+      "emma": {
+        "name": "Emma Williams",
+        "location": "London, UK",
+        "text": "I traveled solo and felt completely safe and welcomed. The community around the campfire each night was wonderful. Made friends from all over the world. Truly life-changing.",
+        "date": "Jan 2026"
+      },
+      "carlos": {
+        "name": "Carlos Mendez",
+        "location": "Mexico City, Mexico",
+        "text": "La experiencia perfecta para reconectarse con la naturaleza. The beach at Conchal is paradise, and having it so close to camp made every day feel like a dream.",
+        "date": "Oct 2025"
+      },
+      "lisa": {
+        "name": "Lisa Anderson",
+        "location": "Sydney, Australia",
+        "text": "Worth the long flight! The wildlife here is incredible—we saw scarlet macaws every morning. The tent rentals were surprisingly comfortable and the amenities were great.",
+        "date": "Sep 2025"
+      },
+      "david": {
+        "name": "David Müller",
+        "location": "Berlin, Germany",
+        "text": "Best decision we made for our honeymoon. Romantic sunsets, private beaches, and the most amazing stargazing. The staff helped us arrange kayaking and snorkeling trips too.",
+        "date": "Dec 2025"
+      }
+    }
   },
   "location": {
     "title": "Where Jungle Meets Ocean",
