@@ -17,8 +17,8 @@ export function ContactInfo() {
     {
       icon: MapPin,
       title: t('contact.info.address'),
-      content: 'Playa Conchal, Guanacaste, Costa Rica',
-      link: 'https://maps.google.com/?q=10.4066,-85.8012',
+      content: 'Mapatalo, Puerto Viejo, Guanacaste Province, Cabo Velas District, 50308, Costa Rica',
+      link: 'https://www.google.com/maps/dir/?api=1&destination=10.4066,-85.8012',
     },
     {
       icon: Phone,

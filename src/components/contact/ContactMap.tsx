@@ -1,15 +1,20 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { Navigation } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Campsite coordinates near Playa Conchal, Guanacaste, Costa Rica
 const CAMPSITE_COORDINATES: [number, number] = [-85.8012, 10.4066];
+const GOOGLE_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CAMPSITE_COORDINATES[1]},${CAMPSITE_COORDINATES[0]}`;
 
 interface ContactMapProps {
   accessToken: string;
 }
 
 export function ContactMap({ accessToken }: ContactMapProps) {
+  const { t } = useTranslation();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -43,7 +48,7 @@ export function ContactMap({ accessToken }: ContactMapProps) {
         new mapboxgl.Popup({ offset: 25 }).setHTML(`
           <div class="p-2">
             <h3 class="font-bold text-sm">Camping Puerto Viejo Conchal</h3>
-            <p class="text-xs text-gray-600">Playa Conchal, Guanacaste</p>
+            <p class="text-xs text-gray-600">Mapatalo, Puerto Viejo, Guanacaste</p>
           </div>
         `)
       )
@@ -68,6 +73,17 @@ export function ContactMap({ accessToken }: ContactMapProps) {
   return (
     <div className="relative w-full h-full min-h-[400px] rounded-xl overflow-hidden shadow-lg">
       <div ref={mapContainer} className="absolute inset-0" />
+      <a
+        href={GOOGLE_MAPS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute bottom-4 left-4 z-10"
+      >
+        <Button className="shadow-lg gap-2">
+          <Navigation className="w-4 h-4" />
+          {t('contact.map.getDirections')}
+        </Button>
+      </a>
     </div>
   );
 }
