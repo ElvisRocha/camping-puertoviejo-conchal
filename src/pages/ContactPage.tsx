@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { ContactMap } from '@/components/contact/ContactMap';
 import { ContactInfo } from '@/components/contact/ContactInfo';
+import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 
 export default function ContactPage() {
@@ -116,12 +118,11 @@ export default function ContactPage() {
             <h3 className="text-xl font-semibold text-foreground mb-2">
               {t('contact.faqPrompt')}
             </h3>
-            <a
-              href="/#faq"
-              className="text-primary hover:underline font-medium"
-            >
-              {t('contact.faqLink')}
-            </a>
+            <Link to="/#faq">
+              <Button className="shadow-lg gap-2">
+                {t('contact.faqLink')}
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
