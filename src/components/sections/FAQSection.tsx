@@ -11,7 +11,7 @@ const FAQSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding bg-card" ref={ref}>
+    <section id="faq" className="section-padding bg-card" ref={ref}>
       <div className="container-narrow">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
