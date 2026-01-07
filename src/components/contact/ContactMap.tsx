@@ -6,7 +6,7 @@ import { Navigation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // Campsite coordinates near Playa Conchal, Guanacaste, Costa Rica
-const CAMPSITE_COORDINATES: [number, number] = [-85.8012, 10.4066];
+const CAMPSITE_COORDINATES: [number, number] = [-85.81322062490392, 10.39059946466431];
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CAMPSITE_COORDINATES[1]},${CAMPSITE_COORDINATES[0]}`;
 
 interface ContactMapProps {
