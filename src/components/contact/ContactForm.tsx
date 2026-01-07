@@ -60,35 +60,89 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-6">
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('contact.form.name')}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t('contact.form.namePlaceholder')} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('contact.form.email')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder={t('contact.form.emailPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('contact.form.phone')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      placeholder={t('contact.form.phonePlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="subject"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('contact.form.subject')}</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={t('contact.form.subjectPlaceholder')}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
-            name="name"
+            name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('contact.form.name')}</FormLabel>
+                <FormLabel>{t('contact.form.message')}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder={t('contact.form.namePlaceholder')}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('contact.form.email')}</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder={t('contact.form.emailPlaceholder')}
+                  <Textarea
+                    placeholder={t('contact.form.messagePlaceholder')}
+                    rows={5}
                     {...field}
                   />
                 </FormControl>
@@ -98,67 +152,8 @@ export function ContactForm() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('contact.form.phone')}</FormLabel>
-                <FormControl>
-                  <Input
-                    type="tel"
-                    placeholder={t('contact.form.phonePlaceholder')}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <FormField
-            control={form.control}
-            name="subject"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('contact.form.subject')}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={t('contact.form.subjectPlaceholder')}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('contact.form.message')}</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder={t('contact.form.messagePlaceholder')}
-                  rows={5}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="flex justify-end">
-          <Button
-            type="submit"
-            size="lg"
-            disabled={isSubmitting}
-          >
+        <div className="mt-auto flex justify-end">
+          <Button type="submit" size="lg" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
