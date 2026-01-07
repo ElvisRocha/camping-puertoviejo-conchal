@@ -7,14 +7,27 @@ interface CreateBookingParams {
   pricing: PricingBreakdown;
 }
 
+// Generate a unique reference code
+function generateReferenceCode(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = 'CPVC-';
+  for (let i = 0; i < 5; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
 export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
+    const referenceCode = generateReferenceCode();
+    
     // 1. Create the main booking record
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
       .insert([{
-        check_in: booking.checkIn ? new Date(booking.checkIn).toISOString().split('T')[0] : null,
-        check_out: booking.checkOut ? new Date(booking.checkOut).toISOString().split('T')[0] : null,
+        reference_code: referenceCode,
+        check_in: booking.checkIn ? new Date(booking.checkIn).toISOString().split('T')[0] : '',
+        check_out: booking.checkOut ? new Date(booking.checkOut).toISOString().split('T')[0] : '',
         adults: booking.guests?.adults || 1,
         children: booking.guests?.children || 0,
         infants: booking.guests?.infants || 0,
@@ -25,7 +38,7 @@ export async function createBooking({ booking, pricing }: CreateBookingParams): 
         subtotal: pricing.subtotal,
         taxes: pricing.taxes,
         total: pricing.total,
-        status: 'confirmed' as const,
+        status: 'confirmed',
       }])
       .select('id, reference_code')
       .single();
@@ -34,7 +47,6 @@ export async function createBooking({ booking, pricing }: CreateBookingParams): 
     if (!bookingData) throw new Error('No booking data returned');
 
     const bookingId = bookingData.id;
-    const referenceCode = bookingData.reference_code;
 
     // 2. Insert rented tents if any
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
