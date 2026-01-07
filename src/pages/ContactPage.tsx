@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,27 @@ import { supabase } from '@/integrations/supabase/client';
 export default function ContactPage() {
   const { t } = useTranslation();
   const [mapboxToken, setMapboxToken] = useState<string>('');
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+  const mapSectionRef = useRef<HTMLDivElement>(null);
+
+  // Lazy-load map when section enters viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (mapSectionRef.current) {
+      observer.observe(mapSectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     // Fetch the Mapbox token from an edge function
@@ -92,15 +113,22 @@ export default function ContactPage() {
             </motion.div>
           </div>
 
-          {/* Map - Full width */}
+          {/* Map - Full width (lazy-loaded) */}
           <motion.div
+            ref={mapSectionRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12"
           >
             <div className="bg-card rounded-2xl p-4 shadow-lg border h-[800px]">
-              <ContactMap accessToken={mapboxToken} />
+              {shouldLoadMap && mapboxToken ? (
+                <ContactMap accessToken={mapboxToken} />
+              ) : (
+                <div className="w-full h-full bg-muted rounded-xl flex items-center justify-center">
+                  <p className="text-muted-foreground">{t('contact.map.loading', 'Cargando mapa...')}</p>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

@@ -21,9 +21,6 @@ export function ContactMap({ accessToken }: ContactMapProps) {
   useEffect(() => {
     if (!mapContainer.current || !accessToken) return;
 
-    // Save scroll position BEFORE initializing map
-    const scrollPosition = window.scrollY;
-
     mapboxgl.accessToken = accessToken;
 
     map.current = new mapboxgl.Map({
@@ -32,11 +29,8 @@ export function ContactMap({ accessToken }: ContactMapProps) {
       center: CAMPSITE_COORDINATES,
       zoom: 13,
       pitch: 45,
-      keyboard: false, // Prevent keyboard focus stealing
+      keyboard: false,
     });
-
-    // Restore scroll position immediately (synchronous, no delay)
-    window.scrollTo(0, scrollPosition);
 
     // Add navigation controls
     map.current.addControl(
