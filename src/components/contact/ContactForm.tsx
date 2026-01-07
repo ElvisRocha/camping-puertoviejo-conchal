@@ -153,24 +153,25 @@ export function ContactForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          size="lg"
-          className="w-full md:w-auto"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {t('contact.form.sending')}
-            </>
-          ) : (
-            <>
-              <Send className="mr-2 h-4 w-4" />
-              {t('contact.form.submit')}
-            </>
-          )}
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            size="lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t('contact.form.sending')}
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-4 w-4" />
+                {t('contact.form.submit')}
+              </>
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );
