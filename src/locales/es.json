@@ -1,11 +1,41 @@
 {
-  "nav": {
+"nav": {
     "home": "Inicio",
     "experience": "Experiencia",
     "accommodations": "Alojamiento",
     "gallery": "Galería",
     "bookNow": "Reservar",
     "contact": "Contacto"
+  },
+  "gallery": {
+    "title": "Captura la Magia",
+    "subtitle": "Momentos de nuestro paraíso tropical que los huéspedes nunca olvidan",
+    "categories": {
+      "all": "Todas las Fotos",
+      "beach": "Playa",
+      "wildlife": "Fauna",
+      "campsite": "Campamento",
+      "sunsets": "Atardeceres"
+    },
+    "cta": "¿Listo para crear tus propios recuerdos?",
+    "captions": {
+      "beach1": "Aguas turquesas prístinas de Playa Conchal",
+      "beach2": "Playa de arena de conchas al atardecer",
+      "beach3": "Palmeras a lo largo de la costa",
+      "beach4": "Olas rompiendo en la costa tropical",
+      "wildlife1": "Mono aullador en el dosel",
+      "wildlife2": "Guacamayo escarlata en vuelo",
+      "wildlife3": "Tucán pico iris en rama",
+      "wildlife4": "Mono capuchino carablanca",
+      "campsite1": "Tienda al atardecer cerca de la playa",
+      "campsite2": "Fogata bajo las estrellas",
+      "campsite3": "Sendero de jungla entre el bosque",
+      "campsite4": "Mañana en el campamento",
+      "sunset1": "Atardecer pacífico sobre aguas tranquilas",
+      "sunset2": "Hora dorada en la playa",
+      "sunset3": "Cielo crepuscular dramático",
+      "sunset4": "Siluetas al atardecer"
+    }
   },
   "hero": {
     "headline": "Despierta con el Sonido de las Olas y los Monos Aulladores",
