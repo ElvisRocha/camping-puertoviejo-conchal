@@ -63,11 +63,13 @@ export default function ContactPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full">
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full flex flex-col">
                 <h2 className="text-2xl font-bold text-foreground mb-6">
                   {t('contact.form.title')}
                 </h2>
-                <ContactForm />
+                <div className="flex-1">
+                  <ContactForm />
+                </div>
               </div>
             </motion.div>
 
@@ -77,11 +79,13 @@ export default function ContactPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full">
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border h-full flex flex-col">
                 <h2 className="text-2xl font-bold text-foreground mb-6">
                   {t('contact.info.title')}
                 </h2>
-                <ContactInfo />
+                <div className="flex-1">
+                  <ContactInfo />
+                </div>
               </div>
             </motion.div>
           </div>
