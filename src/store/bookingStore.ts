@@ -82,10 +82,17 @@ export const useBookingStore = create<BookingState>()(
         const { currentStep } = get();
         if (step >= 1 && step < currentStep) {
           set({ currentStep: step });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       },
-      nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, 5) })),
-      prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
+      nextStep: () => {
+        set((state) => ({ currentStep: Math.min(state.currentStep + 1, 5) }));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      prevStep: () => {
+        set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) }));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
 
       setDates: (checkIn, checkOut) => {
         const nights = checkIn && checkOut ? differenceInDays(checkOut, checkIn) : 0;
