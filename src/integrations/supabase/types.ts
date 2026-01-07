@@ -14,13 +14,216 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booking_addons: {
+        Row: {
+          addon_type: string
+          booking_id: string
+          created_at: string
+          id: string
+          price: number
+          quantity: number
+        }
+        Insert: {
+          addon_type: string
+          booking_id: string
+          created_at?: string
+          id?: string
+          price: number
+          quantity?: number
+        }
+        Update: {
+          addon_type?: string
+          booking_id?: string
+          created_at?: string
+          id?: string
+          price?: number
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_addons_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_tents: {
+        Row: {
+          booking_id: string
+          created_at: string
+          id: string
+          price_per_night: number
+          quantity: number
+          tent_type: string
+        }
+        Insert: {
+          booking_id: string
+          created_at?: string
+          id?: string
+          price_per_night: number
+          quantity?: number
+          tent_type: string
+        }
+        Update: {
+          booking_id?: string
+          created_at?: string
+          id?: string
+          price_per_night?: number
+          quantity?: number
+          tent_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_tents_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bookings: {
+        Row: {
+          addons_fee: number
+          adults: number
+          bring_own_tent: boolean
+          campsite_fee: number
+          check_in: string
+          check_out: string
+          children: number
+          created_at: string
+          id: string
+          infants: number
+          reference_code: string
+          status: string
+          subtotal: number
+          taxes: number
+          tent_rental_fee: number
+          total: number
+          updated_at: string
+        }
+        Insert: {
+          addons_fee?: number
+          adults?: number
+          bring_own_tent?: boolean
+          campsite_fee?: number
+          check_in: string
+          check_out: string
+          children?: number
+          created_at?: string
+          id?: string
+          infants?: number
+          reference_code: string
+          status?: string
+          subtotal?: number
+          taxes?: number
+          tent_rental_fee?: number
+          total?: number
+          updated_at?: string
+        }
+        Update: {
+          addons_fee?: number
+          adults?: number
+          bring_own_tent?: boolean
+          campsite_fee?: number
+          check_in?: string
+          check_out?: string
+          children?: number
+          created_at?: string
+          id?: string
+          infants?: number
+          reference_code?: string
+          status?: string
+          subtotal?: number
+          taxes?: number
+          tent_rental_fee?: number
+          total?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      guest_info: {
+        Row: {
+          arrival_time: string | null
+          booking_id: string
+          celebrating_occasion: string | null
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          special_requests: string | null
+        }
+        Insert: {
+          arrival_time?: string | null
+          booking_id: string
+          celebrating_occasion?: string | null
+          country: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          special_requests?: string | null
+        }
+        Update: {
+          arrival_time?: string | null
+          booking_id?: string
+          celebrating_occasion?: string | null
+          country?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          special_requests?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_info_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_booking_by_reference: {
+        Args: { ref_code: string }
+        Returns: {
+          addons_fee: number
+          adults: number
+          bring_own_tent: boolean
+          campsite_fee: number
+          check_in: string
+          check_out: string
+          children: number
+          created_at: string
+          id: string
+          infants: number
+          reference_code: string
+          status: string
+          subtotal: number
+          taxes: number
+          tent_rental_fee: number
+          total: number
+          updated_at: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "bookings"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
       [_ in never]: never
