@@ -40,11 +40,11 @@ const HeroSection = () => {
         />
       ))}
       {/* Overlay siempre visible */}
-      <div className="absolute inset-0 bg-gradient-hero" />
+      <div className="absolute inset-0 bg-forest/40" />
 
       {/* Content */}
       <div className="relative z-10 container-wide text-center py-32 pt-40">
-        <div className="inline-block bg-black/30 backdrop-blur-sm rounded-3xl px-6 py-10 sm:px-12 sm:py-14">
+        <div className="inline-block px-6 py-10 sm:px-12 sm:py-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
           >
             <Link to="/book">
-              <Button className="btn-hero text-lg px-10 py-6">
+              <Button className="btn-hero text-xl px-12 py-7">
                 {t('hero.cta')}
               </Button>
             </Link>
