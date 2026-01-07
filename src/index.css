@@ -1,96 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Core Brand Colors - Forest & Nature */
+    --forest: 93 52% 21%;
+    --forest-light: 93 35% 35%;
+    --sage: 93 25% 54%;
+    --sea-green: 146 53% 43%;
+    
+    /* Warm Sand Tones */
+    --sand: 39 77% 83%;
+    --sand-warm: 34 44% 69%;
+    --cream: 56 100% 91%;
+    
+    /* Ocean & Sunset Accents */
+    --ocean: 200 100% 29%;
+    --ocean-light: 200 70% 50%;
+    --sunset: 16 100% 60%;
+    --sunset-warm: 25 100% 55%;
+    
+    /* Neutrals */
+    --charcoal: 204 20% 27%;
+    --charcoal-light: 204 15% 45%;
+    
+    /* Semantic Design Tokens */
+    --background: 56 100% 97%;
+    --foreground: 204 20% 17%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 204 20% 17%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover-foreground: 204 20% 17%;
+    
+    --primary: 93 52% 21%;
+    --primary-foreground: 56 100% 97%;
+    
+    --secondary: 39 77% 88%;
+    --secondary-foreground: 93 52% 21%;
+    
+    --muted: 39 40% 92%;
+    --muted-foreground: 204 15% 45%;
+    
+    --accent: 146 53% 43%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 39 30% 85%;
+    --input: 39 30% 85%;
+    --ring: 93 52% 21%;
+    
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(93 52% 21% / 0.9), hsl(146 53% 43% / 0.7));
+    --gradient-sunset: linear-gradient(180deg, hsl(16 100% 60% / 0.2), hsl(25 100% 55% / 0.1));
+    --gradient-sand: linear-gradient(180deg, hsl(56 100% 97%), hsl(39 77% 88%));
+    --gradient-ocean: linear-gradient(135deg, hsl(200 100% 29%), hsl(200 70% 50%));
+    --gradient-forest: linear-gradient(135deg, hsl(93 52% 21%), hsl(93 35% 35%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(93 52% 21% / 0.15);
+    --shadow-medium: 0 8px 30px -8px hsl(93 52% 21% / 0.2);
+    --shadow-strong: 0 20px 50px -12px hsl(93 52% 21% / 0.25);
+    --shadow-glow: 0 0 40px hsl(146 53% 43% / 0.3);
+    
+    /* Sidebar */
+    --sidebar-background: 93 52% 21%;
+    --sidebar-foreground: 56 100% 97%;
+    --sidebar-primary: 146 53% 43%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 93 35% 35%;
+    --sidebar-accent-foreground: 56 100% 97%;
+    --sidebar-border: 93 35% 30%;
+    --sidebar-ring: 146 53% 43%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 204 20% 10%;
+    --foreground: 56 100% 97%;
+    
+    --card: 204 20% 14%;
+    --card-foreground: 56 100% 97%;
+    
+    --popover: 204 20% 14%;
+    --popover-foreground: 56 100% 97%;
+    
+    --primary: 146 53% 43%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 93 35% 25%;
+    --secondary-foreground: 56 100% 97%;
+    
+    --muted: 204 15% 20%;
+    --muted-foreground: 39 30% 70%;
+    
+    --accent: 93 52% 21%;
+    --accent-foreground: 56 100% 97%;
+    
+    --border: 204 15% 25%;
+    --input: 204 15% 25%;
+    --ring: 146 53% 43%;
   }
 }
 
@@ -98,8 +114,220 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground;
+  
+  html {
+    scroll-behavior: smooth;
   }
+  
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-heading font-semibold text-lg shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 hover:bg-forest-light;
+  }
+  
+  .btn-hero-outline {
+    @apply border-2 border-cream text-cream px-8 py-4 rounded-full font-heading font-semibold text-lg backdrop-blur-sm hover:bg-cream/10 transition-all duration-300;
+  }
+  
+  .btn-cta {
+    @apply bg-accent text-accent-foreground px-6 py-3 rounded-full font-heading font-semibold shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-heading font-medium hover:bg-sand-warm transition-all duration-300;
+  }
+  
+  /* Card Styles */
+  .card-nature {
+    @apply bg-card rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 overflow-hidden border border-border;
+  }
+  
+  .card-floating {
+    @apply bg-card/80 backdrop-blur-md rounded-2xl shadow-medium border border-white/20;
+  }
+  
+  /* Section Styles */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Text Styles */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-forest to-sea-green;
+  }
+  
+  .text-hero {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight;
+  }
+  
+  .text-section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground;
+  }
+  
+  /* Decorative Elements */
+  .wave-divider {
+    @apply w-full h-16 md:h-24;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f7f9f0' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,25 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q40 20 30 35 Q20 20 30 5' fill='none' stroke='%2387A96B' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+  }
+  
+  /* Booking Flow Styles */
+  .booking-step {
+    @apply bg-card rounded-2xl shadow-medium p-6 md:p-8 border border-border;
+  }
+  
+  .booking-step-indicator {
+    @apply w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm transition-all duration-300;
+  }
+  
+  .booking-step-active {
+    @apply bg-accent text-accent-foreground shadow-glow;
+  }
+  
+  .booking-step-complete {
+    @apply bg-forest text-primary-foreground;
+  }
+  
+  .booking-step-pending {
+    @apply bg-muted text-muted-foreground;
+  }
+  
+  /* Form Styles */
+  .input-nature {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-border bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-200 font-body;
+  }
+  
+  .select-nature {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-border bg-background focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-200 font-body appearance-none cursor-pointer;
+  }
+  
+  /* Animation Classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+  
+  .animate-wave {
+    animation: wave 8s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(5px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(0) translateY(0);
+  }
+  75% {
+    transform: translateX(-5px) translateY(5px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Parallax Effect */
+.parallax-container {
+  perspective: 1px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(-1px) scale(2);
 }

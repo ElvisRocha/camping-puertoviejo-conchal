@@ -1,0 +1,275 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "experience": "Experiencia",
+    "accommodations": "Alojamiento",
+    "gallery": "Galería",
+    "bookNow": "Reservar",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "headline": "Despierta con el Sonido de las Olas y los Monos Aulladores",
+    "subheadline": "Experimenta la magia de dormir bajo las estrellas en las playas más prístinas de Costa Rica. Donde la jungla se encuentra con el Pacífico, tu aventura comienza.",
+    "cta": "Reserva Tu Lugar en el Paraíso",
+    "features": {
+      "beachfront": "Camping frente al mar",
+      "wildlife": "Encuentros con fauna",
+      "sunsets": "Atardeceres inolvidables"
+    }
+  },
+  "welcome": {
+    "title": "Esto No Es Solo Acampar. Esto Es Vivir.",
+    "paragraph1": "Imagina quedarte dormido al ritmo de las olas rompiendo a pocos pasos de tu tienda. Despertar con una sinfonía de aves tropicales mientras los monos aulladores llaman desde las copas de los árboles. Ver el sol derretirse en el Océano Pacífico mientras asas malvaviscos sobre un fuego crepitante.",
+    "paragraph2": "Bienvenido a Camping Puerto Viejo Conchal, donde los límites entre la comodidad y la naturaleza se difuminan en algo extraordinario. Ubicado a lo largo de las doradas costas de Guanacaste, Costa Rica—a solo minutos de las famosas arenas de conchas blancas de Playa Conchal—nuestro santuario de camping frente al mar ofrece un escape de lo ordinario y una puerta a la naturaleza pura e intacta.",
+    "paragraph3": "Esto no es sobrevivir. Esto es reconectarse con lo que importa."
+  },
+  "whyUs": {
+    "title": "Por Qué Los Aventureros Nos Eligen",
+    "location": {
+      "title": "Pies en la Arena, Alma en la Jungla",
+      "text": "Nuestro campamento está en la intersección mágica donde el bosque tropical seco se encuentra con aguas turquesas. Duerme a 50 metros del océano, despierta rodeado de vida silvestre. Sin paredes de resort—solo tú y la obra maestra de la naturaleza."
+    },
+    "wildlife": {
+      "title": "Tus Vecinos Tienen Colas y Alas",
+      "text": "Los monos aulladores anuncian el amanecer. Los guacamayos pintan el cielo de rojo. Los tucanes posan para tu cámara. Los monos carablanca podrían visitar tu desayuno. Esta es su casa—tú eres el invitado afortunado."
+    },
+    "experience": {
+      "title": "Historias Que Contarás Para Siempre",
+      "text": "El plancton bioluminiscente iluminando las olas a medianoche. La tortuga marina que viste anidar bajo la luz de la luna. La familia de coatíes que pasó por el campamento. Estos momentos no suceden en los hoteles."
+    },
+    "flexibility": {
+      "title": "Tu Aventura, A Tu Manera",
+      "text": "Trae tu propia tienda o alquila una de las nuestras. Quédate una noche o un mes. Añade un tour de kayak al amanecer o mantenlo simple. Nosotros proporcionamos el paraíso—tú escribes la historia."
+    }
+  },
+  "experience": {
+    "title": "Un Día en el Paraíso",
+    "morning": {
+      "time": "6:00 AM",
+      "title": "El Despertar de la Naturaleza",
+      "text": "Los monos aulladores comienzan su coro matutino mientras la luz dorada se filtra entre las palmeras. Sal de tu tienda al aire brumoso de la jungla y la promesa de aventura. Los madrugadores ven tucanes y loros en el dosel."
+    },
+    "midMorning": {
+      "time": "9:00 AM",
+      "title": "Felicidad Playera",
+      "text": "Después de un desayuno tropical fresco, las aguas prístinas de Conchal te esperan. Bucea entre olas cristalinas, observa peces tropicales, o simplemente flota en agua tan clara que puedes ver tus dedos. La famosa playa de arena de conchas es tu patio trasero."
+    },
+    "afternoon": {
+      "time": "2:00 PM",
+      "title": "Secretos de la Jungla",
+      "text": "Explora senderos ocultos donde los monos se balancean sobre tu cabeza y las iguanas toman el sol en ramas antiguas. Refréscate en un pozo de natación secreto. Observa fauna que solo has visto en documentales—aquí, son tus vecinos."
+    },
+    "evening": {
+      "time": "6:00 PM",
+      "title": "Rituales del Atardecer",
+      "text": "Toma tu bebida favorita y reclama tu lugar en la arena. Observa cómo el Pacífico se traga el sol en una explosión de naranja, rosa y púrpura. No hay dos atardeceres iguales—cada uno es un espectáculo privado solo para ti."
+    },
+    "night": {
+      "time": "8:00 PM",
+      "title": "Bajo las Estrellas",
+      "text": "Reúnete alrededor de la fogata mientras la Vía Láctea emerge arriba. Comparte historias con otros viajeros. Escucha la sinfonía nocturna de la jungla. Duerme al ritmo de las olas y despierta listo para hacerlo todo de nuevo."
+    }
+  },
+  "accommodations": {
+    "title": "Duerme A Tu Manera",
+    "bringOwn": {
+      "title": "Para el Explorador Preparado",
+      "text": "¿Ya tienes tu tienda de confianza? Perfecto. Reserva tu sitio premium frente al mar y arma tu hogar-lejos-del-hogar exactamente como te gusta. Espacios planos y despejados con vistas al océano te esperan.",
+      "price": "Desde $25/noche por persona"
+    },
+    "rental": {
+      "title": "Viaja Ligero, Duerme Bien",
+      "text": "¿Vienes en avión o prefieres empacar ligero? Te tenemos cubierto—literalmente. Nuestras tiendas de calidad vienen listas con colchonetas cómodas, para que puedas enfocarte en la aventura, no en la logística."
+    }
+  },
+  "tents": {
+    "cozyDuo": {
+      "name": "Dúo Acogedor",
+      "description": "Perfecta para parejas o viajeros solos que gustan del espacio. Compacta, impermeable y sorprendentemente espaciosa."
+    },
+    "familyExplorer": {
+      "name": "Explorador Familiar",
+      "description": "Espacio para todo el grupo o amigos. Altura para pararse, múltiples ventanas de ventilación y vestíbulo cubierto."
+    },
+    "baseCamp": {
+      "name": "Campamento Base",
+      "description": "El lujo del espacio en el corazón de la naturaleza. Perfecta para familias o grupos que quieren expandirse."
+    }
+  },
+  "amenities": {
+    "title": "Encanto Rústico, Comodidad Real",
+    "intro": "Acampar no significa sacrificar la comodidad. Hemos pensado en todo para que puedas enfocarte en lo que importa: desconectarte del ruido y reconectarte con la naturaleza.",
+    "showers": { "title": "Duchas Calientes", "text": "Comienza tu día refrescado con duchas calentadas por sol con vista a la jungla" },
+    "restrooms": { "title": "Baños Limpios", "text": "Instalaciones bien mantenidas limpiadas varias veces al día" },
+    "campfire": { "title": "Fogatas", "text": "Áreas designadas para fuego con asientos—malvaviscos opcionales pero recomendados" },
+    "parking": { "title": "Estacionamiento Seguro", "text": "Estacionamiento seguro y monitoreado para tu auto o moto de alquiler" },
+    "wifi": { "title": "Zonas Wi-Fi", "text": "¿Necesitas publicar ese atardecer? Conectividad cuando la necesites, naturaleza cuando no" },
+    "cooking": { "title": "Áreas de Cocina", "text": "Espacios de cocina compartidos con parrillas y estaciones de preparación" },
+    "security": { "title": "Seguridad 24/7", "text": "Descansa tranquilo sabiendo que nuestro equipo vigila el campamento las 24 horas" },
+    "tours": { "title": "Mesa de Tours", "text": "Reserva aventuras, obtén consejos locales y descubre gemas ocultas" }
+  },
+  "wildlife": {
+    "title": "Conoce a los Locales",
+    "intro": "Nuestro campamento no está solo cerca de la naturaleza—está inmerso en ella. La fauna aquí no está enjaulada ni escenificada. Estos animales viven aquí, y si eres paciente y respetuoso, compartirán su mundo contigo.",
+    "howler": { "name": "Monos Aulladores", "text": "Tu despertador natural. Estos gentiles gigantes se mueven por el dosel al amanecer y al atardecer, sus increíbles llamados resonando por el bosque. Observa familias enteras acicalándose y jugando en los árboles sobre el campamento." },
+    "macaw": { "name": "Guacamayos Escarlata", "text": "Los residentes más deslumbrantes de Costa Rica. Estos brillantes loros rojos, amarillos y azules vuelan en parejas sobre la playa al amanecer y atardecer. Sus llamados son inconfundibles—e inolvidables." },
+    "toucan": { "name": "Tucanes Pico Iris", "text": "Los íconos de pico arcoíris de los trópicos. Obsérvalos saltar entre ramas buscando fruta, sus picos sobredimensionados haciéndolos imposibles de ignorar." },
+    "capuchin": { "name": "Monos Carablanca", "text": "Los curiosos. Estos monos inteligentes podrían investigar tu campamento desde una distancia segura, sus caras expresivas mostrando infinita curiosidad sobre sus visitantes humanos." },
+    "iguana": { "name": "Iguanas y Más", "text": "Iguanas verdes tomando el sol en ramas, lagartos Jesucristo corriendo sobre el agua, coatíes forrajeando en grupos—cada caminata revela nuevos vecinos." },
+    "note": "Importante: Practicamos interacción responsable con la fauna. Por favor no alimentes a los animales—prosperan mejor con su dieta natural, y tu respeto ayuda a mantenerlos salvajes."
+  },
+  "testimonials": {
+    "title": "Historias Desde la Arena"
+  },
+  "location": {
+    "title": "Donde la Jungla Conoce el Océano",
+    "intro": "Ubicado en el corazón de Guanacaste, la impresionante Costa Dorada de Costa Rica, Camping Puerto Viejo Conchal está en el punto dulce entre aventura y accesibilidad.",
+    "distances": {
+      "beach": "5 min caminando a Playa Conchal",
+      "tamarindo": "10 min a Tamarindo",
+      "volcano": "45 min a Rincón de la Vieja",
+      "airport": "45 min del Aeropuerto de Liberia (LIR)"
+    },
+    "gettingHere": "Vuela al Aeropuerto Internacional Daniel Oduber Quirós (LIR) en Liberia. Alquila un auto para máxima libertad de explorar, o coordina una recogida en shuttle directamente al campamento. El viaje es hermoso—tu aventura comienza en el momento que aterrizas."
+  },
+  "cta": {
+    "title": "Tu Lugar Bajo las Estrellas Te Espera",
+    "text": "Cada atardecer es diferente. Cada cielo nocturno cuenta una nueva historia. Cada día trae encuentros inesperados con la fauna. Pero los sitios son limitados, y los mejores lugares se van rápido—especialmente durante la temporada seca (diciembre-abril).",
+    "subtext": "No solo lo sueñes. No solo lo agregues a tu lista de deseos. Hazlo realidad.",
+    "button": "Reserva Tu Aventura Ahora",
+    "trust": {
+      "secure": "Reserva Segura",
+      "payment": "Paga con Tarjeta o PayPal",
+      "cancel": "Cancelación gratuita hasta 48h",
+      "support": "Soporte 24/7"
+    }
+  },
+  "faq": {
+    "title": "¿Preguntas? Tenemos Respuestas",
+    "safety": {
+      "q": "¿Es seguro acampar en Costa Rica?",
+      "a": "¡Absolutamente! Costa Rica es uno de los países más seguros de Centroamérica. Nuestro campamento tiene seguridad 24/7, y la comunidad local es acogedora y amigable. Viajeros solos, familias y grupos todos se sienten como en casa aquí."
+    },
+    "packing": {
+      "q": "¿Qué debo traer?",
+      "a": "Esenciales: protector solar, repelente de insectos, linterna, botella de agua y espíritu aventurero. Útiles: binoculares para fauna, bolsa impermeable para días de playa, capas ligeras para noches frescas. Si alquilas tienda, proporcionamos colchonetas—solo trae tu sleeping bag o alquila ropa de cama."
+    },
+    "weather": {
+      "q": "¿Cómo es el clima?",
+      "a": "Guanacaste tiene dos temporadas: seca (diciembre-abril) con días soleados y noches frescas, y verde (mayo-noviembre) con lluvias por la tarde y paisajes exuberantes. Ambas son mágicas—temporada seca para sol garantizado, temporada verde para menos multitudes y cielos dramáticos."
+    },
+    "wildlifeSightings": {
+      "q": "¿Puedo ver fauna con seguridad?",
+      "a": "Aunque la fauna es salvaje (¡no hay garantías en la naturaleza!), nuestra ubicación significa que los avistamientos son extremadamente comunes. Los monos aulladores se escuchan diariamente, las aves son constantes, y la mayoría de huéspedes ven múltiples especies durante su estadía. Las mañanas tempranas y tardes son el mejor momento."
+    },
+    "families": {
+      "q": "¿Es bueno para familias con niños?",
+      "a": "¡A los niños les ENCANTA aquí! La playa es tranquila para nadar, la fauna es fascinante sin fin, y hay espacio para correr y explorar. Hemos recibido familias con bebés hasta adolescentes—todos se van con recuerdos increíbles."
+    },
+    "rain": {
+      "q": "¿Qué pasa si llueve?",
+      "a": "Nuestras tiendas son impermeables, y tenemos áreas comunes techadas. Una lluvia tropical es parte de la experiencia—usualmente corta, dramática, y seguida del aire más fresco que hayas respirado. Empaca una chaqueta ligera y ¡abrázala!"
+    },
+    "booking": {
+      "q": "¿Cómo reservo?",
+      "a": "¡Fácil! Usa nuestro sistema de reservas en línea aquí mismo. Selecciona tus fechas, elige tu alojamiento, añade extras, y paga de forma segura con tarjeta o PayPal. Recibirás confirmación instantánea."
+    }
+  },
+  "footer": {
+    "tagline": "Desconéctate para Reconectarte",
+    "quickLinks": "Enlaces Rápidos",
+    "legal": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "cancellation": "Política de Cancelación",
+    "newsletter": {
+      "title": "Únete a la Tribu",
+      "text": "Recibe consejos de viaje, actualizaciones de fauna y ofertas exclusivas.",
+      "placeholder": "Tu correo",
+      "button": "Suscribirse"
+    },
+    "copyright": "© 2025 Camping Puerto Viejo Conchal. Todos los derechos reservados. Hecho con 🌴 en Costa Rica."
+  },
+  "booking": {
+    "step1": {
+      "title": "¿Cuándo Comienza Tu Aventura?",
+      "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
+      "priceNote": "$25/persona/noche tarifa base",
+      "peakSeason": "Temporada alta"
+    },
+    "step2": {
+      "title": "¿Quién Viene al Paraíso?",
+      "subtitle": "Cuéntanos sobre tu grupo para preparar tu lugar perfecto.",
+      "adults": "Adultos (18+)",
+      "children": "Niños (4-17)",
+      "infants": "Bebés (0-3)",
+      "infantsFree": "Gratis",
+      "needTent": "¿Necesitas alquilar tienda?",
+      "bringOwn": "Traigo mi propia tienda"
+    },
+    "step3": {
+      "title": "Hazlo Inolvidable",
+      "subtitle": "Extras opcionales para mejorar tu experiencia. Sáltalos si prefieres mantenerlo simple."
+    },
+    "step4": {
+      "title": "Revisa Tu Aventura",
+      "dates": "Fechas",
+      "nights": "noches",
+      "guests": "Huéspedes",
+      "adults": "Adultos",
+      "children": "Niños",
+      "campsite": "Tarifa de sitio",
+      "tentRental": "Alquiler de tienda",
+      "addons": "Extras",
+      "subtotal": "Subtotal",
+      "taxes": "Impuestos (13%)",
+      "total": "Total",
+      "guestInfo": {
+        "title": "Información del Huésped",
+        "fullName": "Nombre completo",
+        "email": "Correo electrónico",
+        "phone": "Teléfono (con código de país)",
+        "country": "País de residencia",
+        "arrivalTime": "Hora estimada de llegada",
+        "specialRequests": "Solicitudes especiales / restricciones alimentarias",
+        "celebrating": "¿Celebrando algo especial?"
+      }
+    },
+    "step5": {
+      "title": "¡Ya Casi! Completa Tu Reserva",
+      "subtitle": "Tu aventura está a un solo clic. El pago es seguro y encriptado.",
+      "paymentMethod": "Método de Pago",
+      "cardPayment": "Tarjeta de Crédito/Débito",
+      "paypal": "PayPal",
+      "agreeTerms": "Acepto los Términos y Condiciones y la Política de Cancelación",
+      "newsletter": "Inscríbeme para actualizaciones ocasionales y ofertas (¡sin spam, prometido!)",
+      "cancellationPolicy": "Cancelación gratuita hasta 48 horas antes del check-in para reembolso completo. Cancelaciones dentro de 48 horas reciben 50% de reembolso. No presentarse no es reembolsable.",
+      "completeBooking": "Completar Reserva",
+      "secureNote": "Encriptación SSL de 256 bits",
+      "trustedBy": "Confiado por más de 2,000 campistas felices"
+    },
+    "confirmation": {
+      "title": "🎉 ¡Lo Lograste! ¡El Paraíso Te Espera!",
+      "reference": "Referencia de Reserva",
+      "emailSent": "Confirmación enviada a",
+      "whatsNext": "¿Qué Sigue?",
+      "step1": "Revisa tu correo para confirmación detallada y direcciones",
+      "step2": "Guarda nuestro WhatsApp para preguntas",
+      "step3": "Revisa nuestra lista de empaque y consejos de viaje",
+      "step4": "¡Emociónate—vienes a Costa Rica!",
+      "addToCalendar": "Agregar al Calendario",
+      "shareTitle": "Comparte Tus Planes",
+      "questionsTitle": "¿Preguntas? ¡Estamos aquí!"
+    },
+    "next": "Continuar",
+    "back": "Atrás",
+    "findAvailability": "Buscar Disponibilidad"
+  },
+  "addons": {
+    "breakfast": { "name": "Paquete de Desayuno", "description": "Frutas tropicales frescas, gallo pinto, huevos, café costarricense. Energía para la aventura." },
+    "kayak": { "name": "Tour de Kayak al Amanecer", "description": "Rema por aguas tranquilas mientras la jungla despierta. 2 horas de magia." },
+    "wildlife": { "name": "Caminata Guiada de Fauna", "description": "Guía naturalista experto revela fauna oculta y comparte secretos de la jungla. 2.5 horas." },
+    "bonfire": { "name": "Kit de Fogata", "description": "Leña, malvaviscos, chocolate, galletas. Todo para la noche perfecta de fogata." },
+    "snorkel": { "name": "Alquiler de Equipo de Snorkel", "description": "Máscara, snorkel, aletas. Explora el mundo submarino a tu ritmo." }
+  }
+}
