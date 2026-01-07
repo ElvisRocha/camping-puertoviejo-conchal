@@ -20,10 +20,20 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleHomeClick = (e: React.MouseEvent) => {
-    if (location.pathname === '/') {
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    // If we're on home and the link is a hash link, scroll manually
+    if (location.pathname === '/' && href.startsWith('/#')) {
+      e.preventDefault();
+      const elementId = href.replace('/#', '');
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsMobileMenuOpen(false);
+    } else if (location.pathname === '/' && href === '/') {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
     }
   };
 
@@ -67,7 +77,7 @@ const Header = () => {
     >
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" onClick={handleHomeClick} className="flex items-center gap-2">
+        <Link to="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-2">
           <span className="text-2xl">🌴</span>
           <div className="flex flex-col">
             <span
@@ -95,9 +105,7 @@ const Header = () => {
             <Link
               key={item.key}
               to={item.href}
-              onClick={(e) => {
-                if (item.key === 'home') handleHomeClick(e);
-              }}
+              onClick={(e) => handleNavClick(e, item.href)}
               className={cn(
                 'font-body font-medium text-sm transition-colors hover:text-accent',
                 hasBackground ? 'text-foreground' : 'text-cream'
@@ -178,10 +186,7 @@ const Header = () => {
                 <Link
                   key={item.key}
                   to={item.href}
-                  onClick={(e) => {
-                    if (item.key === 'home') handleHomeClick(e);
-                    setIsMobileMenuOpen(false);
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className="font-body font-medium text-foreground hover:text-accent transition-colors py-2"
                 >
                   {t(`nav.${item.key}`)}
