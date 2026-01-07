@@ -69,6 +69,10 @@
       "description": "Need a quick response? Chat with us on WhatsApp!",
       "button": "Chat on WhatsApp"
     },
+    "map": {
+      "getDirections": "Get Directions",
+      "openInGoogleMaps": "Open in Google Maps"
+    },
     "faqPrompt": "Looking for answers to common questions?",
     "faqLink": "Check out our FAQ section →"
   },

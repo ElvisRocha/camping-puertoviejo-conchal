@@ -69,6 +69,10 @@
       "description": "¿Necesitas una respuesta rápida? ¡Escríbenos por WhatsApp!",
       "button": "Chatear por WhatsApp"
     },
+    "map": {
+      "getDirections": "Cómo Llegar",
+      "openInGoogleMaps": "Abrir en Google Maps"
+    },
     "faqPrompt": "¿Buscas respuestas a preguntas frecuentes?",
     "faqLink": "Consulta nuestra sección de FAQ →"
   },
