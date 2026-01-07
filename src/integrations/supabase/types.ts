@@ -115,7 +115,7 @@ export type Database = {
           created_at?: string
           id?: string
           infants?: number
-          reference_code: string
+          reference_code?: string
           status?: string
           subtotal?: number
           taxes?: number
