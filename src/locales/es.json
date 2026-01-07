@@ -296,6 +296,16 @@
     "copyright": "© 2025 Camping Puerto Viejo Conchal. Todos los derechos reservados. Hecho con 🌴 en Costa Rica."
   },
   "booking": {
+    "steps": {
+      "dates": "Fechas",
+      "guests": "Huéspedes",
+      "extras": "Extras",
+      "details": "Detalles",
+      "confirm": "Confirmar",
+      "completed": "Paso completado",
+      "current": "Paso actual",
+      "upcoming": "Próximo paso"
+    },
     "step1": {
       "title": "¿Cuándo Comienza Tu Aventura?",
       "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
@@ -310,7 +320,10 @@
       "infants": "Bebés (0-3)",
       "infantsFree": "Gratis",
       "needTent": "¿Necesitas alquilar tienda?",
-      "bringOwn": "Traigo mi propia tienda"
+      "bringOwn": "Traigo mi propia tienda",
+      "bringOwnNote": "Solo aplica tarifa de sitio",
+      "campsiteRate": "Sitio",
+      "sleeps": "Capacidad"
     },
     "step3": {
       "title": "Hazlo Inolvidable",
@@ -318,11 +331,16 @@
     },
     "step4": {
       "title": "Revisa Tu Aventura",
+      "summary": "Resumen de Reserva",
       "dates": "Fechas",
       "nights": "noches",
       "guests": "Huéspedes",
       "adults": "Adultos",
       "children": "Niños",
+      "infants": "Bebés",
+      "accommodation": "Alojamiento",
+      "bringOwnTent": "Traigo mi propia tienda",
+      "addonsLabel": "Extras",
       "campsite": "Tarifa de sitio",
       "tentRental": "Alquiler de tienda",
       "addons": "Extras",
@@ -368,7 +386,13 @@
     },
     "next": "Continuar",
     "back": "Atrás",
-    "findAvailability": "Buscar Disponibilidad"
+    "findAvailability": "Buscar Disponibilidad",
+    "priceTypes": {
+      "person": "persona",
+      "night": "noche",
+      "day": "día",
+      "personNight": "persona/noche"
+    }
   },
   "addons": {
     "breakfast": { "name": "Paquete de Desayuno", "description": "Frutas tropicales frescas, gallo pinto, huevos, café costarricense. Energía para la aventura." },

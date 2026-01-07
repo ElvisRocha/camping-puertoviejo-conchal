@@ -10,6 +10,7 @@ interface BookingState {
   
   // Actions
   setStep: (step: number) => void;
+  goToStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
   
@@ -76,6 +77,13 @@ export const useBookingStore = create<BookingState>()(
       booking: { ...initialBooking },
 
       setStep: (step) => set({ currentStep: step }),
+      goToStep: (step) => {
+        // Only allow going to steps that have been completed (step < currentStep)
+        const { currentStep } = get();
+        if (step >= 1 && step < currentStep) {
+          set({ currentStep: step });
+        }
+      },
       nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, 5) })),
       prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
 

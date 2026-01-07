@@ -15,11 +15,11 @@ export function Step3Addons() {
   const getPriceLabel = (addon: typeof ADD_ONS[0]) => {
     switch (addon.priceType) {
       case 'per-person':
-        return `$${addon.price}/person`;
+        return `$${addon.price}/${t('booking.priceTypes.person')}`;
       case 'per-night':
-        return `$${addon.price}/night`;
+        return `$${addon.price}/${t('booking.priceTypes.night')}`;
       case 'per-day':
-        return `$${addon.price}/day`;
+        return `$${addon.price}/${t('booking.priceTypes.day')}`;
       case 'flat':
         return `$${addon.price}`;
       default:
@@ -58,7 +58,7 @@ export function Step3Addons() {
               <div className="relative">
                 <img
                   src={addon.image}
-                  alt={addon.name}
+                  alt={t(addon.nameKey)}
                   className="w-20 h-20 object-cover rounded-lg"
                 />
                 {isSelected(addon.id) && (
@@ -69,10 +69,10 @@ export function Step3Addons() {
               </div>
               <div className="flex-1">
                 <div className="flex items-start justify-between">
-                  <h4 className="font-semibold">{addon.icon} {addon.name}</h4>
+                  <h4 className="font-semibold">{addon.icon} {t(addon.nameKey)}</h4>
                   <span className="font-bold text-forest">{getPriceLabel(addon)}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">{addon.description}</p>
+                <p className="text-sm text-muted-foreground mt-1">{t(addon.descriptionKey)}</p>
               </div>
             </div>
           </motion.button>
