@@ -1,11 +1,41 @@
 {
-  "nav": {
+"nav": {
     "home": "Home",
     "experience": "Experience",
     "accommodations": "Accommodations",
     "gallery": "Gallery",
     "bookNow": "Book Now",
     "contact": "Contact"
+  },
+  "gallery": {
+    "title": "Capture the Magic",
+    "subtitle": "Moments from our tropical paradise that guests never forget",
+    "categories": {
+      "all": "All Photos",
+      "beach": "Beach",
+      "wildlife": "Wildlife",
+      "campsite": "Campsite",
+      "sunsets": "Sunsets"
+    },
+    "cta": "Ready to create your own memories?",
+    "captions": {
+      "beach1": "Pristine turquoise waters of Playa Conchal",
+      "beach2": "Shell sand beach at golden hour",
+      "beach3": "Palm trees along the coastline",
+      "beach4": "Waves crashing on tropical shore",
+      "wildlife1": "Howler monkey in the canopy",
+      "wildlife2": "Scarlet macaw in flight",
+      "wildlife3": "Keel-billed toucan on branch",
+      "wildlife4": "White-faced capuchin monkey",
+      "campsite1": "Tent at sunset near the beach",
+      "campsite2": "Campfire under the stars",
+      "campsite3": "Jungle trail through the forest",
+      "campsite4": "Morning at the campsite",
+      "sunset1": "Pacific sunset over calm waters",
+      "sunset2": "Golden hour on the beach",
+      "sunset3": "Dramatic twilight sky",
+      "sunset4": "Silhouettes at sunset"
+    }
   },
   "hero": {
     "headline": "Wake Up to the Sound of Waves and Howler Monkeys",
