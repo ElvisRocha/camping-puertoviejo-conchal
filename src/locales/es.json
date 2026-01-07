@@ -37,6 +37,41 @@
       "sunset4": "Siluetas al atardecer"
     }
   },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "¿Tienes preguntas sobre tu aventura? ¡Nos encantaría saber de ti!",
+    "form": {
+      "title": "Envíanos un Mensaje",
+      "name": "Nombre Completo",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "phone": "Teléfono (opcional)",
+      "phonePlaceholder": "+506 8888 8888",
+      "subject": "Asunto",
+      "subjectPlaceholder": "Pregunta sobre mi reserva",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntanos cómo podemos ayudarte...",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "successTitle": "¡Mensaje Enviado!",
+      "successMessage": "Gracias por contactarnos. Te responderemos en menos de 24 horas."
+    },
+    "info": {
+      "title": "Información de Contacto",
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "hours": "Horario de Atención",
+      "hoursContent": "Todos los días 7:00 AM - 8:00 PM (Hora de Costa Rica)"
+    },
+    "whatsapp": {
+      "description": "¿Necesitas una respuesta rápida? ¡Escríbenos por WhatsApp!",
+      "button": "Chatear por WhatsApp"
+    },
+    "faqPrompt": "¿Buscas respuestas a preguntas frecuentes?",
+    "faqLink": "Consulta nuestra sección de FAQ →"
+  },
   "hero": {
     "headline": "Despierta con el Sonido de las Olas y los Monos Aulladores",
     "subheadline": "Experimenta la magia de dormir bajo las estrellas en las playas más prístinas de Costa Rica. Donde la jungla se encuentra con el Pacífico, tu aventura comienza.",

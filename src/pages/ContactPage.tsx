@@ -1,0 +1,123 @@
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ContactForm } from '@/components/contact/ContactForm';
+import { ContactMap } from '@/components/contact/ContactMap';
+import { ContactInfo } from '@/components/contact/ContactInfo';
+import { supabase } from '@/integrations/supabase/client';
+
+export default function ContactPage() {
+  const { t } = useTranslation();
+  const [mapboxToken, setMapboxToken] = useState<string>('');
+
+  useEffect(() => {
+    // Fetch the Mapbox token from an edge function
+    const fetchToken = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('get-mapbox-token');
+        if (data?.token) {
+          setMapboxToken(data.token);
+        }
+      } catch (err) {
+        console.error('Failed to fetch Mapbox token');
+      }
+    };
+    fetchToken();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-b from-primary/10 to-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4"
+          >
+            {t('contact.title')}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+          >
+            {t('contact.subtitle')}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left Column - Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border">
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  {t('contact.form.title')}
+                </h2>
+                <ContactForm />
+              </div>
+            </motion.div>
+
+            {/* Right Column - Info & Map */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="space-y-8"
+            >
+              {/* Contact Info */}
+              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border">
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  {t('contact.info.title')}
+                </h2>
+                <ContactInfo />
+              </div>
+
+              {/* Map */}
+              <div className="bg-card rounded-2xl p-4 shadow-lg border h-[400px]">
+                <ContactMap accessToken={mapboxToken} />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Link */}
+      <section className="py-12 bg-muted/30">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-xl font-semibold text-foreground mb-2">
+              {t('contact.faqPrompt')}
+            </h3>
+            <a
+              href="/#faq"
+              className="text-primary hover:underline font-medium"
+            >
+              {t('contact.faqLink')}
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
