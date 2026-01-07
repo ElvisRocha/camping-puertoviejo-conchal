@@ -15,13 +15,14 @@ import {
   Share2,
   Home
 } from 'lucide-react';
+import { formatLocalizedDate } from '@/lib/dateLocale';
 
 interface BookingConfirmationProps {
   referenceCode: string;
 }
 
 export function BookingConfirmation({ referenceCode }: BookingConfirmationProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { booking, calculatePricing, resetBooking } = useBookingStore();
   const pricing = calculatePricing();
 
@@ -78,25 +79,25 @@ export function BookingConfirmation({ referenceCode }: BookingConfirmationProps)
       <div className="card-nature p-6 mb-6 text-left">
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-muted-foreground">Check-in</p>
+            <p className="text-muted-foreground">{t('booking.confirmation.checkIn')}</p>
             <p className="font-semibold">
-              {booking.checkIn && format(new Date(booking.checkIn), 'EEEE, MMM dd, yyyy')}
+              {booking.checkIn && formatLocalizedDate(booking.checkIn, 'PPPP', i18n.language)}
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">Check-out</p>
+            <p className="text-muted-foreground">{t('booking.confirmation.checkOut')}</p>
             <p className="font-semibold">
-              {booking.checkOut && format(new Date(booking.checkOut), 'EEEE, MMM dd, yyyy')}
+              {booking.checkOut && formatLocalizedDate(booking.checkOut, 'PPPP', i18n.language)}
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">Guests</p>
+            <p className="text-muted-foreground">{t('booking.confirmation.guests')}</p>
             <p className="font-semibold">
-              {(booking.guests?.adults || 0) + (booking.guests?.children || 0)} guests
+              {(booking.guests?.adults || 0) + (booking.guests?.children || 0)} {t('booking.confirmation.guestsLabel')}
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">Total Paid</p>
+            <p className="text-muted-foreground">{t('booking.confirmation.totalPaid')}</p>
             <p className="font-semibold text-forest">${pricing.total.toFixed(2)}</p>
           </div>
         </div>
@@ -144,7 +145,7 @@ export function BookingConfirmation({ referenceCode }: BookingConfirmationProps)
       <Link to="/" onClick={resetBooking}>
         <Button className="btn-cta gap-2">
           <Home className="w-4 h-4" />
-          Back to Home
+          {t('booking.confirmation.backHome')}
         </Button>
       </Link>
 

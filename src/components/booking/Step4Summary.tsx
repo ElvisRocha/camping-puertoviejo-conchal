@@ -7,9 +7,9 @@ import { useBookingStore } from '@/store/bookingStore';
 import { TENT_OPTIONS, ADD_ONS, COUNTRIES } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Calendar, Users, Tent, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { format } from 'date-fns';
 import { z } from 'zod';
 import { useState } from 'react';
+import { formatLocalizedDate } from '@/lib/dateLocale';
 
 const guestInfoSchema = z.object({
   fullName: z.string().min(2, 'Name is required').max(100),
@@ -19,7 +19,7 @@ const guestInfoSchema = z.object({
 });
 
 export function Step4Summary() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { booking, calculatePricing, setGuestInfo, prevStep, nextStep } = useBookingStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -86,7 +86,7 @@ export function Step4Summary() {
             <div>
               <p className="font-medium">{t('booking.step4.dates')}</p>
               <p className="text-sm text-muted-foreground">
-                {booking.checkIn && format(new Date(booking.checkIn), 'MMM dd')} → {booking.checkOut && format(new Date(booking.checkOut), 'MMM dd, yyyy')}
+                {booking.checkIn && formatLocalizedDate(booking.checkIn, 'PP', i18n.language)} → {booking.checkOut && formatLocalizedDate(booking.checkOut, 'PP', i18n.language)}
                 <span className="ml-2 text-forest">({booking.nights} {t('booking.step4.nights')})</span>
               </p>
             </div>
