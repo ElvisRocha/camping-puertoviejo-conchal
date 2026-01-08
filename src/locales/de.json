@@ -4,520 +4,411 @@
     "experience": "Erlebnis",
     "accommodations": "Unterkünfte",
     "gallery": "Galerie",
-    "book": "Jetzt Buchen",
+    "bookNow": "Jetzt Buchen",
     "contact": "Kontakt"
   },
   "gallery": {
-    "title": "Unsere Galerie",
-    "subtitle": "Entdecken Sie die Schönheit des Strandcampings durch unsere Sammlung von Momenten, die von unseren Gästen und unserem Team festgehalten wurden.",
+    "title": "Die Magie Einfangen",
+    "subtitle": "Momente aus unserem tropischen Paradies, die Gäste nie vergessen",
     "categories": {
-      "all": "Alle",
+      "all": "Alle Fotos",
       "beach": "Strand",
       "wildlife": "Tierwelt",
       "campsite": "Campingplatz",
-      "sunset": "Sonnenuntergänge"
+      "sunsets": "Sonnenuntergänge"
     },
-    "images": {
-      "beachSunrise": "Sonnenaufgang am Strand",
-      "turtleNesting": "Nistende Schildkröte",
-      "campfireNight": "Lagerfeuerabend",
-      "jungleTrail": "Dschungelpfad",
-      "surfWaves": "Surfwellen",
-      "monkeyTrees": "Affen in den Bäumen",
-      "starryNight": "Sternenhimmel am Campingplatz",
-      "beachYoga": "Yoga am Strand",
-      "tropicalBirds": "Tropische Vögel",
-      "oceanView": "Meerblick",
-      "coastalSunset": "Küstensonnenuntergang",
-      "palmSilhouette": "Palmensilhouette"
+    "cta": "Bereit, Ihre eigenen Erinnerungen zu schaffen?",
+    "captions": {
+      "beach1": "Unberührte türkisfarbene Gewässer von Playa Conchal",
+      "beach2": "Muschelstrand zur goldenen Stunde",
+      "beach3": "Palmen entlang der Küste",
+      "beach4": "Wellen brechen am tropischen Ufer",
+      "wildlife1": "Brüllaffe im Blätterdach",
+      "wildlife2": "Hellroter Ara im Flug",
+      "wildlife3": "Regenbogentukan auf einem Ast",
+      "wildlife4": "Weißgesicht-Kapuzineraffe",
+      "campsite1": "Zelt bei Sonnenuntergang am Strand",
+      "campsite2": "Lagerfeuer unter den Sternen",
+      "campsite3": "Dschungelpfad durch den Wald",
+      "campsite4": "Morgen am Campingplatz",
+      "sunset1": "Pazifischer Sonnenuntergang über ruhigen Gewässern",
+      "sunset2": "Goldene Stunde am Strand",
+      "sunset3": "Dramatischer Dämmerungshimmel",
+      "sunset4": "Silhouetten bei Sonnenuntergang"
     }
   },
   "contact": {
     "title": "Kontaktieren Sie Uns",
-    "subtitle": "Haben Sie Fragen? Wir helfen Ihnen gerne bei der Planung Ihres perfekten Campingabenteuers.",
+    "subtitle": "Fragen zu Ihrem Abenteuer? Wir freuen uns von Ihnen zu hören!",
     "form": {
-      "name": "Ihr Name",
+      "title": "Senden Sie uns eine Nachricht",
+      "name": "Vollständiger Name",
       "namePlaceholder": "Max Mustermann",
       "email": "E-Mail-Adresse",
       "emailPlaceholder": "max@beispiel.de",
-      "phone": "Telefonnummer",
+      "phone": "Telefon (optional)",
       "phonePlaceholder": "+49 170 1234567",
       "subject": "Betreff",
-      "subjectPlaceholder": "Wie können wir Ihnen helfen?",
+      "subjectPlaceholder": "Frage zu meiner Buchung",
       "message": "Nachricht",
-      "messagePlaceholder": "Erzählen Sie uns von Ihrer geplanten Reise oder stellen Sie Ihre Fragen...",
+      "messagePlaceholder": "Erzählen Sie uns, wie wir helfen können...",
       "submit": "Nachricht Senden",
       "sending": "Wird gesendet...",
-      "success": "Nachricht erfolgreich gesendet!",
-      "successMessage": "Wir werden uns innerhalb von 24 Stunden bei Ihnen melden."
+      "successTitle": "Nachricht Gesendet!",
+      "successMessage": "Vielen Dank für Ihre Kontaktaufnahme. Wir antworten innerhalb von 24 Stunden."
     },
     "info": {
       "title": "Kontaktinformationen",
-      "subtitle": "Erreichen Sie uns über einen dieser Kanäle",
-      "email": "E-Mail",
+      "address": "Adresse",
       "phone": "Telefon",
-      "location": "Standort",
+      "email": "E-Mail",
       "hours": "Öffnungszeiten",
-      "hoursValue": "Täglich 7:00 - 21:00 Uhr",
-      "whatsapp": "Chat auf WhatsApp",
-      "whatsappText": "Schnelle Antwort über WhatsApp"
+      "hoursContent": "Täglich 7:00 - 20:00 Uhr (Costa Rica Zeit)"
+    },
+    "whatsapp": {
+      "description": "Brauchen Sie eine schnelle Antwort? Chatten Sie mit uns auf WhatsApp!",
+      "button": "Auf WhatsApp Chatten"
     },
     "map": {
-      "title": "Finden Sie Uns",
-      "directions": "Wegbeschreibung abrufen"
+      "getDirections": "Wegbeschreibung",
+      "openInGoogleMaps": "In Google Maps öffnen"
     },
-    "faqLink": "Besuchen Sie unsere FAQ",
-    "faqText": "für häufig gestellte Fragen"
+    "faqPrompt": "Suchen Sie nach Antworten auf häufige Fragen?",
+    "faqLink": "Besuchen Sie unsere FAQ-Sektion →"
   },
   "hero": {
-    "headline": "Ihr Abenteuer\nBeginnt Hier",
-    "subheadline": "Unberührter Strand. Reichhaltige Tierwelt. Unvergessliche Erinnerungen.",
-    "cta": "Buchen Sie Ihren Aufenthalt",
+    "headline": "Erwachen Sie zum Klang der Wellen und Brüllaffen",
+    "subheadline": "Erleben Sie die Magie des Schlafens unter den Sternen an Costa Ricas unberührtesten Stränden. Wo der Dschungel den Pazifik trifft, beginnt Ihr Abenteuer.",
+    "cta": "Reservieren Sie Ihren Platz im Paradies",
     "features": {
-      "beachfront": "Direkt am Strand",
-      "wildlife": "Wildtier-Refugium",
-      "ecoFriendly": "Umweltfreundlich"
+      "beachfront": "Camping am Strand",
+      "wildlife": "Begegnungen mit Wildtieren",
+      "sunsets": "Unvergessliche Sonnenuntergänge"
     }
   },
   "welcome": {
-    "title": "Willkommen im Paradies",
-    "text": "Eingebettet an der unberührten Küste von Guanacaste bietet unser Campingplatz ein einzigartiges Erlebnis, bei dem moderner Komfort auf unberührte Naturschönheit trifft. Wachen Sie mit dem Klang der Wellen auf, erkunden Sie den tropischen Wald und erleben Sie die Magie des costa-ricanischen Küstenlebens."
+    "title": "Das Ist Nicht Nur Camping. Das Ist Leben.",
+    "paragraph1": "Stellen Sie sich vor, Sie schlafen zum Rhythmus der Wellen ein, die nur wenige Schritte von Ihrem Zelt entfernt brechen. Sie wachen auf zu einer Symphonie tropischer Vögel, während Brüllaffen von den Baumkronen rufen. Sie beobachten, wie die Sonne im Pazifischen Ozean versinkt, während Sie Marshmallows über einem knisternden Feuer rösten.",
+    "paragraph2": "Willkommen im Camping Puerto Viejo Conchal, wo die Grenzen zwischen Komfort und Wildnis zu etwas Außergewöhnlichem verschwimmen. Eingebettet an den goldenen Küsten von Guanacaste, Costa Rica—nur Minuten von den berühmten weißen Muschelstränden von Playa Conchal entfernt—bietet unser Strandcamping-Refugium eine Flucht aus dem Gewöhnlichen und ein Tor zur reinen, unberührten Natur.",
+    "paragraph3": "Das ist nicht Überleben. Das ist Wiederbverbindung mit dem Wesentlichen."
   },
   "whyUs": {
-    "title": "Warum Uns Wählen",
-    "subtitle": "Was unseren Campingplatz wirklich besonders macht",
-    "reasons": {
-      "location": {
-        "title": "Erstklassige Lage",
-        "description": "Direkter Strandzugang mit atemberaubenden Sonnenuntergängen und einer friedlichen Atmosphäre abseits der überfüllten Touristengebiete."
-      },
-      "wildlife": {
-        "title": "Begegnungen mit Wildtieren",
-        "description": "Beobachten Sie Brüllaffen, Aras, Meeresschildkröten und unzählige tropische Vögel in ihrem natürlichen Lebensraum."
-      },
-      "experience": {
-        "title": "Einzigartiges Erlebnis",
-        "description": "Kombinieren Sie Abenteuer und Entspannung mit Surfen, Wandern, Kajakfahren und Wildtiertouren - alles von Ihrem Campingplatz aus."
-      },
-      "flexibility": {
-        "title": "Flexible Buchung",
-        "description": "Ob Sie Ihr eigenes Zelt mitbringen oder eines unserer Zelte mieten - wir erfüllen Ihren bevorzugten Campingstil."
-      }
+    "title": "Warum Abenteurer Uns Wählen",
+    "location": {
+      "title": "Füße im Sand, Seele im Dschungel",
+      "text": "Unser Camp liegt am magischen Schnittpunkt, wo tropischer Trockenwald auf türkisfarbenes Wasser trifft. Schlafen Sie 50 Meter vom Ozean entfernt ein, wachen Sie umgeben von Wildtieren auf. Keine Hotelwände—nur Sie und das Meisterwerk der Natur."
+    },
+    "wildlife": {
+      "title": "Ihre Nachbarn Haben Schwänze und Flügel",
+      "text": "Brüllaffen kündigen den Sonnenaufgang an. Hellrote Aras malen den Himmel rot. Tukane posieren für Ihre Kamera. Weißgesicht-Kapuziner könnten Ihr Frühstück besuchen. Das ist ihr Zuhause—Sie sind der glückliche Gast."
+    },
+    "experience": {
+      "title": "Geschichten, Die Sie Für Immer Erzählen",
+      "text": "Das biolumineszierende Plankton, das die Wellen um Mitternacht erleuchtet. Die Meeresschildkröte, die Sie im Mondlicht nisten sahen. Die Nasenbärenfamilie, die durch das Camp lief. Diese Momente passieren nicht in Hotels."
+    },
+    "flexibility": {
+      "title": "Ihr Abenteuer, Auf Ihre Weise",
+      "text": "Bringen Sie Ihr eigenes Zelt mit oder mieten Sie eines von uns. Bleiben Sie eine Nacht oder einen Monat. Fügen Sie eine Kayaktour bei Sonnenaufgang hinzu oder halten Sie es einfach. Wir bieten das Paradies—Sie schreiben die Geschichte."
     }
   },
   "experience": {
     "title": "Ein Tag im Paradies",
-    "subtitle": "Erleben Sie die Magie des Strandcampings mit einem typischen Tag in unserem Küstenparadies",
-    "timeline": {
-      "morning": {
-        "time": "6:00 - 8:00 Uhr",
-        "title": "Aufwachen bei Sonnenaufgang",
-        "description": "Beginnen Sie Ihren Tag mit einem erfrischenden Bad im Meer oder einer friedlichen Yoga-Session am Strand, während die Sonne über dem Horizont aufgeht."
-      },
-      "midMorning": {
-        "time": "8:00 - 12:00 Uhr",
-        "title": "Abenteuer und Erkundung",
-        "description": "Wandern Sie auf Dschungelpfaden, paddeln Sie durch die Mangroven oder surfen Sie die perfekten Wellen entlang unseres Strandes."
-      },
-      "afternoon": {
-        "time": "12:00 - 17:00 Uhr",
-        "title": "Entspannung und Entdeckung",
-        "description": "Genießen Sie ein entspanntes Mittagessen, machen Sie ein Nickerchen in der Hängematte oder nehmen Sie an einer geführten Wildtiertour teil, um Affen und tropische Vögel zu beobachten."
-      },
-      "evening": {
-        "time": "17:00 - 20:00 Uhr",
-        "title": "Sonnenuntergang und Geselligkeit",
-        "description": "Beobachten Sie spektakuläre Sonnenuntergänge, teilen Sie Geschichten am Lagerfeuer und genießen Sie frisch zubereitete Mahlzeiten unter den Sternen."
-      },
-      "night": {
-        "time": "20:00 - 22:00 Uhr",
-        "title": "Nachtwunder",
-        "description": "Beobachten Sie nistende Meeresschildkröten (saisonal), bewundern Sie die Milchstraße oder genießen Sie einfach die Klänge des Dschungels beim Einschlafen."
-      }
+    "morning": {
+      "time": "6:00",
+      "title": "Der Weckruf der Natur",
+      "text": "Die Brüllaffen beginnen ihren Morgenchor, während goldenes Licht durch die Palmen filtert. Treten Sie aus Ihrem Zelt in die neblige Dschungelluft und das Versprechen von Abenteuer. Frühaufsteher sehen Tukane und Papageien im Blätterdach."
+    },
+    "midMorning": {
+      "time": "9:00",
+      "title": "Strandglück",
+      "text": "Nach einem frischen tropischen Frühstück warten die unberührten Gewässer von Conchal auf Sie. Schnorcheln Sie durch kristallklare Wellen, beobachten Sie tropische Fische, oder schweben Sie einfach in so klarem Wasser, dass Sie Ihre Zehen sehen können. Der berühmte Muschelstrand ist Ihr Hinterhof."
+    },
+    "afternoon": {
+      "time": "14:00",
+      "title": "Geheimnisse des Dschungels",
+      "text": "Erkunden Sie versteckte Pfade, wo Affen über Ihnen schwingen und Leguane auf uralten Ästen Sonne tanken. Erfrischen Sie sich in einem geheimen Naturpool. Beobachten Sie Wildtiere, die Sie nur aus Dokumentarfilmen kennen—hier sind sie Ihre Nachbarn."
+    },
+    "evening": {
+      "time": "18:00",
+      "title": "Sonnenuntergangs-Rituale",
+      "text": "Schnappen Sie sich Ihr Lieblingsgetränk und beanspruchen Sie Ihren Platz im Sand. Beobachten Sie, wie der Pazifik die Sonne in einer Explosion von Orange, Rosa und Violett verschluckt. Kein Sonnenuntergang gleicht dem anderen—jeder ist eine private Show nur für Sie."
+    },
+    "night": {
+      "time": "20:00",
+      "title": "Unter den Sternen",
+      "text": "Versammeln Sie sich ums Lagerfeuer, während die Milchstraße über Ihnen erscheint. Teilen Sie Geschichten mit anderen Reisenden. Hören Sie die nächtliche Symphonie des Dschungels. Schlafen Sie zum Klang der Wellen ein und erwachen Sie bereit, alles zu wiederholen."
     }
   },
   "accommodations": {
-    "title": "Unterkünfte",
-    "subtitle": "Wählen Sie Ihren perfekten Campingstil",
+    "title": "Schlafen Sie Auf Ihre Art",
     "bringOwn": {
-      "title": "Eigenes Zelt Mitbringen",
-      "description": "Bringen Sie Ihre eigene Campingausrüstung mit und genießen Sie unsere Premium-Strandstellplätze mit allen Annehmlichkeiten inklusive.",
-      "price": "25 € / Nacht",
-      "features": {
-        "spot": "Strandstellplatz",
-        "amenities": "Zugang zu allen Einrichtungen",
-        "fire": "Ausgewiesene Feuerstelle",
-        "parking": "Kostenloser Parkplatz"
-      }
+      "title": "Für den Vorbereiteten Entdecker",
+      "text": "Haben Sie bereits Ihr bewährtes Zelt? Perfekt. Reservieren Sie Ihren Premium-Strandstellplatz und richten Sie Ihr Zuhause-fern-von-Zuhause genau so ein, wie Sie es mögen. Flache, geräumte Plätze mit Meerblick warten auf Sie.",
+      "price": "Ab 25€/Nacht pro Person"
     },
     "rental": {
-      "title": "Zeltmiete",
-      "description": "Kein Zelt? Kein Problem! Mieten Sie eines unserer komfortablen, gut ausgestatteten Zelte für ein sorgenfreies Erlebnis.",
-      "startingAt": "Ab",
-      "perNight": "/ Nacht"
+      "title": "Reisen Sie Leicht, Schlafen Sie Gut",
+      "text": "Fliegen Sie an oder packen Sie lieber leicht? Wir haben für Sie vorgesorgt—buchstäblich. Unsere Qualitätszelte kommen fertig mit bequemen Schlafmatten, damit Sie sich auf das Abenteuer konzentrieren können, nicht auf die Logistik."
     }
   },
   "tents": {
     "cozyDuo": {
       "name": "Gemütliches Duo",
-      "description": "Perfekt für Paare oder Alleinreisende, die Komfort suchen.",
-      "capacity": "2 Personen",
-      "price": "45 €"
+      "description": "Perfekt für Paare oder Alleinreisende, die Platz mögen. Kompakt, wasserdicht und überraschend geräumig."
     },
     "familyExplorer": {
       "name": "Familien-Entdecker",
-      "description": "Geräumig und komfortabel für Familien oder kleine Gruppen.",
-      "capacity": "4 Personen",
-      "price": "75 €"
+      "description": "Platz für die ganze Crew oder Freundesgruppe. Stehhöhe, mehrere Belüftungsfenster und überdachter Vorraum."
     },
     "baseCamp": {
-      "name": "Basis-Camp",
-      "description": "Unsere größte Option für Gruppen, die gemeinsam Abenteuer suchen.",
-      "capacity": "6 Personen",
-      "price": "95 €"
+      "name": "Basislager",
+      "description": "Der Luxus von Raum im Herzen der Natur. Perfekt für Familien oder Gruppen, die sich ausbreiten möchten."
     }
   },
   "amenities": {
-    "title": "Campingplatz-Einrichtungen",
-    "subtitle": "Alles, was Sie für einen komfortablen Aufenthalt brauchen",
-    "items": {
-      "showers": {
-        "title": "Warme Duschen",
-        "description": "Saubere Duschen mit 24-Stunden-Warmwasser"
-      },
-      "restrooms": {
-        "title": "Saubere Toiletten",
-        "description": "Gut gewartete Sanitäranlagen"
-      },
-      "campfires": {
-        "title": "Lagerfeuer",
-        "description": "Ausgewiesene Feuerstellen mit Brennholz"
-      },
-      "parking": {
-        "title": "Sicherer Parkplatz",
-        "description": "Kostenlose Parkplätze für alle Gäste"
-      },
-      "wifi": {
-        "title": "Kostenloses WLAN",
-        "description": "Bleiben Sie mit Basis-Internet verbunden"
-      },
-      "cooking": {
-        "title": "Kochbereich",
-        "description": "Gemeinschaftsküche mit Grundausstattung"
-      },
-      "security": {
-        "title": "24-Stunden-Sicherheit",
-        "description": "Nachts Sicherheitspersonal vor Ort"
-      },
-      "tours": {
-        "title": "Tourendesk",
-        "description": "Buchen Sie Touren und Aktivitäten vor Ort"
-      }
-    }
+    "title": "Rustikaler Charme, Echter Komfort",
+    "intro": "Camping bedeutet nicht, auf Komfort zu verzichten. Wir haben an alles gedacht, damit Sie sich auf das Wesentliche konzentrieren können: sich vom Lärm zu lösen und sich mit der Natur zu verbinden.",
+    "showers": { "title": "Warme Duschen", "text": "Beginnen Sie Ihren Tag erfrischt mit solarbeheizten Duschen mit Blick auf den Dschungel" },
+    "restrooms": { "title": "Saubere Toiletten", "text": "Gut gewartete Einrichtungen, die mehrmals täglich gereinigt werden" },
+    "campfire": { "title": "Lagerfeuerstellen", "text": "Ausgewiesene Feuerbereiche mit Sitzgelegenheiten—Marshmallows optional aber empfohlen" },
+    "parking": { "title": "Sicherer Parkplatz", "text": "Sicheres, überwachtes Parken für Ihren Mietwagen oder Motorrad" },
+    "wifi": { "title": "WLAN-Zonen", "text": "Müssen Sie diesen Sonnenuntergang posten? Konnektivität wenn Sie sie brauchen, Natur wenn nicht" },
+    "cooking": { "title": "Kochbereiche", "text": "Gemeinschaftsküchen mit Grills und Vorbereitungsstationen" },
+    "security": { "title": "24/7 Sicherheit", "text": "Ruhen Sie entspannt in dem Wissen, dass unser Team das Camp rund um die Uhr bewacht" },
+    "tours": { "title": "Touren-Desk", "text": "Buchen Sie Abenteuer, erhalten Sie lokale Tipps und entdecken Sie verborgene Schätze" }
   },
   "wildlife": {
-    "title": "Treffen Sie Unsere Nachbarn",
-    "subtitle": "Der Campingplatz liegt in einem Biodiversitäts-Hotspot mit unglaublicher Tierwelt",
-    "animals": {
-      "howlerMonkeys": {
-        "name": "Brüllaffen",
-        "description": "Wachen Sie mit ihren ikonischen Rufen bei Tagesanbruch auf"
-      },
-      "scarletMacaws": {
-        "name": "Hellrote Aras",
-        "description": "Beobachten Sie diese wunderschönen Vögel über den Baumkronen fliegen"
-      },
-      "toucans": {
-        "name": "Tukane",
-        "description": "Entdecken Sie diese bunten Vögel im Blätterdach"
-      },
-      "capuchinMonkeys": {
-        "name": "Kapuzineraffen",
-        "description": "Verspielt und neugierig, oft in der Nähe des Campingplatzes zu sehen"
-      },
-      "iguanas": {
-        "name": "Leguane",
-        "description": "Sonnen sich auf Felsen und Ästen"
-      }
-    },
-    "note": "Wir praktizieren verantwortungsvolle Wildtierbeobachtung. Bitte halten Sie sicheren Abstand und füttern Sie niemals die Tiere."
+    "title": "Treffen Sie die Einheimischen",
+    "intro": "Unser Camp ist nicht nur in der Nähe der Natur—es ist in sie eingetaucht. Die Wildtiere hier sind nicht eingesperrt oder inszeniert. Diese Tiere leben hier, und wenn Sie geduldig und respektvoll sind, werden sie ihre Welt mit Ihnen teilen.",
+    "howler": { "name": "Brüllaffen", "text": "Ihr natürlicher Wecker. Diese sanften Riesen bewegen sich bei Morgen- und Abenddämmerung durch das Blätterdach, ihre unglaublichen Rufe hallen durch den Wald. Beobachten Sie ganze Familien beim Pflegen und Spielen in den Bäumen über dem Camp." },
+    "macaw": { "name": "Hellrote Aras", "text": "Costa Ricas schillerndste Bewohner. Diese leuchtend roten, gelben und blauen Papageien fliegen paarweise über den Strand bei Sonnenauf- und -untergang. Ihre Rufe sind unverwechselbar—und unvergesslich." },
+    "toucan": { "name": "Regenbogentukane", "text": "Die regenbogenschnabeligen Ikonen der Tropen. Beobachten Sie sie von Ast zu Ast hüpfen auf der Suche nach Früchten, ihre übergroßen Schnäbel machen sie unmöglich zu übersehen." },
+    "capuchin": { "name": "Weißgesicht-Kapuziner", "text": "Die Neugierigen. Diese intelligenten Affen könnten Ihr Lager aus sicherer Entfernung untersuchen, ihre ausdrucksstarken Gesichter zeigen endlose Neugier gegenüber ihren menschlichen Besuchern." },
+    "iguana": { "name": "Leguane und Mehr", "text": "Grüne Leguane beim Sonnenbaden auf Ästen, Jesus-Christus-Eidechsen, die übers Wasser laufen, Nasenbären, die in Gruppen nach Nahrung suchen—jeder Spaziergang enthüllt neue Nachbarn." },
+    "note": "Wichtig: Wir praktizieren verantwortungsvolle Wildtier-Interaktion. Bitte füttern Sie die Tiere nicht—sie gedeihen am besten mit ihrer natürlichen Ernährung, und Ihr Respekt hilft, sie wild zu halten."
   },
   "testimonials": {
-    "title": "Was Unsere Gäste Sagen",
-    "subtitle": "Echte Erfahrungen von echten Campern",
+    "title": "Geschichten aus dem Sand",
+    "subtitle": "Echte Erfahrungen von Abenteurern, die ihr Paradies bei uns gefunden haben",
+    "ratingCount": "von über 200 Bewertungen",
     "reviews": {
       "sarah": {
-        "name": "Anna M.",
+        "name": "Sarah Johnson",
+        "location": "Kalifornien, USA",
+        "text": "Aufwachen mit Brüllaffen und in Sekunden zum Strand laufen—das war das magischste Campingerlebnis meines Lebens. Das Personal war unglaublich hilfsbereit und die Lage ist absolut atemberaubend.",
+        "date": "Dez 2025"
+      },
+      "michael": {
+        "name": "Michael Chen",
+        "location": "Toronto, Kanada",
+        "text": "Wir sahen Tukane, Affen und die unglaublichsten Sonnenuntergänge. Meine Kinder reden noch Monate später davon. Perfekte Mischung aus Abenteuer und Komfort. Wir kommen definitiv wieder!",
+        "date": "Nov 2025"
+      },
+      "emma": {
+        "name": "Emma Williams",
+        "location": "London, Großbritannien",
+        "text": "Ich reiste allein und fühlte mich völlig sicher und willkommen. Die Gemeinschaft am Lagerfeuer jeden Abend war wunderbar. Ich machte Freunde aus der ganzen Welt. Wirklich lebensverändernd.",
+        "date": "Jan 2026"
+      },
+      "carlos": {
+        "name": "Carlos Mendez",
+        "location": "Mexiko-Stadt, Mexiko",
+        "text": "Die perfekte Erfahrung, um sich mit der Natur zu verbinden. Der Strand von Conchal ist ein Paradies, und ihn so nah am Camp zu haben, ließ jeden Tag wie einen Traum erscheinen.",
+        "date": "Okt 2025"
+      },
+      "lisa": {
+        "name": "Lisa Anderson",
+        "location": "Sydney, Australien",
+        "text": "Den langen Flug wert! Die Tierwelt hier ist unglaublich—wir sahen jeden Morgen Hellrote Aras. Die Mietzzelte waren überraschend komfortabel und die Einrichtungen großartig.",
+        "date": "Sep 2025"
+      },
+      "david": {
+        "name": "David Müller",
         "location": "Berlin, Deutschland",
-        "text": "Mit dem Klang der Brüllaffen aufzuwachen und mit den Meereswellen einzuschlafen war magisch. Der Sonnenuntergang von unserem Stellplatz war unvergesslich!",
-        "date": "März 2024"
-      },
-      "mike": {
-        "name": "Thomas K.",
-        "location": "München, Deutschland",
-        "text": "Das Team hat alles so einfach gemacht. Die Wildtiertour war unglaublich - wir haben Tukane, Affen und sogar eine Meeresschildkröte gesehen!",
-        "date": "Februar 2024"
-      },
-      "familia": {
-        "name": "Familie Schneider",
-        "location": "Hamburg, Deutschland",
-        "text": "Perfekt für Familien! Unsere Kinder haben den Strand geliebt und wir haben Erinnerungen geschaffen, die ein Leben lang halten werden. Wir kommen definitiv wieder.",
-        "date": "Januar 2024"
-      },
-      "adventure": {
-        "name": "Sophie B.",
-        "location": "Wien, Österreich",
-        "text": "Die beste Campingreise, die ich je gemacht habe. Das Surfen war ausgezeichnet, das Personal war super freundlich und die Lage ist einfach perfekt.",
-        "date": "Dezember 2023"
+        "text": "Die beste Entscheidung für unsere Flitterwochen. Romantische Sonnenuntergänge, private Strände und das fantastischste Sternegucken. Das Personal half uns, Kajak- und Schnorchelausflüge zu organisieren.",
+        "date": "Dez 2025"
       }
     }
   },
   "location": {
-    "title": "Finden Sie Uns",
-    "subtitle": "Eingebettet in der wunderschönen Region Guanacaste in Costa Rica",
-    "address": "Playa Guanacaste, Costa Rica",
-    "coordinates": "10,2° N, 85,8° W",
-    "nearbyTitle": "In der Nähe",
-    "nearby": {
-      "beach": "Unberührter Strand - 50m",
-      "town": "Nächste Stadt - 15 Min",
-      "airport": "Flughafen Liberia - 1 Std",
-      "nationalPark": "Nationalpark - 30 Min"
+    "title": "Wo Dschungel auf Ozean Trifft",
+    "intro": "Im Herzen von Guanacaste gelegen, Costa Ricas atemberaubender Goldküste, liegt Camping Puerto Viejo Conchal perfekt zwischen Abenteuer und Erreichbarkeit.",
+    "distances": {
+      "beach": "5 Min zu Fuß zu Playa Conchal",
+      "tamarindo": "10 Min nach Tamarindo",
+      "volcano": "45 Min nach Rincón de la Vieja",
+      "airport": "45 Min vom Flughafen Liberia (LIR)"
     },
-    "gettingHere": {
-      "title": "Anreise",
-      "description": "Vom Flughafen Liberia nehmen Sie die Route 21 nach Süden. Unser Campingplatz ist gut an der Küstenstraße ausgeschildert. Wir bieten auch Flughafentransfers auf Anfrage an."
-    }
+    "gettingHere": "Fliegen Sie zum internationalen Flughafen Daniel Oduber Quirós (LIR) in Liberia. Mieten Sie ein Auto für maximale Erkundungsfreiheit, oder organisieren Sie einen Shuttle direkt zum Camp. Die Fahrt ist wunderschön—Ihr Abenteuer beginnt in dem Moment, in dem Sie landen."
   },
   "cta": {
-    "title": "Bereit für Ihr Abenteuer?",
-    "text": "Begrenzte Plätze für die Hochsaison verfügbar.",
-    "subtext": "Buchen Sie jetzt und sichern Sie sich Ihren Platz im Paradies",
-    "button": "Buchen Sie Ihren Aufenthalt",
-    "trustBadges": {
+    "title": "Ihr Platz Unter den Sternen Wartet",
+    "text": "Jeder Sonnenuntergang ist anders. Jeder Nachthimmel erzählt eine neue Geschichte. Jeder Tag bringt unerwartete Begegnungen mit Wildtieren. Aber die Stellplätze sind begrenzt, und die besten Plätze sind schnell weg—besonders während der Trockenzeit (Dezember-April).",
+    "subtext": "Träumen Sie nicht nur davon. Fügen Sie es nicht nur Ihrer Wunschliste hinzu. Machen Sie es wahr.",
+    "button": "Buchen Sie Jetzt Ihr Abenteuer",
+    "trust": {
       "secure": "Sichere Buchung",
-      "flexible": "Flexible Stornierung",
+      "payment": "Mit Karte oder PayPal bezahlen",
+      "cancel": "Kostenlose Stornierung bis 48h",
       "support": "24/7 Support"
     }
   },
   "faq": {
-    "title": "Häufig Gestellte Fragen",
-    "subtitle": "Alles, was Sie vor Ihrem Besuch wissen müssen",
-    "questions": {
-      "safety": {
-        "question": "Ist der Campingplatz sicher?",
-        "answer": "Absolut! Wir haben 24-Stunden-Sicherheitspersonal, gut beleuchtete Stellplätze und befinden uns in einer sicheren Gegend. Gäste können ihren Aufenthalt beruhigt genießen."
-      },
-      "bring": {
-        "question": "Was sollte ich mitbringen?",
-        "answer": "Das Wichtigste: Sonnencreme, Insektenschutz, Badeanzug, bequeme Kleidung und eine Taschenlampe. Wenn Sie ein Zelt mieten, stellen wir die gesamte Campingausrüstung zur Verfügung."
-      },
-      "weather": {
-        "question": "Wie ist das Wetter?",
-        "answer": "Die Trockenzeit (Dezember-April) bietet sonnigen Himmel und Temperaturen von 25-32°C. Die Regenzeit (Mai-November) bringt kurze Nachmittagsschauer, aber weniger überfüllte Strände."
-      },
-      "wildlife": {
-        "question": "Werden wir Wildtiere sehen?",
-        "answer": "Sehr wahrscheinlich! Affen, Tukane und Leguane werden täglich gesehen. Die Schildkrötenbeobachtung ist saisonal (August-Dezember). Wir bieten geführte Wildtiertouren an."
-      },
-      "families": {
-        "question": "Ist der Campingplatz familienfreundlich?",
-        "answer": "Ja! Wir heißen Familien jeden Alters willkommen. Unser Strand ist sicher zum Schwimmen und wir haben familienfreundliche Aktivitäten."
-      },
-      "rain": {
-        "question": "Was passiert, wenn es regnet?",
-        "answer": "Unsere Zelte sind wasserdicht und wir haben überdachte Gemeinschaftsbereiche. Regen dauert normalerweise nicht lange und der Campingplatz ist danach wunderschön."
-      },
-      "booking": {
-        "question": "Wie buche ich?",
-        "answer": "Sie können direkt auf dieser Website über unser sicheres Buchungssystem buchen. Eine Anzahlung ist erforderlich, der Rest wird bei der Ankunft fällig."
-      }
+    "title": "Fragen? Wir Haben Antworten",
+    "safety": {
+      "q": "Ist Camping in Costa Rica sicher?",
+      "a": "Absolut! Costa Rica ist eines der sichersten Länder Mittelamerikas. Unser Camp hat 24/7-Sicherheit, und die lokale Gemeinschaft ist einladend und freundlich. Alleinreisende, Familien und Gruppen fühlen sich hier alle wie zu Hause."
+    },
+    "packing": {
+      "q": "Was sollte ich mitbringen?",
+      "a": "Wesentliches: Sonnencreme, Insektenschutzmittel, Taschenlampe, Wasserflasche und Abenteuerlust. Nützlich: Fernglas für Wildtiere, wasserdichte Tasche für Strandtage, leichte Schichten für kühlere Abende. Wenn Sie ein Zelt mieten, stellen wir Schlafmatten bereit—bringen Sie nur Ihren Schlafsack mit oder mieten Sie Bettwäsche."
+    },
+    "weather": {
+      "q": "Wie ist das Wetter?",
+      "a": "Guanacaste hat zwei Jahreszeiten: Trockenzeit (Dezember-April) mit sonnigen Tagen und kühlen Nächten, und Grüne Saison (Mai-November) mit Nachmittagsschauern und üppigen Landschaften. Beide sind magisch—Trockenzeit für garantierte Sonne, Grüne Saison für weniger Menschenmassen und dramatische Himmel."
+    },
+    "wildlifeSightings": {
+      "q": "Kann ich garantiert Wildtiere sehen?",
+      "a": "Wildtiere sind wild (keine Garantien in der Natur!), aber unsere Lage bedeutet, dass Sichtungen extrem häufig sind. Brüllaffen hört man täglich, Vögel sind ständig da, und die meisten Gäste sehen während ihres Aufenthalts mehrere Arten. Frühe Morgenstunden und späte Nachmittage sind die besten Zeiten."
+    },
+    "families": {
+      "q": "Ist das gut für Familien mit Kindern?",
+      "a": "Kinder LIEBEN es hier. Der Strand ist ruhig zum Schwimmen, die Wildtiere sind endlos faszinierend, und es gibt Platz zum Rennen und Erkunden. Wir haben Familien mit Babys bis zu Teenagern beherbergt—alle gehen mit unglaublichen Erinnerungen."
+    },
+    "rain": {
+      "q": "Was passiert, wenn es regnet?",
+      "a": "Unsere Zelte sind wasserdicht, und wir haben überdachte Gemeinschaftsbereiche. Ein tropischer Regenschauer ist Teil des Erlebnisses—normalerweise kurz, dramatisch und gefolgt von der frischesten Luft, die Sie je geatmet haben. Packen Sie eine leichte Regenjacke ein und genießen Sie es!"
+    },
+    "booking": {
+      "q": "Wie buche ich?",
+      "a": "Ganz einfach! Nutzen Sie unser Online-Buchungssystem direkt hier. Wählen Sie Ihre Daten, wählen Sie Ihre Unterkunft, fügen Sie Extras hinzu und bezahlen Sie sicher mit Karte oder PayPal. Sie erhalten sofortige Bestätigung."
     }
   },
   "footer": {
-    "tagline": "Ihr Zuhause in der Ferne, unter den Sternen.",
+    "tagline": "Abschalten um Aufzuladen",
     "quickLinks": "Schnelllinks",
     "legal": "Rechtliches",
     "privacy": "Datenschutzrichtlinie",
-    "terms": "Nutzungsbedingungen",
+    "terms": "Allgemeine Geschäftsbedingungen",
     "cancellation": "Stornierungsrichtlinie",
     "newsletter": {
-      "title": "Bleiben Sie Verbunden",
+      "title": "Der Tribe Beitreten",
+      "text": "Erhalten Sie Reisetipps, Wildtier-Updates und exklusive Angebote.",
       "placeholder": "Ihre E-Mail",
-      "button": "Abonnieren",
-      "success": "Vielen Dank für Ihr Abonnement!"
+      "button": "Abonnieren"
     },
-    "copyright": "Alle Rechte vorbehalten.",
-    "languages": "Sprachen"
+    "copyright": "© 2025 Camping Puerto Viejo Conchal. Alle Rechte vorbehalten. Mit 🌴 in Costa Rica gemacht."
   },
   "booking": {
-    "title": "Buchen Sie Ihren Aufenthalt",
     "steps": {
       "dates": "Daten",
       "guests": "Gäste",
       "extras": "Extras",
       "details": "Details",
-      "confirm": "Bestätigung",
-      "payment": "Zahlung"
+      "confirm": "Bestätigen",
+      "completed": "Schritt abgeschlossen",
+      "current": "Aktueller Schritt",
+      "upcoming": "Nächster Schritt"
     },
     "step1": {
-      "title": "Wählen Sie Ihre Daten",
-      "checkIn": "Anreise",
-      "checkOut": "Abreise",
-      "selectDate": "Datum auswählen",
-      "nights": "Nächte",
-      "continue": "Weiter"
+      "title": "Wann Beginnt Ihr Abenteuer?",
+      "subtitle": "Wählen Sie Ihr An- und Abreisedatum. Mindestaufenthalt: 1 Nacht.",
+      "priceNote": "25€/Person/Nacht Grundpreis",
+      "peakSeason": "Hauptsaison"
     },
     "step2": {
-      "title": "Wer Kommt?",
-      "adults": "Erwachsene",
-      "adultsDesc": "Ab 13 Jahren",
-      "children": "Kinder",
-      "childrenDesc": "3-12 Jahre",
-      "infants": "Kleinkinder",
-      "infantsDesc": "Unter 3 Jahren",
-      "bringTent": "Ich bringe mein eigenes Zelt mit",
-      "bringTentDesc": "Nur Stellplatz: 25 € / Nacht",
-      "rentTent": "Ich brauche ein Miet-Zelt",
-      "rentTentDesc": "Wählen Sie aus unseren komfortablen Optionen",
-      "selectTents": "Wählen Sie Ihre Zelte",
-      "quantity": "Menge",
-      "capacity": "Kapazität",
-      "perNight": "/ Nacht",
-      "back": "Zurück",
-      "continue": "Weiter"
+      "title": "Wer Kommt Ins Paradies?",
+      "subtitle": "Erzählen Sie uns von Ihrer Gruppe, damit wir Ihren perfekten Platz vorbereiten können.",
+      "adults": "Erwachsene (18+)",
+      "children": "Kinder (4-17)",
+      "infants": "Babys (0-3)",
+      "infantsFree": "Kostenlos",
+      "needTent": "Brauchen Sie ein Mietzzelt?",
+      "bringOwn": "Ich bringe mein eigenes Zelt mit",
+      "bringOwnNote": "Nur Stellplatzgebühr fällt an",
+      "campsiteRate": "Stellplatz",
+      "sleeps": "Kapazität"
     },
     "step3": {
-      "title": "Erweitern Sie Ihren Aufenthalt",
-      "subtitle": "Fügen Sie optionale Erlebnisse hinzu",
-      "perPerson": "/ Person",
-      "perGroup": "/ Gruppe",
-      "perSet": "/ Set",
-      "perDay": "/ Tag",
-      "back": "Zurück",
-      "continue": "Weiter",
-      "skip": "Überspringen"
+      "title": "Machen Sie Es Unvergesslich",
+      "subtitle": "Optionale Extras, um Ihr Erlebnis zu verbessern. Überspringen Sie, wenn Sie es einfach halten möchten."
     },
     "step4": {
-      "title": "Ihre Informationen",
-      "subtitle": "Wir benötigen einige Details, um Ihre Buchung abzuschließen",
-      "fullName": "Vollständiger Name",
-      "fullNamePlaceholder": "Max Mustermann",
-      "email": "E-Mail-Adresse",
-      "emailPlaceholder": "max@beispiel.de",
-      "phone": "Telefonnummer",
-      "phonePlaceholder": "+49 170 1234567",
-      "country": "Land",
-      "selectCountry": "Land auswählen",
-      "arrivalTime": "Geschätzte Ankunftszeit",
-      "selectTime": "Zeit auswählen",
-      "occasion": "Feiern Sie einen besonderen Anlass?",
-      "selectOccasion": "Anlass auswählen",
-      "occasionOptions": {
-        "none": "Keiner",
-        "birthday": "Geburtstag",
-        "anniversary": "Jahrestag",
-        "honeymoon": "Flitterwochen",
-        "graduation": "Abschluss",
-        "other": "Anderer"
-      },
-      "specialRequests": "Besondere Wünsche",
-      "specialRequestsPlaceholder": "Teilen Sie uns alles mit, was wir wissen sollten, um Ihren Aufenthalt besonders zu machen...",
-      "back": "Zurück",
-      "continue": "Buchung Überprüfen"
-    },
-    "step5": {
-      "title": "Bestätigen Sie Ihre Buchung",
-      "tripSummary": "Reisezusammenfassung",
+      "title": "Überprüfen Sie Ihr Abenteuer",
+      "summary": "Buchungsübersicht",
       "dates": "Daten",
+      "nights": "Nächte",
       "guests": "Gäste",
       "adults": "Erwachsene",
       "children": "Kinder",
-      "infants": "Kleinkinder",
+      "infants": "Babys",
       "accommodation": "Unterkunft",
-      "ownTent": "Eigenes Zelt",
-      "rentalTents": "Miet-Zelte",
-      "addons": "Extras",
-      "guestInfo": "Gästeinformationen",
-      "priceSummary": "Preiszusammenfassung",
-      "campsiteFee": "Stellplatzgebühr",
+      "bringOwnTent": "Eigenes Zelt mitgebracht",
+      "addonsLabel": "Extras",
+      "campsite": "Stellplatzgebühr",
       "tentRental": "Zeltmiete",
-      "addonsFee": "Extras",
+      "addons": "Extras",
       "subtotal": "Zwischensumme",
       "taxes": "Steuern (13%)",
       "total": "Gesamt",
-      "back": "Zurück",
-      "confirmPay": "Bestätigen und Bezahlen"
+      "guestInfo": {
+        "title": "Gästeinformationen",
+        "fullName": "Vollständiger Name",
+        "email": "E-Mail",
+        "phone": "Telefon (mit Ländervorwahl)",
+        "country": "Wohnsitzland",
+        "arrivalTime": "Geschätzte Ankunftszeit",
+        "specialRequests": "Besondere Wünsche / Ernährungseinschränkungen",
+        "celebrating": "Feiern Sie etwas Besonderes?"
+      }
     },
-    "step6": {
-      "title": "Zahlung",
-      "processing": "Ihre Zahlung wird verarbeitet...",
-      "securePayment": "Sichere Zahlung",
-      "paymentMethods": "Wir akzeptieren gängige Kreditkarten",
-      "totalDue": "Zu zahlender Betrag",
-      "back": "Zurück",
-      "completePurchase": "Kauf Abschließen"
+    "step5": {
+      "title": "Fast Geschafft! Buchung Abschließen",
+      "subtitle": "Ihr Abenteuer ist nur einen Klick entfernt. Die Zahlung ist sicher und verschlüsselt.",
+      "paymentMethod": "Zahlungsmethode",
+      "cardPayment": "Kredit-/Debitkarte",
+      "paypal": "PayPal",
+      "agreeTerms": "Ich stimme den AGB und Stornierungsrichtlinien zu",
+      "newsletter": "Ich möchte gelegentliche Updates und Angebote erhalten (kein Spam, versprochen!)",
+      "cancellationPolicy": "Kostenlose Stornierung bis 48 Stunden vor Anreise für volle Rückerstattung. Stornierungen innerhalb von 48 Stunden erhalten 50% Rückerstattung. Nichterscheinen ist nicht erstattungsfähig.",
+      "completeBooking": "Buchung Abschließen",
+      "secureNote": "256-Bit SSL-Verschlüsselung",
+      "trustedBy": "Vertraut von über 2.000 glücklichen Campern"
     },
     "confirmation": {
-      "title": "Buchung Bestätigt!",
-      "thankYou": "Vielen Dank für Ihre Buchung",
-      "referenceCode": "Referenzcode",
-      "emailSent": "Eine Bestätigungs-E-Mail wurde gesendet an",
-      "summary": "Buchungsübersicht",
+      "title": "🎉 Geschafft! Das Paradies Erwartet Sie!",
+      "reference": "Buchungsreferenz",
+      "emailSent": "Bestätigung gesendet an",
       "checkIn": "Anreise",
       "checkOut": "Abreise",
       "guests": "Gäste",
-      "total": "Gezahlter Betrag",
-      "whatNext": "Was Kommt als Nächstes?",
-      "nextSteps": {
-        "email": "Überprüfen Sie Ihre E-Mail für vollständige Buchungsdetails",
-        "directions": "Wir senden Ihnen 3 Tage vor Ihrer Ankunft eine Wegbeschreibung",
-        "contact": "Kontaktieren Sie uns bei Fragen"
-      },
+      "guestsLabel": "Gäste",
+      "totalPaid": "Gezahlter Gesamtbetrag",
       "backHome": "Zurück zur Startseite",
-      "print": "Bestätigung Drucken"
+      "whatsNext": "Was Kommt Als Nächstes?",
+      "step1": "Überprüfen Sie Ihre E-Mail für detaillierte Bestätigung und Wegbeschreibung",
+      "step2": "Speichern Sie unser WhatsApp für Fragen",
+      "step3": "Überprüfen Sie unsere Packliste und Reisetipps",
+      "step4": "Freuen Sie sich—Sie kommen nach Costa Rica!",
+      "addToCalendar": "Zum Kalender Hinzufügen",
+      "shareTitle": "Ihre Pläne Teilen",
+      "questionsTitle": "Fragen? Wir sind hier!"
     },
-    "errors": {
-      "required": "Dieses Feld ist erforderlich",
-      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-      "invalidPhone": "Bitte geben Sie eine gültige Telefonnummer ein",
-      "selectDates": "Bitte wählen Sie An- und Abreisedatum",
-      "minGuests": "Mindestens 1 Erwachsener ist erforderlich",
-      "selectTent": "Bitte wählen Sie mindestens eine Zeltoption"
+    "next": "Weiter",
+    "back": "Zurück",
+    "findAvailability": "Verfügbarkeit Prüfen",
+    "priceTypes": {
+      "person": "Person",
+      "night": "Nacht",
+      "day": "Tag",
+      "personNight": "Person/Nacht"
     }
   },
   "addons": {
-    "breakfast": {
-      "name": "Frühstückspaket",
-      "description": "Traditionelles Tico-Frühstück mit Kaffee, Obst und Gallo Pinto"
-    },
-    "kayak": {
-      "name": "Kajak-Tour",
-      "description": "Geführte Mangroven-Kajaktour mit Wildtierbeobachtung"
-    },
-    "wildlife": {
-      "name": "Wildtier-Wanderung",
-      "description": "Geführte Morgenwanderung zum Beobachten von Affen, Vögeln und mehr"
-    },
-    "bonfire": {
-      "name": "Lagerfeuer-Set",
-      "description": "Brennholz, S'mores-Set und reservierte Feuerstelle"
-    },
-    "snorkel": {
-      "name": "Schnorchel-Ausrüstung",
-      "description": "Maske, Schnorchel und Flossen zum Erkunden der nahen Riffe"
-    },
-    "surfLesson": {
-      "name": "Surfkurs",
-      "description": "2-stündiger privater Surfkurs mit lokalem Instruktor"
-    },
-    "massage": {
-      "name": "Strand-Massage",
-      "description": "Entspannende 60-minütige Massage mit Meerblick"
-    },
-    "dinner": {
-      "name": "BBQ-Abendessen",
-      "description": "Gegrillte Meeresfrüchte und Gemüse mit lokalen Beilagen"
-    }
+    "breakfast": { "name": "Frühstückspaket", "description": "Frische tropische Früchte, Gallo Pinto, Eier, costaricanischer Kaffee. Energie für das Abenteuer." },
+    "kayak": { "name": "Sonnenaufgangs-Kajaktour", "description": "Paddeln Sie durch ruhige Morgenwasser, während der Dschungel erwacht. 2 Stunden Magie." },
+    "wildlife": { "name": "Geführte Wildtier-Wanderung", "description": "Experten-Naturführer enthüllt versteckte Wildtiere und teilt Dschungelgeheimnisse. 2,5 Stunden." },
+    "bonfire": { "name": "Lagerfeuer-Set", "description": "Brennholz, Marshmallows, Schokolade, Kekse. Alles für den perfekten Lagerfeuerabend." },
+    "snorkel": { "name": "Schnorchelausrüstung Mieten", "description": "Maske, Schnorchel, Flossen. Erkunden Sie die Unterwasserwelt in Ihrem eigenen Tempo." }
   }
 }
