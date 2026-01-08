@@ -4,520 +4,411 @@
     "experience": "体验",
     "accommodations": "住宿",
     "gallery": "相册",
-    "book": "立即预订",
+    "bookNow": "立即预订",
     "contact": "联系我们"
   },
   "gallery": {
-    "title": "我们的相册",
-    "subtitle": "通过我们的宾客和团队捕捉的精彩瞬间，探索海滩露营的美丽。",
+    "title": "捕捉魔力",
+    "subtitle": "来自我们热带天堂的精彩瞬间，让客人永生难忘",
     "categories": {
-      "all": "全部",
+      "all": "全部照片",
       "beach": "海滩",
       "wildlife": "野生动物",
       "campsite": "营地",
-      "sunset": "日落"
+      "sunsets": "日落"
     },
-    "images": {
-      "beachSunrise": "海滩日出",
-      "turtleNesting": "海龟筑巢",
-      "campfireNight": "篝火之夜",
-      "jungleTrail": "丛林小径",
-      "surfWaves": "冲浪海浪",
-      "monkeyTrees": "树上的猴子",
-      "starryNight": "营地星空",
-      "beachYoga": "海滩瑜伽",
-      "tropicalBirds": "热带鸟类",
-      "oceanView": "海景",
-      "coastalSunset": "海岸日落",
-      "palmSilhouette": "棕榈剪影"
+    "cta": "准备好创造属于您的回忆了吗？",
+    "captions": {
+      "beach1": "Playa Conchal 原始的碧绿海水",
+      "beach2": "黄金时刻的贝壳沙滩",
+      "beach3": "沿海岸线的棕榈树",
+      "beach4": "热带海岸的海浪",
+      "wildlife1": "树冠中的吼猴",
+      "wildlife2": "飞翔中的红金刚鹦鹉",
+      "wildlife3": "树枝上的彩虹巨嘴鸟",
+      "wildlife4": "白面卷尾猴",
+      "campsite1": "海滩附近日落时的帐篷",
+      "campsite2": "星空下的篝火",
+      "campsite3": "穿越森林的丛林小径",
+      "campsite4": "营地的清晨",
+      "sunset1": "平静水面上的太平洋日落",
+      "sunset2": "海滩上的黄金时刻",
+      "sunset3": "戏剧性的黄昏天空",
+      "sunset4": "日落时的剪影"
     }
   },
   "contact": {
     "title": "联系我们",
-    "subtitle": "有问题吗？我们随时为您规划完美的露营冒险提供帮助。",
+    "subtitle": "对您的冒险有疑问？我们很乐意听到您的声音！",
     "form": {
-      "name": "您的姓名",
+      "title": "给我们发消息",
+      "name": "全名",
       "namePlaceholder": "张三",
       "email": "电子邮箱",
       "emailPlaceholder": "zhangsan@example.com",
-      "phone": "电话号码",
+      "phone": "电话（可选）",
       "phonePlaceholder": "+86 138 0000 0000",
       "subject": "主题",
-      "subjectPlaceholder": "我们能帮您什么？",
+      "subjectPlaceholder": "关于我的预订的问题",
       "message": "留言",
-      "messagePlaceholder": "告诉我们您计划的旅行或提出您的问题...",
+      "messagePlaceholder": "告诉我们如何能帮助您...",
       "submit": "发送消息",
       "sending": "发送中...",
-      "success": "消息发送成功！",
-      "successMessage": "我们将在24小时内回复您。"
+      "successTitle": "消息已发送！",
+      "successMessage": "感谢您的联系。我们将在24小时内回复您。"
     },
     "info": {
       "title": "联系方式",
-      "subtitle": "通过以下方式联系我们",
-      "email": "邮箱",
+      "address": "地址",
       "phone": "电话",
-      "location": "位置",
+      "email": "邮箱",
       "hours": "营业时间",
-      "hoursValue": "每天 7:00 - 21:00",
-      "whatsapp": "WhatsApp聊天",
-      "whatsappText": "通过WhatsApp快速回复"
+      "hoursContent": "每天 7:00 - 20:00（哥斯达黎加时间）"
+    },
+    "whatsapp": {
+      "description": "需要快速回复？在WhatsApp上与我们聊天！",
+      "button": "WhatsApp聊天"
     },
     "map": {
-      "title": "找到我们",
-      "directions": "获取路线"
+      "getDirections": "获取路线",
+      "openInGoogleMaps": "在Google地图中打开"
     },
-    "faqLink": "查看我们的常见问题",
-    "faqText": "了解常见问题的解答"
+    "faqPrompt": "正在寻找常见问题的答案？",
+    "faqLink": "查看我们的FAQ部分 →"
   },
   "hero": {
-    "headline": "您的冒险\n从这里开始",
-    "subheadline": "原始海滩。丰富野生动物。难忘回忆。",
-    "cta": "预订您的住宿",
+    "headline": "在海浪和吼猴的声音中醒来",
+    "subheadline": "在哥斯达黎加最原始的海滩上体验星空下露营的魔力。丛林与太平洋相遇的地方，您的冒险开始。",
+    "cta": "在天堂预订您的位置",
     "features": {
-      "beachfront": "海滨位置",
-      "wildlife": "野生动物保护区",
-      "ecoFriendly": "生态友好"
+      "beachfront": "海滨露营",
+      "wildlife": "野生动物邂逅",
+      "sunsets": "难忘的日落"
     }
   },
   "welcome": {
-    "title": "欢迎来到天堂",
-    "text": "我们的营地坐落在瓜纳卡斯特原始海岸线上，提供独特的体验，现代舒适与原始自然美景在此交汇。在海浪声中醒来，探索热带雨林，体验哥斯达黎加海岸生活的魅力。"
+    "title": "这不仅仅是露营。这是生活。",
+    "paragraph1": "想象一下，伴着距离帐篷几步之遥的海浪声入睡。在热带鸟类的交响乐中醒来，而吼猴在树冠中呼唤。看着太阳融入太平洋，同时在噼啪作响的篝火上烤棉花糖。",
+    "paragraph2": "欢迎来到Camping Puerto Viejo Conchal，这里舒适与荒野的界限模糊成非凡的体验。坐落在哥斯达黎加瓜纳卡斯特的金色海岸——距离著名的Playa Conchal白色贝壳沙滩仅几分钟——我们的海滨露营地提供了逃离平凡的机会，打开通往纯净、原始自然的大门。",
+    "paragraph3": "这不是求生。这是与重要事物的重新连接。"
   },
   "whyUs": {
-    "title": "为什么选择我们",
-    "subtitle": "是什么让我们的营地真正与众不同",
-    "reasons": {
-      "location": {
-        "title": "优越位置",
-        "description": "直通海滩，享受壮观的日落美景，远离拥挤的旅游区，氛围宁静。"
-      },
-      "wildlife": {
-        "title": "野生动物邂逅",
-        "description": "在其自然栖息地观察吼猴、金刚鹦鹉、海龟和无数热带鸟类。"
-      },
-      "experience": {
-        "title": "独特体验",
-        "description": "将冒险与放松相结合，从您的营地出发即可进行冲浪、徒步、皮划艇和野生动物之旅。"
-      },
-      "flexibility": {
-        "title": "灵活预订",
-        "description": "无论您自带帐篷还是租用我们的帐篷，我们都能满足您喜爱的露营方式。"
-      }
+    "title": "为什么冒险者选择我们",
+    "location": {
+      "title": "脚踩沙滩，灵魂在丛林",
+      "text": "我们的营地位于热带干燥森林与碧绿海水相遇的神奇交汇处。距离海洋50米入睡，被野生动物环绕醒来。没有度假村的墙壁——只有您和大自然的杰作。"
+    },
+    "wildlife": {
+      "title": "您的邻居有尾巴和翅膀",
+      "text": "吼猴宣告日出。红金刚鹦鹉把天空染成红色。巨嘴鸟为您的相机摆姿势。白面卷尾猴可能会来拜访您的早餐。这是它们的家——您是幸运的客人。"
+    },
+    "experience": {
+      "title": "您将永远讲述的故事",
+      "text": "午夜时分照亮海浪的生物发光浮游生物。您在月光下看到筑巢的海龟。穿过营地的貉家族。这些时刻不会发生在酒店里。"
+    },
+    "flexibility": {
+      "title": "您的冒险，您做主",
+      "text": "带上您自己的帐篷或租用我们的。住一晚或一个月。添加日出皮划艇之旅或保持简单。我们提供天堂——您书写故事。"
     }
   },
   "experience": {
     "title": "天堂的一天",
-    "subtitle": "在我们的海岸避风港体验海滩露营的魔力",
-    "timeline": {
-      "morning": {
-        "time": "6:00 - 8:00",
-        "title": "日出唤醒",
-        "description": "在太阳从地平线升起时，以清爽的海中游泳或宁静的海滩瑜伽开始您的一天。"
-      },
-      "midMorning": {
-        "time": "8:00 - 12:00",
-        "title": "冒险与探索",
-        "description": "徒步穿越丛林小径，在红树林中划皮划艇，或在我们的海滩上冲浪完美的海浪。"
-      },
-      "afternoon": {
-        "time": "12:00 - 17:00",
-        "title": "放松与发现",
-        "description": "享受悠闲的午餐，在吊床上小憩，或参加导游带领的野生动物之旅观察猴子和热带鸟类。"
-      },
-      "evening": {
-        "time": "17:00 - 20:00",
-        "title": "日落与社交",
-        "description": "欣赏壮观的日落，围着篝火分享故事，在星空下享用新鲜烹制的美食。"
-      },
-      "night": {
-        "time": "20:00 - 22:00",
-        "title": "夜间奇观",
-        "description": "观察筑巢的海龟（季节性），凝望银河，或在入睡时静静聆听丛林的声音。"
-      }
+    "morning": {
+      "time": "6:00",
+      "title": "大自然的唤醒",
+      "text": "吼猴开始它们的晨间合唱，金色的光线穿过棕榈树过滤进来。走出帐篷，迎接朦胧的丛林空气和冒险的承诺。早起的人可以看到树冠中的巨嘴鸟和鹦鹉。"
+    },
+    "midMorning": {
+      "time": "9:00",
+      "title": "海滩幸福",
+      "text": "享用新鲜的热带早餐后，Conchal的原始海水等着您。在清澈的海浪中浮潜，观察热带鱼，或者简单地漂浮在清澈到能看到脚趾的水中。著名的贝壳沙滩就是您的后院。"
+    },
+    "afternoon": {
+      "time": "14:00",
+      "title": "丛林秘密",
+      "text": "探索隐藏的小径，猴子在头顶荡秋千，鬣蜥在古老的树枝上晒太阳。在秘密的天然泳池中凉爽一下。观察您只在纪录片中见过的野生动物——在这里，它们是您的邻居。"
+    },
+    "evening": {
+      "time": "18:00",
+      "title": "日落仪式",
+      "text": "拿上您最喜欢的饮料，在沙滩上找到您的位置。看着太平洋吞噬太阳，爆发出橙色、粉色和紫色。没有两个日落是相同的——每一个都是只为您准备的私人表演。"
+    },
+    "night": {
+      "time": "20:00",
+      "title": "星空下",
+      "text": "围坐在篝火旁，银河在头顶出现。与其他旅行者分享故事。聆听丛林的夜间交响乐。伴着海浪声入睡，醒来准备好再次开始。"
     }
   },
   "accommodations": {
-    "title": "住宿",
-    "subtitle": "选择您完美的露营方式",
+    "title": "按您的方式睡觉",
     "bringOwn": {
-      "title": "自带帐篷",
-      "description": "带上您自己的露营装备，享受我们优质的海滨营位，所有设施一应俱全。",
-      "price": "¥180 / 晚",
-      "features": {
-        "spot": "海滨营位",
-        "amenities": "使用所有设施",
-        "fire": "专用篝火坑",
-        "parking": "免费停车"
-      }
+      "title": "为准备充分的探险者",
+      "text": "已经有您信赖的帐篷了？完美。预订您的优质海滨营位，按照您喜欢的方式搭建您的家外之家。平坦、清理好的空间和海景等着您。",
+      "price": "每人每晚25美元起"
     },
     "rental": {
-      "title": "帐篷租赁",
-      "description": "没有帐篷？没问题！租用我们舒适、设备齐全的帐篷，享受无忧体验。",
-      "startingAt": "起价",
-      "perNight": "/ 晚"
+      "title": "轻装出行，睡得舒适",
+      "text": "乘飞机来或更喜欢轻装旅行？我们为您准备好了——字面意思。我们的优质帐篷配有舒适的睡垫，让您可以专注于冒险，而不是后勤。"
     }
   },
   "tents": {
     "cozyDuo": {
       "name": "温馨双人",
-      "description": "非常适合寻求舒适的情侣或独自旅行者。",
-      "capacity": "2人",
-      "price": "¥320"
+      "description": "非常适合喜欢空间的情侣或独自旅行者。紧凑、防水且出奇地宽敞。"
     },
     "familyExplorer": {
       "name": "家庭探险家",
-      "description": "宽敞舒适，适合家庭或小团体。",
-      "capacity": "4人",
-      "price": "¥540"
+      "description": "可容纳整个团队或朋友群。可站立高度，多个通风窗和有盖门廊。"
     },
     "baseCamp": {
       "name": "大本营",
-      "description": "我们最大的选择，适合一起冒险的团体。",
-      "capacity": "6人",
-      "price": "¥680"
+      "description": "在大自然中心享受空间的奢华。非常适合想要展开的家庭或团体。"
     }
   },
   "amenities": {
-    "title": "营地设施",
-    "subtitle": "舒适住宿所需的一切",
-    "items": {
-      "showers": {
-        "title": "热水淋浴",
-        "description": "24小时提供热水的干净淋浴间"
-      },
-      "restrooms": {
-        "title": "干净卫生间",
-        "description": "维护良好的卫生设施"
-      },
-      "campfires": {
-        "title": "篝火",
-        "description": "专用篝火坑，提供木柴"
-      },
-      "parking": {
-        "title": "安全停车",
-        "description": "所有客人免费停车"
-      },
-      "wifi": {
-        "title": "免费WiFi",
-        "description": "基础网络保持连接"
-      },
-      "cooking": {
-        "title": "烹饪区",
-        "description": "配有基本器具的共用厨房"
-      },
-      "security": {
-        "title": "24小时安保",
-        "description": "夜间安保人员在场"
-      },
-      "tours": {
-        "title": "旅游服务台",
-        "description": "现场预订旅游和活动"
-      }
-    }
+    "title": "乡村魅力，真正舒适",
+    "intro": "露营不意味着牺牲舒适。我们考虑到了一切，让您可以专注于重要的事情：从喧嚣中断开，与自然重新连接。",
+    "showers": { "title": "热水淋浴", "text": "用俯瞰丛林的太阳能加热淋浴开始您清爽的一天" },
+    "restrooms": { "title": "干净卫生间", "text": "维护良好的设施，每天清洁多次" },
+    "campfire": { "title": "篝火坑", "text": "指定的篝火区配有座位——棉花糖可选但推荐" },
+    "parking": { "title": "安全停车", "text": "为您的租车或摩托车提供安全、有监控的停车场" },
+    "wifi": { "title": "WiFi区域", "text": "需要发布那个日落？需要时有连接，不需要时享受自然" },
+    "cooking": { "title": "烹饪区", "text": "配有烧烤炉和准备台的共用厨房空间" },
+    "security": { "title": "24/7安保", "text": "安心休息，我们的团队全天候守护营地" },
+    "tours": { "title": "旅游服务台", "text": "预订冒险活动，获取当地建议，发现隐藏的宝藏" }
   },
   "wildlife": {
-    "title": "认识我们的邻居",
-    "subtitle": "营地位于生物多样性热点地区，拥有令人难以置信的野生动物",
-    "animals": {
-      "howlerMonkeys": {
-        "name": "吼猴",
-        "description": "在黎明时分它们标志性的叫声中醒来"
-      },
-      "scarletMacaws": {
-        "name": "绯红金刚鹦鹉",
-        "description": "观赏这些美丽的鸟儿飞越树冠"
-      },
-      "toucans": {
-        "name": "巨嘴鸟",
-        "description": "在树冠中发现这些色彩斑斓的鸟类"
-      },
-      "capuchinMonkeys": {
-        "name": "卷尾猴",
-        "description": "顽皮好奇，经常在营地附近看到"
-      },
-      "iguanas": {
-        "name": "鬣蜥",
-        "description": "在岩石和树枝上晒太阳"
-      }
-    },
-    "note": "我们实行负责任的野生动物观察。请保持安全距离，切勿喂食动物。"
+    "title": "认识当地居民",
+    "intro": "我们的营地不仅靠近自然——而是沉浸其中。这里的野生动物没有被关起来或安排好。这些动物生活在这里，如果您有耐心和尊重，它们会与您分享它们的世界。",
+    "howler": { "name": "吼猴", "text": "您的天然闹钟。这些温和的巨人在黎明和黄昏时穿过树冠移动，它们令人难以置信的叫声在森林中回荡。观察整个家庭在营地上方的树上梳理毛发和玩耍。" },
+    "macaw": { "name": "红金刚鹦鹉", "text": "哥斯达黎加最耀眼的居民。这些鲜红、黄色和蓝色的鹦鹉在日出和日落时成双飞过海滩。它们的叫声是独特的——也是难忘的。" },
+    "toucan": { "name": "彩虹巨嘴鸟", "text": "热带地区的彩虹喙标志。看着它们在树枝间跳跃寻找水果，它们超大的喙让它们不可能被忽视。" },
+    "capuchin": { "name": "白面卷尾猴", "text": "好奇的家伙。这些聪明的猴子可能会从安全距离调查您的营地，它们富有表情的脸显示出对人类访客无尽的好奇。" },
+    "iguana": { "name": "鬣蜥及更多", "text": "绿鬣蜥在树枝上晒太阳，耶稣蜥蜴在水面上奔跑，貉成群觅食——每次散步都会发现新邻居。" },
+    "note": "重要提示：我们实行负责任的野生动物互动。请不要喂食动物——它们在自然饮食中茁壮成长，您的尊重有助于保持它们的野性。"
   },
   "testimonials": {
-    "title": "客人的评价",
-    "subtitle": "来自真实露营者的真实体验",
+    "title": "来自沙滩的故事",
+    "subtitle": "在我们这里找到天堂的冒险者的真实体验",
+    "ratingCount": "来自200+评论",
     "reviews": {
       "sarah": {
-        "name": "王小姐",
-        "location": "北京，中国",
-        "text": "在吼猴的叫声中醒来，在海浪声中入睡，这太神奇了。从我们的营位看到的日落令人难忘！",
-        "date": "2024年3月"
+        "name": "Sarah Johnson",
+        "location": "加利福尼亚，美国",
+        "text": "在吼猴声中醒来，几秒钟就能走到海滩——这是我生命中最神奇的露营体验。工作人员非常乐于助人，位置绝对令人惊叹。",
+        "date": "2025年12月"
       },
-      "mike": {
-        "name": "李先生",
-        "location": "上海，中国",
-        "text": "团队让一切都变得如此简单。野生动物之旅太棒了——我们看到了巨嘴鸟、猴子，甚至还有一只海龟！",
-        "date": "2024年2月"
+      "michael": {
+        "name": "Michael Chen",
+        "location": "多伦多，加拿大",
+        "text": "我们看到了巨嘴鸟、猴子和最令人难以置信的日落。几个月后我的孩子们还在谈论它。冒险和舒适的完美结合。一定会再来！",
+        "date": "2025年11月"
       },
-      "familia": {
-        "name": "张家人",
-        "location": "广州，中国",
-        "text": "非常适合家庭！我们的孩子喜欢海滩，我们创造了终生难忘的回忆。我们一定会再来的。",
-        "date": "2024年1月"
+      "emma": {
+        "name": "Emma Williams",
+        "location": "伦敦，英国",
+        "text": "我独自旅行，感觉完全安全和受欢迎。每晚篝火旁的社区氛围很棒。我结交了来自世界各地的朋友。真正改变人生。",
+        "date": "2026年1月"
       },
-      "adventure": {
-        "name": "陈小姐",
-        "location": "深圳，中国",
-        "text": "这是我经历过的最棒的露营之旅。冲浪很棒，工作人员超级友好，位置简直完美。",
-        "date": "2023年12月"
+      "carlos": {
+        "name": "Carlos Mendez",
+        "location": "墨西哥城，墨西哥",
+        "text": "与大自然重新连接的完美体验。Conchal的海滩是天堂，离营地这么近让每一天都像梦一样。",
+        "date": "2025年10月"
+      },
+      "lisa": {
+        "name": "Lisa Anderson",
+        "location": "悉尼，澳大利亚",
+        "text": "长途飞行值得！这里的野生动物令人难以置信——我们每天早上都能看到红金刚鹦鹉。租用的帐篷出奇地舒适，设施也很棒。",
+        "date": "2025年9月"
+      },
+      "david": {
+        "name": "David Müller",
+        "location": "柏林，德国",
+        "text": "我们蜜月最好的决定。浪漫的日落、私人海滩和最令人惊叹的观星。工作人员帮我们安排了皮划艇和浮潜之旅。",
+        "date": "2025年12月"
       }
     }
   },
   "location": {
-    "title": "找到我们",
-    "subtitle": "坐落在哥斯达黎加美丽的瓜纳卡斯特地区",
-    "address": "哥斯达黎加瓜纳卡斯特海滩",
-    "coordinates": "北纬10.2°，西经85.8°",
-    "nearbyTitle": "附近",
-    "nearby": {
-      "beach": "原始海滩 - 50米",
-      "town": "最近城镇 - 15分钟",
-      "airport": "利比里亚机场 - 1小时",
-      "nationalPark": "国家公园 - 30分钟"
+    "title": "丛林与海洋相遇的地方",
+    "intro": "位于瓜纳卡斯特的中心——哥斯达黎加令人惊叹的黄金海岸，Camping Puerto Viejo Conchal完美地位于冒险与便利之间。",
+    "distances": {
+      "beach": "步行5分钟到Playa Conchal",
+      "tamarindo": "10分钟到Tamarindo",
+      "volcano": "45分钟到Rincón de la Vieja",
+      "airport": "距利比里亚机场(LIR)45分钟"
     },
-    "gettingHere": {
-      "title": "如何到达",
-      "description": "从利比里亚机场，沿21号公路向南行驶。我们的营地在海岸公路上有清晰的标识。我们也可应要求提供机场接送服务。"
-    }
+    "gettingHere": "飞往利比里亚的Daniel Oduber Quirós国际机场(LIR)。租车可以最大限度地自由探索，或安排接送直接到营地。路途很美——您的冒险在落地那一刻就开始了。"
   },
   "cta": {
-    "title": "准备好开始您的冒险了吗？",
-    "text": "旺季名额有限。",
-    "subtext": "立即预订，确保您在天堂的位置",
-    "button": "预订您的住宿",
-    "trustBadges": {
+    "title": "您的星空下的位置在等待",
+    "text": "每个日落都不同。每个夜空都讲述新的故事。每一天都带来与野生动物的意外邂逅。但营位有限，最好的位置很快就没了——尤其是在旱季（12月至4月）。",
+    "subtext": "不要只是梦想。不要只是把它加入愿望清单。让它成为现实。",
+    "button": "现在预订您的冒险",
+    "trust": {
       "secure": "安全预订",
-      "flexible": "灵活取消",
+      "payment": "用卡或PayPal支付",
+      "cancel": "48小时前免费取消",
       "support": "24/7支持"
     }
   },
   "faq": {
-    "title": "常见问题",
-    "subtitle": "您访问前需要了解的一切",
-    "questions": {
-      "safety": {
-        "question": "营地安全吗？",
-        "answer": "绝对安全！我们有24小时安保人员，营位照明良好，位于安全区域。客人可以安心享受住宿。"
-      },
-      "bring": {
-        "question": "我应该带什么？",
-        "answer": "必需品：防晒霜、驱虫剂、泳衣、舒适的衣服和手电筒。如果您租用帐篷，我们提供所有露营装备。"
-      },
-      "weather": {
-        "question": "天气怎么样？",
-        "answer": "旱季（12月至4月）阳光明媚，气温25-32°C。雨季（5月至11月）下午有短暂阵雨，但海滩不那么拥挤。"
-      },
-      "wildlife": {
-        "question": "我们能看到野生动物吗？",
-        "answer": "很有可能！猴子、巨嘴鸟和鬣蜥每天都能看到。海龟观察是季节性的（8月至12月）。我们提供导游带领的野生动物之旅。"
-      },
-      "families": {
-        "question": "营地适合家庭吗？",
-        "answer": "是的！我们欢迎各年龄段的家庭。我们的海滩适合游泳，还有适合家庭的活动。"
-      },
-      "rain": {
-        "question": "下雨怎么办？",
-        "answer": "我们的帐篷是防水的，还有带顶棚的公共区域。雨通常不会持续很长时间，雨后营地格外美丽。"
-      },
-      "booking": {
-        "question": "如何预订？",
-        "answer": "您可以通过我们的安全预订系统直接在本网站预订。需要支付定金，余款在到达时支付。"
-      }
+    "title": "有问题？我们有答案",
+    "safety": {
+      "q": "在哥斯达黎加露营安全吗？",
+      "a": "绝对安全！哥斯达黎加是中美洲最安全的国家之一。我们的营地有24/7安保，当地社区热情友好。独自旅行者、家庭和团体在这里都感到宾至如归。"
+    },
+    "packing": {
+      "q": "我应该带什么？",
+      "a": "必需品：防晒霜、驱虫剂、手电筒、水瓶和冒险精神。有用的：观察野生动物的望远镜、海滩日的防水袋、凉爽夜晚的轻薄衣物。如果您租用帐篷，我们提供睡垫——只需带上睡袋或租用床上用品。"
+    },
+    "weather": {
+      "q": "天气怎么样？",
+      "a": "瓜纳卡斯特有两个季节：旱季（12月至4月）有阳光明媚的日子和凉爽的夜晚，绿季（5月至11月）有下午阵雨和郁郁葱葱的景观。两者都很神奇——旱季保证阳光，绿季人少且天空壮观。"
+    },
+    "wildlifeSightings": {
+      "q": "我能确定看到野生动物吗？",
+      "a": "野生动物是野生的（大自然中没有保证！），但我们的位置意味着目击极为常见。吼猴每天都能听到，鸟类不断出现，大多数客人在逗留期间会看到多种物种。清晨和傍晚是最佳时间。"
+    },
+    "families": {
+      "q": "适合带孩子的家庭吗？",
+      "a": "孩子们在这里爱死了。海滩平静适合游泳，野生动物无穷无尽地迷人，有空间可以跑和探索。我们接待过从婴儿到青少年的家庭——都带着难以置信的回忆离开。"
+    },
+    "rain": {
+      "q": "如果下雨怎么办？",
+      "a": "我们的帐篷是防水的，我们有带顶棚的公共区域。热带阵雨是体验的一部分——通常很短、很戏剧性，之后是您呼吸过的最清新的空气。带一件轻便雨衣，享受它！"
+    },
+    "booking": {
+      "q": "如何预订？",
+      "a": "很简单！使用我们这里的在线预订系统。选择您的日期，选择您的住宿，添加附加服务，用卡或PayPal安全支付。您将收到即时确认。"
     }
   },
   "footer": {
-    "tagline": "星空下，您远离家乡的家。",
+    "tagline": "断开连接以重新连接",
     "quickLinks": "快速链接",
     "legal": "法律信息",
     "privacy": "隐私政策",
-    "terms": "使用条款",
+    "terms": "条款和条件",
     "cancellation": "取消政策",
     "newsletter": {
-      "title": "保持联系",
+      "title": "加入部落",
+      "text": "获取旅行提示、野生动物更新和独家优惠。",
       "placeholder": "您的邮箱",
-      "button": "订阅",
-      "success": "感谢您的订阅！"
+      "button": "订阅"
     },
-    "copyright": "版权所有。",
-    "languages": "语言"
+    "copyright": "© 2025 Camping Puerto Viejo Conchal. 版权所有。在哥斯达黎加用🌴制作。"
   },
   "booking": {
-    "title": "预订您的住宿",
     "steps": {
       "dates": "日期",
       "guests": "客人",
       "extras": "附加",
       "details": "详情",
       "confirm": "确认",
-      "payment": "付款"
+      "completed": "步骤完成",
+      "current": "当前步骤",
+      "upcoming": "下一步"
     },
     "step1": {
-      "title": "选择您的日期",
-      "checkIn": "入住",
-      "checkOut": "退房",
-      "selectDate": "选择日期",
-      "nights": "晚",
-      "continue": "继续"
+      "title": "您的冒险何时开始？",
+      "subtitle": "选择入住和退房日期。最短住宿：1晚。",
+      "priceNote": "每人每晚$25基础价",
+      "peakSeason": "旺季"
     },
     "step2": {
-      "title": "谁来？",
-      "adults": "成人",
-      "adultsDesc": "13岁及以上",
-      "children": "儿童",
-      "childrenDesc": "3-12岁",
-      "infants": "婴儿",
-      "infantsDesc": "3岁以下",
-      "bringTent": "我自带帐篷",
-      "bringTentDesc": "仅营位：¥180 / 晚",
-      "rentTent": "我需要租帐篷",
-      "rentTentDesc": "从我们舒适的选项中选择",
-      "selectTents": "选择您的帐篷",
-      "quantity": "数量",
-      "capacity": "容量",
-      "perNight": "/ 晚",
-      "back": "返回",
-      "continue": "继续"
+      "title": "谁来天堂？",
+      "subtitle": "告诉我们您的团队情况，以便我们准备您的完美位置。",
+      "adults": "成人 (18+)",
+      "children": "儿童 (4-17)",
+      "infants": "婴儿 (0-3)",
+      "infantsFree": "免费",
+      "needTent": "您需要租帐篷吗？",
+      "bringOwn": "我带自己的帐篷",
+      "bringOwnNote": "仅收取营位费",
+      "campsiteRate": "营位",
+      "sleeps": "容量"
     },
     "step3": {
-      "title": "升级您的住宿",
-      "subtitle": "添加可选体验",
-      "perPerson": "/ 人",
-      "perGroup": "/ 组",
-      "perSet": "/ 套",
-      "perDay": "/ 天",
-      "back": "返回",
-      "continue": "继续",
-      "skip": "跳过"
+      "title": "让它难忘",
+      "subtitle": "可选附加服务提升您的体验。如果您喜欢保持简单，可以跳过。"
     },
     "step4": {
-      "title": "您的信息",
-      "subtitle": "我们需要一些信息来完成您的预订",
-      "fullName": "全名",
-      "fullNamePlaceholder": "张三",
-      "email": "电子邮箱",
-      "emailPlaceholder": "zhangsan@example.com",
-      "phone": "电话号码",
-      "phonePlaceholder": "+86 138 0000 0000",
-      "country": "国家",
-      "selectCountry": "选择国家",
-      "arrivalTime": "预计到达时间",
-      "selectTime": "选择时间",
-      "occasion": "您在庆祝特殊场合吗？",
-      "selectOccasion": "选择场合",
-      "occasionOptions": {
-        "none": "无",
-        "birthday": "生日",
-        "anniversary": "周年纪念",
-        "honeymoon": "蜜月",
-        "graduation": "毕业",
-        "other": "其他"
-      },
-      "specialRequests": "特殊要求",
-      "specialRequestsPlaceholder": "告诉我们任何能让您的住宿更特别的事情...",
-      "back": "返回",
-      "continue": "查看预订"
-    },
-    "step5": {
-      "title": "确认您的预订",
-      "tripSummary": "行程摘要",
+      "title": "查看您的冒险",
+      "summary": "预订摘要",
       "dates": "日期",
+      "nights": "晚",
       "guests": "客人",
       "adults": "成人",
       "children": "儿童",
       "infants": "婴儿",
       "accommodation": "住宿",
-      "ownTent": "自带帐篷",
-      "rentalTents": "租用帐篷",
-      "addons": "附加服务",
-      "guestInfo": "客人信息",
-      "priceSummary": "价格摘要",
-      "campsiteFee": "营位费",
+      "bringOwnTent": "自带帐篷",
+      "addonsLabel": "附加服务",
+      "campsite": "营位费",
       "tentRental": "帐篷租金",
-      "addonsFee": "附加费用",
+      "addons": "附加服务",
       "subtotal": "小计",
       "taxes": "税费 (13%)",
       "total": "总计",
-      "back": "返回",
-      "confirmPay": "确认并付款"
+      "guestInfo": {
+        "title": "客人信息",
+        "fullName": "全名",
+        "email": "邮箱",
+        "phone": "电话（含国家代码）",
+        "country": "居住国家",
+        "arrivalTime": "预计到达时间",
+        "specialRequests": "特殊要求/饮食限制",
+        "celebrating": "正在庆祝特别的事情？"
+      }
     },
-    "step6": {
-      "title": "付款",
-      "processing": "正在处理您的付款...",
-      "securePayment": "安全支付",
-      "paymentMethods": "我们接受主流信用卡",
-      "totalDue": "应付总额",
-      "back": "返回",
-      "completePurchase": "完成购买"
+    "step5": {
+      "title": "就差一步！完成您的预订",
+      "subtitle": "您的冒险只差一次点击。付款安全加密。",
+      "paymentMethod": "付款方式",
+      "cardPayment": "信用卡/借记卡",
+      "paypal": "PayPal",
+      "agreeTerms": "我同意条款条件和取消政策",
+      "newsletter": "给我发送偶尔的更新和优惠（不发垃圾邮件，承诺！）",
+      "cancellationPolicy": "入住前48小时免费取消可获全额退款。48小时内取消可获50%退款。未到场不退款。",
+      "completeBooking": "完成预订",
+      "secureNote": "256位SSL加密",
+      "trustedBy": "超过2,000位快乐露营者信赖"
     },
     "confirmation": {
-      "title": "预订已确认！",
-      "thankYou": "感谢您的预订",
-      "referenceCode": "参考号",
-      "emailSent": "确认邮件已发送至",
-      "summary": "预订摘要",
+      "title": "🎉 成功了！天堂等着您！",
+      "reference": "预订参考号",
+      "emailSent": "确认已发送至",
       "checkIn": "入住",
       "checkOut": "退房",
       "guests": "客人",
-      "total": "已付总额",
-      "whatNext": "接下来？",
-      "nextSteps": {
-        "email": "查看您的邮件获取完整的预订详情",
-        "directions": "我们将在您到达前3天发送路线指引",
-        "contact": "如有任何问题请联系我们"
-      },
+      "guestsLabel": "位客人",
+      "totalPaid": "已付总额",
       "backHome": "返回首页",
-      "print": "打印确认单"
+      "whatsNext": "接下来怎么办？",
+      "step1": "查看您的邮箱获取详细确认和路线",
+      "step2": "保存我们的WhatsApp以便提问",
+      "step3": "查看我们的装箱单和旅行提示",
+      "step4": "兴奋起来——您要来哥斯达黎加了！",
+      "addToCalendar": "添加到日历",
+      "shareTitle": "分享您的计划",
+      "questionsTitle": "有问题？我们在这里！"
     },
-    "errors": {
-      "required": "此字段为必填",
-      "invalidEmail": "请输入有效的邮箱地址",
-      "invalidPhone": "请输入有效的电话号码",
-      "selectDates": "请选择入住和退房日期",
-      "minGuests": "至少需要1位成人",
-      "selectTent": "请至少选择一个帐篷选项"
+    "next": "继续",
+    "back": "返回",
+    "findAvailability": "查找可用性",
+    "priceTypes": {
+      "person": "人",
+      "night": "晚",
+      "day": "天",
+      "personNight": "人/晚"
     }
   },
   "addons": {
-    "breakfast": {
-      "name": "早餐套餐",
-      "description": "传统Tico早餐，包括咖啡、水果和Gallo Pinto"
-    },
-    "kayak": {
-      "name": "皮划艇之旅",
-      "description": "导游带领的红树林皮划艇之旅，观察野生动物"
-    },
-    "wildlife": {
-      "name": "野生动物徒步",
-      "description": "清晨导游带领的徒步，观察猴子、鸟类等"
-    },
-    "bonfire": {
-      "name": "篝火套装",
-      "description": "木柴、烤棉花糖套装和预留的篝火位置"
-    },
-    "snorkel": {
-      "name": "浮潜装备租赁",
-      "description": "面罩、呼吸管和脚蹼，探索附近的珊瑚礁"
-    },
-    "surfLesson": {
-      "name": "冲浪课程",
-      "description": "当地教练2小时私人冲浪课程"
-    },
-    "massage": {
-      "name": "海滩按摩",
-      "description": "60分钟放松按摩，享受海景"
-    },
-    "dinner": {
-      "name": "烧烤晚餐",
-      "description": "烤海鲜和蔬菜，配当地配菜"
-    }
+    "breakfast": { "name": "早餐套餐", "description": "新鲜热带水果、gallo pinto、鸡蛋、哥斯达黎加咖啡。为冒险补充能量。" },
+    "kayak": { "name": "日出皮划艇之旅", "description": "在丛林苏醒时划过平静的晨间水面。2小时的魔力。" },
+    "wildlife": { "name": "导游野生动物徒步", "description": "专业自然导游揭示隐藏的野生动物并分享丛林秘密。2.5小时。" },
+    "bonfire": { "name": "篝火套装", "description": "木柴、棉花糖、巧克力、饼干。完美篝火之夜所需的一切。" },
+    "snorkel": { "name": "浮潜装备租赁", "description": "面罩、呼吸管、脚蹼。按自己的节奏探索水下世界。" }
   }
 }
