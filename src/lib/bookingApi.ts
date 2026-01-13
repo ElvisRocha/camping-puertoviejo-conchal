@@ -21,6 +21,8 @@ export async function createBooking({ booking, pricing }: CreateBookingParams): 
   try {
     const referenceCode = generateReferenceCode();
     
+    console.log('Creating booking with data:', { booking, pricing, referenceCode });
+    
     // 1. Create the main booking record
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
@@ -43,8 +45,13 @@ export async function createBooking({ booking, pricing }: CreateBookingParams): 
       .select('id, reference_code')
       .single();
 
-    if (bookingError) throw bookingError;
+    if (bookingError) {
+      console.error('Error creating booking record:', bookingError);
+      throw bookingError;
+    }
     if (!bookingData) throw new Error('No booking data returned');
+    
+    console.log('Booking created successfully:', bookingData);
 
     const bookingId = bookingData.id;
 
