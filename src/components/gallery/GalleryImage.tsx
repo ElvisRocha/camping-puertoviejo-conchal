@@ -28,7 +28,10 @@ export function GalleryImage({ image, index, onClick }: GalleryImageProps) {
       <img
         src={image.src}
         alt={image.alt}
+        width="400"
+        height="300"
         loading="lazy"
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
