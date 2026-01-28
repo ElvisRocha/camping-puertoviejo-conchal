@@ -150,7 +150,7 @@ const Footer = () => {
               <Input
                 type="email"
                 placeholder={t('footer.newsletter.placeholder')}
-                className="bg-forest-light border-forest-light text-cream placeholder:text-cream/50 focus:border-sea-green"
+                className="bg-forest-light border-0 border-none text-cream placeholder:text-cream/50 focus:ring-sea-green focus:ring-1"
               />
               <Button className="bg-sea-green hover:bg-accent text-accent-foreground px-4">
                 {t('footer.newsletter.button')}

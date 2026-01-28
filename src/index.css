@@ -200,20 +200,31 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Footer - ensure no unwanted lines, borders, outlines on any element */
+  /* Footer - fix sub-pixel rendering glitches and remove all lines */
+  footer {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
   footer,
   footer *,
   footer *::before,
   footer *::after {
+    border: 0 !important;
     border-width: 0 !important;
-    outline: none !important;
+    border-style: none !important;
+    outline: 0 !important;
+    outline-width: 0 !important;
     box-shadow: none !important;
-    text-decoration: none !important;
   }
 
-  footer > div {
-    border: none !important;
-    outline: none !important;
+  footer > div,
+  footer div {
+    border: 0 !important;
+    outline: 0 !important;
   }
   
   /* Text Styles */
