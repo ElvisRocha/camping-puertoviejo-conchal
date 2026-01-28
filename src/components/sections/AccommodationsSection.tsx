@@ -79,6 +79,10 @@ const AccommodationsSection = () => {
                 <img
                   src={tent.image}
                   alt={t(tent.nameKey)}
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>

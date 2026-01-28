@@ -3,25 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Favicon -->
+
+    <!-- Critical: Preconnect to external domains first -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+    <!-- DNS prefetch for analytics (if used) -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- Google Fonts with display=swap for non-blocking load -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" />
+    </noscript>
+
+    <!-- Favicon - minimal set -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="apple-touch-icon" href="/camping-pvc-white.png" />
-    <!-- Preconnect to optimize font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="apple-touch-icon" href="/favicon-32.png" />
+
+    <!-- Primary Meta Tags -->
     <title>Camping Puerto Viejo Conchal | Beach Camping in Costa Rica</title>
+    <meta name="title" content="Camping Puerto Viejo Conchal | Beach Camping in Costa Rica" />
     <meta name="description" content="Wake up to howler monkeys and ocean waves at Camping Puerto Viejo Conchal. Beachfront camping near Playa Conchal, Costa Rica. Book your tropical adventure today." />
+
+    <!-- Performance hints -->
+    <meta name="theme-color" content="#1a3a2f" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://camping-puertoviejo-conchal.com/" />
     <meta property="og:title" content="Camping Puerto Viejo Conchal - Beach Camping Paradise" />
     <meta property="og:description" content="Experience magical beachfront camping in Guanacaste, Costa Rica. Wildlife, stunning beaches, unforgettable sunsets." />
-    <meta property="og:url" content="https://camping-puertoviejo-conchal.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/camping-pvc-white.png" />
+    <meta property="og:image" content="https://camping-puertoviejo-conchal.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://camping-puertoviejo-conchal.com/" />
+    <meta property="twitter:title" content="Camping Puerto Viejo Conchal - Beach Camping Paradise" />
+    <meta property="twitter:description" content="Experience magical beachfront camping in Guanacaste, Costa Rica." />
+
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://camping-puertoviejo-conchal.com" />
+
+    <!-- Critical CSS inline for faster first paint -->
+    <style>
+      /* Minimal critical CSS for loading state */
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{font-family:system-ui,-apple-system,sans-serif;line-height:1.5}
+      body{background:#faf9f6;min-height:100vh}
+      #root{min-height:100vh}
+      .initial-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#faf9f6}
+      .initial-loader .spinner{width:48px;height:48px;border:4px solid #1a3a2f;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite}
+      @keyframes spin{to{transform:rotate(360deg)}}
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Initial loader shown until React hydrates -->
+    <div id="root">
+      <div class="initial-loader">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- Main app bundle - loaded as module for modern browsers -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,14 +1,29 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ContactForm } from '@/components/contact/ContactForm';
-import { ContactMap } from '@/components/contact/ContactMap';
 import { ContactInfo } from '@/components/contact/ContactInfo';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+
+// Lazy load the heavy ContactMap component (includes mapbox-gl ~1.5MB)
+const ContactMap = lazy(() => import('@/components/contact/ContactMap').then(m => ({ default: m.ContactMap })));
+
+// Loading placeholder for the map
+const MapLoadingPlaceholder = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-full h-full bg-muted rounded-xl flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-10 h-10 border-4 border-forest border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-muted-foreground">{t('contact.map.loading', 'Cargando mapa...')}</p>
+      </div>
+    </div>
+  );
+};
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -123,11 +138,11 @@ export default function ContactPage() {
           >
             <div className="bg-card rounded-2xl p-4 shadow-lg border h-[800px]">
               {shouldLoadMap && mapboxToken ? (
-                <ContactMap accessToken={mapboxToken} />
+                <Suspense fallback={<MapLoadingPlaceholder />}>
+                  <ContactMap accessToken={mapboxToken} />
+                </Suspense>
               ) : (
-                <div className="w-full h-full bg-muted rounded-xl flex items-center justify-center">
-                  <p className="text-muted-foreground">{t('contact.map.loading', 'Cargando mapa...')}</p>
-                </div>
+                <MapLoadingPlaceholder />
               )}
             </div>
           </motion.div>

@@ -17,6 +17,9 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Original unoptimized images (keep only optimized versions)
+src/assets/originals
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
