@@ -200,12 +200,20 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Footer - ensure no unwanted borders on any element */
+  /* Footer - ensure no unwanted lines, borders, outlines on any element */
   footer,
   footer *,
   footer *::before,
   footer *::after {
     border-width: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+  }
+
+  footer > div {
+    border: none !important;
+    outline: none !important;
   }
   
   /* Text Styles */
