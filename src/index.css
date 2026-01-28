@@ -199,6 +199,23 @@
   .container-wide {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  /* Footer - ensure no unwanted borders on any element */
+  footer,
+  footer *,
+  footer *::before,
+  footer *::after {
+    border-width: 0 !important;
+  }
+
+  /* Re-enable intentional borders in footer */
+  footer .border-t {
+    border-top-width: 1px !important;
+  }
+
+  footer .border-forest-light {
+    border-color: hsl(var(--forest-light)) !important;
+  }
   
   /* Text Styles */
   .text-gradient {
