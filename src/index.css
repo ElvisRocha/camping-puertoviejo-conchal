@@ -111,8 +111,13 @@
 }
 
 @layer base {
-  * {
-    @apply border-border box-border;
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+    border-width: 0;
+    border-style: solid;
+    border-color: hsl(var(--border));
   }
 
   html {
