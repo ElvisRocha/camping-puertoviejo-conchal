@@ -4,12 +4,71 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun } from 'lucide-react';
-import heroPlaya from '@/assets/hero-playa-guanacaste.png';
-import heroPlayaBahia from '@/assets/hero-playa-bahia.png';
-import heroCamping from '@/assets/hero-beach-sunset.jpg';
-import heroCampingSunset from '@/assets/hero-camping-sunset.png';
 
-const heroImages = [heroPlaya, heroPlayaBahia, heroCamping, heroCampingSunset];
+// Optimized images - WebP with JPG fallback
+// Desktop versions
+import heroPlayaDesktopWebp from '@/assets/optimized/hero-playa-guanacaste-desktop.webp';
+import heroPlayaDesktopJpg from '@/assets/optimized/hero-playa-guanacaste-desktop.jpg';
+import heroPlayaBahiaDesktopWebp from '@/assets/optimized/hero-playa-bahia-desktop.webp';
+import heroPlayaBahiaDesktopJpg from '@/assets/optimized/hero-playa-bahia-desktop.jpg';
+import heroBeachDesktopWebp from '@/assets/optimized/hero-beach-sunset-desktop.webp';
+import heroBeachDesktopJpg from '@/assets/optimized/hero-beach-sunset-desktop.jpg';
+import heroCampingDesktopWebp from '@/assets/optimized/hero-camping-sunset-desktop.webp';
+import heroCampingDesktopJpg from '@/assets/optimized/hero-camping-sunset-desktop.jpg';
+
+// Tablet versions
+import heroPlayaTabletWebp from '@/assets/optimized/hero-playa-guanacaste-tablet.webp';
+import heroPlayaTabletJpg from '@/assets/optimized/hero-playa-guanacaste-tablet.jpg';
+import heroPlayaBahiaTabletWebp from '@/assets/optimized/hero-playa-bahia-tablet.webp';
+import heroPlayaBahiaTabletJpg from '@/assets/optimized/hero-playa-bahia-tablet.jpg';
+import heroBeachTabletWebp from '@/assets/optimized/hero-beach-sunset-tablet.webp';
+import heroBeachTabletJpg from '@/assets/optimized/hero-beach-sunset-tablet.jpg';
+import heroCampingTabletWebp from '@/assets/optimized/hero-camping-sunset-tablet.webp';
+import heroCampingTabletJpg from '@/assets/optimized/hero-camping-sunset-tablet.jpg';
+
+// Mobile versions
+import heroPlayaMobileWebp from '@/assets/optimized/hero-playa-guanacaste-mobile.webp';
+import heroPlayaMobileJpg from '@/assets/optimized/hero-playa-guanacaste-mobile.jpg';
+import heroPlayaBahiaMobileWebp from '@/assets/optimized/hero-playa-bahia-mobile.webp';
+import heroPlayaBahiaMobileJpg from '@/assets/optimized/hero-playa-bahia-mobile.jpg';
+import heroBeachMobileWebp from '@/assets/optimized/hero-beach-sunset-mobile.webp';
+import heroBeachMobileJpg from '@/assets/optimized/hero-beach-sunset-mobile.jpg';
+import heroCampingMobileWebp from '@/assets/optimized/hero-camping-sunset-mobile.webp';
+import heroCampingMobileJpg from '@/assets/optimized/hero-camping-sunset-mobile.jpg';
+
+interface HeroImage {
+  desktop: { webp: string; jpg: string };
+  tablet: { webp: string; jpg: string };
+  mobile: { webp: string; jpg: string };
+  alt: string;
+}
+
+const heroImages: HeroImage[] = [
+  {
+    desktop: { webp: heroPlayaDesktopWebp, jpg: heroPlayaDesktopJpg },
+    tablet: { webp: heroPlayaTabletWebp, jpg: heroPlayaTabletJpg },
+    mobile: { webp: heroPlayaMobileWebp, jpg: heroPlayaMobileJpg },
+    alt: 'Playa Guanacaste - Vista panorámica de la costa'
+  },
+  {
+    desktop: { webp: heroPlayaBahiaDesktopWebp, jpg: heroPlayaBahiaDesktopJpg },
+    tablet: { webp: heroPlayaBahiaTabletWebp, jpg: heroPlayaBahiaTabletJpg },
+    mobile: { webp: heroPlayaBahiaMobileWebp, jpg: heroPlayaBahiaMobileJpg },
+    alt: 'Bahía de Puerto Viejo - Aguas cristalinas'
+  },
+  {
+    desktop: { webp: heroBeachDesktopWebp, jpg: heroBeachDesktopJpg },
+    tablet: { webp: heroBeachTabletWebp, jpg: heroBeachTabletJpg },
+    mobile: { webp: heroBeachMobileWebp, jpg: heroBeachMobileJpg },
+    alt: 'Atardecer en la playa de Puerto Viejo'
+  },
+  {
+    desktop: { webp: heroCampingDesktopWebp, jpg: heroCampingDesktopJpg },
+    tablet: { webp: heroCampingTabletWebp, jpg: heroCampingTabletJpg },
+    mobile: { webp: heroCampingMobileWebp, jpg: heroCampingMobileJpg },
+    alt: 'Camping al atardecer frente al mar'
+  }
+];
 
 const HeroSection = () => {
   const { t } = useTranslation();
@@ -19,25 +78,61 @@ const HeroSection = () => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
     }, 6000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images - Crossfade simultáneo */}
+      {/* Background Images - Crossfade with optimized responsive images */}
       {heroImages.map((image, index) => (
         <motion.div
           key={index}
           initial={false}
-          animate={{ 
+          animate={{
             opacity: index === currentImageIndex ? 1 : 0,
             scale: index === currentImageIndex ? 1 : 1.05
           }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${image})` }}
-        />
+          className="absolute inset-0"
+        >
+          <picture>
+            {/* WebP sources for modern browsers */}
+            <source
+              type="image/webp"
+              media="(max-width: 640px)"
+              srcSet={image.mobile.webp}
+            />
+            <source
+              type="image/webp"
+              media="(max-width: 1024px)"
+              srcSet={image.tablet.webp}
+            />
+            <source
+              type="image/webp"
+              srcSet={image.desktop.webp}
+            />
+            {/* JPG fallback sources */}
+            <source
+              type="image/jpeg"
+              media="(max-width: 640px)"
+              srcSet={image.mobile.jpg}
+            />
+            <source
+              type="image/jpeg"
+              media="(max-width: 1024px)"
+              srcSet={image.tablet.jpg}
+            />
+            <img
+              src={image.desktop.jpg}
+              alt={image.alt}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding={index === 0 ? 'sync' : 'async'}
+              fetchPriority={index === 0 ? 'high' : 'low'}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </picture>
+        </motion.div>
       ))}
       {/* Overlay siempre visible */}
       <div className="absolute inset-0 bg-forest/40" />
@@ -107,8 +202,8 @@ const HeroSection = () => {
             key={index}
             onClick={() => setCurrentImageIndex(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              index === currentImageIndex 
-                ? 'bg-cream w-6' 
+              index === currentImageIndex
+                ? 'bg-cream w-6'
                 : 'bg-cream/50 hover:bg-cream/70 w-2'
             }`}
             aria-label={`Ver imagen ${index + 1}`}
