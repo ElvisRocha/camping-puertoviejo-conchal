@@ -175,7 +175,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-forest-light/20">
+      <div>
         <div className="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-sm text-cream/70 text-center sm:text-left">
             {t('footer.copyright')}
