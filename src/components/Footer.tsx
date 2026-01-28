@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SITE_CONFIG } from '@/types/booking';
 import { languages } from '@/i18n';
-import logoImage from '@/assets/logo-camping-puertoviejo.svg';
+import logoImage from '@/assets/camping-pvc-white.png';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -40,7 +40,7 @@ const Footer = () => {
               <img
                 src={logoImage}
                 alt="Camping Puerto Viejo Conchal Logo"
-                className="h-16 w-16 object-contain bg-white rounded-full p-1"
+                className="h-14 w-auto object-contain"
               />
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-xl leading-tight text-cream">

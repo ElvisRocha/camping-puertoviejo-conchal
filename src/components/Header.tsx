@@ -13,7 +13,7 @@ import {
 import { languages } from '@/i18n';
 import { SITE_CONFIG } from '@/types/booking';
 import { cn } from '@/lib/utils';
-import logoImage from '@/assets/logo-camping-puertoviejo.svg';
+import logoImage from '@/assets/camping-pvc-white.png';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -82,7 +82,7 @@ const Header = () => {
           <img
             src={logoImage}
             alt="Camping Puerto Viejo Conchal Logo"
-            className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+            className="h-12 sm:h-14 w-auto object-contain"
           />
           <div className="flex flex-col">
             <span
