@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SITE_CONFIG } from '@/types/booking';
 import { languages } from '@/i18n';
+import logoImage from '@/assets/logo-camping-puertoviejo.svg';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -35,8 +36,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <span className="text-3xl">🌴</span>
+            <Link to="/" className="flex items-center gap-3 mb-4">
+              <img
+                src={logoImage}
+                alt="Camping Puerto Viejo Conchal Logo"
+                className="h-16 w-16 object-contain bg-white rounded-full p-1"
+              />
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-xl leading-tight text-cream">
                   Camping Puerto Viejo

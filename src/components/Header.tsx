@@ -13,6 +13,7 @@ import {
 import { languages } from '@/i18n';
 import { SITE_CONFIG } from '@/types/booking';
 import { cn } from '@/lib/utils';
+import logoImage from '@/assets/logo-camping-puertoviejo.svg';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -77,12 +78,16 @@ const Header = () => {
     >
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-2">
-          <span className="text-2xl">🌴</span>
+        <Link to="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-3">
+          <img
+            src={logoImage}
+            alt="Camping Puerto Viejo Conchal Logo"
+            className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+          />
           <div className="flex flex-col">
             <span
               className={cn(
-                'font-heading font-bold text-lg leading-tight transition-colors',
+                'font-heading font-bold text-base sm:text-lg leading-tight transition-colors',
                 hasBackground ? 'text-forest' : 'text-cream'
               )}
             >
