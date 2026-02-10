@@ -22,7 +22,11 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
         passes: 2,
+      },
+      format: {
+        comments: false,
       },
     },
     // Optimize chunk splitting
@@ -68,7 +72,7 @@ export default defineConfig(({ mode }) => ({
     // Report compressed file sizes
     reportCompressedSize: true,
     // Set chunk size warning limit
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 600,
     // Disable source maps in production
     sourcemap: false,
     // Target modern browsers for smaller output

@@ -11,7 +11,7 @@ const HERO_FOLDER = 'Camping%20Puerto%20Viejo%20Conchal/Hero%20Section';
 
 // Generate responsive Cloudinary URL: /transformations/vVersion/folder/file
 const cldUrl = (version: string, file: string, w: number) =>
-  `${CLD}/f_auto,q_auto:low,w_${w},c_limit/${version}/${HERO_FOLDER}/${file}`;
+  `${CLD}/f_webp,q_auto:eco,w_${w},c_limit,fl_progressive/${version}/${HERO_FOLDER}/${file}`;
 
 const heroImages = [
   {

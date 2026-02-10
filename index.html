@@ -4,38 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Critical: Preconnect + DNS prefetch to external domains first -->
-    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
-    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    <!-- DNS Prefetch and Preconnect to external domains -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
-    <!-- Preload LCP hero image with high priority -->
+    <!-- Preload LCP hero image with high priority (WebP + progressive) -->
     <link
       rel="preload"
       as="image"
-      href="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1920,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg"
+      href="https://res.cloudinary.com/da1sq9diw/image/upload/f_webp,q_auto:eco,w_1920,c_limit,fl_progressive/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg"
       fetchpriority="high"
-      imagesrcset="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_800,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 800w, https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1200,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1200w, https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1920,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1920w"
+      imagesrcset="https://res.cloudinary.com/da1sq9diw/image/upload/f_webp,q_auto:eco,w_800,c_limit,fl_progressive/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 800w, https://res.cloudinary.com/da1sq9diw/image/upload/f_webp,q_auto:eco,w_1200,c_limit,fl_progressive/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1200w, https://res.cloudinary.com/da1sq9diw/image/upload/f_webp,q_auto:eco,w_1920,c_limit,fl_progressive/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1920w"
       imagesizes="100vw"
     />
 
     <!-- DNS prefetch for analytics (if used) -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-    <!-- Google Fonts with display=swap for non-blocking load -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <!-- Preload Font CSS -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+    />
+
+    <!-- Load Font CSS with non-blocking pattern -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+      />
     </noscript>
 
-    <!-- Favicon - minimal set -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="apple-touch-icon" href="/favicon-32.png" />
+    <!-- Favicon - optimized set -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Primary Meta Tags -->
     <title>Camping Puerto Viejo Conchal | Beach Camping in Costa Rica</title>
