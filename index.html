@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Preload Hero Image -->
-    <link
-      rel="preload"
-      as="image"
-      href="https://res.cloudinary.com/da1sq9diw/image/upload/w_auto,dpr_auto,f_auto,q_auto/v1770736693/hero-background.jpg"
-    />
-
     <!-- Critical: Preconnect to external domains first -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+    <!-- Preload first Hero Image from Cloudinary -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg"
+    />
 
     <!-- DNS prefetch for analytics (if used) -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />

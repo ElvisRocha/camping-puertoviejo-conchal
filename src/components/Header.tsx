@@ -13,9 +13,8 @@ import {
 import { languages } from '@/i18n';
 import { SITE_CONFIG } from '@/types/booking';
 import { cn } from '@/lib/utils';
-// Optimized logo - WebP with PNG fallback
-import logoImageWebp from '@/assets/optimized/logo.webp';
-import logoImagePng from '@/assets/optimized/logo.png';
+// Logo - local asset
+import logoImage from '@/assets/Logo-Camping-Puerto-Viejo.png';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -81,16 +80,13 @@ const Header = () => {
       <div className="container-wide flex items-center justify-between">
         {/* Logo */}
         <Link to="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-3">
-          <picture>
-              <source type="image/webp" srcSet={logoImageWebp} />
-              <img
-                src={logoImagePng}
-                alt="Camping Puerto Viejo Conchal Logo"
-                width="56"
-                height="56"
-                className="h-12 sm:h-14 w-auto object-contain"
-              />
-            </picture>
+          <img
+            src={logoImage}
+            alt="Camping Puerto Viejo Conchal Logo"
+            width="56"
+            height="56"
+            className="h-12 sm:h-14 w-auto object-contain"
+          />
           <div className="flex flex-col">
             <span
               className={cn(

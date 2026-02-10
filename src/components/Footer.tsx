@@ -5,9 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SITE_CONFIG } from '@/types/booking';
 import { languages } from '@/i18n';
-// Optimized logo - WebP with PNG fallback
-import logoImageWebp from '@/assets/optimized/logo.webp';
-import logoImagePng from '@/assets/optimized/logo.png';
+// Logo - local asset
+import logoImage from '@/assets/Logo-Camping-Puerto-Viejo.png';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -39,17 +38,14 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-4">
-              <picture>
-                  <source type="image/webp" srcSet={logoImageWebp} />
-                  <img
-                    src={logoImagePng}
-                    alt="Camping Puerto Viejo Conchal Logo"
-                    width="56"
-                    height="56"
-                    className="h-14 w-auto object-contain"
-                    loading="lazy"
-                  />
-                </picture>
+              <img
+                src={logoImage}
+                alt="Camping Puerto Viejo Conchal Logo"
+                width="56"
+                height="56"
+                className="h-14 w-auto object-contain"
+                loading="lazy"
+              />
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-xl leading-tight text-cream">
                   Camping Puerto Viejo
