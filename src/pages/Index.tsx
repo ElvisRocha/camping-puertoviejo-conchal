@@ -2,10 +2,9 @@ import { useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import '@/i18n';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import HeroSection from '@/components/sections/HeroSection';
 
-// Lazy load below-the-fold sections for faster initial paint
+// Lazy load below-the-fold sections and footer for faster initial paint
 const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
 const WhyUsSection = lazy(() => import('@/components/sections/WhyUsSection'));
 const ExperienceSection = lazy(() => import('@/components/sections/ExperienceSection'));
@@ -14,6 +13,7 @@ const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSecti
 const TestimonialsSection = lazy(() => import('@/components/sections/TestimonialsSection'));
 const CTASection = lazy(() => import('@/components/sections/CTASection'));
 const FAQSection = lazy(() => import('@/components/sections/FAQSection'));
+const Footer = lazy(() => import('@/components/Footer'));
 
 const Index = () => {
   const location = useLocation();
@@ -45,7 +45,9 @@ const Index = () => {
           <FAQSection />
         </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };

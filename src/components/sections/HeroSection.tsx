@@ -5,18 +5,28 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun } from 'lucide-react';
 
-// Hero images served from Cloudinary with automatic format and quality optimization
+// Cloudinary base path - version comes before folder per Cloudinary URL spec
+const CLD = 'https://res.cloudinary.com/da1sq9diw/image/upload';
+const HERO_FOLDER = 'Camping%20Puerto%20Viejo%20Conchal/Hero%20Section';
+
+// Generate responsive Cloudinary URL: /transformations/vVersion/folder/file
+const cldUrl = (version: string, file: string, w: number) =>
+  `${CLD}/f_auto,q_auto:low,w_${w},c_limit/${version}/${HERO_FOLDER}/${file}`;
+
 const heroImages = [
   {
-    src: 'https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg',
+    version: 'v1770739718',
+    file: 'hero-playa-guanacaste-desktop.jpg',
     alt: 'Playa Guanacaste - Vista panorámica de la costa',
   },
   {
-    src: 'https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto/v1770739717/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-bahia-desktop.jpg',
+    version: 'v1770739717',
+    file: 'hero-playa-bahia-desktop.jpg',
     alt: 'Bahía de Puerto Viejo - Aguas cristalinas',
   },
   {
-    src: 'https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto/v1770739716/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-camping-sunset-desktop.jpg',
+    version: 'v1770739716',
+    file: 'hero-camping-sunset-desktop.jpg',
     alt: 'Camping al atardecer frente al mar',
   },
 ];
@@ -48,10 +58,14 @@ const HeroSection = () => {
           className="absolute inset-0"
         >
           <img
-            src={image.src}
+            src={cldUrl(image.version, image.file, 1920)}
+            srcSet={`${cldUrl(image.version, image.file, 800)} 800w, ${cldUrl(image.version, image.file, 1200)} 1200w, ${cldUrl(image.version, image.file, 1920)} 1920w`}
+            sizes="100vw"
             alt={image.alt}
+            width="1920"
+            height="1080"
             loading={index === 0 ? 'eager' : 'lazy'}
-            decoding={index === 0 ? 'sync' : 'async'}
+            decoding="async"
             fetchPriority={index === 0 ? 'high' : 'low'}
             className="absolute inset-0 w-full h-full object-cover"
           />
