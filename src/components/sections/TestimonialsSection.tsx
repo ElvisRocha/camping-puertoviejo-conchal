@@ -116,6 +116,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <img
           src={testimonial.image}
           alt={t(testimonial.nameKey)}
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
           className="w-12 h-12 rounded-full object-cover"
         />
         <div>

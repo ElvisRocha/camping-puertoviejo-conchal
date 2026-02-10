@@ -20,7 +20,7 @@ const CTASection = () => {
   return (
     <section className="relative py-24 overflow-hidden" ref={ref}>
       <div className="absolute inset-0 bg-gradient-forest" />
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=1920')] bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=1200&q=50')] bg-cover bg-center opacity-20" />
       
       <div className="relative z-10 container-wide text-center">
         <motion.h2

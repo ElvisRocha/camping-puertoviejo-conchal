@@ -69,6 +69,14 @@ const Header = () => {
   const currentLang = languages.find((l) => l.code === i18n.language) || languages[0];
 
   return (
+    <>
+    {/* Skip to main content - accessibility */}
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:bg-forest focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none"
+    >
+      Skip to main content
+    </a>
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
@@ -170,6 +178,8 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
             className={cn(
               'lg:hidden p-2 rounded-lg transition-colors',
               hasBackground ? 'text-foreground' : 'text-cream'
@@ -210,6 +220,7 @@ const Header = () => {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 };
 
