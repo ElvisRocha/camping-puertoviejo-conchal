@@ -16,8 +16,15 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Enable minification with esbuild (built into Vite)
-    minify: 'esbuild',
+    // Terser produces smaller output than esbuild and strips console/debugger
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        passes: 2,
+      },
+    },
     // Optimize chunk splitting
     rollupOptions: {
       output: {
@@ -38,7 +45,7 @@ export default defineConfig(({ mode }) => ({
           'vendor-query': ['@tanstack/react-query'],
           'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'vendor-date': ['date-fns'],
-          'vendor-mapbox': ['mapbox-gl'],  // Heavy library (~1.5MB) - loaded only when map is needed
+          'vendor-mapbox': ['mapbox-gl'],
         },
         // Optimize asset file names for better caching
         assetFileNames: (assetInfo) => {
@@ -56,12 +63,16 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
+    // Inline small assets (< 4KB) to reduce HTTP requests
+    assetsInlineLimit: 4096,
     // Report compressed file sizes
     reportCompressedSize: true,
     // Set chunk size warning limit
-    chunkSizeWarningLimit: 300,
-    // Enable source maps for debugging (can disable in production)
+    chunkSizeWarningLimit: 500,
+    // Disable source maps in production
     sourcemap: false,
+    // Target modern browsers for smaller output
+    target: 'es2020',
   },
   // Optimize dependencies
   optimizeDeps: {

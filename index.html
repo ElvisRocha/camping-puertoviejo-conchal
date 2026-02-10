@@ -4,17 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Critical: Preconnect to external domains first -->
+    <!-- Critical: Preconnect + DNS prefetch to external domains first -->
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
-    <!-- Preload first Hero Image from Cloudinary -->
+    <!-- Preload LCP hero image with high priority -->
     <link
       rel="preload"
       as="image"
-      href="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg"
+      href="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1920,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg"
+      fetchpriority="high"
+      imagesrcset="https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_800,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 800w, https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1200,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1200w, https://res.cloudinary.com/da1sq9diw/image/upload/f_auto,q_auto:low,w_1920,c_limit/v1770739718/Camping%20Puerto%20Viejo%20Conchal/Hero%20Section/hero-playa-guanacaste-desktop.jpg 1920w"
+      imagesizes="100vw"
     />
 
     <!-- DNS prefetch for analytics (if used) -->
