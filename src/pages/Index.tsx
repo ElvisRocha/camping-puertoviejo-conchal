@@ -34,7 +34,7 @@ const Index = () => {
       <Header />
       <main id="main-content">
         <HeroSection />
-        {/* <Suspense fallback={null}>
+        <Suspense fallback={null}>
           <WelcomeSection />
           <WhyUsSection />
           <ExperienceSection />
@@ -43,7 +43,7 @@ const Index = () => {
           <TestimonialsSection />
           <CTASection />
           <FAQSection />
-        </Suspense> */}
+        </Suspense>
       </main>
       <Suspense fallback={null}>
         <Footer />
