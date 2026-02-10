@@ -59,6 +59,10 @@ export function Step3Addons() {
                 <img
                   src={addon.image}
                   alt={t(addon.nameKey)}
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                  decoding="async"
                   className="w-20 h-20 object-cover rounded-lg"
                 />
                 {isSelected(addon.id) && (

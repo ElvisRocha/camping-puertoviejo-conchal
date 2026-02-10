@@ -128,6 +128,10 @@ export function Step2Guests() {
                   <img
                     src={tent.image}
                     alt={t(tent.nameKey)}
+                    width="96"
+                    height="96"
+                    loading="lazy"
+                    decoding="async"
                     className="w-24 h-24 object-cover rounded-lg"
                   />
                   <div className="flex-1">

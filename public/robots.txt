@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://camping-puertoviejo-conchal.com/sitemap.xml
