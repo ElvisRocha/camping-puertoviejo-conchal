@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import '@/i18n';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/sections/HeroSection';
-import WelcomeSection from '@/components/sections/WelcomeSection';
-import WhyUsSection from '@/components/sections/WhyUsSection';
-import ExperienceSection from '@/components/sections/ExperienceSection';
-import AccommodationsSection from '@/components/sections/AccommodationsSection';
-import AmenitiesSection from '@/components/sections/AmenitiesSection';
-import TestimonialsSection from '@/components/sections/TestimonialsSection';
-import CTASection from '@/components/sections/CTASection';
-import FAQSection from '@/components/sections/FAQSection';
+
+// Lazy load below-the-fold sections for faster initial paint
+const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
+const WhyUsSection = lazy(() => import('@/components/sections/WhyUsSection'));
+const ExperienceSection = lazy(() => import('@/components/sections/ExperienceSection'));
+const AccommodationsSection = lazy(() => import('@/components/sections/AccommodationsSection'));
+const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
+const TestimonialsSection = lazy(() => import('@/components/sections/TestimonialsSection'));
+const CTASection = lazy(() => import('@/components/sections/CTASection'));
+const FAQSection = lazy(() => import('@/components/sections/FAQSection'));
 
 const Index = () => {
   const location = useLocation();
@@ -32,14 +34,16 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <WelcomeSection />
-        <WhyUsSection />
-        <ExperienceSection />
-        <AccommodationsSection />
-        <AmenitiesSection />
-        <TestimonialsSection />
-        <CTASection />
-        <FAQSection />
+        <Suspense fallback={null}>
+          <WelcomeSection />
+          <WhyUsSection />
+          <ExperienceSection />
+          <AccommodationsSection />
+          <AmenitiesSection />
+          <TestimonialsSection />
+          <CTASection />
+          <FAQSection />
+        </Suspense>
       </main>
       <Footer />
     </div>
