@@ -1,0 +1,14 @@
+{
+  "name": "Camping Puerto Viejo Conchal",
+  "short_name": "Camping PV",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1a3a2f",
+  "background_color": "#faf9f6",
+  "display": "standalone"
+}
