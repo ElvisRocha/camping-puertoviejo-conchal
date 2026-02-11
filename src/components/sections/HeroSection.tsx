@@ -6,27 +6,26 @@ import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun } from 'lucide-react';
 
 // Cloudinary base path - version comes before folder per Cloudinary URL spec
-const CLD = 'https://res.cloudinary.com/da1sq9diw/image/upload';
-const HERO_FOLDER = 'Camping%20Puerto%20Viejo%20Conchal/Hero%20Section';
+const CLD = 'https://res.cloudinary.com/dcvipikha/image/upload';
 
 // Generate responsive Cloudinary URL: /transformations/vVersion/folder/file
 const cldUrl = (version: string, file: string, w: number) =>
-  `${CLD}/f_webp,q_auto:eco,w_${w},c_limit,fl_progressive/${version}/${HERO_FOLDER}/${file}`;
+  `${CLD}/f_webp,q_auto:eco,w_${w},c_limit,fl_progressive/${version}/${file}`;
 
 const heroImages = [
   {
-    version: 'v1770739718',
-    file: 'hero-playa-guanacaste-desktop.jpg',
+    version: 'v1770786784',
+    file: 'hero-playa-guanacaste-desktop_yobpml.jpg',
     alt: 'Playa Guanacaste - Vista panorámica de la costa',
   },
   {
-    version: 'v1770739717',
-    file: 'hero-playa-bahia-desktop.jpg',
+    version: 'v1770786784',
+    file: 'hero-playa-bahia-desktop_ffdsvi.jpg',
     alt: 'Bahía de Puerto Viejo - Aguas cristalinas',
   },
   {
-    version: 'v1770739716',
-    file: 'hero-camping-sunset-desktop.jpg',
+    version: 'v1770786783',
+    file: 'hero-camping-sunset-desktop_qki0cz.jpg',
     alt: 'Camping al atardecer frente al mar',
   },
 ];
