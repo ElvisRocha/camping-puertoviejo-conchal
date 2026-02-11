@@ -1,79 +1,44 @@
-import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { Navigation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 
-// Campsite coordinates near Playa Conchal, Guanacaste, Costa Rica
-const CAMPSITE_COORDINATES: [number, number] = [-85.81322062490392, 10.39059946466431];
-const GOOGLE_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CAMPSITE_COORDINATES[1]},${CAMPSITE_COORDINATES[0]}`;
+// Campsite coordinates - Camping Puerto Viejo Conchal, Guanacaste, Costa Rica
+const CAMPSITE_POSITION = {
+  lat: 10.390279144185165,
+  lng: -85.81323950164672,
+};
+const GOOGLE_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CAMPSITE_POSITION.lat},${CAMPSITE_POSITION.lng}`;
 
-interface ContactMapProps {
-  accessToken: string;
-}
-
-export function ContactMap({ accessToken }: ContactMapProps) {
+export function ContactMap() {
   const { t } = useTranslation();
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
-  useEffect(() => {
-    if (!mapContainer.current || !accessToken) return;
-
-    mapboxgl.accessToken = accessToken;
-
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: CAMPSITE_COORDINATES,
-      zoom: 13,
-      pitch: 45,
-      keyboard: false,
-    });
-
-    // Add navigation controls
-    map.current.addControl(
-      new mapboxgl.NavigationControl({
-        visualizePitch: true,
-      }),
-      'top-right'
-    );
-
-    // Add marker for campsite
-    const marker = new mapboxgl.Marker({
-      color: '#2D5A27',
-    })
-      .setLngLat(CAMPSITE_COORDINATES)
-      .setPopup(
-        new mapboxgl.Popup({ offset: 25 }).setHTML(`
-          <div class="p-2">
-            <h3 class="font-bold text-sm">Camping Puerto Viejo Conchal</h3>
-            <p class="text-xs text-gray-600">Mapatalo, Puerto Viejo, Guanacaste</p>
-          </div>
-        `)
-      )
-      .addTo(map.current);
-
-    // Open popup by default
-    marker.togglePopup();
-
-    return () => {
-      map.current?.remove();
-    };
-  }, [accessToken]);
-
-  if (!accessToken) {
+  if (!apiKey) {
     return (
       <div className="w-full h-full bg-muted rounded-xl flex items-center justify-center">
-        <p className="text-muted-foreground">Map loading...</p>
+        <p className="text-muted-foreground">Map configuration unavailable</p>
       </div>
     );
   }
 
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden">
-      <div ref={mapContainer} className="absolute inset-0" tabIndex={-1} style={{ outline: 'none' }} />
+      <APIProvider apiKey={apiKey}>
+        <Map
+          defaultCenter={CAMPSITE_POSITION}
+          defaultZoom={15}
+          gestureHandling="cooperative"
+          disableDefaultUI={false}
+          mapTypeId="roadmap"
+          style={{ width: '100%', height: '100%' }}
+        >
+          <Marker
+            position={CAMPSITE_POSITION}
+            title="Camping Puerto Viejo Conchal"
+          />
+        </Map>
+      </APIProvider>
       <a
         href={GOOGLE_MAPS_URL}
         target="_blank"

@@ -7,9 +7,8 @@ import Footer from '@/components/Footer';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { ContactInfo } from '@/components/contact/ContactInfo';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/integrations/supabase/client';
 
-// Lazy load the heavy ContactMap component (includes mapbox-gl ~1.5MB)
+// Lazy load the ContactMap component
 const ContactMap = lazy(() => import('@/components/contact/ContactMap').then(m => ({ default: m.ContactMap })));
 
 // Loading placeholder for the map
@@ -27,7 +26,6 @@ const MapLoadingPlaceholder = () => {
 
 export default function ContactPage() {
   const { t } = useTranslation();
-  const [mapboxToken, setMapboxToken] = useState<string>('');
   const [shouldLoadMap, setShouldLoadMap] = useState(false);
   const mapSectionRef = useRef<HTMLDivElement>(null);
 
@@ -48,21 +46,6 @@ export default function ContactPage() {
     }
 
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    // Fetch the Mapbox token from an edge function
-    const fetchToken = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('get-mapbox-token');
-        if (data?.token) {
-          setMapboxToken(data.token);
-        }
-      } catch (err) {
-        console.error('Failed to fetch Mapbox token');
-      }
-    };
-    fetchToken();
   }, []);
 
   return (
@@ -137,9 +120,9 @@ export default function ContactPage() {
             className="mt-12"
           >
             <div className="bg-card rounded-2xl p-4 shadow-lg border h-[800px]">
-              {shouldLoadMap && mapboxToken ? (
+              {shouldLoadMap ? (
                 <Suspense fallback={<MapLoadingPlaceholder />}>
-                  <ContactMap accessToken={mapboxToken} />
+                  <ContactMap />
                 </Suspense>
               ) : (
                 <MapLoadingPlaceholder />

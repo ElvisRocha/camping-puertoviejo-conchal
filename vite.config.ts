@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => ({
           'vendor-query': ['@tanstack/react-query'],
           'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'vendor-date': ['date-fns'],
-          'vendor-mapbox': ['mapbox-gl'],
+          'vendor-google-maps': ['@vis.gl/react-google-maps'],
         },
         // Optimize asset file names for better caching
         assetFileNames: (assetInfo) => {
