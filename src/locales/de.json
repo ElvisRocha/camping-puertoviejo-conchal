@@ -334,9 +334,9 @@
     "step2": {
       "title": "Wer Kommt Ins Paradies?",
       "subtitle": "Erzählen Sie uns von Ihrer Gruppe, damit wir Ihren perfekten Platz vorbereiten können.",
-      "adults": "Erwachsene (18+)",
-      "children": "Kinder (4-17)",
-      "infants": "Babys (0-3)",
+      "adults": "Erwachsene (18+ Jahre)",
+      "children": "Kinder (5-17 Jahre)",
+      "infants": "Babys (0-4 Jahre)",
       "infantsFree": "Kostenlos",
       "needTent": "Brauchen Sie ein Mietzzelt?",
       "bringOwn": "Ich bringe mein eigenes Zelt mit",

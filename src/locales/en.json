@@ -334,9 +334,9 @@
     "step2": {
       "title": "Who's Coming to Paradise?",
       "subtitle": "Tell us about your group so we can prepare your perfect spot.",
-      "adults": "Adults (18+)",
-      "children": "Children (4-17)",
-      "infants": "Infants (0-3)",
+      "adults": "Adults (18+ years)",
+      "children": "Children (5-17 years)",
+      "infants": "Infants (0-4 years)",
       "infantsFree": "Free",
       "needTent": "Do you need tent rental?",
       "bringOwn": "I'm bringing my own tent",

@@ -334,9 +334,9 @@
     "step2": {
       "title": "¿Quién Viene al Paraíso?",
       "subtitle": "Cuéntanos sobre tu grupo para preparar tu lugar perfecto.",
-      "adults": "Adultos (18+)",
-      "children": "Niños (4-17)",
-      "infants": "Bebés (0-3)",
+      "adults": "Adultos (18+ años)",
+      "children": "Niños (5-17 años)",
+      "infants": "Bebés (0-4 años)",
       "infantsFree": "Gratis",
       "needTent": "¿Necesitas alquilar tienda?",
       "bringOwn": "Traigo mi propia tienda",
