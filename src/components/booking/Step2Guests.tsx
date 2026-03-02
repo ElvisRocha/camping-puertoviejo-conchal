@@ -115,14 +115,16 @@ export function Step2Guests() {
 
         {/* Tent Rental Options */}
         <div className="grid gap-4">
-          {TENT_OPTIONS.map((tent) => {
+        {TENT_OPTIONS.map((tent) => {
             const quantity = getTentQuantity(tent.id);
+            const isSoldOut = true;
             return (
               <div
                 key={tent.id}
                 className={cn(
                   'p-4 rounded-xl border-2 transition-all',
-                  quantity > 0 ? 'border-forest bg-forest/5' : 'border-border'
+                  quantity > 0 ? 'border-forest bg-forest/5' : 'border-border',
+                  isSoldOut && 'opacity-60 pointer-events-none'
                 )}
               >
                   <div className="flex gap-4">
@@ -150,7 +152,7 @@ export function Step2Guests() {
                         size="icon"
                         className="h-8 w-8 rounded-full"
                         onClick={() => removeTent(tent.id)}
-                        disabled={quantity === 0}
+                        disabled={isSoldOut || quantity === 0}
                       >
                         <Minus className="w-4 h-4" />
                       </Button>
@@ -160,10 +162,16 @@ export function Step2Guests() {
                         size="icon"
                         className="h-8 w-8 rounded-full"
                         onClick={() => addTent(tent.id)}
+                        disabled={isSoldOut}
                       >
                         <Plus className="w-4 h-4" />
                       </Button>
                     </div>
+                    {isSoldOut && (
+                      <span className="bg-gray-200 text-gray-500 text-xs font-medium px-3 py-1 rounded-full mt-2 inline-block">
+                        {t('booking.step2.soldOut')}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

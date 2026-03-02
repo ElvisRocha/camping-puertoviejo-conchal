@@ -340,7 +340,8 @@
       "bringOwn": "J'apporte ma propre tente",
       "bringOwnNote": "Seuls les frais d'emplacement s'appliquent",
       "campsiteRate": "Emplacement",
-      "sleeps": "Capacité"
+      "sleeps": "Capacité",
+      "soldOut": "Épuisé"
     },
     "step3": {
       "title": "Rendez-le Inoubliable",

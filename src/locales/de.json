@@ -340,7 +340,8 @@
       "bringOwn": "Ich bringe mein eigenes Zelt mit",
       "bringOwnNote": "Nur Stellplatzgebühr fällt an",
       "campsiteRate": "Stellplatz",
-      "sleeps": "Kapazität"
+      "sleeps": "Kapazität",
+      "soldOut": "Ausverkauft"
     },
     "step3": {
       "title": "Machen Sie Es Unvergesslich",

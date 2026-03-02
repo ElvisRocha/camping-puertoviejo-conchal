@@ -340,7 +340,8 @@
       "bringOwn": "I'm bringing my own tent",
       "bringOwnNote": "Just campsite fee applies",
       "campsiteRate": "Campsite",
-      "sleeps": "Sleeps"
+      "sleeps": "Sleeps",
+      "soldOut": "Sold out"
     },
     "step3": {
       "title": "Make It Unforgettable",
