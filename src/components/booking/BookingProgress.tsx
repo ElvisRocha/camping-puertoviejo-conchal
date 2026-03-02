@@ -29,7 +29,7 @@ export function BookingProgress({ currentStep, totalSteps }: BookingProgressProp
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-8">
+    <div className="w-full mb-8">
       <div className="flex items-center justify-between">
         {steps.slice(0, totalSteps).map((step, index) => {
           const isCompleted = currentStep > step.number;
