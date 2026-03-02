@@ -95,7 +95,7 @@ export const SITE_CONFIG: SiteConfig = {
 };
 
 export const PRICING = {
-  campsitePerPersonPerNight: 25,
+  campsitePerPersonPerNight: 14,
   tents: {
     'tent-2': 15,
     'tent-4': 25,
