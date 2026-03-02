@@ -93,7 +93,7 @@ const AccommodationsSection = () => {
                     {tent.icon} {t(tent.nameKey)}
                   </h4>
                   <span className="text-sm font-body text-muted-foreground">
-                    {tent.capacity} guests
+                    {tent.capacity} {t('accommodations.guests')}
                   </span>
                 </div>
                 <p className="font-body text-foreground/70 text-sm mb-4">
@@ -102,7 +102,7 @@ const AccommodationsSection = () => {
                 <div className="flex items-center justify-between">
                   <span className="font-heading font-bold text-xl text-sea-green">
                     {formatDualPriceInt(tent.pricePerNight)}
-                    <span className="text-sm font-normal text-muted-foreground">/{t('booking.priceTypes.night')}</span>
+                    <span className="text-sm font-normal text-muted-foreground"> {t('accommodations.perNight')}</span>
                   </span>
                 </div>
                 <div className="flex justify-end mt-2">
