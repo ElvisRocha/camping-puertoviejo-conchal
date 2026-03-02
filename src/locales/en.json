@@ -149,7 +149,9 @@
     "rental": {
       "title": "Travel Light, Sleep Right",
       "text": "Flying in or prefer to pack light? We've got you covered—literally. Our quality tents come ready with comfortable sleeping pads, so you can focus on adventure, not logistics."
-    }
+    },
+    "guests": "guests",
+    "perNight": "per night"
   },
   "tents": {
     "cozyDuo": {
