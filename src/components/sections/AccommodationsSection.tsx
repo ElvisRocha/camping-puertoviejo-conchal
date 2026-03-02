@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { TENT_OPTIONS } from '@/types/booking';
+import { formatDualPriceInt } from '@/lib/priceFormat';
 
 const AccommodationsSection = () => {
   const { t } = useTranslation();
@@ -100,8 +101,8 @@ const AccommodationsSection = () => {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-heading font-bold text-xl text-sea-green">
-                    ${tent.pricePerNight}
-                    <span className="text-sm font-normal text-muted-foreground">/night</span>
+                    {formatDualPriceInt(tent.pricePerNight)}
+                    <span className="text-sm font-normal text-muted-foreground">/{t('booking.priceTypes.night')}</span>
                   </span>
                 </div>
               </div>

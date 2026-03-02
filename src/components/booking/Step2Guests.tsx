@@ -5,6 +5,7 @@ import { TENT_OPTIONS, PRICING } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Minus, Plus, Users, Tent, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { formatDualPriceInt } from '@/lib/priceFormat';
 
 export function Step2Guests() {
   const { t } = useTranslation();
@@ -78,7 +79,7 @@ export function Step2Guests() {
 
         <div className="pt-4 text-center">
           <p className="text-muted-foreground">
-            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">${PRICING.campsitePerPersonPerNight}/{t('booking.priceTypes.personNight')}</span>
+            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">{formatDualPriceInt(PRICING.campsitePerPersonPerNight)}/{t('booking.priceTypes.personNight')}</span>
           </p>
         </div>
       </div>
@@ -140,7 +141,7 @@ export function Step2Guests() {
                         <h4 className="font-semibold">{tent.icon} {t(tent.nameKey)}</h4>
                         <p className="text-sm text-muted-foreground">{t('booking.step2.sleeps')} {tent.capacity}</p>
                       </div>
-                      <p className="font-bold text-forest">${tent.pricePerNight}/{t('booking.priceTypes.night')}</p>
+                      <p className="font-bold text-forest">{formatDualPriceInt(tent.pricePerNight)}/{t('booking.priceTypes.night')}</p>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">{t(tent.descriptionKey)}</p>
                     <div className="flex items-center gap-3 mt-3">

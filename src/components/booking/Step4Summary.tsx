@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { z } from 'zod';
 import { useState } from 'react';
 import { formatLocalizedDate } from '@/lib/dateLocale';
+import { formatDualPrice } from '@/lib/priceFormat';
 
 export function Step4Summary() {
   const { t, i18n } = useTranslation();
@@ -231,31 +232,31 @@ export function Step4Summary() {
           <div className="space-y-2 pt-2">
             <div className="flex justify-between text-sm">
               <span>{t('booking.step4.campsite')}</span>
-              <span>${pricing.campsiteFee.toFixed(2)}</span>
+              <span>{formatDualPrice(pricing.campsiteFee)}</span>
             </div>
             {pricing.tentRental > 0 && (
               <div className="flex justify-between text-sm">
                 <span>{t('booking.step4.tentRental')}</span>
-                <span>${pricing.tentRental.toFixed(2)}</span>
+                <span>{formatDualPrice(pricing.tentRental)}</span>
               </div>
             )}
             {pricing.addOns > 0 && (
               <div className="flex justify-between text-sm">
                 <span>{t('booking.step4.addons')}</span>
-                <span>${pricing.addOns.toFixed(2)}</span>
+                <span>{formatDualPrice(pricing.addOns)}</span>
               </div>
             )}
             <div className="flex justify-between text-sm pt-2 border-t border-border/50">
               <span>{t('booking.step4.subtotal')}</span>
-              <span>${pricing.subtotal.toFixed(2)}</span>
+              <span>{formatDualPrice(pricing.subtotal)}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span>{t('booking.step4.taxes')}</span>
-              <span>${pricing.taxes.toFixed(2)}</span>
+              <span>{formatDualPrice(pricing.taxes)}</span>
             </div>
             <div className="flex justify-between font-bold text-lg pt-2 border-t border-border">
               <span>{t('booking.step4.total')}</span>
-              <span className="text-forest">${pricing.total.toFixed(2)}</span>
+              <span className="text-forest">{formatDualPrice(pricing.total)}</span>
             </div>
           </div>
         </div>

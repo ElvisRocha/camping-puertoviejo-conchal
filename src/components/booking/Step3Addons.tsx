@@ -5,6 +5,7 @@ import { ADD_ONS } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { formatDualPriceInt } from '@/lib/priceFormat';
 
 export function Step3Addons() {
   const { t } = useTranslation();
@@ -13,17 +14,18 @@ export function Step3Addons() {
   const isSelected = (id: string) => booking.addOns?.includes(id) || false;
 
   const getPriceLabel = (addon: typeof ADD_ONS[0]) => {
+    const dual = formatDualPriceInt(addon.price);
     switch (addon.priceType) {
       case 'per-person':
-        return `$${addon.price}/${t('booking.priceTypes.person')}`;
+        return `${dual}/${t('booking.priceTypes.person')}`;
       case 'per-night':
-        return `$${addon.price}/${t('booking.priceTypes.night')}`;
+        return `${dual}/${t('booking.priceTypes.night')}`;
       case 'per-day':
-        return `$${addon.price}/${t('booking.priceTypes.day')}`;
+        return `${dual}/${t('booking.priceTypes.day')}`;
       case 'flat':
-        return `$${addon.price}`;
+        return dual;
       default:
-        return `$${addon.price}`;
+        return dual;
     }
   };
 
