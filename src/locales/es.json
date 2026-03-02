@@ -319,7 +319,7 @@
     "step1": {
       "title": "¿Cuándo Comienza Tu Aventura?",
       "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
-      "priceNote": "₡7,000 - $14 por persona/noche tarifa base",
+      "priceNote": "₡7,000 - $14 por persona por noche tarifa base",
       "peakSeason": "Temporada alta",
       "checkIn": "LLEGADA",
       "checkOut": "SALIDA",
@@ -442,7 +442,7 @@
       "person": "persona",
       "night": "noche",
       "day": "día",
-      "personNight": "persona/noche"
+      "personNight": "persona por noche"
     }
   },
   "addons": {

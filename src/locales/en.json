@@ -319,7 +319,7 @@
     "step1": {
       "title": "When Does Your Adventure Begin?",
       "subtitle": "Select your check-in and check-out dates. Minimum stay: 1 night.",
-      "priceNote": "₡7,000 - $14 per person/night base rate",
+      "priceNote": "₡7,000 - $14 per person per night base rate",
       "peakSeason": "Peak season",
       "checkIn": "CHECK-IN",
       "checkOut": "CHECK-OUT",
@@ -442,7 +442,7 @@
       "person": "person",
       "night": "night",
       "day": "day",
-      "personNight": "person/night"
+      "personNight": "person per night"
     }
   },
   "addons": {
