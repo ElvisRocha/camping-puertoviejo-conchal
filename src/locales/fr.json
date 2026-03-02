@@ -401,7 +401,12 @@
       "toastErrorTitle": "Échec de la réservation",
       "toastErrorDescription": "Une erreur s'est produite lors du traitement. Veuillez réessayer.",
       "termsRequiredTitle": "Conditions requises",
-      "termsRequired": "Vous devez accepter les Conditions générales pour finaliser votre réservation."
+      "termsRequired": "Vous devez accepter les Conditions générales pour finaliser votre réservation.",
+      "paymentInfo": {
+        "title": "Votre réservation est presque prête",
+        "body1": "Votre emplacement au camping sera réservé en toute sécurité une fois que vous aurez confirmé. Le paiement s'effectuera directement à l'arrivée — sans complications, sans frais anticipés.",
+        "body2": "Nous nous occupons de tout pour vous accueillir dans les meilleures conditions. Apportez simplement votre envie de vous déconnecter, nous nous chargeons du reste. Nous sommes ravis de partager cette expérience avec vous !"
+      }
     },
     "confirmation": {
       "title": "🎉 Vous l'Avez Fait ! Le Paradis Vous Attend !",

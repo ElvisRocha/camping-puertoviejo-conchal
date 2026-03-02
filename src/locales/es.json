@@ -401,7 +401,12 @@
       "toastErrorTitle": "Error en la Reserva",
       "toastErrorDescription": "Hubo un error al procesar tu reserva. Por favor inténtalo de nuevo.",
       "termsRequiredTitle": "Términos requeridos",
-      "termsRequired": "Debes aceptar los Términos y Condiciones para completar tu reserva."
+      "termsRequired": "Debes aceptar los Términos y Condiciones para completar tu reserva.",
+      "paymentInfo": {
+        "title": "Tu reserva está casi lista",
+        "body1": "Tu espacio en el camping quedará reservado de forma segura una vez que confirmes. El pago lo realizarás directamente al llegar — sin complicaciones, sin cargos anticipados.",
+        "body2": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!"
+      }
     },
     "confirmation": {
       "title": "🎉 ¡Lo Lograste! ¡El Paraíso Te Espera!",

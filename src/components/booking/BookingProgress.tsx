@@ -17,8 +17,8 @@ export function BookingProgress({ currentStep, totalSteps }: BookingProgressProp
     { number: 2, labelKey: 'booking.steps.guests' },
     // PASO 3 — Comentado temporalmente. No eliminar.
     // { number: 3, labelKey: 'booking.steps.extras' },
-    { number: 4, labelKey: 'booking.steps.details' },
-    { number: 5, labelKey: 'booking.steps.confirm' },
+    { number: 3, labelKey: 'booking.steps.details' },
+    { number: 4, labelKey: 'booking.steps.confirm' },
   ];
 
   const handleStepClick = (stepNumber: number) => {

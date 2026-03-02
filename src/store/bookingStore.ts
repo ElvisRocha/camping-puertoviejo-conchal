@@ -86,7 +86,7 @@ export const useBookingStore = create<BookingState>()(
         }
       },
       nextStep: () => {
-        set((state) => ({ currentStep: Math.min(state.currentStep + 1, 5) }));
+        set((state) => ({ currentStep: Math.min(state.currentStep + 1, 4) }));
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       prevStep: () => {
