@@ -15,7 +15,8 @@ export function BookingProgress({ currentStep, totalSteps }: BookingProgressProp
   const steps = [
     { number: 1, labelKey: 'booking.steps.dates' },
     { number: 2, labelKey: 'booking.steps.guests' },
-    { number: 3, labelKey: 'booking.steps.extras' },
+    // PASO 3 — Comentado temporalmente. No eliminar.
+    // { number: 3, labelKey: 'booking.steps.extras' },
     { number: 4, labelKey: 'booking.steps.details' },
     { number: 5, labelKey: 'booking.steps.confirm' },
   ];

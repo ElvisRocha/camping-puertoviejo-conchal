@@ -168,23 +168,62 @@
   "amenities": {
     "title": "乡村魅力，真正舒适",
     "intro": "露营不意味着牺牲舒适。我们考虑到了一切，让您可以专注于重要的事情：从喧嚣中断开，与自然重新连接。",
-    "showers": { "title": "热水淋浴", "text": "用俯瞰丛林的太阳能加热淋浴开始您清爽的一天" },
-    "restrooms": { "title": "干净卫生间", "text": "维护良好的设施，每天清洁多次" },
-    "campfire": { "title": "篝火坑", "text": "指定的篝火区配有座位——棉花糖可选但推荐" },
-    "parking": { "title": "安全停车", "text": "为您的租车或摩托车提供安全、有监控的停车场" },
-    "wifi": { "title": "WiFi区域", "text": "需要发布那个日落？需要时有连接，不需要时享受自然" },
-    "cooking": { "title": "烹饪区", "text": "配有烧烤炉和准备台的共用厨房空间" },
-    "security": { "title": "24/7安保", "text": "安心休息，我们的团队全天候守护营地" },
-    "tours": { "title": "旅游服务台", "text": "预订冒险活动，获取当地建议，发现隐藏的宝藏" }
+    "showers": {
+      "title": "热水淋浴",
+      "text": "用俯瞰丛林的太阳能加热淋浴开始您清爽的一天"
+    },
+    "restrooms": {
+      "title": "干净卫生间",
+      "text": "维护良好的设施，每天清洁多次"
+    },
+    "campfire": {
+      "title": "篝火坑",
+      "text": "指定的篝火区配有座位——棉花糖可选但推荐"
+    },
+    "parking": {
+      "title": "安全停车",
+      "text": "为您的租车或摩托车提供安全、有监控的停车场"
+    },
+    "wifi": {
+      "title": "WiFi区域",
+      "text": "需要发布那个日落？需要时有连接，不需要时享受自然"
+    },
+    "cooking": {
+      "title": "烹饪区",
+      "text": "配有烧烤炉和准备台的共用厨房空间"
+    },
+    "security": {
+      "title": "24/7安保",
+      "text": "安心休息，我们的团队全天候守护营地"
+    },
+    "tours": {
+      "title": "旅游服务台",
+      "text": "预订冒险活动，获取当地建议，发现隐藏的宝藏"
+    }
   },
   "wildlife": {
     "title": "认识当地居民",
     "intro": "我们的营地不仅靠近自然——而是沉浸其中。这里的野生动物没有被关起来或安排好。这些动物生活在这里，如果您有耐心和尊重，它们会与您分享它们的世界。",
-    "howler": { "name": "吼猴", "text": "您的天然闹钟。这些温和的巨人在黎明和黄昏时穿过树冠移动，它们令人难以置信的叫声在森林中回荡。观察整个家庭在营地上方的树上梳理毛发和玩耍。" },
-    "macaw": { "name": "红金刚鹦鹉", "text": "哥斯达黎加最耀眼的居民。这些鲜红、黄色和蓝色的鹦鹉在日出和日落时成双飞过海滩。它们的叫声是独特的——也是难忘的。" },
-    "toucan": { "name": "彩虹巨嘴鸟", "text": "热带地区的彩虹喙标志。看着它们在树枝间跳跃寻找水果，它们超大的喙让它们不可能被忽视。" },
-    "capuchin": { "name": "白面卷尾猴", "text": "好奇的家伙。这些聪明的猴子可能会从安全距离调查您的营地，它们富有表情的脸显示出对人类访客无尽的好奇。" },
-    "iguana": { "name": "鬣蜥及更多", "text": "绿鬣蜥在树枝上晒太阳，耶稣蜥蜴在水面上奔跑，貉成群觅食——每次散步都会发现新邻居。" },
+    "howler": {
+      "name": "吼猴",
+      "text": "您的天然闹钟。这些温和的巨人在黎明和黄昏时穿过树冠移动，它们令人难以置信的叫声在森林中回荡。观察整个家庭在营地上方的树上梳理毛发和玩耍。"
+    },
+    "macaw": {
+      "name": "红金刚鹦鹉",
+      "text": "哥斯达黎加最耀眼的居民。这些鲜红、黄色和蓝色的鹦鹉在日出和日落时成双飞过海滩。它们的叫声是独特的——也是难忘的。"
+    },
+    "toucan": {
+      "name": "彩虹巨嘴鸟",
+      "text": "热带地区的彩虹喙标志。看着它们在树枝间跳跃寻找水果，它们超大的喙让它们不可能被忽视。"
+    },
+    "capuchin": {
+      "name": "白面卷尾猴",
+      "text": "好奇的家伙。这些聪明的猴子可能会从安全距离调查您的营地，它们富有表情的脸显示出对人类访客无尽的好奇。"
+    },
+    "iguana": {
+      "name": "鬣蜥及更多",
+      "text": "绿鬣蜥在树枝上晒太阳，耶稣蜥蜴在水面上奔跑，貉成群觅食——每次散步都会发现新邻居。"
+    },
     "note": "重要提示：我们实行负责任的野生动物互动。请不要喂食动物——它们在自然饮食中茁壮成长，您的尊重有助于保持它们的野性。"
   },
   "testimonials": {
@@ -326,7 +365,20 @@
         "country": "居住国家",
         "arrivalTime": "预计到达时间",
         "specialRequests": "特殊要求/饮食限制",
-        "celebrating": "正在庆祝特别的事情？"
+        "celebrating": "正在庆祝特别的事情？",
+        "fullNamePlaceholder": "例：张三",
+        "emailPlaceholder": "zhangsan@example.com",
+        "phonePlaceholder": "+86 138 0000 0000",
+        "countryPlaceholder": "选择国家",
+        "arrivalTimePlaceholder": "例：下午3点",
+        "specialRequestsPlaceholder": "饮食限制、过敏症或特殊要求...",
+        "celebratingPlaceholder": "生日、周年纪念、蜜月...",
+        "errors": {
+          "nameRequired": "姓名为必填项",
+          "invalidEmail": "电子邮件地址无效",
+          "phoneRequired": "电话为必填项",
+          "countryRequired": "国家为必填项"
+        }
       }
     },
     "step5": {
@@ -340,7 +392,16 @@
       "cancellationPolicy": "入住前48小时免费取消可获全额退款。48小时内取消可获50%退款。未到场不退款。",
       "completeBooking": "完成预订",
       "secureNote": "256位SSL加密",
-      "trustedBy": "超过2,000位快乐露营者信赖"
+      "trustedBy": "超过2,000位快乐露营者信赖",
+      "totalToPay": "应付总额",
+      "includingTaxes": "美元，含税",
+      "processing": "处理中...",
+      "toastSuccessTitle": "预订确认！🎉",
+      "toastSuccessDescription": "您的参考号码是 {{code}}",
+      "toastErrorTitle": "预订失败",
+      "toastErrorDescription": "处理您的预订时出错。请重试。",
+      "termsRequiredTitle": "需要同意条款",
+      "termsRequired": "您必须同意条款和条件才能完成预订。"
     },
     "confirmation": {
       "title": "🎉 成功了！天堂等着您！",
@@ -372,10 +433,25 @@
     }
   },
   "addons": {
-    "breakfast": { "name": "早餐套餐", "description": "新鲜热带水果、gallo pinto、鸡蛋、哥斯达黎加咖啡。为冒险补充能量。" },
-    "kayak": { "name": "日出皮划艇之旅", "description": "在丛林苏醒时划过平静的晨间水面。2小时的魔力。" },
-    "wildlife": { "name": "导游野生动物徒步", "description": "专业自然导游揭示隐藏的野生动物并分享丛林秘密。2.5小时。" },
-    "bonfire": { "name": "篝火套装", "description": "木柴、棉花糖、巧克力、饼干。完美篝火之夜所需的一切。" },
-    "snorkel": { "name": "浮潜装备租赁", "description": "面罩、呼吸管、脚蹼。按自己的节奏探索水下世界。" }
+    "breakfast": {
+      "name": "早餐套餐",
+      "description": "新鲜热带水果、gallo pinto、鸡蛋、哥斯达黎加咖啡。为冒险补充能量。"
+    },
+    "kayak": {
+      "name": "日出皮划艇之旅",
+      "description": "在丛林苏醒时划过平静的晨间水面。2小时的魔力。"
+    },
+    "wildlife": {
+      "name": "导游野生动物徒步",
+      "description": "专业自然导游揭示隐藏的野生动物并分享丛林秘密。2.5小时。"
+    },
+    "bonfire": {
+      "name": "篝火套装",
+      "description": "木柴、棉花糖、巧克力、饼干。完美篝火之夜所需的一切。"
+    },
+    "snorkel": {
+      "name": "浮潜装备租赁",
+      "description": "面罩、呼吸管、脚蹼。按自己的节奏探索水下世界。"
+    }
   }
 }

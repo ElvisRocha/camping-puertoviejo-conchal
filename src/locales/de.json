@@ -168,23 +168,62 @@
   "amenities": {
     "title": "Rustikaler Charme, Echter Komfort",
     "intro": "Camping bedeutet nicht, auf Komfort zu verzichten. Wir haben an alles gedacht, damit Sie sich auf das Wesentliche konzentrieren können: sich vom Lärm zu lösen und sich mit der Natur zu verbinden.",
-    "showers": { "title": "Warme Duschen", "text": "Beginnen Sie Ihren Tag erfrischt mit solarbeheizten Duschen mit Blick auf den Dschungel" },
-    "restrooms": { "title": "Saubere Toiletten", "text": "Gut gewartete Einrichtungen, die mehrmals täglich gereinigt werden" },
-    "campfire": { "title": "Lagerfeuerstellen", "text": "Ausgewiesene Feuerbereiche mit Sitzgelegenheiten—Marshmallows optional aber empfohlen" },
-    "parking": { "title": "Sicherer Parkplatz", "text": "Sicheres, überwachtes Parken für Ihren Mietwagen oder Motorrad" },
-    "wifi": { "title": "WLAN-Zonen", "text": "Müssen Sie diesen Sonnenuntergang posten? Konnektivität wenn Sie sie brauchen, Natur wenn nicht" },
-    "cooking": { "title": "Kochbereiche", "text": "Gemeinschaftsküchen mit Grills und Vorbereitungsstationen" },
-    "security": { "title": "24/7 Sicherheit", "text": "Ruhen Sie entspannt in dem Wissen, dass unser Team das Camp rund um die Uhr bewacht" },
-    "tours": { "title": "Touren-Desk", "text": "Buchen Sie Abenteuer, erhalten Sie lokale Tipps und entdecken Sie verborgene Schätze" }
+    "showers": {
+      "title": "Warme Duschen",
+      "text": "Beginnen Sie Ihren Tag erfrischt mit solarbeheizten Duschen mit Blick auf den Dschungel"
+    },
+    "restrooms": {
+      "title": "Saubere Toiletten",
+      "text": "Gut gewartete Einrichtungen, die mehrmals täglich gereinigt werden"
+    },
+    "campfire": {
+      "title": "Lagerfeuerstellen",
+      "text": "Ausgewiesene Feuerbereiche mit Sitzgelegenheiten—Marshmallows optional aber empfohlen"
+    },
+    "parking": {
+      "title": "Sicherer Parkplatz",
+      "text": "Sicheres, überwachtes Parken für Ihren Mietwagen oder Motorrad"
+    },
+    "wifi": {
+      "title": "WLAN-Zonen",
+      "text": "Müssen Sie diesen Sonnenuntergang posten? Konnektivität wenn Sie sie brauchen, Natur wenn nicht"
+    },
+    "cooking": {
+      "title": "Kochbereiche",
+      "text": "Gemeinschaftsküchen mit Grills und Vorbereitungsstationen"
+    },
+    "security": {
+      "title": "24/7 Sicherheit",
+      "text": "Ruhen Sie entspannt in dem Wissen, dass unser Team das Camp rund um die Uhr bewacht"
+    },
+    "tours": {
+      "title": "Touren-Desk",
+      "text": "Buchen Sie Abenteuer, erhalten Sie lokale Tipps und entdecken Sie verborgene Schätze"
+    }
   },
   "wildlife": {
     "title": "Treffen Sie die Einheimischen",
     "intro": "Unser Camp ist nicht nur in der Nähe der Natur—es ist in sie eingetaucht. Die Wildtiere hier sind nicht eingesperrt oder inszeniert. Diese Tiere leben hier, und wenn Sie geduldig und respektvoll sind, werden sie ihre Welt mit Ihnen teilen.",
-    "howler": { "name": "Brüllaffen", "text": "Ihr natürlicher Wecker. Diese sanften Riesen bewegen sich bei Morgen- und Abenddämmerung durch das Blätterdach, ihre unglaublichen Rufe hallen durch den Wald. Beobachten Sie ganze Familien beim Pflegen und Spielen in den Bäumen über dem Camp." },
-    "macaw": { "name": "Hellrote Aras", "text": "Costa Ricas schillerndste Bewohner. Diese leuchtend roten, gelben und blauen Papageien fliegen paarweise über den Strand bei Sonnenauf- und -untergang. Ihre Rufe sind unverwechselbar—und unvergesslich." },
-    "toucan": { "name": "Regenbogentukane", "text": "Die regenbogenschnabeligen Ikonen der Tropen. Beobachten Sie sie von Ast zu Ast hüpfen auf der Suche nach Früchten, ihre übergroßen Schnäbel machen sie unmöglich zu übersehen." },
-    "capuchin": { "name": "Weißgesicht-Kapuziner", "text": "Die Neugierigen. Diese intelligenten Affen könnten Ihr Lager aus sicherer Entfernung untersuchen, ihre ausdrucksstarken Gesichter zeigen endlose Neugier gegenüber ihren menschlichen Besuchern." },
-    "iguana": { "name": "Leguane und Mehr", "text": "Grüne Leguane beim Sonnenbaden auf Ästen, Jesus-Christus-Eidechsen, die übers Wasser laufen, Nasenbären, die in Gruppen nach Nahrung suchen—jeder Spaziergang enthüllt neue Nachbarn." },
+    "howler": {
+      "name": "Brüllaffen",
+      "text": "Ihr natürlicher Wecker. Diese sanften Riesen bewegen sich bei Morgen- und Abenddämmerung durch das Blätterdach, ihre unglaublichen Rufe hallen durch den Wald. Beobachten Sie ganze Familien beim Pflegen und Spielen in den Bäumen über dem Camp."
+    },
+    "macaw": {
+      "name": "Hellrote Aras",
+      "text": "Costa Ricas schillerndste Bewohner. Diese leuchtend roten, gelben und blauen Papageien fliegen paarweise über den Strand bei Sonnenauf- und -untergang. Ihre Rufe sind unverwechselbar—und unvergesslich."
+    },
+    "toucan": {
+      "name": "Regenbogentukane",
+      "text": "Die regenbogenschnabeligen Ikonen der Tropen. Beobachten Sie sie von Ast zu Ast hüpfen auf der Suche nach Früchten, ihre übergroßen Schnäbel machen sie unmöglich zu übersehen."
+    },
+    "capuchin": {
+      "name": "Weißgesicht-Kapuziner",
+      "text": "Die Neugierigen. Diese intelligenten Affen könnten Ihr Lager aus sicherer Entfernung untersuchen, ihre ausdrucksstarken Gesichter zeigen endlose Neugier gegenüber ihren menschlichen Besuchern."
+    },
+    "iguana": {
+      "name": "Leguane und Mehr",
+      "text": "Grüne Leguane beim Sonnenbaden auf Ästen, Jesus-Christus-Eidechsen, die übers Wasser laufen, Nasenbären, die in Gruppen nach Nahrung suchen—jeder Spaziergang enthüllt neue Nachbarn."
+    },
     "note": "Wichtig: Wir praktizieren verantwortungsvolle Wildtier-Interaktion. Bitte füttern Sie die Tiere nicht—sie gedeihen am besten mit ihrer natürlichen Ernährung, und Ihr Respekt hilft, sie wild zu halten."
   },
   "testimonials": {
@@ -326,7 +365,20 @@
         "country": "Wohnsitzland",
         "arrivalTime": "Geschätzte Ankunftszeit",
         "specialRequests": "Besondere Wünsche / Ernährungseinschränkungen",
-        "celebrating": "Feiern Sie etwas Besonderes?"
+        "celebrating": "Feiern Sie etwas Besonderes?",
+        "fullNamePlaceholder": "z.B. Max Mustermann",
+        "emailPlaceholder": "max@beispiel.de",
+        "phonePlaceholder": "+49 151 12345678",
+        "countryPlaceholder": "Land auswählen",
+        "arrivalTimePlaceholder": "z.B. 15:00 Uhr",
+        "specialRequestsPlaceholder": "Ernährungseinschränkungen, Allergien oder besondere Wünsche...",
+        "celebratingPlaceholder": "Geburtstag, Jahrestag, Flitterwochen...",
+        "errors": {
+          "nameRequired": "Name ist erforderlich",
+          "invalidEmail": "Ungültige E-Mail-Adresse",
+          "phoneRequired": "Telefon ist erforderlich",
+          "countryRequired": "Land ist erforderlich"
+        }
       }
     },
     "step5": {
@@ -340,7 +392,16 @@
       "cancellationPolicy": "Kostenlose Stornierung bis 48 Stunden vor Anreise für volle Rückerstattung. Stornierungen innerhalb von 48 Stunden erhalten 50% Rückerstattung. Nichterscheinen ist nicht erstattungsfähig.",
       "completeBooking": "Buchung Abschließen",
       "secureNote": "256-Bit SSL-Verschlüsselung",
-      "trustedBy": "Vertraut von über 2.000 glücklichen Campern"
+      "trustedBy": "Vertraut von über 2.000 glücklichen Campern",
+      "totalToPay": "Zu zahlender Betrag",
+      "includingTaxes": "USD, inkl. Steuern",
+      "processing": "Wird verarbeitet...",
+      "toastSuccessTitle": "Buchung bestätigt! 🎉",
+      "toastSuccessDescription": "Ihr Referenzcode lautet {{code}}",
+      "toastErrorTitle": "Buchung fehlgeschlagen",
+      "toastErrorDescription": "Bei der Verarbeitung Ihrer Buchung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "termsRequiredTitle": "Bedingungen erforderlich",
+      "termsRequired": "Sie müssen den Allgemeinen Geschäftsbedingungen zustimmen, um Ihre Buchung abzuschließen."
     },
     "confirmation": {
       "title": "🎉 Geschafft! Das Paradies Erwartet Sie!",
@@ -372,10 +433,25 @@
     }
   },
   "addons": {
-    "breakfast": { "name": "Frühstückspaket", "description": "Frische tropische Früchte, Gallo Pinto, Eier, costaricanischer Kaffee. Energie für das Abenteuer." },
-    "kayak": { "name": "Sonnenaufgangs-Kajaktour", "description": "Paddeln Sie durch ruhige Morgenwasser, während der Dschungel erwacht. 2 Stunden Magie." },
-    "wildlife": { "name": "Geführte Wildtier-Wanderung", "description": "Experten-Naturführer enthüllt versteckte Wildtiere und teilt Dschungelgeheimnisse. 2,5 Stunden." },
-    "bonfire": { "name": "Lagerfeuer-Set", "description": "Brennholz, Marshmallows, Schokolade, Kekse. Alles für den perfekten Lagerfeuerabend." },
-    "snorkel": { "name": "Schnorchelausrüstung Mieten", "description": "Maske, Schnorchel, Flossen. Erkunden Sie die Unterwasserwelt in Ihrem eigenen Tempo." }
+    "breakfast": {
+      "name": "Frühstückspaket",
+      "description": "Frische tropische Früchte, Gallo Pinto, Eier, costaricanischer Kaffee. Energie für das Abenteuer."
+    },
+    "kayak": {
+      "name": "Sonnenaufgangs-Kajaktour",
+      "description": "Paddeln Sie durch ruhige Morgenwasser, während der Dschungel erwacht. 2 Stunden Magie."
+    },
+    "wildlife": {
+      "name": "Geführte Wildtier-Wanderung",
+      "description": "Experten-Naturführer enthüllt versteckte Wildtiere und teilt Dschungelgeheimnisse. 2,5 Stunden."
+    },
+    "bonfire": {
+      "name": "Lagerfeuer-Set",
+      "description": "Brennholz, Marshmallows, Schokolade, Kekse. Alles für den perfekten Lagerfeuerabend."
+    },
+    "snorkel": {
+      "name": "Schnorchelausrüstung Mieten",
+      "description": "Maske, Schnorchel, Flossen. Erkunden Sie die Unterwasserwelt in Ihrem eigenen Tempo."
+    }
   }
 }

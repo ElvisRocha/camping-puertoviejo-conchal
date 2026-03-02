@@ -1,5 +1,5 @@
 {
-"nav": {
+  "nav": {
     "home": "Inicio",
     "experience": "Experiencia",
     "accommodations": "Alojamiento",
@@ -168,23 +168,62 @@
   "amenities": {
     "title": "Encanto Rústico, Comodidad Real",
     "intro": "Acampar no significa sacrificar la comodidad. Hemos pensado en todo para que puedas enfocarte en lo que importa: desconectarte del ruido y reconectarte con la naturaleza.",
-    "showers": { "title": "Duchas Calientes", "text": "Comienza tu día refrescado con duchas calentadas por sol con vista a la jungla" },
-    "restrooms": { "title": "Baños Limpios", "text": "Instalaciones bien mantenidas limpiadas varias veces al día" },
-    "campfire": { "title": "Fogatas", "text": "Áreas designadas para fuego con asientos—malvaviscos opcionales pero recomendados" },
-    "parking": { "title": "Estacionamiento Seguro", "text": "Estacionamiento seguro y monitoreado para tu auto o moto de alquiler" },
-    "wifi": { "title": "Zonas Wi-Fi", "text": "¿Necesitas publicar ese atardecer? Conectividad cuando la necesites, naturaleza cuando no" },
-    "cooking": { "title": "Áreas de Cocina", "text": "Espacios de cocina compartidos con parrillas y estaciones de preparación" },
-    "security": { "title": "Seguridad 24/7", "text": "Descansa tranquilo sabiendo que nuestro equipo vigila el campamento las 24 horas" },
-    "tours": { "title": "Mesa de Tours", "text": "Reserva aventuras, obtén consejos locales y descubre gemas ocultas" }
+    "showers": {
+      "title": "Duchas Calientes",
+      "text": "Comienza tu día refrescado con duchas calentadas por sol con vista a la jungla"
+    },
+    "restrooms": {
+      "title": "Baños Limpios",
+      "text": "Instalaciones bien mantenidas limpiadas varias veces al día"
+    },
+    "campfire": {
+      "title": "Fogatas",
+      "text": "Áreas designadas para fuego con asientos—malvaviscos opcionales pero recomendados"
+    },
+    "parking": {
+      "title": "Estacionamiento Seguro",
+      "text": "Estacionamiento seguro y monitoreado para tu auto o moto de alquiler"
+    },
+    "wifi": {
+      "title": "Zonas Wi-Fi",
+      "text": "¿Necesitas publicar ese atardecer? Conectividad cuando la necesites, naturaleza cuando no"
+    },
+    "cooking": {
+      "title": "Áreas de Cocina",
+      "text": "Espacios de cocina compartidos con parrillas y estaciones de preparación"
+    },
+    "security": {
+      "title": "Seguridad 24/7",
+      "text": "Descansa tranquilo sabiendo que nuestro equipo vigila el campamento las 24 horas"
+    },
+    "tours": {
+      "title": "Mesa de Tours",
+      "text": "Reserva aventuras, obtén consejos locales y descubre gemas ocultas"
+    }
   },
   "wildlife": {
     "title": "Conoce a los Locales",
     "intro": "Nuestro campamento no está solo cerca de la naturaleza—está inmerso en ella. La fauna aquí no está enjaulada ni escenificada. Estos animales viven aquí, y si eres paciente y respetuoso, compartirán su mundo contigo.",
-    "howler": { "name": "Monos Aulladores", "text": "Tu despertador natural. Estos gentiles gigantes se mueven por el dosel al amanecer y al atardecer, sus increíbles llamados resonando por el bosque. Observa familias enteras acicalándose y jugando en los árboles sobre el campamento." },
-    "macaw": { "name": "Guacamayos Escarlata", "text": "Los residentes más deslumbrantes de Costa Rica. Estos brillantes loros rojos, amarillos y azules vuelan en parejas sobre la playa al amanecer y atardecer. Sus llamados son inconfundibles—e inolvidables." },
-    "toucan": { "name": "Tucanes Pico Iris", "text": "Los íconos de pico arcoíris de los trópicos. Obsérvalos saltar entre ramas buscando fruta, sus picos sobredimensionados haciéndolos imposibles de ignorar." },
-    "capuchin": { "name": "Monos Carablanca", "text": "Los curiosos. Estos monos inteligentes podrían investigar tu campamento desde una distancia segura, sus caras expresivas mostrando infinita curiosidad sobre sus visitantes humanos." },
-    "iguana": { "name": "Iguanas y Más", "text": "Iguanas verdes tomando el sol en ramas, lagartos Jesucristo corriendo sobre el agua, coatíes forrajeando en grupos—cada caminata revela nuevos vecinos." },
+    "howler": {
+      "name": "Monos Aulladores",
+      "text": "Tu despertador natural. Estos gentiles gigantes se mueven por el dosel al amanecer y al atardecer, sus increíbles llamados resonando por el bosque. Observa familias enteras acicalándose y jugando en los árboles sobre el campamento."
+    },
+    "macaw": {
+      "name": "Guacamayos Escarlata",
+      "text": "Los residentes más deslumbrantes de Costa Rica. Estos brillantes loros rojos, amarillos y azules vuelan en parejas sobre la playa al amanecer y atardecer. Sus llamados son inconfundibles—e inolvidables."
+    },
+    "toucan": {
+      "name": "Tucanes Pico Iris",
+      "text": "Los íconos de pico arcoíris de los trópicos. Obsérvalos saltar entre ramas buscando fruta, sus picos sobredimensionados haciéndolos imposibles de ignorar."
+    },
+    "capuchin": {
+      "name": "Monos Carablanca",
+      "text": "Los curiosos. Estos monos inteligentes podrían investigar tu campamento desde una distancia segura, sus caras expresivas mostrando infinita curiosidad sobre sus visitantes humanos."
+    },
+    "iguana": {
+      "name": "Iguanas y Más",
+      "text": "Iguanas verdes tomando el sol en ramas, lagartos Jesucristo corriendo sobre el agua, coatíes forrajeando en grupos—cada caminata revela nuevos vecinos."
+    },
     "note": "Importante: Practicamos interacción responsable con la fauna. Por favor no alimentes a los animales—prosperan mejor con su dieta natural, y tu respeto ayuda a mantenerlos salvajes."
   },
   "testimonials": {
@@ -326,7 +365,20 @@
         "country": "País de residencia",
         "arrivalTime": "Hora estimada de llegada",
         "specialRequests": "Solicitudes especiales / restricciones alimentarias",
-        "celebrating": "¿Celebrando algo especial?"
+        "celebrating": "¿Celebrando algo especial?",
+        "fullNamePlaceholder": "Ej. Juan Pérez",
+        "emailPlaceholder": "juan@ejemplo.com",
+        "phonePlaceholder": "+506 8888-8888",
+        "countryPlaceholder": "Selecciona tu país",
+        "arrivalTimePlaceholder": "Ej. 3:00 PM",
+        "specialRequestsPlaceholder": "Restricciones alimentarias, alergias o solicitudes especiales...",
+        "celebratingPlaceholder": "Cumpleaños, aniversario, luna de miel...",
+        "errors": {
+          "nameRequired": "El nombre es requerido",
+          "invalidEmail": "Correo electrónico inválido",
+          "phoneRequired": "El teléfono es requerido",
+          "countryRequired": "El país es requerido"
+        }
       }
     },
     "step5": {
@@ -340,7 +392,16 @@
       "cancellationPolicy": "Cancelación gratuita hasta 48 horas antes del check-in para reembolso completo. Cancelaciones dentro de 48 horas reciben 50% de reembolso. No presentarse no es reembolsable.",
       "completeBooking": "Completar Reserva",
       "secureNote": "Encriptación SSL de 256 bits",
-      "trustedBy": "Confiado por más de 2,000 campistas felices"
+      "trustedBy": "Confiado por más de 2,000 campistas felices",
+      "totalToPay": "Total a pagar",
+      "includingTaxes": "USD, impuestos incluidos",
+      "processing": "Procesando...",
+      "toastSuccessTitle": "¡Reserva Confirmada! 🎉",
+      "toastSuccessDescription": "Tu código de referencia es {{code}}",
+      "toastErrorTitle": "Error en la Reserva",
+      "toastErrorDescription": "Hubo un error al procesar tu reserva. Por favor inténtalo de nuevo.",
+      "termsRequiredTitle": "Términos requeridos",
+      "termsRequired": "Debes aceptar los Términos y Condiciones para completar tu reserva."
     },
     "confirmation": {
       "title": "🎉 ¡Lo Lograste! ¡El Paraíso Te Espera!",
@@ -372,10 +433,25 @@
     }
   },
   "addons": {
-    "breakfast": { "name": "Paquete de Desayuno", "description": "Frutas tropicales frescas, gallo pinto, huevos, café costarricense. Energía para la aventura." },
-    "kayak": { "name": "Tour de Kayak al Amanecer", "description": "Rema por aguas tranquilas mientras la jungla despierta. 2 horas de magia." },
-    "wildlife": { "name": "Caminata Guiada de Fauna", "description": "Guía naturalista experto revela fauna oculta y comparte secretos de la jungla. 2.5 horas." },
-    "bonfire": { "name": "Kit de Fogata", "description": "Leña, malvaviscos, chocolate, galletas. Todo para la noche perfecta de fogata." },
-    "snorkel": { "name": "Alquiler de Equipo de Snorkel", "description": "Máscara, snorkel, aletas. Explora el mundo submarino a tu ritmo." }
+    "breakfast": {
+      "name": "Paquete de Desayuno",
+      "description": "Frutas tropicales frescas, gallo pinto, huevos, café costarricense. Energía para la aventura."
+    },
+    "kayak": {
+      "name": "Tour de Kayak al Amanecer",
+      "description": "Rema por aguas tranquilas mientras la jungla despierta. 2 horas de magia."
+    },
+    "wildlife": {
+      "name": "Caminata Guiada de Fauna",
+      "description": "Guía naturalista experto revela fauna oculta y comparte secretos de la jungla. 2.5 horas."
+    },
+    "bonfire": {
+      "name": "Kit de Fogata",
+      "description": "Leña, malvaviscos, chocolate, galletas. Todo para la noche perfecta de fogata."
+    },
+    "snorkel": {
+      "name": "Alquiler de Equipo de Snorkel",
+      "description": "Máscara, snorkel, aletas. Explora el mundo submarino a tu ritmo."
+    }
   }
 }
