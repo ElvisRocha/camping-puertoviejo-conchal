@@ -320,7 +320,12 @@
       "title": "When Does Your Adventure Begin?",
       "subtitle": "Select your check-in and check-out dates. Minimum stay: 1 night.",
       "priceNote": "$25/person/night base rate",
-      "peakSeason": "Peak season"
+      "peakSeason": "Peak season",
+      "checkIn": "CHECK-IN",
+      "checkOut": "CHECK-OUT",
+      "clearDates": "Clear dates",
+      "selectCheckIn": "Select date",
+      "selectCheckOut": "Select date"
     },
     "step2": {
       "title": "Who's Coming to Paradise?",
