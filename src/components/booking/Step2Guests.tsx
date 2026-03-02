@@ -168,9 +168,11 @@ export function Step2Guests() {
                       </Button>
                     </div>
                     {isSoldOut && (
-                      <span className="bg-gray-200 text-gray-500 text-xs font-medium px-3 py-1 rounded-full mt-2 inline-block">
-                        {t('booking.step2.soldOut')}
-                      </span>
+                      <div className="flex justify-end mt-2">
+                        <span className="bg-gray-200 text-gray-500 text-xs font-medium px-3 py-1 rounded-full">
+                          {t('booking.step2.soldOut')}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </div>
