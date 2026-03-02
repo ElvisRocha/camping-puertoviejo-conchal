@@ -334,9 +334,9 @@
     "step2": {
       "title": "谁来天堂？",
       "subtitle": "告诉我们您的团队情况，以便我们准备您的完美位置。",
-      "adults": "成人 (18+)",
-      "children": "儿童 (4-17)",
-      "infants": "婴儿 (0-3)",
+      "adults": "成人 (18岁以上)",
+      "children": "儿童 (5-17岁)",
+      "infants": "婴儿 (0-4岁)",
       "infantsFree": "免费",
       "needTent": "您需要租帐篷吗？",
       "bringOwn": "我带自己的帐篷",

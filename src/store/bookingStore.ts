@@ -55,7 +55,7 @@ const initialBooking: Partial<Booking> = {
   checkIn: null,
   checkOut: null,
   nights: 0,
-  guests: { adults: 2, children: 0, infants: 0 },
+  guests: { adults: 0, children: 0, infants: 0 },
   accommodation: { bringOwnTent: true, rentedTents: [] },
   addOns: [],
   guestInfo: {

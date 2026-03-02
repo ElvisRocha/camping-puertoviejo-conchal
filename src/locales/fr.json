@@ -334,9 +334,9 @@
     "step2": {
       "title": "Qui Vient au Paradis ?",
       "subtitle": "Parlez-nous de votre groupe pour préparer votre place parfaite.",
-      "adults": "Adultes (18+)",
-      "children": "Enfants (4-17)",
-      "infants": "Bébés (0-3)",
+      "adults": "Adultes (18+ ans)",
+      "children": "Enfants (5-17 ans)",
+      "infants": "Bébés (0-4 ans)",
       "infantsFree": "Gratuit",
       "needTent": "Avez-vous besoin de louer une tente ?",
       "bringOwn": "J'apporte ma propre tente",

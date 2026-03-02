@@ -11,11 +11,11 @@ export function Step2Guests() {
   const { t } = useTranslation();
   const { booking, setGuests, setBringOwnTent, addTent, removeTent, prevStep, nextStep } = useBookingStore();
 
-  const guests = booking.guests || { adults: 2, children: 0, infants: 0 };
+  const guests = booking.guests || { adults: 0, children: 0, infants: 0 };
   const totalGuests = guests.adults + guests.children;
 
   const updateGuests = (type: 'adults' | 'children' | 'infants', delta: number) => {
-    const newValue = Math.max(type === 'adults' ? 1 : 0, (guests[type] || 0) + delta);
+    const newValue = Math.max(0, (guests[type] || 0) + delta);
     setGuests({ ...guests, [type]: newValue });
   };
 
