@@ -319,7 +319,7 @@
     "step1": {
       "title": "Wann Beginnt Ihr Abenteuer?",
       "subtitle": "Wählen Sie Ihr An- und Abreisedatum. Mindestaufenthalt: 1 Nacht.",
-      "priceNote": "₡7,000 - $14 pro Person/Nacht Grundpreis",
+      "priceNote": "₡7,000 - $14 pro Person pro Nacht Grundpreis",
       "peakSeason": "Hauptsaison",
       "checkIn": "ANREISE",
       "checkOut": "ABREISE",
@@ -442,7 +442,7 @@
       "person": "Person",
       "night": "Nacht",
       "day": "Tag",
-      "personNight": "Person/Nacht"
+      "personNight": "Person pro Nacht"
     }
   },
   "addons": {

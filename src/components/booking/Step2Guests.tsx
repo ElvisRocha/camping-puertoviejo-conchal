@@ -79,7 +79,7 @@ export function Step2Guests() {
 
         <div className="pt-4 text-center">
           <p className="text-muted-foreground">
-            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">{formatDualPriceInt(PRICING.campsitePerPersonPerNight)}/{t('booking.priceTypes.personNight')}</span>
+            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">{formatDualPriceInt(PRICING.campsitePerPersonPerNight)} {t('booking.priceTypes.personNight')}</span>
           </p>
         </div>
       </div>

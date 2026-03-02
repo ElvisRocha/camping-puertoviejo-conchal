@@ -319,7 +319,7 @@
     "step1": {
       "title": "Quand Commence Votre Aventure ?",
       "subtitle": "Sélectionnez vos dates d'arrivée et de départ. Séjour minimum : 1 nuit.",
-      "priceNote": "₡7,000 - $14 par personne/nuit tarif de base",
+      "priceNote": "₡7,000 - $14 par personne par nuit tarif de base",
       "peakSeason": "Haute saison",
       "checkIn": "ARRIVÉE",
       "checkOut": "DÉPART",
@@ -442,7 +442,7 @@
       "person": "personne",
       "night": "nuit",
       "day": "jour",
-      "personNight": "personne/nuit"
+      "personNight": "personne par nuit"
     }
   },
   "addons": {
