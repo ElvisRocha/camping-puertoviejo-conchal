@@ -16,6 +16,7 @@ import {
   Home
 } from 'lucide-react';
 import { formatLocalizedDate } from '@/lib/dateLocale';
+import { formatDualPrice } from '@/lib/priceFormat';
 
 interface BookingConfirmationProps {
   referenceCode: string;
@@ -98,7 +99,7 @@ export function BookingConfirmation({ referenceCode }: BookingConfirmationProps)
           </div>
           <div>
             <p className="text-muted-foreground">{t('booking.confirmation.totalPaid')}</p>
-            <p className="font-semibold text-forest">${pricing.total.toFixed(2)}</p>
+            <p className="font-semibold text-forest">{formatDualPrice(pricing.total)}</p>
           </div>
         </div>
       </div>

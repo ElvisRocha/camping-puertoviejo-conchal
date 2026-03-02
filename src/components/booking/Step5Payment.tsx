@@ -7,6 +7,7 @@ import { createBooking } from '@/lib/bookingApi';
 import { ArrowLeft, Lock, Shield, Loader2, Tent } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
+import { formatDualPrice } from '@/lib/priceFormat';
 
 interface Step5PaymentProps {
   onComplete: (referenceCode: string) => void;
@@ -78,7 +79,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       {/* Total */}
       <div className="card-nature p-6 text-center">
         <p className="text-muted-foreground mb-1">{t('booking.step5.totalToPay')}</p>
-        <p className="text-4xl font-bold text-forest">${pricing.total.toFixed(2)}</p>
+        <p className="text-4xl font-bold text-forest">{formatDualPrice(pricing.total)}</p>
         <p className="text-sm text-muted-foreground mt-1">{t('booking.step5.includingTaxes')}</p>
       </div>
 
