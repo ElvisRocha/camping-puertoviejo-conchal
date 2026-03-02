@@ -265,6 +265,8 @@ export const useBookingStore = create<BookingState>()(
           currentStep: 1,
           booking: { ...initialBooking },
         });
+        // Clear persisted state from localStorage to prevent rehydration of old data
+        localStorage.removeItem('camping-booking-storage');
       },
 
       completeBooking: () => {
