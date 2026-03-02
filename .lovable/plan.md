@@ -1,65 +1,88 @@
 
 
-## Plan: Inputs de fecha editables estilo Airbnb
+## Plan: Mostrar precios en dolares y colones (1$ = 500 colones)
 
-### Resumen
+### Enfoque
 
-Reemplazar los botones de LLEGADA/SALIDA actuales (que solo muestran texto) por inputs de texto editables con formato `DD/MM/YYYY`, permitiendo escritura manual de fechas, borrado individual con un boton X, y validacion en tiempo real. Mantener la interaccion con el calendario sincronizada.
-
----
-
-### Comportamiento objetivo (como Airbnb)
-
-1. **Inputs editables** - El usuario puede escribir una fecha manualmente en formato `DD/MM/YYYY`
-2. **Placeholder con formato** - Cuando esta vacio, muestra `DD/MM/YYYY` como placeholder
-3. **Boton X individual** - Cada input tiene un icono X para borrar solo esa fecha
-4. **Borde activo** - El input seleccionado tiene borde destacado (forest)
-5. **Validacion al escribir** - Solo acepta numeros y `/`, auto-formatea mientras se escribe (agrega `/` automaticamente despues de DD y MM)
-6. **Validacion al confirmar** - Al hacer blur o presionar Enter, valida que la fecha sea real y no este en el pasado
-7. **Sincronizacion bidireccional** - Escribir una fecha valida actualiza el calendario, y clickear en el calendario actualiza el input
-8. **Click en input = focus** - Al clickear LLEGADA se activa selectionPhase checkIn, al clickear SALIDA se activa checkOut
+Crear una funcion helper `formatDualPrice(amount)` que devuelve `"$X / Y₡"` y usarla en todos los lugares donde se muestran precios. Ademas, actualizar las cadenas de texto estaticas en los archivos de idiomas.
 
 ---
 
-### Cambios por archivo
+### 1. Crear helper de formato dual de precios
 
-#### 1. `src/components/booking/Step1Dates.tsx`
+**Archivo nuevo**: `src/lib/priceFormat.ts`
 
-Reemplazar los dos `<button>` (lineas 70-119) por inputs de texto con la siguiente logica:
+```typescript
+const CRC_RATE = 500;
 
-- **Nuevo estado**: `checkInText` y `checkOutText` (strings que representan lo que el usuario escribe)
-- **Funcion `formatDateInput(value)`**: Auto-inserta `/` despues de posicion 2 y 5 (DD/MM/YYYY), filtra caracteres no numericos
-- **Funcion `parseDateInput(text)`**: Convierte `DD/MM/YYYY` a objeto Date, retorna null si invalida
-- **Funcion `validateAndApply(phase, text)`**: Al blur/Enter, parsea la fecha, valida que no sea pasada, valida que checkOut > checkIn, y llama a `setDates()`
-- **Sincronizacion**: Cuando el usuario clickea en el calendario, tambien actualiza `checkInText`/`checkOutText` con la fecha formateada
-- **Boton X**: Dentro de cada input wrapper, un icono X que borra esa fecha individual (si se borra checkIn, tambien se borra checkOut)
-- **Layout**: Cada input sera un `<div>` con label arriba, `<input>` con placeholder `DD/MM/YYYY`, y boton X a la derecha
+export function formatDualPrice(usd: number): string {
+  const colones = Math.round(usd * CRC_RATE);
+  return `$${usd.toFixed(2)} / ${colones.toLocaleString()}₡`;
+}
 
-Estructura del input:
-```
-+---------------------------+
-| LLEGADA              [X]  |
-| DD/MM/YYYY                |
-+---------------------------+
+export function formatDualPriceInt(usd: number): string {
+  const colones = Math.round(usd * CRC_RATE);
+  return `$${usd} / ${colones.toLocaleString()}₡`;
+}
 ```
 
-- El `<input>` tendra `maxLength={10}`, `inputMode="numeric"`, `pattern="[0-9/]*"`
-- Al hacer focus en un input, se cambia `selectionPhase` automaticamente
-- Se mantiene el boton "Borrar fechas" general abajo del calendario
-
-#### 2. Locale files (todos)
-
-Agregar clave:
-- `booking.step1.datePlaceholder`: `"DD/MM/YYYY"`
-- `booking.step1.invalidDate`: `"Fecha invalida"` (para mostrar error visual si la fecha escrita no es valida)
+- `formatDualPrice` para totales con decimales (ej: `$56.50 / 28250₡`)
+- `formatDualPriceInt` para precios unitarios enteros (ej: `$25 / 12500₡`)
 
 ---
 
-### Detalles tecnicos
+### 2. Archivos a modificar
 
-- El auto-formato funciona asi: al escribir "19" automaticamente se convierte a "19/", al escribir "1903" se convierte a "19/03/", hasta llegar a "19/03/2026"
-- Al borrar con backspace, se respeta la posicion del cursor y se eliminan los `/` automaticos
-- La validacion usa `parse` de date-fns para convertir el string a Date con formato `dd/MM/yyyy`
-- Si la fecha parseada es invalida o esta en el pasado, el input muestra un borde rojo momentaneo y revierte al valor anterior
-- `useEffect` sincroniza `checkInText`/`checkOutText` cuando `booking.checkIn`/`booking.checkOut` cambian (por clicks en calendario)
+#### `src/components/sections/AccommodationsSection.tsx` (2 lugares)
+- **Linea 42**: Precio "bring your own" -- ya viene de traduccion, se actualiza en locales
+- **Linea 102-105**: Precio por noche de cada tienda -- cambiar `${tent.pricePerNight}` a `formatDualPriceInt(tent.pricePerNight)`
+
+#### `src/components/booking/Step1Dates.tsx` (1 lugar)
+- **Linea 172**: Nota de precio -- viene de traduccion `booking.step1.priceNote`, actualizar en locales
+
+#### `src/components/booking/Step2Guests.tsx` (2 lugares)
+- **Linea 81**: Tarifa campsite `$PRICING.campsitePerPersonPerNight` -- usar `formatDualPriceInt`
+- **Linea 143**: Precio por noche de tiendas `$tent.pricePerNight` -- usar `formatDualPriceInt`
+
+#### `src/components/booking/Step3Addons.tsx` (1 lugar)
+- **Lineas 16-27**: Funcion `getPriceLabel` -- cambiar a usar `formatDualPriceInt` con el addon.price
+
+#### `src/components/booking/Step4Summary.tsx` (6 lugares)
+- **Linea 234**: Campsite fee
+- **Linea 239**: Tent rental
+- **Linea 245**: Add-ons
+- **Linea 250**: Subtotal
+- **Linea 254**: Taxes
+- **Linea 258**: Total
+- Todos usan `$pricing.X.toFixed(2)` -- cambiar a `formatDualPrice(pricing.X)`
+
+#### `src/components/booking/Step5Payment.tsx` (1 lugar)
+- **Linea 81**: Total grande `$pricing.total.toFixed(2)` -- usar `formatDualPrice`
+
+#### `src/components/booking/BookingConfirmation.tsx` (1 lugar)
+- **Linea 101**: Total `$pricing.total.toFixed(2)` -- usar `formatDualPrice`
+
+---
+
+### 3. Actualizacion de cadenas en locales (6 archivos)
+
+Actualizar las claves que contienen precios en texto estatico en `es.json`, `en.json`, `fr.json`, `de.json`, `zh.json`, `ru.json`:
+
+- `accommodations.bringOwn.price`: Cambiar de `"From $25/night per person"` a `"From $25 / 12500₡ per night per person"` (y equivalentes en cada idioma)
+- `booking.step1.priceNote`: Cambiar de `"$25/person/night base rate"` a `"$25 / 12500₡ per person/night base rate"` (y equivalentes)
+
+---
+
+### Resumen de archivos tocados
+
+| Archivo | Cambio |
+|---------|--------|
+| `src/lib/priceFormat.ts` | Nuevo - funciones helper |
+| `src/components/sections/AccommodationsSection.tsx` | Precios de tiendas |
+| `src/components/booking/Step2Guests.tsx` | Tarifa campsite + tiendas |
+| `src/components/booking/Step3Addons.tsx` | Precios de add-ons |
+| `src/components/booking/Step4Summary.tsx` | Desglose de precios |
+| `src/components/booking/Step5Payment.tsx` | Total de pago |
+| `src/components/booking/BookingConfirmation.tsx` | Total en confirmacion |
+| `src/locales/*.json` (x6) | Cadenas estaticas de precios |
 
