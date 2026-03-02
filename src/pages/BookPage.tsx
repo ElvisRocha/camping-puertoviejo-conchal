@@ -48,12 +48,14 @@ const BookPage = () => {
       <Header />
       <main className="pt-32 pb-20">
         <div className="container-wide">
-          {!referenceCode && (
-            <BookingProgress currentStep={currentStep} totalSteps={4} />
-          )}
-          <AnimatePresence mode="wait">
-            {renderStep()}
-          </AnimatePresence>
+          <div className="max-w-4xl mx-auto">
+            {!referenceCode && (
+              <BookingProgress currentStep={currentStep} totalSteps={4} />
+            )}
+            <AnimatePresence mode="wait">
+              {renderStep()}
+            </AnimatePresence>
+          </div>
         </div>
       </main>
       <Footer />
