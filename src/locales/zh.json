@@ -325,7 +325,9 @@
       "checkOut": "退房",
       "clearDates": "清除日期",
       "selectCheckIn": "选择日期",
-      "selectCheckOut": "选择日期"
+      "selectCheckOut": "选择日期",
+      "datePlaceholder": "日/月/年",
+      "invalidDate": "日期无效"
     },
     "step2": {
       "title": "谁来天堂？",

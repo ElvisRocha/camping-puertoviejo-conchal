@@ -325,7 +325,9 @@
       "checkOut": "DÉPART",
       "clearDates": "Effacer les dates",
       "selectCheckIn": "Sélectionnez une date",
-      "selectCheckOut": "Sélectionnez une date"
+      "selectCheckOut": "Sélectionnez une date",
+      "datePlaceholder": "JJ/MM/AAAA",
+      "invalidDate": "Date invalide"
     },
     "step2": {
       "title": "Qui Vient au Paradis ?",

@@ -325,7 +325,9 @@
       "checkOut": "SALIDA",
       "clearDates": "Borrar fechas",
       "selectCheckIn": "Selecciona fecha",
-      "selectCheckOut": "Selecciona fecha"
+      "selectCheckOut": "Selecciona fecha",
+      "datePlaceholder": "DD/MM/AAAA",
+      "invalidDate": "Fecha inválida"
     },
     "step2": {
       "title": "¿Quién Viene al Paraíso?",
