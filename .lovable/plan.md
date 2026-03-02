@@ -1,31 +1,19 @@
 
-## Plan: Limpiar estado de reserva al salir o completar
+
+## Plan: Cambiar valor inicial de adultos a 0
 
 ### Problema
-El estado de la reserva se guarda en `localStorage` y persiste entre sesiones. Si el usuario sale del proceso sin completar, los datos (como extras seleccionados) quedan guardados y aparecen en futuras reservas.
+El estado inicial de la reserva tiene `adults: 2` por defecto. El usuario quiere que siempre inicie en 0 para que el usuario elija cuantos adultos necesita.
 
-### Solucion
+### Cambios
 
-**Archivo: `src/pages/BookPage.tsx`**
+**Archivo: `src/store/bookingStore.ts`**
+- Cambiar `adults: 2` a `adults: 0` en el objeto `initialBooking` (linea ~56)
 
-1. Llamar `resetBooking()` cuando el usuario **navega fuera** de `/book` (usando un `useEffect` con cleanup).
-2. Llamar `resetBooking()` cuando el componente se **monta** (para limpiar datos de sesiones anteriores).
-3. Despues de completar la reserva, el `resetBooking` ya se llama en `BookingConfirmation` al hacer clic en "Volver al inicio", lo cual se mantiene.
+**Archivo: `src/components/booking/Step2Guests.tsx`**
+- Cambiar el fallback `adults: 2` a `adults: 0` en la linea del guest default (linea ~15)
+- Cambiar el minimo de adultos de `1` a `0` para permitir que el campo inicie en 0
 
-### Cambios tecnicos
+### Validacion
+- El boton "Siguiente" ya esta protegido con `canContinue = totalGuests > 0`, asi que el usuario no podra avanzar sin seleccionar al menos 1 huesped.
 
-- En `BookPage.tsx`, agregar un `useEffect` que:
-  - Al montar: llame `resetBooking()` para empezar siempre con estado limpio
-  - Al desmontar (cuando el usuario navega fuera): llame `resetBooking()` para limpiar cualquier dato parcial
-
-```typescript
-useEffect(() => {
-  resetBooking();
-  return () => {
-    resetBooking();
-  };
-}, [resetBooking]);
-```
-
-### Archivos a modificar
-- `src/pages/BookPage.tsx` -- agregar useEffect para limpiar estado al entrar y salir
