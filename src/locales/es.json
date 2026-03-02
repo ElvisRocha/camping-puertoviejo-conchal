@@ -320,7 +320,12 @@
       "title": "¿Cuándo Comienza Tu Aventura?",
       "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
       "priceNote": "$25/persona/noche tarifa base",
-      "peakSeason": "Temporada alta"
+      "peakSeason": "Temporada alta",
+      "checkIn": "LLEGADA",
+      "checkOut": "SALIDA",
+      "clearDates": "Borrar fechas",
+      "selectCheckIn": "Selecciona fecha",
+      "selectCheckOut": "Selecciona fecha"
     },
     "step2": {
       "title": "¿Quién Viene al Paraíso?",

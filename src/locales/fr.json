@@ -320,7 +320,12 @@
       "title": "Quand Commence Votre Aventure ?",
       "subtitle": "Sélectionnez vos dates d'arrivée et de départ. Séjour minimum : 1 nuit.",
       "priceNote": "25€/personne/nuit tarif de base",
-      "peakSeason": "Haute saison"
+      "peakSeason": "Haute saison",
+      "checkIn": "ARRIVÉE",
+      "checkOut": "DÉPART",
+      "clearDates": "Effacer les dates",
+      "selectCheckIn": "Sélectionnez une date",
+      "selectCheckOut": "Sélectionnez une date"
     },
     "step2": {
       "title": "Qui Vient au Paradis ?",

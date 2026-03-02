@@ -1,26 +1,53 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
 import { isBefore, startOfDay } from 'date-fns';
-import { CalendarIcon, ArrowRight } from 'lucide-react';
+import { CalendarIcon, ArrowRight, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getDateLocale, getWeekStartsOn, formatLocalizedDate } from '@/lib/dateLocale';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
+
+type SelectionPhase = 'checkIn' | 'checkOut';
 
 export function Step1Dates() {
   const { t, i18n } = useTranslation();
   const { booking, setDates, nextStep } = useBookingStore();
-  
+  const isMobile = useIsMobile();
+  const [selectionPhase, setSelectionPhase] = useState<SelectionPhase>(
+    booking.checkIn ? 'checkOut' : 'checkIn'
+  );
+
   const today = startOfDay(new Date());
   const currentLocale = getDateLocale(i18n.language);
   const weekStartsOn = getWeekStartsOn(i18n.language);
-  
-  const handleSelect = (range: { from?: Date; to?: Date } | undefined) => {
-    if (range?.from && range?.to) {
-      setDates(range.from, range.to);
-    } else if (range?.from) {
-      setDates(range.from, null);
+
+  const checkInDate = booking.checkIn ? new Date(booking.checkIn) : undefined;
+  const checkOutDate = booking.checkOut ? new Date(booking.checkOut) : undefined;
+
+  const handleDayClick = (day: Date) => {
+    if (isBefore(day, today)) return;
+
+    if (selectionPhase === 'checkIn') {
+      setDates(day, null);
+      setSelectionPhase('checkOut');
+    } else {
+      // checkOut phase
+      if (checkInDate && isBefore(day, checkInDate)) {
+        // Clicked before checkIn → restart with this as new checkIn
+        setDates(day, null);
+        setSelectionPhase('checkOut');
+      } else if (checkInDate) {
+        setDates(checkInDate, day);
+      }
     }
+  };
+
+  const handleClearDates = () => {
+    setDates(null, null);
+    setSelectionPhase('checkIn');
   };
 
   const canContinue = booking.checkIn && booking.checkOut && booking.nights && booking.nights > 0;
@@ -38,21 +65,90 @@ export function Step1Dates() {
         <p className="text-forest font-semibold mt-2">{t('booking.step1.priceNote')}</p>
       </div>
 
+      {/* Date input indicators */}
+      <div className="flex justify-center gap-4 mb-2">
+        <button
+          type="button"
+          onClick={() => setSelectionPhase('checkIn')}
+          className={cn(
+            "flex-1 max-w-[200px] rounded-xl border-2 p-3 text-left transition-all",
+            selectionPhase === 'checkIn'
+              ? "border-forest bg-forest/5 shadow-sm"
+              : "border-border bg-background hover:border-forest/40"
+          )}
+        >
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {t('booking.step1.checkIn')}
+          </span>
+          <p className={cn(
+            "text-sm font-medium mt-1",
+            checkInDate ? "text-foreground" : "text-muted-foreground"
+          )}>
+            {checkInDate
+              ? formatLocalizedDate(checkInDate, 'PP', i18n.language)
+              : t('booking.step1.selectCheckIn')
+            }
+          </p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            if (checkInDate) setSelectionPhase('checkOut');
+          }}
+          className={cn(
+            "flex-1 max-w-[200px] rounded-xl border-2 p-3 text-left transition-all",
+            selectionPhase === 'checkOut'
+              ? "border-forest bg-forest/5 shadow-sm"
+              : "border-border bg-background hover:border-forest/40",
+            !checkInDate && "opacity-50 cursor-not-allowed"
+          )}
+        >
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {t('booking.step1.checkOut')}
+          </span>
+          <p className={cn(
+            "text-sm font-medium mt-1",
+            checkOutDate ? "text-foreground" : "text-muted-foreground"
+          )}>
+            {checkOutDate
+              ? formatLocalizedDate(checkOutDate, 'PP', i18n.language)
+              : t('booking.step1.selectCheckOut')
+            }
+          </p>
+        </button>
+      </div>
+
       <div className="flex justify-center">
         <div className="card-nature p-4 md:p-6 inline-block">
           <Calendar
             mode="range"
             selected={{
-              from: booking.checkIn ? new Date(booking.checkIn) : undefined,
-              to: booking.checkOut ? new Date(booking.checkOut) : undefined,
+              from: checkInDate,
+              to: checkOutDate,
             }}
-            onSelect={handleSelect}
-            numberOfMonths={2}
+            onDayClick={handleDayClick}
+            numberOfMonths={isMobile ? 1 : 2}
             disabled={(date) => isBefore(date, today)}
             locale={currentLocale}
             weekStartsOn={weekStartsOn}
             className="rounded-xl"
           />
+
+          {/* Clear dates button */}
+          {(checkInDate || checkOutDate) && (
+            <div className="flex justify-end mt-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleClearDates}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-4 h-4 mr-1" />
+                {t('booking.step1.clearDates')}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

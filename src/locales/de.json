@@ -320,7 +320,12 @@
       "title": "Wann Beginnt Ihr Abenteuer?",
       "subtitle": "Wählen Sie Ihr An- und Abreisedatum. Mindestaufenthalt: 1 Nacht.",
       "priceNote": "25€/Person/Nacht Grundpreis",
-      "peakSeason": "Hauptsaison"
+      "peakSeason": "Hauptsaison",
+      "checkIn": "ANREISE",
+      "checkOut": "ABREISE",
+      "clearDates": "Daten löschen",
+      "selectCheckIn": "Datum wählen",
+      "selectCheckOut": "Datum wählen"
     },
     "step2": {
       "title": "Wer Kommt Ins Paradies?",
