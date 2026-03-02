@@ -191,44 +191,11 @@
     "title": "Geschichten aus dem Sand",
     "subtitle": "Echte Erfahrungen von Abenteurern, die ihr Paradies bei uns gefunden haben",
     "ratingCount": "von über 200 Bewertungen",
-    "reviews": {
-      "sarah": {
-        "name": "Sarah Johnson",
-        "location": "Kalifornien, USA",
-        "text": "Aufwachen mit Brüllaffen und in Sekunden zum Strand laufen—das war das magischste Campingerlebnis meines Lebens. Das Personal war unglaublich hilfsbereit und die Lage ist absolut atemberaubend.",
-        "date": "Dez 2025"
-      },
-      "michael": {
-        "name": "Michael Chen",
-        "location": "Toronto, Kanada",
-        "text": "Wir sahen Tukane, Affen und die unglaublichsten Sonnenuntergänge. Meine Kinder reden noch Monate später davon. Perfekte Mischung aus Abenteuer und Komfort. Wir kommen definitiv wieder!",
-        "date": "Nov 2025"
-      },
-      "emma": {
-        "name": "Emma Williams",
-        "location": "London, Großbritannien",
-        "text": "Ich reiste allein und fühlte mich völlig sicher und willkommen. Die Gemeinschaft am Lagerfeuer jeden Abend war wunderbar. Ich machte Freunde aus der ganzen Welt. Wirklich lebensverändernd.",
-        "date": "Jan 2026"
-      },
-      "carlos": {
-        "name": "Carlos Mendez",
-        "location": "Mexiko-Stadt, Mexiko",
-        "text": "Die perfekte Erfahrung, um sich mit der Natur zu verbinden. Der Strand von Conchal ist ein Paradies, und ihn so nah am Camp zu haben, ließ jeden Tag wie einen Traum erscheinen.",
-        "date": "Okt 2025"
-      },
-      "lisa": {
-        "name": "Lisa Anderson",
-        "location": "Sydney, Australien",
-        "text": "Den langen Flug wert! Die Tierwelt hier ist unglaublich—wir sahen jeden Morgen Hellrote Aras. Die Mietzzelte waren überraschend komfortabel und die Einrichtungen großartig.",
-        "date": "Sep 2025"
-      },
-      "david": {
-        "name": "David Müller",
-        "location": "Berlin, Deutschland",
-        "text": "Die beste Entscheidung für unsere Flitterwochen. Romantische Sonnenuntergänge, private Strände und das fantastischste Sternegucken. Das Personal half uns, Kajak- und Schnorchelausflüge zu organisieren.",
-        "date": "Dez 2025"
-      }
-    }
+    "readMore": "Mehr lesen",
+    "close": "Schließen",
+    "prev": "Zurück",
+    "next": "Weiter",
+    "goToSlide": "Gehe zu Seite"
   },
   "location": {
     "title": "Wo Dschungel auf Ozean Trifft",

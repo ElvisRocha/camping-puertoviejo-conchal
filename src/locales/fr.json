@@ -191,44 +191,11 @@
     "title": "Histoires Depuis le Sable",
     "subtitle": "Expériences réelles d'aventuriers qui ont trouvé leur paradis avec nous",
     "ratingCount": "sur plus de 200 avis",
-    "reviews": {
-      "sarah": {
-        "name": "Sarah Johnson",
-        "location": "Californie, États-Unis",
-        "text": "Se réveiller avec les singes hurleurs et marcher jusqu'à la plage en quelques secondes—c'était l'expérience de camping la plus magique de ma vie. Le personnel était incroyablement serviable et l'emplacement est absolument magnifique.",
-        "date": "Déc 2025"
-      },
-      "michael": {
-        "name": "Michael Chen",
-        "location": "Toronto, Canada",
-        "text": "Nous avons vu des toucans, des singes et les couchers de soleil les plus incroyables. Mes enfants en parlent encore des mois après. Mélange parfait d'aventure et de confort. Nous reviendrons !",
-        "date": "Nov 2025"
-      },
-      "emma": {
-        "name": "Emma Williams",
-        "location": "Londres, Royaume-Uni",
-        "text": "J'ai voyagé seule et me suis sentie complètement en sécurité et bienvenue. La communauté autour du feu de camp chaque soir était merveilleuse. J'ai fait des amis du monde entier. Vraiment transformateur.",
-        "date": "Jan 2026"
-      },
-      "carlos": {
-        "name": "Carlos Mendez",
-        "location": "Mexico, Mexique",
-        "text": "L'expérience parfaite pour se reconnecter avec la nature. La plage de Conchal est un paradis, et l'avoir si proche du camp rendait chaque jour comme un rêve.",
-        "date": "Oct 2025"
-      },
-      "lisa": {
-        "name": "Lisa Anderson",
-        "location": "Sydney, Australie",
-        "text": "Le long vol en valait la peine ! La faune ici est incroyable—nous avons vu des aras écarlates chaque matin. Les tentes de location étaient étonnamment confortables et les équipements excellents.",
-        "date": "Sep 2025"
-      },
-      "david": {
-        "name": "David Müller",
-        "location": "Berlin, Allemagne",
-        "text": "La meilleure décision pour notre lune de miel. Couchers de soleil romantiques, plages privées et observation d'étoiles incroyable. Le personnel nous a aidés à organiser des excursions en kayak et snorkeling.",
-        "date": "Déc 2025"
-      }
-    }
+    "readMore": "Lire la suite",
+    "close": "Fermer",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "goToSlide": "Aller à la page"
   },
   "location": {
     "title": "Là Où la Jungle Rencontre l'Océan",
