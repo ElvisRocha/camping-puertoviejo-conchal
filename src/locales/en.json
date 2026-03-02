@@ -404,7 +404,7 @@
       "termsRequired": "You must agree to the Terms & Conditions to complete your booking.",
       "paymentInfo": {
         "title": "Your booking is almost ready",
-        "body1": "Your camping spot will be securely reserved once you confirm. Payment will be made directly upon arrival — no complications, no upfront charges.",
+        "body1": "Your camping spot will be securely reserved once you confirm. Payment will be made directly upon arrival. No complications, no upfront charges.",
         "body2": "We'll take care of everything to make sure you're welcomed properly. Just bring your desire to disconnect, and we'll handle the rest. We're excited to share this experience with you!"
       }
     },
