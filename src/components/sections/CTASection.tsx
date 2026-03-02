@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Lock, CreditCard, Calendar, MessageCircle } from 'lucide-react';
+import { Lock, MessageCircle } from 'lucide-react';
 
 const CTASection = () => {
   const { t } = useTranslation();
@@ -12,8 +12,6 @@ const CTASection = () => {
 
   const trustBadges = [
     { key: 'secure', icon: Lock },
-    { key: 'payment', icon: CreditCard },
-    { key: 'cancel', icon: Calendar },
     { key: 'support', icon: MessageCircle },
   ];
 
