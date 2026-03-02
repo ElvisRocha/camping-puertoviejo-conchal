@@ -1,5 +1,5 @@
 import '@/i18n';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BookingProgress } from '@/components/booking/BookingProgress';
@@ -14,8 +14,15 @@ import { useBookingStore } from '@/store/bookingStore';
 import { AnimatePresence } from 'framer-motion';
 
 const BookPage = () => {
-  const { currentStep } = useBookingStore();
+  const { currentStep, resetBooking } = useBookingStore();
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    resetBooking();
+    return () => {
+      resetBooking();
+    };
+  }, [resetBooking]);
 
   const handleBookingComplete = (code: string) => {
     setReferenceCode(code);
