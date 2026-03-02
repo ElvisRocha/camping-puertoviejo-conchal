@@ -37,7 +37,7 @@ export function BookingProgress({ currentStep, totalSteps }: BookingProgressProp
           const isClickable = isCompleted;
 
           return (
-            <div key={step.number} className="flex items-center flex-1">
+            <div key={step.number} className={cn("flex items-center", index < totalSteps - 1 && "flex-1")}>
               <div className="flex flex-col items-center">
                 <button
                   type="button"
