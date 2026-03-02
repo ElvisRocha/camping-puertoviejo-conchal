@@ -1,59 +1,65 @@
 
 
-## Plan: Selector de fechas estilo Airbnb
+## Plan: Inputs de fecha editables estilo Airbnb
 
 ### Resumen
 
-Reemplazar el calendario actual (react-day-picker basico) con un selector de fechas inspirado en Airbnb, manteniendo el look and feel del proyecto. Las mejoras clave son:
+Reemplazar los botones de LLEGADA/SALIDA actuales (que solo muestran texto) por inputs de texto editables con formato `DD/MM/YYYY`, permitiendo escritura manual de fechas, borrado individual con un boton X, y validacion en tiempo real. Mantener la interaccion con el calendario sincronizada.
 
-1. **Inputs de fecha visibles** - Campos "LLEGADA" y "SALIDA" arriba del calendario (como en la imagen de Airbnb) que muestran la fecha seleccionada y permiten saber cual campo se esta editando
-2. **Seleccion en 2 pasos** - Primero click = check-in, segundo click = check-out (UX de Airbnb)
-3. **Boton "Borrar fechas"** para resetear la seleccion
-4. **1 mes en mobile, 2 meses en desktop** - Responsive
-5. **Highlight visual del rango** con circulos en las fechas de inicio/fin y fondo suave en los dias intermedios
-6. **Celdas mas grandes** - Dias de 40px para mejor usabilidad tactil
+---
 
-### No se cambia
+### Comportamiento objetivo (como Airbnb)
 
-- Colores (forest green, sand, cream)
-- Tipografia
-- Estructura de la pagina (titulo, subtitulo, precio, boton siguiente)
-- La barra de resumen de fechas inferior
+1. **Inputs editables** - El usuario puede escribir una fecha manualmente en formato `DD/MM/YYYY`
+2. **Placeholder con formato** - Cuando esta vacio, muestra `DD/MM/YYYY` como placeholder
+3. **Boton X individual** - Cada input tiene un icono X para borrar solo esa fecha
+4. **Borde activo** - El input seleccionado tiene borde destacado (forest)
+5. **Validacion al escribir** - Solo acepta numeros y `/`, auto-formatea mientras se escribe (agrega `/` automaticamente despues de DD y MM)
+6. **Validacion al confirmar** - Al hacer blur o presionar Enter, valida que la fecha sea real y no este en el pasado
+7. **Sincronizacion bidireccional** - Escribir una fecha valida actualiza el calendario, y clickear en el calendario actualiza el input
+8. **Click en input = focus** - Al clickear LLEGADA se activa selectionPhase checkIn, al clickear SALIDA se activa checkOut
 
 ---
 
 ### Cambios por archivo
 
 #### 1. `src/components/booking/Step1Dates.tsx`
-- Agregar estado `selectionPhase`: "checkIn" | "checkOut" para trackear que fecha se esta seleccionando
-- Agregar inputs de fecha "LLEGADA" / "SALIDA" arriba del calendario con labels traducidos
-- El input activo tendra un borde highlight (border-forest)
-- Click en un input cambia el selectionPhase
-- Agregar boton "Borrar fechas" / "Clear dates" abajo del calendario
-- Usar `useMediaQuery` o window width para mostrar 1 o 2 meses
-- Logica de seleccion Airbnb:
-  - Si selectionPhase es "checkIn": el click setea checkIn y cambia a "checkOut"
-  - Si selectionPhase es "checkOut": si la fecha es posterior a checkIn, setea checkOut; si es anterior, resetea y empieza de nuevo como checkIn
 
-#### 2. `src/components/ui/calendar.tsx`
-- Aumentar tamano de celdas de `w-9 h-9` a `w-10 h-10` (40px) para mejor touch target
-- Mejorar estilos del rango seleccionado: circulos llenos en start/end, fondo suave en middle
-- Usar colores del proyecto (bg-forest para selected, bg-forest/10 para range middle)
+Reemplazar los dos `<button>` (lineas 70-119) por inputs de texto con la siguiente logica:
 
-#### 3. Locale files (`es.json`, `en.json`, `fr.json`, `de.json`, `zh.json`, `ru.json`)
-- Agregar claves:
-  - `booking.step1.checkIn`: "LLEGADA" / "CHECK-IN" / etc.
-  - `booking.step1.checkOut`: "SALIDA" / "CHECK-OUT" / etc.
-  - `booking.step1.clearDates`: "Borrar fechas" / "Clear dates" / etc.
-  - `booking.step1.selectCheckIn`: "Selecciona llegada" / "Select check-in" / etc.
-  - `booking.step1.selectCheckOut`: "Selecciona salida" / "Select check-out" / etc.
+- **Nuevo estado**: `checkInText` y `checkOutText` (strings que representan lo que el usuario escribe)
+- **Funcion `formatDateInput(value)`**: Auto-inserta `/` despues de posicion 2 y 5 (DD/MM/YYYY), filtra caracteres no numericos
+- **Funcion `parseDateInput(text)`**: Convierte `DD/MM/YYYY` a objeto Date, retorna null si invalida
+- **Funcion `validateAndApply(phase, text)`**: Al blur/Enter, parsea la fecha, valida que no sea pasada, valida que checkOut > checkIn, y llama a `setDates()`
+- **Sincronizacion**: Cuando el usuario clickea en el calendario, tambien actualiza `checkInText`/`checkOutText` con la fecha formateada
+- **Boton X**: Dentro de cada input wrapper, un icono X que borra esa fecha individual (si se borra checkIn, tambien se borra checkOut)
+- **Layout**: Cada input sera un `<div>` con label arriba, `<input>` con placeholder `DD/MM/YYYY`, y boton X a la derecha
+
+Estructura del input:
+```
++---------------------------+
+| LLEGADA              [X]  |
+| DD/MM/YYYY                |
++---------------------------+
+```
+
+- El `<input>` tendra `maxLength={10}`, `inputMode="numeric"`, `pattern="[0-9/]*"`
+- Al hacer focus en un input, se cambia `selectionPhase` automaticamente
+- Se mantiene el boton "Borrar fechas" general abajo del calendario
+
+#### 2. Locale files (todos)
+
+Agregar clave:
+- `booking.step1.datePlaceholder`: `"DD/MM/YYYY"`
+- `booking.step1.invalidDate`: `"Fecha invalida"` (para mostrar error visual si la fecha escrita no es valida)
 
 ---
 
 ### Detalles tecnicos
 
-- Se reutiliza el componente `Calendar` existente (react-day-picker) sin reemplazarlo -- solo se ajustan estilos y se mejora la logica de seleccion en Step1Dates
-- La deteccion de mobile para numberOfMonths usa el hook `use-mobile` que ya existe en el proyecto
-- El selectionPhase permite que al hacer click en el input de "LLEGADA" se pueda re-seleccionar la fecha de inicio sin perder contexto
-- Se mantiene la validacion existente: no permitir fechas pasadas, minimo 1 noche
+- El auto-formato funciona asi: al escribir "19" automaticamente se convierte a "19/", al escribir "1903" se convierte a "19/03/", hasta llegar a "19/03/2026"
+- Al borrar con backspace, se respeta la posicion del cursor y se eliminan los `/` automaticos
+- La validacion usa `parse` de date-fns para convertir el string a Date con formato `dd/MM/yyyy`
+- Si la fecha parseada es invalida o esta en el pasado, el input muestra un borde rojo momentaneo y revierte al valor anterior
+- `useEffect` sincroniza `checkInText`/`checkOutText` cuando `booking.checkIn`/`booking.checkOut` cambian (por clicks en calendario)
 
