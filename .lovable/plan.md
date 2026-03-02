@@ -1,41 +1,31 @@
 
-
-## Plan: Corregir layout de tiendas en mobile
+## Plan: Limpiar estado de reserva al salir o completar
 
 ### Problema
-En pantallas pequenas, la tarjeta de tienda usa un layout horizontal (imagen + contenido lado a lado) con el precio en la misma fila que el nombre. Esto causa que el precio se desborde del contenedor.
+El estado de la reserva se guarda en `localStorage` y persiste entre sesiones. Si el usuario sale del proceso sin completar, los datos (como extras seleccionados) quedan guardados y aparecen en futuras reservas.
 
 ### Solucion
 
-**Archivo: `src/components/booking/Step2Guests.tsx`** (lineas 130-146)
+**Archivo: `src/pages/BookPage.tsx`**
 
-1. **Cambiar el layout de la tarjeta a vertical en mobile**: La imagen y el contenido se apilaran verticalmente en pantallas pequenas y se mantendran horizontales en pantallas grandes usando `flex-col sm:flex-row`.
-
-2. **Mover el precio debajo del nombre en mobile**: En vez de poner nombre y precio en la misma fila con `justify-between`, el precio ira debajo del nombre en mobile y al lado en pantallas mas grandes, usando `flex-col sm:flex-row sm:justify-between`.
-
-3. **Hacer la imagen responsiva**: Cambiar de tamano fijo `w-24 h-24` a `w-full h-40 sm:w-24 sm:h-24` para que en mobile ocupe todo el ancho.
+1. Llamar `resetBooking()` cuando el usuario **navega fuera** de `/book` (usando un `useEffect` con cleanup).
+2. Llamar `resetBooking()` cuando el componente se **monta** (para limpiar datos de sesiones anteriores).
+3. Despues de completar la reserva, el `resetBooking` ya se llama en `BookingConfirmation` al hacer clic en "Volver al inicio", lo cual se mantiene.
 
 ### Cambios tecnicos
 
-```text
-Antes (linea 130):
-  <div className="flex gap-4">
-    <img className="w-24 h-24 ..."/>
-    <div className="flex-1">
-      <div className="flex items-start justify-between">
-        <div>nombre</div>
-        <p>precio</p>   <-- se desborda
-      </div>
+- En `BookPage.tsx`, agregar un `useEffect` que:
+  - Al montar: llame `resetBooking()` para empezar siempre con estado limpio
+  - Al desmontar (cuando el usuario navega fuera): llame `resetBooking()` para limpiar cualquier dato parcial
 
-Despues:
-  <div className="flex flex-col sm:flex-row gap-4">
-    <img className="w-full h-40 sm:w-24 sm:h-24 ..."/>
-    <div className="flex-1 min-w-0">
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-        <div>nombre</div>
-        <p className="text-left sm:text-right">precio</p>
-      </div>
+```typescript
+useEffect(() => {
+  resetBooking();
+  return () => {
+    resetBooking();
+  };
+}, [resetBooking]);
 ```
 
 ### Archivos a modificar
-- `src/components/booking/Step2Guests.tsx` -- layout responsivo de tarjetas de tienda
+- `src/pages/BookPage.tsx` -- agregar useEffect para limpiar estado al entrar y salir
