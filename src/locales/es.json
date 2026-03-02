@@ -340,7 +340,8 @@
       "bringOwn": "Traigo mi propia tienda",
       "bringOwnNote": "Solo aplica tarifa de sitio",
       "campsiteRate": "Sitio",
-      "sleeps": "Capacidad"
+      "sleeps": "Capacidad",
+      "soldOut": "Agotado"
     },
     "step3": {
       "title": "Hazlo Inolvidable",

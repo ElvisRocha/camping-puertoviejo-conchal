@@ -340,7 +340,8 @@
       "bringOwn": "我带自己的帐篷",
       "bringOwnNote": "仅收取营位费",
       "campsiteRate": "营位",
-      "sleeps": "容量"
+      "sleeps": "容量",
+      "soldOut": "已售罄"
     },
     "step3": {
       "title": "让它难忘",
