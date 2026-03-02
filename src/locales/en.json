@@ -1,5 +1,5 @@
 {
-"nav": {
+  "nav": {
     "home": "Home",
     "experience": "Experience",
     "accommodations": "Accommodations",
@@ -168,23 +168,62 @@
   "amenities": {
     "title": "Rustic Charm, Real Comfort",
     "intro": "Camping doesn't mean sacrificing comfort. We've thought of everything so you can focus on what matters: disconnecting from the noise and reconnecting with nature.",
-    "showers": { "title": "Hot Showers", "text": "Start your day refreshed with solar-heated showers overlooking the jungle" },
-    "restrooms": { "title": "Clean Restrooms", "text": "Well-maintained facilities cleaned multiple times daily" },
-    "campfire": { "title": "Campfire Pits", "text": "Designated fire areas with seating—marshmallows optional but recommended" },
-    "parking": { "title": "Secure Parking", "text": "Safe, monitored parking for your rental car or motorcycle" },
-    "wifi": { "title": "Wi-Fi Zones", "text": "Need to post that sunset? Connectivity when you need it, nature when you don't" },
-    "cooking": { "title": "Cooking Areas", "text": "Shared kitchen spaces with grills and prep stations" },
-    "security": { "title": "24/7 Security", "text": "Rest easy knowing our team watches over the camp around the clock" },
-    "tours": { "title": "Tour Desk", "text": "Book adventures, get local tips, and discover hidden gems" }
+    "showers": {
+      "title": "Hot Showers",
+      "text": "Start your day refreshed with solar-heated showers overlooking the jungle"
+    },
+    "restrooms": {
+      "title": "Clean Restrooms",
+      "text": "Well-maintained facilities cleaned multiple times daily"
+    },
+    "campfire": {
+      "title": "Campfire Pits",
+      "text": "Designated fire areas with seating—marshmallows optional but recommended"
+    },
+    "parking": {
+      "title": "Secure Parking",
+      "text": "Safe, monitored parking for your rental car or motorcycle"
+    },
+    "wifi": {
+      "title": "Wi-Fi Zones",
+      "text": "Need to post that sunset? Connectivity when you need it, nature when you don't"
+    },
+    "cooking": {
+      "title": "Cooking Areas",
+      "text": "Shared kitchen spaces with grills and prep stations"
+    },
+    "security": {
+      "title": "24/7 Security",
+      "text": "Rest easy knowing our team watches over the camp around the clock"
+    },
+    "tours": {
+      "title": "Tour Desk",
+      "text": "Book adventures, get local tips, and discover hidden gems"
+    }
   },
   "wildlife": {
     "title": "Meet the Locals",
     "intro": "Our camp isn't just near nature—it's immersed in it. The wildlife here isn't caged or staged. These animals live here, and if you're patient and respectful, they'll share their world with you.",
-    "howler": { "name": "Howler Monkeys", "text": "Your natural alarm clock. These gentle giants move through the canopy at dawn and dusk, their incredible calls echoing through the forest. Spot whole families grooming and playing in the trees above camp." },
-    "macaw": { "name": "Scarlet Macaws", "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable—and unforgettable." },
-    "toucan": { "name": "Keel-Billed Toucans", "text": "The rainbow-beaked icons of the tropics. Watch them hop between branches searching for fruit, their oversized bills making them impossible to miss." },
-    "capuchin": { "name": "White-Faced Capuchins", "text": "The curious ones. These intelligent monkeys might investigate your campsite from a safe distance, their expressive faces showing endless curiosity about their human visitors." },
-    "iguana": { "name": "Iguanas & More", "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups—every walk reveals new neighbors." },
+    "howler": {
+      "name": "Howler Monkeys",
+      "text": "Your natural alarm clock. These gentle giants move through the canopy at dawn and dusk, their incredible calls echoing through the forest. Spot whole families grooming and playing in the trees above camp."
+    },
+    "macaw": {
+      "name": "Scarlet Macaws",
+      "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable—and unforgettable."
+    },
+    "toucan": {
+      "name": "Keel-Billed Toucans",
+      "text": "The rainbow-beaked icons of the tropics. Watch them hop between branches searching for fruit, their oversized bills making them impossible to miss."
+    },
+    "capuchin": {
+      "name": "White-Faced Capuchins",
+      "text": "The curious ones. These intelligent monkeys might investigate your campsite from a safe distance, their expressive faces showing endless curiosity about their human visitors."
+    },
+    "iguana": {
+      "name": "Iguanas & More",
+      "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups—every walk reveals new neighbors."
+    },
     "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals—they thrive best on their natural diet, and your respect helps keep them wild."
   },
   "testimonials": {
@@ -326,7 +365,20 @@
         "country": "Country of residence",
         "arrivalTime": "Estimated arrival time",
         "specialRequests": "Special requests / dietary restrictions",
-        "celebrating": "Celebrating something special?"
+        "celebrating": "Celebrating something special?",
+        "fullNamePlaceholder": "e.g. John Doe",
+        "emailPlaceholder": "john@example.com",
+        "phonePlaceholder": "+1 555-123-4567",
+        "countryPlaceholder": "Select your country",
+        "arrivalTimePlaceholder": "e.g. 3:00 PM",
+        "specialRequestsPlaceholder": "Any dietary restrictions, allergies, or special requests...",
+        "celebratingPlaceholder": "Birthday, anniversary, honeymoon...",
+        "errors": {
+          "nameRequired": "Name is required",
+          "invalidEmail": "Invalid email address",
+          "phoneRequired": "Phone is required",
+          "countryRequired": "Country is required"
+        }
       }
     },
     "step5": {
@@ -340,7 +392,16 @@
       "cancellationPolicy": "Free cancellation up to 48 hours before check-in for a full refund. Cancellations within 48 hours receive 50% refund. No-shows are non-refundable.",
       "completeBooking": "Complete Booking",
       "secureNote": "256-bit SSL Encryption",
-      "trustedBy": "Trusted by 2,000+ happy campers"
+      "trustedBy": "Trusted by 2,000+ happy campers",
+      "totalToPay": "Total to pay",
+      "includingTaxes": "USD, including taxes",
+      "processing": "Processing...",
+      "toastSuccessTitle": "Booking Confirmed! 🎉",
+      "toastSuccessDescription": "Your reference code is {{code}}",
+      "toastErrorTitle": "Booking Failed",
+      "toastErrorDescription": "There was an error processing your booking. Please try again.",
+      "termsRequiredTitle": "Terms required",
+      "termsRequired": "You must agree to the Terms & Conditions to complete your booking."
     },
     "confirmation": {
       "title": "🎉 You Did It! Paradise Awaits!",
@@ -372,10 +433,25 @@
     }
   },
   "addons": {
-    "breakfast": { "name": "Breakfast Package", "description": "Fresh tropical fruits, gallo pinto, eggs, Costa Rican coffee. Fuel up for adventure." },
-    "kayak": { "name": "Sunrise Kayak Tour", "description": "Paddle through calm morning waters as the jungle wakes up. 2 hours of magic." },
-    "wildlife": { "name": "Guided Wildlife Walk", "description": "Expert naturalist guide reveals hidden wildlife and shares jungle secrets. 2.5 hours." },
-    "bonfire": { "name": "Bonfire Kit", "description": "Firewood, marshmallows, chocolate, crackers. Everything for the perfect campfire night." },
-    "snorkel": { "name": "Snorkel Gear Rental", "description": "Mask, snorkel, fins. Explore the underwater world at your own pace." }
+    "breakfast": {
+      "name": "Breakfast Package",
+      "description": "Fresh tropical fruits, gallo pinto, eggs, Costa Rican coffee. Fuel up for adventure."
+    },
+    "kayak": {
+      "name": "Sunrise Kayak Tour",
+      "description": "Paddle through calm morning waters as the jungle wakes up. 2 hours of magic."
+    },
+    "wildlife": {
+      "name": "Guided Wildlife Walk",
+      "description": "Expert naturalist guide reveals hidden wildlife and shares jungle secrets. 2.5 hours."
+    },
+    "bonfire": {
+      "name": "Bonfire Kit",
+      "description": "Firewood, marshmallows, chocolate, crackers. Everything for the perfect campfire night."
+    },
+    "snorkel": {
+      "name": "Snorkel Gear Rental",
+      "description": "Mask, snorkel, fins. Explore the underwater world at your own pace."
+    }
   }
 }

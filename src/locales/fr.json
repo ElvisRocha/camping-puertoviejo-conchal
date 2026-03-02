@@ -168,23 +168,62 @@
   "amenities": {
     "title": "Charme Rustique, Vrai Confort",
     "intro": "Camper ne signifie pas sacrifier le confort. Nous avons pensé à tout pour que vous puissiez vous concentrer sur l'essentiel : vous déconnecter du bruit et vous reconnecter à la nature.",
-    "showers": { "title": "Douches Chaudes", "text": "Commencez votre journée rafraîchi avec des douches chauffées au soleil avec vue sur la jungle" },
-    "restrooms": { "title": "Toilettes Propres", "text": "Installations bien entretenues nettoyées plusieurs fois par jour" },
-    "campfire": { "title": "Feux de Camp", "text": "Zones désignées avec sièges—guimauves optionnelles mais recommandées" },
-    "parking": { "title": "Parking Sécurisé", "text": "Parking sûr et surveillé pour votre voiture ou moto de location" },
-    "wifi": { "title": "Zones Wi-Fi", "text": "Besoin de poster ce coucher de soleil ? Connectivité quand vous en avez besoin, nature quand vous n'en avez pas" },
-    "cooking": { "title": "Espaces Cuisine", "text": "Cuisines partagées avec grills et plans de travail" },
-    "security": { "title": "Sécurité 24/7", "text": "Dormez tranquille sachant que notre équipe veille sur le camp en permanence" },
-    "tours": { "title": "Bureau des Excursions", "text": "Réservez des aventures, obtenez des conseils locaux et découvrez des trésors cachés" }
+    "showers": {
+      "title": "Douches Chaudes",
+      "text": "Commencez votre journée rafraîchi avec des douches chauffées au soleil avec vue sur la jungle"
+    },
+    "restrooms": {
+      "title": "Toilettes Propres",
+      "text": "Installations bien entretenues nettoyées plusieurs fois par jour"
+    },
+    "campfire": {
+      "title": "Feux de Camp",
+      "text": "Zones désignées avec sièges—guimauves optionnelles mais recommandées"
+    },
+    "parking": {
+      "title": "Parking Sécurisé",
+      "text": "Parking sûr et surveillé pour votre voiture ou moto de location"
+    },
+    "wifi": {
+      "title": "Zones Wi-Fi",
+      "text": "Besoin de poster ce coucher de soleil ? Connectivité quand vous en avez besoin, nature quand vous n'en avez pas"
+    },
+    "cooking": {
+      "title": "Espaces Cuisine",
+      "text": "Cuisines partagées avec grills et plans de travail"
+    },
+    "security": {
+      "title": "Sécurité 24/7",
+      "text": "Dormez tranquille sachant que notre équipe veille sur le camp en permanence"
+    },
+    "tours": {
+      "title": "Bureau des Excursions",
+      "text": "Réservez des aventures, obtenez des conseils locaux et découvrez des trésors cachés"
+    }
   },
   "wildlife": {
     "title": "Rencontrez les Locaux",
     "intro": "Notre camp n'est pas seulement près de la nature—il y est immergé. La faune ici n'est ni en cage ni mise en scène. Ces animaux vivent ici, et si vous êtes patient et respectueux, ils partageront leur monde avec vous.",
-    "howler": { "name": "Singes Hurleurs", "text": "Votre réveil naturel. Ces gentils géants se déplacent dans la canopée à l'aube et au crépuscule, leurs appels incroyables résonnant à travers la forêt. Observez des familles entières se toiletter et jouer dans les arbres au-dessus du camp." },
-    "macaw": { "name": "Aras Écarlates", "text": "Les résidents les plus éblouissants du Costa Rica. Ces perroquets brillants rouges, jaunes et bleus volent en couples au-dessus de la plage au lever et au coucher du soleil. Leurs appels sont incomparables—et inoubliables." },
-    "toucan": { "name": "Toucans à Carène", "text": "Les icônes au bec arc-en-ciel des tropiques. Regardez-les sauter de branche en branche à la recherche de fruits, leur bec surdimensionné les rendant impossibles à manquer." },
-    "capuchin": { "name": "Capucins à Face Blanche", "text": "Les curieux. Ces singes intelligents pourraient enquêter sur votre campement à distance de sécurité, leurs visages expressifs montrant une curiosité infinie envers leurs visiteurs humains." },
-    "iguana": { "name": "Iguanes et Plus", "text": "Iguanes verts se dorant au soleil sur les branches, lézards Jésus-Christ courant sur l'eau, coatis fouillant en groupes—chaque promenade révèle de nouveaux voisins." },
+    "howler": {
+      "name": "Singes Hurleurs",
+      "text": "Votre réveil naturel. Ces gentils géants se déplacent dans la canopée à l'aube et au crépuscule, leurs appels incroyables résonnant à travers la forêt. Observez des familles entières se toiletter et jouer dans les arbres au-dessus du camp."
+    },
+    "macaw": {
+      "name": "Aras Écarlates",
+      "text": "Les résidents les plus éblouissants du Costa Rica. Ces perroquets brillants rouges, jaunes et bleus volent en couples au-dessus de la plage au lever et au coucher du soleil. Leurs appels sont incomparables—et inoubliables."
+    },
+    "toucan": {
+      "name": "Toucans à Carène",
+      "text": "Les icônes au bec arc-en-ciel des tropiques. Regardez-les sauter de branche en branche à la recherche de fruits, leur bec surdimensionné les rendant impossibles à manquer."
+    },
+    "capuchin": {
+      "name": "Capucins à Face Blanche",
+      "text": "Les curieux. Ces singes intelligents pourraient enquêter sur votre campement à distance de sécurité, leurs visages expressifs montrant une curiosité infinie envers leurs visiteurs humains."
+    },
+    "iguana": {
+      "name": "Iguanes et Plus",
+      "text": "Iguanes verts se dorant au soleil sur les branches, lézards Jésus-Christ courant sur l'eau, coatis fouillant en groupes—chaque promenade révèle de nouveaux voisins."
+    },
     "note": "Important : Nous pratiquons une interaction responsable avec la faune. Veuillez ne pas nourrir les animaux—ils prospèrent mieux avec leur régime naturel, et votre respect aide à les garder sauvages."
   },
   "testimonials": {
@@ -326,7 +365,20 @@
         "country": "Pays de résidence",
         "arrivalTime": "Heure d'arrivée estimée",
         "specialRequests": "Demandes spéciales / restrictions alimentaires",
-        "celebrating": "Vous célébrez quelque chose de spécial ?"
+        "celebrating": "Vous célébrez quelque chose de spécial ?",
+        "fullNamePlaceholder": "ex. Jean Dupont",
+        "emailPlaceholder": "jean@exemple.com",
+        "phonePlaceholder": "+33 6 12 34 56 78",
+        "countryPlaceholder": "Sélectionnez votre pays",
+        "arrivalTimePlaceholder": "ex. 15h00",
+        "specialRequestsPlaceholder": "Restrictions alimentaires, allergies ou demandes spéciales...",
+        "celebratingPlaceholder": "Anniversaire, mariage, lune de miel...",
+        "errors": {
+          "nameRequired": "Le nom est requis",
+          "invalidEmail": "Adresse e-mail invalide",
+          "phoneRequired": "Le téléphone est requis",
+          "countryRequired": "Le pays est requis"
+        }
       }
     },
     "step5": {
@@ -340,7 +392,16 @@
       "cancellationPolicy": "Annulation gratuite jusqu'à 48 heures avant l'arrivée pour un remboursement complet. Annulations dans les 48 heures : remboursement de 50%. Les no-shows ne sont pas remboursables.",
       "completeBooking": "Finaliser la Réservation",
       "secureNote": "Cryptage SSL 256 bits",
-      "trustedBy": "Approuvé par plus de 2 000 campeurs heureux"
+      "trustedBy": "Approuvé par plus de 2 000 campeurs heureux",
+      "totalToPay": "Total à payer",
+      "includingTaxes": "USD, taxes incluses",
+      "processing": "Traitement en cours...",
+      "toastSuccessTitle": "Réservation confirmée ! 🎉",
+      "toastSuccessDescription": "Votre code de référence est {{code}}",
+      "toastErrorTitle": "Échec de la réservation",
+      "toastErrorDescription": "Une erreur s'est produite lors du traitement. Veuillez réessayer.",
+      "termsRequiredTitle": "Conditions requises",
+      "termsRequired": "Vous devez accepter les Conditions générales pour finaliser votre réservation."
     },
     "confirmation": {
       "title": "🎉 Vous l'Avez Fait ! Le Paradis Vous Attend !",
@@ -372,10 +433,25 @@
     }
   },
   "addons": {
-    "breakfast": { "name": "Forfait Petit-Déjeuner", "description": "Fruits tropicaux frais, gallo pinto, œufs, café costaricain. De l'énergie pour l'aventure." },
-    "kayak": { "name": "Tour Kayak au Lever du Soleil", "description": "Pagayez sur des eaux calmes du matin pendant que la jungle s'éveille. 2 heures de magie." },
-    "wildlife": { "name": "Randonnée Guidée Faune", "description": "Guide naturaliste expert révèle la faune cachée et partage les secrets de la jungle. 2h30." },
-    "bonfire": { "name": "Kit Feu de Camp", "description": "Bois, guimauves, chocolat, crackers. Tout pour la soirée feu de camp parfaite." },
-    "snorkel": { "name": "Location Équipement Snorkeling", "description": "Masque, tuba, palmes. Explorez le monde sous-marin à votre rythme." }
+    "breakfast": {
+      "name": "Forfait Petit-Déjeuner",
+      "description": "Fruits tropicaux frais, gallo pinto, œufs, café costaricain. De l'énergie pour l'aventure."
+    },
+    "kayak": {
+      "name": "Tour Kayak au Lever du Soleil",
+      "description": "Pagayez sur des eaux calmes du matin pendant que la jungle s'éveille. 2 heures de magie."
+    },
+    "wildlife": {
+      "name": "Randonnée Guidée Faune",
+      "description": "Guide naturaliste expert révèle la faune cachée et partage les secrets de la jungle. 2h30."
+    },
+    "bonfire": {
+      "name": "Kit Feu de Camp",
+      "description": "Bois, guimauves, chocolat, crackers. Tout pour la soirée feu de camp parfaite."
+    },
+    "snorkel": {
+      "name": "Location Équipement Snorkeling",
+      "description": "Masque, tuba, palmes. Explorez le monde sous-marin à votre rythme."
+    }
   }
 }

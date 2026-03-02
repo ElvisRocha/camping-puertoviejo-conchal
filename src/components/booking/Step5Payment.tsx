@@ -28,8 +28,8 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   const handleCompleteBooking = async () => {
     if (!agreedToTerms) {
       toast({
-        title: 'Please agree to terms',
-        description: 'You must agree to the Terms & Conditions to complete your booking.',
+        title: t('booking.step5.termsRequiredTitle'),
+        description: t('booking.step5.termsRequired'),
         variant: 'destructive',
       });
       return;
@@ -48,16 +48,16 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       }
 
       toast({
-        title: 'Booking Confirmed! 🎉',
-        description: `Your reference code is ${referenceCode}`,
+        title: t('booking.step5.toastSuccessTitle'),
+        description: t('booking.step5.toastSuccessDescription', { code: referenceCode }),
       });
 
       onComplete(referenceCode);
     } catch (error) {
       console.error('Booking error:', error);
       toast({
-        title: 'Booking Failed',
-        description: 'There was an error processing your booking. Please try again.',
+        title: t('booking.step5.toastErrorTitle'),
+        description: t('booking.step5.toastErrorDescription'),
         variant: 'destructive',
       });
     } finally {
@@ -79,9 +79,9 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
 
       {/* Total */}
       <div className="card-nature p-6 text-center">
-        <p className="text-muted-foreground mb-1">Total to pay</p>
+        <p className="text-muted-foreground mb-1">{t('booking.step5.totalToPay')}</p>
         <p className="text-4xl font-bold text-forest">${pricing.total.toFixed(2)}</p>
-        <p className="text-sm text-muted-foreground mt-1">USD, including taxes</p>
+        <p className="text-sm text-muted-foreground mt-1">{t('booking.step5.includingTaxes')}</p>
       </div>
 
       {/* Payment Method */}
@@ -177,7 +177,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         {isProcessing ? (
           <>
             <Loader2 className="mr-2 w-5 h-5 animate-spin" />
-            Processing...
+            {t('booking.step5.processing')}
           </>
         ) : (
           <>

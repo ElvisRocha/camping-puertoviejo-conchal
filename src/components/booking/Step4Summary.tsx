@@ -11,15 +11,15 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { formatLocalizedDate } from '@/lib/dateLocale';
 
-const guestInfoSchema = z.object({
-  fullName: z.string().min(2, 'Name is required').max(100),
-  email: z.string().email('Invalid email address').max(255),
-  phone: z.string().min(5, 'Phone is required').max(30),
-  country: z.string().min(1, 'Country is required'),
-});
-
 export function Step4Summary() {
   const { t, i18n } = useTranslation();
+
+  const guestInfoSchema = z.object({
+    fullName: z.string().min(2, t('booking.step4.guestInfo.errors.nameRequired')).max(100),
+    email: z.string().email(t('booking.step4.guestInfo.errors.invalidEmail')).max(255),
+    phone: z.string().min(5, t('booking.step4.guestInfo.errors.phoneRequired')).max(30),
+    country: z.string().min(1, t('booking.step4.guestInfo.errors.countryRequired')),
+  });
   const { booking, calculatePricing, setGuestInfo, prevStep, nextStep } = useBookingStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -183,7 +183,7 @@ export function Step4Summary() {
               <Input
                 value={guestInfo.fullName || ''}
                 onChange={(e) => handleInputChange('fullName', e.target.value)}
-                placeholder="John Doe"
+                placeholder={t('booking.step4.guestInfo.fullNamePlaceholder')}
                 className={errors.fullName ? 'border-destructive' : ''}
               />
               {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName}</p>}
@@ -195,7 +195,7 @@ export function Step4Summary() {
                 type="email"
                 value={guestInfo.email || ''}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder="john@example.com"
+                placeholder={t('booking.step4.guestInfo.emailPlaceholder')}
                 className={errors.email ? 'border-destructive' : ''}
               />
               {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
@@ -206,7 +206,7 @@ export function Step4Summary() {
               <Input
                 value={guestInfo.phone || ''}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
-                placeholder="+1 555-123-4567"
+                placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
                 className={errors.phone ? 'border-destructive' : ''}
               />
               {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
@@ -219,7 +219,7 @@ export function Step4Summary() {
                 onValueChange={(value) => handleInputChange('country', value)}
               >
                 <SelectTrigger className={errors.country ? 'border-destructive' : ''}>
-                  <SelectValue placeholder="Select country" />
+                  <SelectValue placeholder={t('booking.step4.guestInfo.countryPlaceholder')} />
                 </SelectTrigger>
                 <SelectContent>
                   {COUNTRIES.map(country => (
@@ -235,7 +235,7 @@ export function Step4Summary() {
               <Input
                 value={guestInfo.arrivalTime || ''}
                 onChange={(e) => handleInputChange('arrivalTime', e.target.value)}
-                placeholder="e.g. 3:00 PM"
+                placeholder={t('booking.step4.guestInfo.arrivalTimePlaceholder')}
               />
             </div>
 
@@ -244,7 +244,7 @@ export function Step4Summary() {
               <Textarea
                 value={guestInfo.specialRequests || ''}
                 onChange={(e) => handleInputChange('specialRequests', e.target.value)}
-                placeholder="Any dietary restrictions, allergies, or special requests..."
+                placeholder={t('booking.step4.guestInfo.specialRequestsPlaceholder')}
                 rows={3}
               />
             </div>
@@ -254,7 +254,7 @@ export function Step4Summary() {
               <Input
                 value={guestInfo.celebratingOccasion || ''}
                 onChange={(e) => handleInputChange('celebratingOccasion', e.target.value)}
-                placeholder="Birthday, anniversary, honeymoon..."
+                placeholder={t('booking.step4.guestInfo.celebratingPlaceholder')}
               />
             </div>
           </div>
