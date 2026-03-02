@@ -127,7 +127,7 @@ export function Step2Guests() {
                   isSoldOut && 'opacity-60 pointer-events-none'
                 )}
               >
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                   <img
                     src={tent.image}
                     alt={t(tent.nameKey)}
@@ -135,15 +135,15 @@ export function Step2Guests() {
                     height="96"
                     loading="lazy"
                     decoding="async"
-                    className="w-24 h-24 object-cover rounded-lg"
+                    className="w-full h-40 sm:w-24 sm:h-24 object-cover rounded-lg"
                   />
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
                       <div>
                         <h4 className="font-semibold">{tent.icon} {t(tent.nameKey)}</h4>
                         <p className="text-sm text-muted-foreground">{t('booking.step2.sleeps')} {tent.capacity}</p>
                       </div>
-                      <p className="font-bold text-forest">{formatDualPriceInt(tent.pricePerNight)} {t('accommodations.perNight')}</p>
+                      <p className="font-bold text-forest text-left sm:text-right">{formatDualPriceInt(tent.pricePerNight)} {t('accommodations.perNight')}</p>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">{t(tent.descriptionKey)}</p>
                     <div className="flex items-center gap-3 mt-3">
