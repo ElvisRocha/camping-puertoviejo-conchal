@@ -1,39 +1,42 @@
 
 
-## Plan: Agregar tag "Agotado" a las opciones de tiendas de alquiler
+## Plan: Cambiar formato de precios y actualizar tarifa base
 
-### Resumen
+### Cambios requeridos
 
-Agregar una etiqueta visual "Agotado" en la parte inferior izquierda de cada tarjeta de tienda de alquiler (Duo Acogedor, Explorador Familiar, Campamento Base). La opcion "Traigo mi propia tienda" NO se modifica. Las tiendas marcadas como agotadas tendran sus controles (+/-) deshabilitados y una opacidad reducida.
+**1. Invertir orden de monedas en `src/lib/priceFormat.ts`**
 
----
+Cambiar el formato de `$X / ₡Y` a `₡Y - $X`:
 
-### Cambios
+```typescript
+// formatDualPrice: "₡28,250 - $56.50"
+return `₡${colones.toLocaleString()} - $${usd.toFixed(2)}`;
 
-#### 1. `src/components/booking/Step2Guests.tsx`
+// formatDualPriceInt: "₡7,000 - $14"
+return `₡${colones.toLocaleString()} - $${usd}`;
+```
 
-- Dentro del bloque de cada tienda de alquiler (lineas 120-169), agregar un tag `<span>` debajo de los controles +/- con:
-  - Texto: `t('booking.step2.soldOut')` (traducido)
-  - Clases: `bg-gray-200 text-gray-500 text-xs font-medium px-3 py-1 rounded-full`
-  - Posicion: debajo de los botones +/-, alineado a la izquierda
-- Deshabilitar los botones + y - de cada tienda (ambos `disabled={true}`)
-- Agregar `opacity-60 pointer-events-none` al contenedor de cada tienda para dar efecto visual de no disponible
-- No afectar la opcion "Traigo mi propia tienda"
+**2. Cambiar tarifa base de $25 a $14 en `src/types/booking.ts`**
 
-#### 2. Archivos de idiomas (6 archivos)
+```typescript
+campsitePerPersonPerNight: 14,  // antes 25
+```
 
-Agregar clave `booking.step2.soldOut`:
-- `es.json`: `"Agotado"`
-- `en.json`: `"Sold out"`
-- `fr.json`: `"Epuise"`
-- `de.json`: `"Ausverkauft"`
-- `zh.json`: `"已售罄"`
-- `ru.json`: `"Распродано"`
+**3. Actualizar cadenas estaticas en los 6 archivos de idiomas**
 
----
+Dos claves por idioma: `accommodations.bringOwn.price` y `booking.step1.priceNote`. Cambiar de `$25 / ₡12,500` a `₡7,000 - $14` y ajustar el orden moneda en cada idioma:
 
-### Detalle tecnico
+| Idioma | `bringOwn.price` | `priceNote` |
+|--------|-----------------|-------------|
+| es | `"Desde ₡7,000 - $14 por noche por persona"` | `"₡7,000 - $14 por persona/noche tarifa base"` |
+| en | `"From ₡7,000 - $14 per night per person"` | `"₡7,000 - $14 per person/night base rate"` |
+| fr | `"A partir de ₡7,000 - $14 par nuit par personne"` | `"₡7,000 - $14 par personne/nuit tarif de base"` |
+| de | `"Ab ₡7,000 - $14 pro Nacht pro Person"` | `"₡7,000 - $14 pro Person/Nacht Grundpreis"` |
+| zh | `"每人每晚 ₡7,000 - $14 起"` | `"₡7,000 - $14 每人每晚基础价"` |
+| ru | `"От ₡7,000 - $14 за ночь на человека"` | `"₡7,000 - $14 чел/ночь базовая ставка"` |
 
-- Se usa una variable `isSoldOut = true` (hardcodeada por ahora) para todas las tiendas. En el futuro se puede conectar a disponibilidad real desde la base de datos.
-- Los botones +/- se deshabilitan cuando `isSoldOut` es true, evitando que el usuario agregue tiendas no disponibles.
-- El tag se renderiza condicionalmente solo cuando `isSoldOut` es true.
+### Archivos a modificar (9 total)
+
+- `src/lib/priceFormat.ts` -- formato invertido
+- `src/types/booking.ts` -- precio 25 a 14
+- `src/locales/es.json`, `en.json`, `fr.json`, `de.json`, `zh.json`, `ru.json` -- cadenas estaticas
