@@ -250,10 +250,6 @@ export function Step4Summary() {
               <span>{t('booking.step4.subtotal')}</span>
               <span>{formatDualPrice(pricing.subtotal)}</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span>{t('booking.step4.taxes')}</span>
-              <span>{formatDualPrice(pricing.taxes)}</span>
-            </div>
             <div className="flex justify-between font-bold text-lg pt-2 border-t border-border">
               <span>{t('booking.step4.total')}</span>
               <span className="text-forest">{formatDualPrice(pricing.total)}</span>

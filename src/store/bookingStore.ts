@@ -246,8 +246,8 @@ export const useBookingStore = create<BookingState>()(
         });
         
         const subtotal = campsiteFee + tentRental + addOnsTotal;
-        const taxes = subtotal * PRICING.taxRate;
-        const total = subtotal + taxes;
+        const taxes = 0;
+        const total = subtotal;
         
         return {
           campsiteFee,
