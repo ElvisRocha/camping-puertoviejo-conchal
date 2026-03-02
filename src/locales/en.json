@@ -144,7 +144,7 @@
     "bringOwn": {
       "title": "For the Prepared Explorer",
       "text": "Already have your trusty tent? Perfect. Reserve your premium beachfront campsite and set up your home-away-from-home exactly how you like it. Flat, cleared spaces with ocean views await.",
-      "price": "From $25 / ₡12,500 per night per person"
+      "price": "From ₡7,000 - $14 per night per person"
     },
     "rental": {
       "title": "Travel Light, Sleep Right",
@@ -319,7 +319,7 @@
     "step1": {
       "title": "When Does Your Adventure Begin?",
       "subtitle": "Select your check-in and check-out dates. Minimum stay: 1 night.",
-      "priceNote": "$25 / ₡12,500 per person/night base rate",
+      "priceNote": "₡7,000 - $14 per person/night base rate",
       "peakSeason": "Peak season",
       "checkIn": "CHECK-IN",
       "checkOut": "CHECK-OUT",
