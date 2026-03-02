@@ -49,17 +49,31 @@ function getItemsPerView(): number {
   return 1;
 }
 
-function useIsSpanish() {
+function useCurrentLang() {
   const { i18n } = useTranslation();
-  return i18n.language.startsWith('es');
+  return i18n.language.split('-')[0]; // normalise e.g. "es-ES" → "es"
 }
 
-function getReviewText(t: Testimonial, isEs: boolean) {
-  return isEs ? t.textEs : t.textEn;
+function getReviewText(t: Testimonial, lang: string): string {
+  switch (lang) {
+    case 'es': return t.textEs;
+    case 'fr': return t.textFr;
+    case 'de': return t.textDe;
+    case 'zh': return t.textZh;
+    case 'ru': return t.textRu;
+    default:   return t.textEn;
+  }
 }
 
-function getReviewTime(t: Testimonial, isEs: boolean) {
-  return isEs ? t.timeEs : t.timeEn;
+function getReviewTime(t: Testimonial, lang: string): string {
+  switch (lang) {
+    case 'es': return t.timeEs;
+    case 'fr': return t.timeFr;
+    case 'de': return t.timeDe;
+    case 'zh': return t.timeZh;
+    case 'ru': return t.timeRu;
+    default:   return t.timeEn;
+  }
 }
 
 // Star rating
@@ -101,7 +115,7 @@ function TestimonialCard({
   onReadMore: () => void;
 }) {
   const { t } = useTranslation();
-  const isEs = useIsSpanish();
+  const lang = useCurrentLang();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -111,7 +125,7 @@ function TestimonialCard({
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const text = getReviewText(testimonial, isEs);
+  const text = getReviewText(testimonial, lang);
   const maxLen = isMobile ? MOBILE_TRUNCATE : DESKTOP_TRUNCATE;
   const isTruncated = text.length > maxLen;
   const displayText = isTruncated ? truncateText(text, maxLen) : text;
@@ -138,7 +152,7 @@ function TestimonialCard({
         <div>
           <p className="font-semibold text-foreground">{testimonial.name}</p>
           <p className="text-sm text-muted-foreground">
-            {getReviewTime(testimonial, isEs)}
+            {getReviewTime(testimonial, lang)}
           </p>
         </div>
       </div>
@@ -159,7 +173,7 @@ function TestimonialModal({
   onNext: () => void;
 }) {
   const { t } = useTranslation();
-  const isEs = useIsSpanish();
+  const lang = useCurrentLang();
   const testimonial = testimonials[testimonialIndex];
   const touchStartX = useRef(0);
   const [direction, setDirection] = useState(0);
@@ -239,7 +253,7 @@ function TestimonialModal({
           >
             <Quote className="w-10 h-10 text-primary/20 mb-4" />
             <p className="text-foreground/80 leading-relaxed mb-6 italic text-lg">
-              "{getReviewText(testimonial, isEs)}"
+              "{getReviewText(testimonial, lang)}"
             </p>
             <div className="mb-4">
               <StarRating rating={testimonial.rating} />
@@ -249,7 +263,7 @@ function TestimonialModal({
               <div>
                 <p className="font-semibold text-foreground">{testimonial.name}</p>
                 <p className="text-sm text-muted-foreground">
-                  {getReviewTime(testimonial, isEs)}
+                  {getReviewTime(testimonial, lang)}
                 </p>
               </div>
             </div>
