@@ -325,7 +325,9 @@
       "checkOut": "ВЫЕЗД",
       "clearDates": "Очистить даты",
       "selectCheckIn": "Выберите дату",
-      "selectCheckOut": "Выберите дату"
+      "selectCheckOut": "Выберите дату",
+      "datePlaceholder": "ДД/ММ/ГГГГ",
+      "invalidDate": "Неверная дата"
     },
     "step2": {
       "title": "Кто Едет в Рай?",

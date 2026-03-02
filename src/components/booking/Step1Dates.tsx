@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
-import { isBefore, startOfDay } from 'date-fns';
+import { isBefore, startOfDay, parse, isValid, format } from 'date-fns';
 import { CalendarIcon, ArrowRight, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getDateLocale, getWeekStartsOn, formatLocalizedDate } from '@/lib/dateLocale';
@@ -12,6 +12,28 @@ import { cn } from '@/lib/utils';
 
 type SelectionPhase = 'checkIn' | 'checkOut';
 
+function formatDateInput(value: string): string {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4, 8)}`;
+}
+
+function parseDateInput(text: string): Date | null {
+  if (text.length !== 10) return null;
+  const parsed = parse(text, 'dd/MM/yyyy', new Date());
+  if (!isValid(parsed)) return null;
+  // Verify round-trip to catch things like 32/01/2026
+  if (format(parsed, 'dd/MM/yyyy') !== text) return null;
+  return parsed;
+}
+
+function dateToText(date: Date | string | null): string {
+  if (!date) return '';
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return format(d, 'dd/MM/yyyy');
+}
+
 export function Step1Dates() {
   const { t, i18n } = useTranslation();
   const { booking, setDates, nextStep } = useBookingStore();
@@ -19,6 +41,12 @@ export function Step1Dates() {
   const [selectionPhase, setSelectionPhase] = useState<SelectionPhase>(
     booking.checkIn ? 'checkOut' : 'checkIn'
   );
+  const [checkInText, setCheckInText] = useState(dateToText(booking.checkIn));
+  const [checkOutText, setCheckOutText] = useState(dateToText(booking.checkOut));
+  const [checkInError, setCheckInError] = useState(false);
+  const [checkOutError, setCheckOutError] = useState(false);
+  const checkInRef = useRef<HTMLInputElement>(null);
+  const checkOutRef = useRef<HTMLInputElement>(null);
 
   const today = startOfDay(new Date());
   const currentLocale = getDateLocale(i18n.language);
@@ -27,6 +55,15 @@ export function Step1Dates() {
   const checkInDate = booking.checkIn ? new Date(booking.checkIn) : undefined;
   const checkOutDate = booking.checkOut ? new Date(booking.checkOut) : undefined;
 
+  // Sync text fields when calendar selection changes
+  useEffect(() => {
+    setCheckInText(dateToText(booking.checkIn));
+  }, [booking.checkIn]);
+
+  useEffect(() => {
+    setCheckOutText(dateToText(booking.checkOut));
+  }, [booking.checkOut]);
+
   const handleDayClick = (day: Date) => {
     if (isBefore(day, today)) return;
 
@@ -34,9 +71,7 @@ export function Step1Dates() {
       setDates(day, null);
       setSelectionPhase('checkOut');
     } else {
-      // checkOut phase
       if (checkInDate && isBefore(day, checkInDate)) {
-        // Clicked before checkIn → restart with this as new checkIn
         setDates(day, null);
         setSelectionPhase('checkOut');
       } else if (checkInDate) {
@@ -45,8 +80,80 @@ export function Step1Dates() {
     }
   };
 
+  const handleInputChange = (phase: SelectionPhase, value: string) => {
+    const formatted = formatDateInput(value);
+    if (phase === 'checkIn') {
+      setCheckInText(formatted);
+      setCheckInError(false);
+    } else {
+      setCheckOutText(formatted);
+      setCheckOutError(false);
+    }
+  };
+
+  const validateAndApply = (phase: SelectionPhase) => {
+    const text = phase === 'checkIn' ? checkInText : checkOutText;
+    if (text === '') return; // empty is fine, means cleared
+
+    const parsed = parseDateInput(text);
+    if (!parsed || isBefore(parsed, today)) {
+      if (phase === 'checkIn') {
+        setCheckInError(true);
+        setCheckInText(dateToText(booking.checkIn));
+        setTimeout(() => setCheckInError(false), 1500);
+      } else {
+        setCheckOutError(true);
+        setCheckOutText(dateToText(booking.checkOut));
+        setTimeout(() => setCheckOutError(false), 1500);
+      }
+      return;
+    }
+
+    if (phase === 'checkIn') {
+      // If checkOut exists and new checkIn >= checkOut, clear checkOut
+      if (checkOutDate && !isBefore(parsed, checkOutDate)) {
+        setDates(parsed, null);
+        setSelectionPhase('checkOut');
+      } else {
+        setDates(parsed, checkOutDate || null);
+        setSelectionPhase('checkOut');
+      }
+    } else {
+      if (checkInDate && isBefore(parsed, checkInDate)) {
+        setCheckOutError(true);
+        setCheckOutText(dateToText(booking.checkOut));
+        setTimeout(() => setCheckOutError(false), 1500);
+        return;
+      }
+      setDates(checkInDate || null, parsed);
+    }
+  };
+
+  const handleKeyDown = (phase: SelectionPhase, e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      validateAndApply(phase);
+    }
+  };
+
+  const handleClearCheckIn = () => {
+    setDates(null, null);
+    setCheckInText('');
+    setCheckOutText('');
+    setSelectionPhase('checkIn');
+    checkInRef.current?.focus();
+  };
+
+  const handleClearCheckOut = () => {
+    setDates(checkInDate || null, null);
+    setCheckOutText('');
+    setSelectionPhase('checkOut');
+    checkOutRef.current?.focus();
+  };
+
   const handleClearDates = () => {
     setDates(null, null);
+    setCheckInText('');
+    setCheckOutText('');
     setSelectionPhase('checkIn');
   };
 
@@ -65,58 +172,95 @@ export function Step1Dates() {
         <p className="text-forest font-semibold mt-2">{t('booking.step1.priceNote')}</p>
       </div>
 
-      {/* Date input indicators */}
+      {/* Editable date inputs */}
       <div className="flex justify-center gap-4 mb-2">
-        <button
-          type="button"
-          onClick={() => setSelectionPhase('checkIn')}
+        <div
           className={cn(
-            "flex-1 max-w-[200px] rounded-xl border-2 p-3 text-left transition-all",
+            "flex-1 max-w-[200px] rounded-xl border-2 p-3 transition-all relative",
             selectionPhase === 'checkIn'
               ? "border-forest bg-forest/5 shadow-sm"
-              : "border-border bg-background hover:border-forest/40"
+              : "border-border bg-background hover:border-forest/40",
+            checkInError && "border-destructive bg-destructive/5"
           )}
+          onClick={() => {
+            setSelectionPhase('checkIn');
+            checkInRef.current?.focus();
+          }}
         >
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {t('booking.step1.checkIn')}
           </span>
-          <p className={cn(
-            "text-sm font-medium mt-1",
-            checkInDate ? "text-foreground" : "text-muted-foreground"
-          )}>
-            {checkInDate
-              ? formatLocalizedDate(checkInDate, 'PP', i18n.language)
-              : t('booking.step1.selectCheckIn')
-            }
-          </p>
-        </button>
+          <div className="flex items-center gap-1 mt-1">
+            <input
+              ref={checkInRef}
+              type="text"
+              inputMode="numeric"
+              maxLength={10}
+              placeholder={t('booking.step1.datePlaceholder')}
+              value={checkInText}
+              onChange={(e) => handleInputChange('checkIn', e.target.value)}
+              onBlur={() => validateAndApply('checkIn')}
+              onKeyDown={(e) => handleKeyDown('checkIn', e)}
+              onFocus={() => setSelectionPhase('checkIn')}
+              className="bg-transparent border-none outline-none text-sm font-medium w-full text-foreground placeholder:text-muted-foreground"
+            />
+            {checkInText && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); handleClearCheckIn(); }}
+                className="text-muted-foreground hover:text-foreground shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => {
-            if (checkInDate) setSelectionPhase('checkOut');
-          }}
+        <div
           className={cn(
-            "flex-1 max-w-[200px] rounded-xl border-2 p-3 text-left transition-all",
+            "flex-1 max-w-[200px] rounded-xl border-2 p-3 transition-all relative",
             selectionPhase === 'checkOut'
               ? "border-forest bg-forest/5 shadow-sm"
               : "border-border bg-background hover:border-forest/40",
-            !checkInDate && "opacity-50 cursor-not-allowed"
+            !checkInDate && "opacity-50 cursor-not-allowed",
+            checkOutError && "border-destructive bg-destructive/5"
           )}
+          onClick={() => {
+            if (checkInDate) {
+              setSelectionPhase('checkOut');
+              checkOutRef.current?.focus();
+            }
+          }}
         >
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {t('booking.step1.checkOut')}
           </span>
-          <p className={cn(
-            "text-sm font-medium mt-1",
-            checkOutDate ? "text-foreground" : "text-muted-foreground"
-          )}>
-            {checkOutDate
-              ? formatLocalizedDate(checkOutDate, 'PP', i18n.language)
-              : t('booking.step1.selectCheckOut')
-            }
-          </p>
-        </button>
+          <div className="flex items-center gap-1 mt-1">
+            <input
+              ref={checkOutRef}
+              type="text"
+              inputMode="numeric"
+              maxLength={10}
+              placeholder={t('booking.step1.datePlaceholder')}
+              value={checkOutText}
+              onChange={(e) => handleInputChange('checkOut', e.target.value)}
+              onBlur={() => validateAndApply('checkOut')}
+              onKeyDown={(e) => handleKeyDown('checkOut', e)}
+              onFocus={() => { if (checkInDate) setSelectionPhase('checkOut'); }}
+              disabled={!checkInDate}
+              className="bg-transparent border-none outline-none text-sm font-medium w-full text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed"
+            />
+            {checkOutText && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); handleClearCheckOut(); }}
+                className="text-muted-foreground hover:text-foreground shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-center">
@@ -135,7 +279,6 @@ export function Step1Dates() {
             className="rounded-xl"
           />
 
-          {/* Clear dates button */}
           {(checkInDate || checkOutDate) && (
             <div className="flex justify-end mt-2">
               <Button

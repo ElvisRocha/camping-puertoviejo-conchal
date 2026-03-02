@@ -325,7 +325,9 @@
       "checkOut": "CHECK-OUT",
       "clearDates": "Clear dates",
       "selectCheckIn": "Select date",
-      "selectCheckOut": "Select date"
+      "selectCheckOut": "Select date",
+      "datePlaceholder": "DD/MM/YYYY",
+      "invalidDate": "Invalid date"
     },
     "step2": {
       "title": "Who's Coming to Paradise?",

@@ -325,7 +325,9 @@
       "checkOut": "ABREISE",
       "clearDates": "Daten löschen",
       "selectCheckIn": "Datum wählen",
-      "selectCheckOut": "Datum wählen"
+      "selectCheckOut": "Datum wählen",
+      "datePlaceholder": "TT/MM/JJJJ",
+      "invalidDate": "Ungültiges Datum"
     },
     "step2": {
       "title": "Wer Kommt Ins Paradies?",
