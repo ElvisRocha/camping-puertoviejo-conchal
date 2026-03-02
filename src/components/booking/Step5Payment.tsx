@@ -4,9 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useBookingStore } from '@/store/bookingStore';
 import { createBooking } from '@/lib/bookingApi';
-import { ArrowLeft, CreditCard, Lock, Shield, Loader2 } from 'lucide-react';
+import { ArrowLeft, Lock, Shield, Loader2, Tent } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 interface Step5PaymentProps {
@@ -17,8 +16,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   const { t } = useTranslation();
   const { booking, calculatePricing, prevStep } = useBookingStore();
   const { toast } = useToast();
-  
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [newsletter, setNewsletter] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -84,58 +82,24 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         <p className="text-sm text-muted-foreground mt-1">{t('booking.step5.includingTaxes')}</p>
       </div>
 
-      {/* Payment Method */}
-      <div className="card-nature p-6 space-y-4">
-        <h3 className="font-heading font-bold text-lg">{t('booking.step5.paymentMethod')}</h3>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={() => setPaymentMethod('card')}
-            className={cn(
-              'p-4 rounded-xl border-2 transition-all flex items-center gap-3',
-              paymentMethod === 'card'
-                ? 'border-forest bg-forest/10'
-                : 'border-border hover:border-forest/50'
-            )}
-          >
-            <CreditCard className="w-6 h-6 text-forest" />
-            <span className="font-medium">{t('booking.step5.cardPayment')}</span>
-          </button>
-          
-          <button
-            onClick={() => setPaymentMethod('paypal')}
-            className={cn(
-              'p-4 rounded-xl border-2 transition-all flex items-center gap-3',
-              paymentMethod === 'paypal'
-                ? 'border-forest bg-forest/10'
-                : 'border-border hover:border-forest/50'
-            )}
-          >
-            <span className="text-xl font-bold text-[#003087]">P</span>
-            <span className="font-medium">{t('booking.step5.paypal')}</span>
-          </button>
+      {/* Informative block — payment on arrival */}
+      <div className="card-nature p-6 bg-forest/5 border border-forest/20">
+        <div className="flex items-start gap-4">
+          <div className="mt-0.5 flex-shrink-0">
+            <Tent className="w-8 h-8 text-forest" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-heading font-bold text-lg text-forest">
+              {t('booking.step5.paymentInfo.title')}
+            </h3>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              {t('booking.step5.paymentInfo.body1')}
+            </p>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              {t('booking.step5.paymentInfo.body2')}
+            </p>
+          </div>
         </div>
-
-        {/* Card Form Placeholder */}
-        {paymentMethod === 'card' && (
-          <div className="mt-4 p-4 bg-muted/50 rounded-xl border border-dashed border-border">
-            <p className="text-center text-muted-foreground text-sm">
-              💳 Payment integration ready for Stripe
-              <br />
-              <span className="text-xs">(Demo mode - booking will be saved without charge)</span>
-            </p>
-          </div>
-        )}
-
-        {paymentMethod === 'paypal' && (
-          <div className="mt-4 p-4 bg-muted/50 rounded-xl border border-dashed border-border">
-            <p className="text-center text-muted-foreground text-sm">
-              🅿️ PayPal integration ready
-              <br />
-              <span className="text-xs">(Demo mode - booking will be saved without charge)</span>
-            </p>
-          </div>
-        )}
       </div>
 
       {/* Terms & Newsletter */}
@@ -150,7 +114,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
             {t('booking.step5.agreeTerms')}
           </label>
         </div>
-        
+
         <div className="flex items-start gap-3">
           <Checkbox
             id="newsletter"
@@ -160,11 +124,6 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
           <label htmlFor="newsletter" className="text-sm cursor-pointer">
             {t('booking.step5.newsletter')}
           </label>
-        </div>
-
-        {/* Cancellation Policy */}
-        <div className="p-3 bg-muted/50 rounded-lg text-sm text-muted-foreground">
-          📋 {t('booking.step5.cancellationPolicy')}
         </div>
       </div>
 

@@ -401,7 +401,12 @@
       "toastErrorTitle": "Buchung fehlgeschlagen",
       "toastErrorDescription": "Bei der Verarbeitung Ihrer Buchung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
       "termsRequiredTitle": "Bedingungen erforderlich",
-      "termsRequired": "Sie müssen den Allgemeinen Geschäftsbedingungen zustimmen, um Ihre Buchung abzuschließen."
+      "termsRequired": "Sie müssen den Allgemeinen Geschäftsbedingungen zustimmen, um Ihre Buchung abzuschließen.",
+      "paymentInfo": {
+        "title": "Ihre Buchung ist fast fertig",
+        "body1": "Ihr Campingplatz wird sicher reserviert, sobald Sie bestätigen. Die Bezahlung erfolgt direkt bei der Ankunft — unkompliziert, ohne Vorauszahlungen.",
+        "body2": "Wir sorgen dafür, dass alles für Ihren Empfang vorbereitet ist. Bringen Sie einfach Ihre Lust zum Abschalten mit — wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!"
+      }
     },
     "confirmation": {
       "title": "🎉 Geschafft! Das Paradies Erwartet Sie!",

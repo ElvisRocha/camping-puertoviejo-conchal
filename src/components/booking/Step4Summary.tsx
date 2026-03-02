@@ -76,7 +76,94 @@ export function Step4Summary() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Booking Summary */}
+        {/* Guest Information — LEFT column */}
+        <div className="card-nature p-6">
+          <h3 className="font-heading font-bold text-xl mb-4">{t('booking.step4.guestInfo.title')}</h3>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.fullName')} *</label>
+              <Input
+                value={guestInfo.fullName || ''}
+                onChange={(e) => handleInputChange('fullName', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.fullNamePlaceholder')}
+                className={errors.fullName ? 'border-destructive' : ''}
+              />
+              {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.email')} *</label>
+              <Input
+                type="email"
+                value={guestInfo.email || ''}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.emailPlaceholder')}
+                className={errors.email ? 'border-destructive' : ''}
+              />
+              {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.phone')} *</label>
+              <Input
+                value={guestInfo.phone || ''}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
+                className={errors.phone ? 'border-destructive' : ''}
+              />
+              {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.country')} *</label>
+              <Select
+                value={guestInfo.country || ''}
+                onValueChange={(value) => handleInputChange('country', value)}
+              >
+                <SelectTrigger className={errors.country ? 'border-destructive' : ''}>
+                  <SelectValue placeholder={t('booking.step4.guestInfo.countryPlaceholder')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {COUNTRIES.map(country => (
+                    <SelectItem key={country} value={country}>{country}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.arrivalTime')}</label>
+              <Input
+                value={guestInfo.arrivalTime || ''}
+                onChange={(e) => handleInputChange('arrivalTime', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.arrivalTimePlaceholder')}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.specialRequests')}</label>
+              <Textarea
+                value={guestInfo.specialRequests || ''}
+                onChange={(e) => handleInputChange('specialRequests', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.specialRequestsPlaceholder')}
+                rows={3}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.celebrating')}</label>
+              <Input
+                value={guestInfo.celebratingOccasion || ''}
+                onChange={(e) => handleInputChange('celebratingOccasion', e.target.value)}
+                placeholder={t('booking.step4.guestInfo.celebratingPlaceholder')}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Booking Summary — RIGHT column */}
         <div className="card-nature p-6 space-y-4">
           <h3 className="font-heading font-bold text-xl mb-4">{t('booking.step4.summary')}</h3>
 
@@ -169,93 +256,6 @@ export function Step4Summary() {
             <div className="flex justify-between font-bold text-lg pt-2 border-t border-border">
               <span>{t('booking.step4.total')}</span>
               <span className="text-forest">${pricing.total.toFixed(2)}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Guest Information */}
-        <div className="card-nature p-6">
-          <h3 className="font-heading font-bold text-xl mb-4">{t('booking.step4.guestInfo.title')}</h3>
-
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.fullName')} *</label>
-              <Input
-                value={guestInfo.fullName || ''}
-                onChange={(e) => handleInputChange('fullName', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.fullNamePlaceholder')}
-                className={errors.fullName ? 'border-destructive' : ''}
-              />
-              {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName}</p>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.email')} *</label>
-              <Input
-                type="email"
-                value={guestInfo.email || ''}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.emailPlaceholder')}
-                className={errors.email ? 'border-destructive' : ''}
-              />
-              {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.phone')} *</label>
-              <Input
-                value={guestInfo.phone || ''}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
-                className={errors.phone ? 'border-destructive' : ''}
-              />
-              {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.country')} *</label>
-              <Select
-                value={guestInfo.country || ''}
-                onValueChange={(value) => handleInputChange('country', value)}
-              >
-                <SelectTrigger className={errors.country ? 'border-destructive' : ''}>
-                  <SelectValue placeholder={t('booking.step4.guestInfo.countryPlaceholder')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {COUNTRIES.map(country => (
-                    <SelectItem key={country} value={country}>{country}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.arrivalTime')}</label>
-              <Input
-                value={guestInfo.arrivalTime || ''}
-                onChange={(e) => handleInputChange('arrivalTime', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.arrivalTimePlaceholder')}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.specialRequests')}</label>
-              <Textarea
-                value={guestInfo.specialRequests || ''}
-                onChange={(e) => handleInputChange('specialRequests', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.specialRequestsPlaceholder')}
-                rows={3}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.celebrating')}</label>
-              <Input
-                value={guestInfo.celebratingOccasion || ''}
-                onChange={(e) => handleInputChange('celebratingOccasion', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.celebratingPlaceholder')}
-              />
             </div>
           </div>
         </div>
