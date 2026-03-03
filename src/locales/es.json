@@ -447,6 +447,7 @@
       "personNight": "persona por noche"
     }
   },
+  "price_range_connector": "ó",
   "addons": {
     "breakfast": {
       "name": "Paquete de Desayuno",

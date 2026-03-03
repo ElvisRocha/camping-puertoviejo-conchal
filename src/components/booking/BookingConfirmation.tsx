@@ -99,7 +99,7 @@ export function BookingConfirmation({ referenceCode }: BookingConfirmationProps)
           </div>
           <div>
             <p className="text-muted-foreground">{t('booking.confirmation.totalPaid')}</p>
-            <p className="font-semibold text-forest">{formatDualPrice(pricing.total)}</p>
+            <p className="font-semibold text-forest">{formatDualPrice(pricing.total, t('price_range_connector'))}</p>
           </div>
         </div>
       </div>
