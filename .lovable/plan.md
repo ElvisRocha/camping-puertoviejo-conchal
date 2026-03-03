@@ -1,22 +1,26 @@
-## Plan: Iniciar adultos en 0, agregar "años" y cambiar rango de ninos
+
+
+## Plan: Tildar la "o" en contextos de precios (₡ ó $)
+
+### Problema
+En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
 
 ### Cambios
 
-**1. `src/store/bookingStore.ts` (linea 58)**
+**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
+- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
+- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
 
-- Cambiar `adults: 2` a `adults: 0`
+**2. Archivos de traducciones - textos estaticos con precios**
+Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
 
-**2. `src/components/booking/Step2Guests.tsx**`
+- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
+- `src/locales/en.json`: mismos campos
+- `src/locales/fr.json`: mismos campos
+- `src/locales/de.json`: mismos campos
+- `src/locales/ru.json`: mismos campos
+- `src/locales/zh.json`: mismos campos
 
-- Linea 14: Cambiar fallback `adults: 2` a `adults: 0`
-- Linea 18: Cambiar minimo de adultos de `1` a `0` para permitir iniciar en 0
-
-**3. Archivos de traducciones (es.json, en.json, fr.json, de.json, ru.json, zh.json)**
-
-- Cambiar el texto de adultos para incluir "años": `"Adultos (18+ años)"` (y equivalentes en cada idioma)
-- Cambiar el texto de ninos: `"Ninos (5-17 años)"` (antes era 4-17)
-- Cambiar el texto de bebes: `"Bebes (0-4 años)"` (antes era 0-3, ajustado al nuevo rango)
-
-### Validacion
-
-- El boton "Siguiente" ya valida `totalGuests > 0`, asi que no se podra avanzar sin seleccionar al menos 1 huesped.
+### Alcance
+- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
+- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1
