@@ -232,27 +232,27 @@ export function Step4Summary() {
           <div className="space-y-2 pt-2">
             <div className="flex justify-between text-sm">
               <span>{t('booking.step4.campsite')}</span>
-              <span>{formatDualPrice(pricing.campsiteFee)}</span>
+              <span>{formatDualPrice(pricing.campsiteFee, t('common.or'))}</span>
             </div>
             {pricing.tentRental > 0 && (
               <div className="flex justify-between text-sm">
                 <span>{t('booking.step4.tentRental')}</span>
-                <span>{formatDualPrice(pricing.tentRental)}</span>
+                <span>{formatDualPrice(pricing.tentRental, t('common.or'))}</span>
               </div>
             )}
             {pricing.addOns > 0 && (
               <div className="flex justify-between text-sm">
                 <span>{t('booking.step4.addons')}</span>
-                <span>{formatDualPrice(pricing.addOns)}</span>
+                <span>{formatDualPrice(pricing.addOns, t('common.or'))}</span>
               </div>
             )}
             <div className="flex justify-between text-sm pt-2 border-t border-border/50">
               <span>{t('booking.step4.subtotal')}</span>
-              <span>{formatDualPrice(pricing.subtotal)}</span>
+              <span>{formatDualPrice(pricing.subtotal, t('common.or'))}</span>
             </div>
             <div className="flex justify-between font-bold text-lg pt-2 border-t border-border">
               <span>{t('booking.step4.total')}</span>
-              <span className="text-forest">{formatDualPrice(pricing.total)}</span>
+              <span className="text-forest">{formatDualPrice(pricing.total, t('common.or'))}</span>
             </div>
           </div>
         </div>

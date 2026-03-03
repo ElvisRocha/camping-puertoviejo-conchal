@@ -14,7 +14,7 @@ export function Step3Addons() {
   const isSelected = (id: string) => booking.addOns?.includes(id) || false;
 
   const getPriceLabel = (addon: typeof ADD_ONS[0]) => {
-    const dual = formatDualPriceInt(addon.price);
+    const dual = formatDualPriceInt(addon.price, t('common.or'));
     switch (addon.priceType) {
       case 'per-person':
         return `${dual}/${t('booking.priceTypes.person')}`;

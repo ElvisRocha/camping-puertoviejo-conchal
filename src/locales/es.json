@@ -1,4 +1,7 @@
 {
+  "common": {
+    "or": "o"
+  },
   "nav": {
     "home": "Inicio",
     "experience": "Experiencia",

@@ -79,7 +79,7 @@ export function Step2Guests() {
 
         <div className="pt-4 text-center">
           <p className="text-muted-foreground">
-            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">{formatDualPriceInt(PRICING.campsitePerPersonPerNight)} {t('booking.priceTypes.personNight')}</span>
+            {t('booking.step2.campsiteRate')}: <span className="font-semibold text-forest">{formatDualPriceInt(PRICING.campsitePerPersonPerNight, t('common.or'))} {t('booking.priceTypes.personNight')}</span>
           </p>
         </div>
       </div>
@@ -143,7 +143,7 @@ export function Step2Guests() {
                         <h4 className="font-semibold">{tent.icon} {t(tent.nameKey)}</h4>
                         <p className="text-sm text-muted-foreground">{t('booking.step2.sleeps')} {tent.capacity}</p>
                       </div>
-                      <p className="font-bold text-forest text-left sm:text-right">{formatDualPriceInt(tent.pricePerNight)} {t('accommodations.perNight')}</p>
+                      <p className="font-bold text-forest text-left sm:text-right">{formatDualPriceInt(tent.pricePerNight, t('common.or'))} {t('accommodations.perNight')}</p>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">{t(tent.descriptionKey)}</p>
                     <div className="flex items-center gap-3 mt-3">
