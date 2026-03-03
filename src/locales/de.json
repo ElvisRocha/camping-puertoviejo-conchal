@@ -144,7 +144,7 @@
     "bringOwn": {
       "title": "Für den Vorbereiteten Entdecker",
       "text": "Haben Sie bereits Ihr bewährtes Zelt? Perfekt. Reservieren Sie Ihren Premium-Strandstellplatz und richten Sie Ihr Zuhause-fern-von-Zuhause genau so ein, wie Sie es mögen. Flache, geräumte Plätze mit Meerblick warten auf Sie.",
-      "price": "Ab ₡7,000 - $14 pro Nacht pro Person"
+      "price": "Ab ₡7,000 o $14 pro Nacht pro Person"
     },
     "rental": {
       "title": "Reisen Sie Leicht, Schlafen Sie Gut",
@@ -321,7 +321,7 @@
     "step1": {
       "title": "Wann Beginnt Ihr Abenteuer?",
       "subtitle": "Wählen Sie Ihr An- und Abreisedatum. Mindestaufenthalt: 1 Nacht.",
-      "priceNote": "₡7,000 - $14 pro Person pro Nacht Grundpreis",
+      "priceNote": "₡7,000 o $14 pro Person pro Nacht Grundpreis",
       "peakSeason": "Hauptsaison",
       "checkIn": "ANREISE",
       "checkOut": "ABREISE",
