@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,16 +7,28 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import ErrorBoundary from "./components/ErrorBoundary";
 
-// Lazy load pages for code splitting - reduces initial bundle size
-const Index = lazy(() => import("./pages/Index"));
-const BookPage = lazy(() => import("./pages/BookPage"));
-const GalleryPage = lazy(() => import("./pages/GalleryPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
-const AuthPage = lazy(() => import("./pages/AuthPage"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+// Retry wrapper for lazy imports: if a JS chunk fails to download (flaky
+// network, CDN hiccup), retry once before propagating the error. This is the
+// most common cause of "first load fails, reload works" in Vite SPAs.
+function lazyWithRetry<T extends React.ComponentType<unknown>>(
+  importFn: () => Promise<{ default: T }>
+) {
+  return lazy(() =>
+    importFn().catch((err) => {
+      console.warn("[chunk-load] Failed on first attempt, retrying…", err);
+      return importFn();
+    })
+  );
+}
 
-const queryClient = new QueryClient();
+// Lazy load pages for code splitting - reduces initial bundle size
+const Index = lazyWithRetry(() => import("./pages/Index"));
+const BookPage = lazyWithRetry(() => import("./pages/BookPage"));
+const GalleryPage = lazyWithRetry(() => import("./pages/GalleryPage"));
+const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"));
+const AuthPage = lazyWithRetry(() => import("./pages/AuthPage"));
+const AdminDashboard = lazyWithRetry(() => import("./pages/AdminDashboard"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 // Minimal loading fallback for better perceived performance
 const PageLoader = () => (
@@ -28,29 +40,35 @@ const PageLoader = () => (
   </div>
 );
 
-const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/book" element={<BookPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
-);
+const App = () => {
+  // Create QueryClient inside the component so that if the ErrorBoundary resets
+  // (re-mounts App), any cached query state from the failed render is cleared.
+  const [queryClient] = useState(() => new QueryClient());
+
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/book" element={<BookPage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  );
+};
 
 export default App;
