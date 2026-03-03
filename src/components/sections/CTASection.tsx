@@ -25,7 +25,7 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-heading font-bold text-cream mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-cream mb-6"
         >
           {t('cta.title')}
         </motion.h2>
@@ -34,7 +34,7 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-body text-lg text-cream/80 max-w-2xl mx-auto mb-4"
+          className="font-body text-base sm:text-lg text-cream/80 max-w-2xl mx-auto mb-4"
         >
           {t('cta.text')}
         </motion.p>
@@ -43,7 +43,7 @@ const CTASection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-body text-xl text-cream font-medium mb-8"
+          className="font-body text-base sm:text-xl text-cream font-medium mb-8"
         >
           {t('cta.subtext')}
         </motion.p>
@@ -52,9 +52,10 @@ const CTASection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.4, delay: 0.3 }}
+          className="px-4 sm:px-0"
         >
-          <Link to="/book">
-            <Button className="bg-sunset hover:bg-sunset-warm text-primary-foreground px-10 py-6 text-lg font-heading font-bold rounded-full shadow-strong hover:scale-105 transition-all duration-300">
+          <Link to="/book" className="block sm:inline-block">
+            <Button className="bg-sunset hover:bg-sunset-warm text-primary-foreground w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-heading font-bold rounded-full shadow-strong hover:scale-105 transition-all duration-300">
               {t('cta.button')}
             </Button>
           </Link>

@@ -22,12 +22,12 @@ const WhyUsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-section-title text-center mb-16"
+          className="text-section-title text-center mb-10 sm:mb-16"
         >
           {t('whyUs.title')}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -36,7 +36,7 @@ const WhyUsSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card-nature p-8 group hover:scale-[1.02] transition-transform duration-300"
+                className="card-nature p-5 sm:p-8 group hover:scale-[1.02] transition-transform duration-300"
               >
                 <div className="flex items-start gap-5">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-forest flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">

@@ -390,3 +390,71 @@
   inset: 0;
   transform: translateZ(-1px) scale(2);
 }
+
+/* ============================================================
+   Mobile responsive overrides for small screens (≤ 480px)
+   Targets devices like Honor 400, standard Android at 360px
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Prevent any element from causing horizontal scroll */
+  section {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Ensure container-wide has adequate minimum padding */
+  .container-wide {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .container-narrow {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Section titles: use fluid sizing to prevent overflow */
+  .text-section-title {
+    font-size: clamp(1.375rem, 6vw, 1.875rem);
+    line-height: 1.3;
+  }
+
+  /* Hero headline: scale down for narrow viewports */
+  .text-hero {
+    font-size: clamp(1.5rem, 7.5vw, 2.25rem);
+    line-height: 1.2;
+  }
+
+  /* Buttons: prevent overflow beyond container edges */
+  .btn-hero {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  .btn-cta {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 0.9375rem;
+    max-width: 100%;
+  }
+
+  /* Cards: ensure content doesn't exceed card boundaries */
+  .card-nature,
+  .card-floating {
+    overflow: hidden;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Booking step padding on mobile */
+  .booking-step {
+    padding: 1rem;
+  }
+}
