@@ -16,9 +16,19 @@ const resources = {
   ru: { translation: ru },
 };
 
+// Guard localStorage access: iOS Safari private mode and browsers with strict
+// storage policies can throw a SecurityError on getItem/setItem calls.
+const savedLanguage = (() => {
+  try {
+    return localStorage.getItem('language');
+  } catch {
+    return null;
+  }
+})();
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem('language') || 'es',
+  lng: savedLanguage || 'es',
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

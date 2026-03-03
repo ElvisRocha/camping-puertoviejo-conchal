@@ -1,4 +1,4 @@
-import '@/i18n';
+// i18n is initialized in main.tsx before React mounts — no need to re-import here.
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
