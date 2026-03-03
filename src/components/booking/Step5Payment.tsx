@@ -79,7 +79,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       {/* Total */}
       <div className="card-nature p-6 text-center">
         <p className="text-muted-foreground mb-1">{t('booking.step5.totalToPay')}</p>
-        <p className="text-4xl font-bold text-forest">{formatDualPrice(pricing.total)}</p>
+        <p className="text-4xl font-bold text-forest">{formatDualPrice(pricing.total, t('price_range_connector'))}</p>
         
       </div>
 

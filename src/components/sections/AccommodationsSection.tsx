@@ -101,7 +101,7 @@ const AccommodationsSection = () => {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-heading font-bold text-xl text-sea-green">
-                    {formatDualPriceInt(tent.pricePerNight)}
+                    {formatDualPriceInt(tent.pricePerNight, t('price_range_connector'))}
                     <span className="text-sm font-normal text-muted-foreground"> {t('accommodations.perNight')}</span>
                   </span>
                 </div>
