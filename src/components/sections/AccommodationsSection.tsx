@@ -18,7 +18,7 @@ const AccommodationsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-section-title text-center mb-16"
+          className="text-section-title text-center mb-10 sm:mb-16"
         >
           {t('accommodations.title')}
         </motion.h2>
@@ -28,7 +28,7 @@ const AccommodationsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="card-nature p-8 mb-12 bg-gradient-to-r from-sand/50 to-cream/50 border-2 border-sand"
+          className="card-nature p-5 sm:p-8 mb-10 sm:mb-12 bg-gradient-to-r from-sand/50 to-cream/50 border-2 border-sand"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="text-6xl">🎒</div>
@@ -87,7 +87,7 @@ const AccommodationsSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="font-heading font-bold text-xl text-forest">
                     {tent.icon} {t(tent.nameKey)}

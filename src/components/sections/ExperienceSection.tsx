@@ -22,7 +22,7 @@ const ExperienceSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-section-title text-center mb-16"
+          className="text-section-title text-center mb-10 sm:mb-16"
         >
           {t('experience.title')}
         </motion.h2>
@@ -44,7 +44,7 @@ const ExperienceSection = () => {
               >
                 {/* Content */}
                 <div
-                  className={`card-nature p-8 ${
+                  className={`card-nature p-5 sm:p-8 ${
                     index % 2 === 1 ? 'lg:order-2' : ''
                   }`}
                 >

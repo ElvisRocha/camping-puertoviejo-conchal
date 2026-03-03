@@ -75,13 +75,13 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container-wide text-center py-32 pt-40">
-        <div className="inline-block px-6 py-10 sm:px-12 sm:py-14">
+        <div className="inline-block px-4 py-8 sm:px-12 sm:py-14 w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white mb-6 max-w-5xl mx-auto text-balance drop-shadow-lg">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white mb-6 max-w-5xl mx-auto text-balance drop-shadow-lg leading-tight">
               {t('hero.headline')}
             </h1>
           </motion.div>
@@ -90,7 +90,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-body text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-8 font-medium drop-shadow-md"
+            className="font-body text-base sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-8 font-medium drop-shadow-md"
           >
             {t('hero.subheadline')}
           </motion.p>
@@ -101,8 +101,8 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
           >
-            <Link to="/book">
-              <Button className="btn-hero text-xl px-12 py-7">
+            <Link to="/book" className="w-full sm:w-auto">
+              <Button className="btn-hero w-full sm:w-auto text-base sm:text-xl px-6 sm:px-12 py-4 sm:py-7">
                 {t('hero.cta')}
               </Button>
             </Link>
