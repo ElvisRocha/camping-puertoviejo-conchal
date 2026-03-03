@@ -144,7 +144,7 @@
     "bringOwn": {
       "title": "Pour l'Explorateur Préparé",
       "text": "Vous avez déjà votre tente fidèle ? Parfait. Réservez votre emplacement premium en bord de mer et installez votre chez-vous-loin-de-chez-vous exactement comme vous l'aimez. Des espaces plats et dégagés avec vue sur l'océan vous attendent.",
-      "price": "A partir de ₡7,000 o $14 par nuit par personne"
+      "price": "A partir de ₡7,000 ó $14 par nuit par personne"
     },
     "rental": {
       "title": "Voyagez Léger, Dormez Bien",
@@ -321,7 +321,7 @@
     "step1": {
       "title": "Quand Commence Votre Aventure ?",
       "subtitle": "Sélectionnez vos dates d'arrivée et de départ. Séjour minimum : 1 nuit.",
-      "priceNote": "₡7,000 o $14 par personne par nuit tarif de base",
+      "priceNote": "₡7,000 ó $14 par personne par nuit tarif de base",
       "peakSeason": "Haute saison",
       "checkIn": "ARRIVÉE",
       "checkOut": "DÉPART",
