@@ -22,20 +22,41 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // How long the Framer Motion exit animation takes for the mobile menu.
+  // Scrolling while the menu is collapsing causes a layout shift that
+  // disrupts smooth-scroll — we wait for the animation to finish first.
+  const MENU_ANIMATION_MS = 350;
+
+  // The fixed header is ~72-80px tall. Without this offset, the target
+  // section scrolls flush to the very top of the viewport and hides behind
+  // the navbar.
+  const HEADER_OFFSET = 80;
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    const top =
+      element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   const handleNavClick = (e: React.MouseEvent, href: string) => {
-    // If we're on home and the link is a hash link, scroll manually
     if (location.pathname === '/' && href.startsWith('/#')) {
       e.preventDefault();
       const elementId = href.replace('/#', '');
-      const element = document.getElementById(elementId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Close the menu BEFORE scrolling. If the mobile menu is open its
+      // collapse animation shifts the page layout; firing scrollTo during
+      // that animation lands on the wrong position. The delay lets the
+      // animation complete first. On desktop the menu is never open so the
+      // delay is 0 and the scroll is instantaneous.
+      const delay = isMobileMenuOpen ? MENU_ANIMATION_MS : 0;
       setIsMobileMenuOpen(false);
+      setTimeout(() => scrollToSection(elementId), delay);
     } else if (location.pathname === '/' && href === '/') {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const delay = isMobileMenuOpen ? MENU_ANIMATION_MS : 0;
       setIsMobileMenuOpen(false);
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), delay);
     }
   };
 

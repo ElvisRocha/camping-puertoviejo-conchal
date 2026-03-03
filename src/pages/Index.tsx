@@ -19,14 +19,19 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
+    if (!location.hash) return;
+    // This fires when navigating from another page (e.g. /gallery → /#experience).
+    // The 150ms delay lets the page finish painting before we calculate
+    // positions; without it the element's getBoundingClientRect() may be off.
+    const HEADER_OFFSET = 80;
+    const timer = setTimeout(() => {
       const element = document.querySelector(location.hash);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
+      if (!element) return;
+      const top =
+        element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 150);
+    return () => clearTimeout(timer);
   }, [location.hash]);
 
   return (
