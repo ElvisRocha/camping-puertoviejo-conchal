@@ -144,7 +144,7 @@
     "bringOwn": {
       "title": "Para el Explorador Preparado",
       "text": "¿Ya tienes tu tienda de confianza? Perfecto. Reserva tu sitio premium frente al mar y arma tu hogar-lejos-del-hogar exactamente como te gusta. Espacios planos y despejados con vistas al océano te esperan.",
-      "price": "Desde ₡7,000 - $14 por noche por persona"
+      "price": "Desde ₡7,000 o $14 por noche por persona"
     },
     "rental": {
       "title": "Viaja Ligero, Duerme Bien",
@@ -321,7 +321,7 @@
     "step1": {
       "title": "¿Cuándo Comienza Tu Aventura?",
       "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
-      "priceNote": "₡7,000 - $14 por persona por noche tarifa base",
+      "priceNote": "₡7,000 o $14 por persona por noche tarifa base",
       "peakSeason": "Temporada alta",
       "checkIn": "LLEGADA",
       "checkOut": "SALIDA",
