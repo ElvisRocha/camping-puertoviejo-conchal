@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +21,8 @@ const Header = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isReserveOpen, setIsReserveOpen] = useState(false);
+  const reserveMenuRef = useRef<HTMLDivElement>(null);
 
   // How long the Framer Motion exit animation takes for the mobile menu.
   const MENU_ANIMATION_MS = 350;
@@ -86,6 +88,16 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      if (reserveMenuRef.current && !reserveMenuRef.current.contains(e.target as Node)) {
+        setIsReserveOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => document.removeEventListener('mousedown', handleMouseDown);
   }, []);
 
   // Header should have solid background on non-home pages or when scrolled
@@ -206,12 +218,41 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Book Now Button */}
-          <Link to="/book" className="hidden sm:block">
-            <Button className="btn-cta">
-              {t('nav.bookNow')}
-            </Button>
-          </Link>
+          {/* Book Now Split Button */}
+          <div className="hidden sm:block relative" ref={reserveMenuRef}>
+            <div className="flex items-stretch">
+              <Link to="/book">
+                <Button className="btn-cta rounded-r-none">
+                  {t('nav.bookNow')}
+                </Button>
+              </Link>
+              <div className="w-px bg-white/30 self-stretch" />
+              <Button
+                className="btn-cta rounded-l-none px-2"
+                onClick={() => setIsReserveOpen(!isReserveOpen)}
+                aria-label="More booking options"
+                aria-expanded={isReserveOpen}
+              >
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </div>
+            {isReserveOpen && (
+              <div className="absolute right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-border min-w-[180px]">
+                <button
+                  className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
+                  onClick={() => setIsReserveOpen(false)}
+                >
+                  {t('nav.reschedule')}
+                </button>
+                <button
+                  className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
+                  onClick={() => setIsReserveOpen(false)}
+                >
+                  {t('nav.cancel_booking')}
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
