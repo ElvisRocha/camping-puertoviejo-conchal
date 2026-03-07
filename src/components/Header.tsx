@@ -13,6 +13,7 @@ import {
 import { languages } from '@/i18n';
 import { SITE_CONFIG } from '@/types/booking';
 import { cn } from '@/lib/utils';
+import { RescheduleModal } from '@/components/booking/RescheduleModal';
 // Logo - local asset
 import logoImage from '@/assets/Logo-Camping-Puerto-Viejo.png';
 
@@ -22,6 +23,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isReserveOpen, setIsReserveOpen] = useState(false);
+  const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
   const reserveMenuRef = useRef<HTMLDivElement>(null);
 
   // How long the Framer Motion exit animation takes for the mobile menu.
@@ -120,6 +122,10 @@ const Header = () => {
 
   return (
     <>
+    <RescheduleModal
+      open={isRescheduleModalOpen}
+      onClose={() => setIsRescheduleModalOpen(false)}
+    />
     {/* Skip to main content - accessibility */}
     <a
       href="#main-content"
@@ -240,7 +246,10 @@ const Header = () => {
               <div className="absolute right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-border min-w-[180px]">
                 <button
                   className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
-                  onClick={() => setIsReserveOpen(false)}
+                  onClick={() => {
+                    setIsReserveOpen(false);
+                    setIsRescheduleModalOpen(true);
+                  }}
                 >
                   {t('nav.reschedule')}
                 </button>

@@ -9,16 +9,20 @@ import { Step2Guests } from '@/components/booking/Step2Guests';
 /* import { Step3Addons } from '@/components/booking/Step3Addons'; */
 import { Step4Summary } from '@/components/booking/Step4Summary';
 import { Step5Payment } from '@/components/booking/Step5Payment';
+import { RescheduleConfirm } from '@/components/booking/RescheduleConfirm';
 import { BookingConfirmation } from '@/components/booking/BookingConfirmation';
 import { useBookingStore } from '@/store/bookingStore';
 import { AnimatePresence } from 'framer-motion';
 
 const BookPage = () => {
-  const { currentStep, resetBooking } = useBookingStore();
+  const { currentStep, resetBooking, isRescheduling } = useBookingStore();
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
 
   useEffect(() => {
-    resetBooking();
+    // Don't reset booking if we came from the reschedule modal (data is pre-loaded)
+    if (!useBookingStore.getState().isRescheduling) {
+      resetBooking();
+    }
     return () => {
       resetBooking();
     };
@@ -44,7 +48,10 @@ const BookPage = () => {
       case 3:
         return <Step4Summary />;
       case 4:
-        return <Step5Payment onComplete={handleBookingComplete} />;
+        // Skip payment step entirely when rescheduling
+        return isRescheduling
+          ? <RescheduleConfirm onComplete={handleBookingComplete} />
+          : <Step5Payment onComplete={handleBookingComplete} />;
       default:
         return <Step1Dates />;
     }
