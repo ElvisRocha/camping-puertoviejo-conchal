@@ -471,5 +471,30 @@
       "name": "Location Équipement Snorkeling",
       "description": "Masque, tuba, palmes. Explorez le monde sous-marin à votre rythme."
     }
+  },
+  "reschedule": {
+    "modal": {
+      "title": "Modifier la réservation",
+      "subtitle": "Entrez votre code de référence pour continuer",
+      "label": "Code de référence",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Vérifier",
+      "cancelButton": "Annuler",
+      "loading": "Vérification...",
+      "errorNotFound": "Aucune réservation trouvée avec ce code. Veuillez vérifier et réessayer.",
+      "errorGeneral": "Une erreur s'est produite lors de la vérification. Veuillez réessayer.",
+      "errorCancelled": "Cette réservation a été annulée et ne peut pas être modifiée."
+    },
+    "confirm": {
+      "title": "Confirmer la modification",
+      "subtitle": "Vérifiez vos modifications avant de confirmer",
+      "confirmButton": "Confirmer la modification",
+      "processing": "Enregistrement...",
+      "successTitle": "Modification réussie !",
+      "successDescription": "Votre réservation {{code}} a été mise à jour avec succès.",
+      "errorTitle": "Erreur lors de la modification",
+      "errorDescription": "Impossible de mettre à jour votre réservation. Veuillez réessayer.",
+      "keepingCode": "Votre code de référence reste :"
+    }
   }
 }

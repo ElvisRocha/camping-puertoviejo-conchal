@@ -471,5 +471,30 @@
       "name": "Schnorchelausrüstung Mieten",
       "description": "Maske, Schnorchel, Flossen. Erkunden Sie die Unterwasserwelt in Ihrem eigenen Tempo."
     }
+  },
+  "reschedule": {
+    "modal": {
+      "title": "Buchung umbuchen",
+      "subtitle": "Geben Sie Ihren Buchungsreferenzcode ein, um fortzufahren",
+      "label": "Referenzcode",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Überprüfen",
+      "cancelButton": "Abbrechen",
+      "loading": "Überprüfung...",
+      "errorNotFound": "Keine Buchung mit diesem Code gefunden. Bitte überprüfen und erneut versuchen.",
+      "errorGeneral": "Beim Überprüfen des Codes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "errorCancelled": "Diese Buchung wurde storniert und kann nicht umgebucht werden."
+    },
+    "confirm": {
+      "title": "Umbuchung bestätigen",
+      "subtitle": "Überprüfen Sie Ihre Änderungen vor der Bestätigung",
+      "confirmButton": "Umbuchung bestätigen",
+      "processing": "Änderungen speichern...",
+      "successTitle": "Umbuchung erfolgreich!",
+      "successDescription": "Ihre Buchung {{code}} wurde erfolgreich aktualisiert.",
+      "errorTitle": "Umbuchung fehlgeschlagen",
+      "errorDescription": "Ihre Buchung konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+      "keepingCode": "Ihr Buchungsreferenzcode bleibt:"
+    }
   }
 }

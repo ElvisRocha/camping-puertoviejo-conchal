@@ -471,5 +471,30 @@
       "name": "Alquiler de Equipo de Snorkel",
       "description": "Máscara, snorkel, aletas. Explora el mundo submarino a tu ritmo."
     }
+  },
+  "reschedule": {
+    "modal": {
+      "title": "Cambiar fecha de reserva",
+      "subtitle": "Ingresa el código de referencia de tu reserva para continuar",
+      "label": "Código de referencia",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Verificar",
+      "cancelButton": "Cancelar",
+      "loading": "Verificando...",
+      "errorNotFound": "No se encontró ninguna reserva con ese código. Verifica que sea correcto.",
+      "errorGeneral": "Ocurrió un error al verificar el código. Inténtalo de nuevo.",
+      "errorCancelled": "Esta reserva fue cancelada y no puede reagendarse."
+    },
+    "confirm": {
+      "title": "Confirmar reagendamiento",
+      "subtitle": "Revisa los cambios antes de confirmar",
+      "confirmButton": "Confirmar cambio de fecha",
+      "processing": "Guardando cambios...",
+      "successTitle": "¡Reagendamiento exitoso!",
+      "successDescription": "Tu reserva {{code}} ha sido actualizada correctamente.",
+      "errorTitle": "Error al reagendar",
+      "errorDescription": "No se pudo actualizar la reserva. Inténtalo de nuevo.",
+      "keepingCode": "Se mantiene tu código de reserva:"
+    }
   }
 }

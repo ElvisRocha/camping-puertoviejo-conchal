@@ -471,5 +471,30 @@
       "name": "浮潜装备租赁",
       "description": "面罩、呼吸管、脚蹼。按自己的节奏探索水下世界。"
     }
+  },
+  "reschedule": {
+    "modal": {
+      "title": "改期预订",
+      "subtitle": "输入您的预订参考代码以继续",
+      "label": "参考代码",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "验证",
+      "cancelButton": "取消",
+      "loading": "验证中...",
+      "errorNotFound": "未找到该代码对应的预订，请检查后重试。",
+      "errorGeneral": "验证代码时发生错误，请重试。",
+      "errorCancelled": "此预订已被取消，无法改期。"
+    },
+    "confirm": {
+      "title": "确认改期",
+      "subtitle": "确认前请检查您的更改",
+      "confirmButton": "确认改期",
+      "processing": "保存更改中...",
+      "successTitle": "改期成功！",
+      "successDescription": "您的预订 {{code}} 已成功更新。",
+      "errorTitle": "改期失败",
+      "errorDescription": "无法更新您的预订，请重试。",
+      "keepingCode": "您的预订参考代码保持不变："
+    }
   }
 }

@@ -471,5 +471,30 @@
       "name": "Snorkel Gear Rental",
       "description": "Mask, snorkel, fins. Explore the underwater world at your own pace."
     }
+  },
+  "reschedule": {
+    "modal": {
+      "title": "Reschedule Booking",
+      "subtitle": "Enter your booking reference code to continue",
+      "label": "Reference code",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Verify",
+      "cancelButton": "Cancel",
+      "loading": "Verifying...",
+      "errorNotFound": "No booking found with that code. Please check and try again.",
+      "errorGeneral": "An error occurred while verifying the code. Please try again.",
+      "errorCancelled": "This booking has been cancelled and cannot be rescheduled."
+    },
+    "confirm": {
+      "title": "Confirm Reschedule",
+      "subtitle": "Review your changes before confirming",
+      "confirmButton": "Confirm Reschedule",
+      "processing": "Saving changes...",
+      "successTitle": "Reschedule successful!",
+      "successDescription": "Your booking {{code}} has been updated successfully.",
+      "errorTitle": "Reschedule failed",
+      "errorDescription": "Could not update your booking. Please try again.",
+      "keepingCode": "Your booking reference code remains:"
+    }
   }
 }

@@ -7,37 +7,45 @@ import { differenceInDays } from 'date-fns';
 interface BookingState {
   currentStep: number;
   booking: Partial<Booking>;
-  
+
+  // Rescheduling
+  isRescheduling: boolean;
+  rescheduleBookingId: string | null;
+  rescheduleReferenceCode: string | null;
+
   // Actions
   setStep: (step: number) => void;
   goToStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
-  
+
   // Date selection
   setDates: (checkIn: Date | null, checkOut: Date | null) => void;
-  
+
   // Guest selection
   setGuests: (guests: { adults: number; children: number; infants: number }) => void;
-  
+
   // Accommodation
   setBringOwnTent: (value: boolean) => void;
   setRentedTents: (tents: TentSelection[]) => void;
   addTent: (tentId: string) => void;
   removeTent: (tentId: string) => void;
-  
+
   // Add-ons
   toggleAddOn: (addOnId: string) => void;
-  
+
   // Guest info
   setGuestInfo: (info: Partial<GuestInfo>) => void;
-  
+
   // Pricing
   calculatePricing: () => PricingBreakdown;
-  
+
+  // Rescheduling actions
+  setReschedulingData: (bookingId: string, referenceCode: string, bookingData: Partial<Booking>) => void;
+
   // Reset
   resetBooking: () => void;
-  
+
   // Complete booking
   completeBooking: () => string;
 }
@@ -75,6 +83,9 @@ export const useBookingStore = create<BookingState>()(
     (set, get) => ({
       currentStep: 1,
       booking: { ...initialBooking },
+      isRescheduling: false,
+      rescheduleBookingId: null,
+      rescheduleReferenceCode: null,
 
       setStep: (step) => set({ currentStep: step }),
       goToStep: (step) => {
@@ -260,10 +271,23 @@ export const useBookingStore = create<BookingState>()(
         };
       },
 
+      setReschedulingData: (bookingId, referenceCode, bookingData) => {
+        set({
+          isRescheduling: true,
+          rescheduleBookingId: bookingId,
+          rescheduleReferenceCode: referenceCode,
+          currentStep: 1,
+          booking: { ...initialBooking, ...bookingData },
+        });
+      },
+
       resetBooking: () => {
         set({
           currentStep: 1,
           booking: { ...initialBooking },
+          isRescheduling: false,
+          rescheduleBookingId: null,
+          rescheduleReferenceCode: null,
         });
         // Clear persisted state from localStorage to prevent rehydration of old data
         localStorage.removeItem('camping-booking-storage');
@@ -285,7 +309,12 @@ export const useBookingStore = create<BookingState>()(
     }),
     {
       name: 'camping-booking-storage',
-      partialize: (state) => ({ booking: state.booking }),
+      partialize: (state) => ({
+        booking: state.booking,
+        isRescheduling: state.isRescheduling,
+        rescheduleBookingId: state.rescheduleBookingId,
+        rescheduleReferenceCode: state.rescheduleReferenceCode,
+      }),
     }
   )
 );
