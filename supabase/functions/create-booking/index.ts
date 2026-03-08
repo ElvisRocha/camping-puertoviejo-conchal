@@ -72,7 +72,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { booking, pricing }: BookingRequest = await req.json();
+    const { booking, pricing, paymentReceiptUrl }: BookingRequest = await req.json();
 
     if (!booking.checkIn || !booking.checkOut) {
       return new Response(
