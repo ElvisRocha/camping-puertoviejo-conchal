@@ -42,41 +42,38 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
   try {
     const trimmedCode = referenceCode.trim().toUpperCase();
 
-    // Use SECURITY DEFINER function to bypass RLS
-    const { data: details, error: rpcError } = await supabase
-      .rpc('get_booking_details_by_reference', { ref_code: trimmedCode });
+    // Call edge function which uses service_role to bypass RLS
+    const { data, error: fnError } = await supabase.functions.invoke('lookup-booking', {
+      body: { referenceCode: trimmedCode },
+    });
 
-    if (rpcError) {
-      return { bookingId: null, bookingData: null, error: new Error(rpcError.message), errorType: 'general' };
+    if (fnError) {
+      // Check response status from edge function error
+      const msg = fnError.message || '';
+      if (msg.includes('not_found') || fnError.context?.status === 404) {
+        return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
+      }
+      if (msg.includes('cancelled') || fnError.context?.status === 410) {
+        return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
+      }
+      return { bookingId: null, bookingData: null, error: new Error(msg), errorType: 'general' };
     }
 
-    const result = details as unknown as {
-      found: boolean;
-      booking?: Record<string, unknown>;
-      tents?: Record<string, unknown>[];
-      addons?: Record<string, unknown>[];
-      guest_info?: Record<string, unknown> | null;
-    };
-
-    if (!result?.found || !result.booking) {
+    if (!data?.booking) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
 
-    const bookingRow = result.booking;
-
-    if (bookingRow.status === 'cancelled') {
-      return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
-    }
+    const bookingRow = data.booking;
 
     // DB stores tent_type as '2-person'; frontend uses 'tent-2'
-    const rentedTents: TentSelection[] = (result.tents || []).map((t) => ({
+    const rentedTents: TentSelection[] = (data.tents || []).map((t: Record<string, unknown>) => ({
       tentId: String(t.tent_type).replace(/^(\d+)-person$/, 'tent-$1'),
       quantity: Number(t.quantity),
     }));
 
-    const addonIds: string[] = (result.addons || []).map((a) => String(a.addon_type));
+    const addonIds: string[] = (data.addons || []).map((a: Record<string, unknown>) => String(a.addon_type));
 
-    const g = result.guest_info;
+    const g = data.guestInfo;
     const guestInfo: GuestInfo = {
       fullName: String(g?.full_name || ''),
       email: String(g?.email || ''),
