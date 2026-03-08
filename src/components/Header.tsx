@@ -261,7 +261,10 @@ const Header = () => {
                 </button>
                 <button
                   className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
-                  onClick={() => setIsReserveOpen(false)}
+                  onClick={() => {
+                    setIsReserveOpen(false);
+                    setIsCancelModalOpen(true);
+                  }}
                 >
                   {t('nav.cancel_booking')}
                 </button>

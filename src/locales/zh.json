@@ -496,5 +496,37 @@
       "errorDescription": "无法更新您的预订，请重试。",
       "keepingCode": "您的预订参考代码保持不变："
     }
+  },
+  "cancelBooking": {
+    "modal": {
+      "title": "取消预订",
+      "subtitle": "输入您的预订参考代码以继续",
+      "label": "参考代码",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "验证",
+      "closeButton": "关闭",
+      "loading": "验证中...",
+      "errorNotFound": "未找到该代码对应的预订，请检查后重试。",
+      "errorGeneral": "验证代码时发生错误，请重试。",
+      "errorAlreadyCancelled": "此预订已被取消。"
+    },
+    "confirm": {
+      "title": "取消此预订？",
+      "subtitle": "请在确认取消前检查详情",
+      "referenceCode": "预订参考",
+      "checkIn": "入住",
+      "checkOut": "退房",
+      "guests": "客人",
+      "warning": "此操作无法撤销。取消后，您需要重新预订。",
+      "confirmButton": "是的，取消预订",
+      "backButton": "返回",
+      "processing": "取消中...",
+      "errorDescription": "无法取消预订，请重试。"
+    },
+    "success": {
+      "title": "预订已取消",
+      "description": "您的预订 {{code}} 已成功取消。期待再次见到您。",
+      "closeButton": "关闭"
+    }
   }
 }

@@ -496,5 +496,37 @@
       "errorDescription": "Could not update your booking. Please try again.",
       "keepingCode": "Your booking reference code remains:"
     }
+  },
+  "cancelBooking": {
+    "modal": {
+      "title": "Cancel Booking",
+      "subtitle": "Enter your booking reference code to continue",
+      "label": "Reference code",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Verify",
+      "closeButton": "Close",
+      "loading": "Verifying...",
+      "errorNotFound": "No booking found with that code. Please check and try again.",
+      "errorGeneral": "An error occurred while verifying the code. Please try again.",
+      "errorAlreadyCancelled": "This booking has already been cancelled."
+    },
+    "confirm": {
+      "title": "Cancel this booking?",
+      "subtitle": "Please review the details before confirming cancellation",
+      "referenceCode": "Booking reference",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "guests": "Guests",
+      "warning": "This action cannot be undone. Once cancelled, you will need to make a new booking if you wish to visit us.",
+      "confirmButton": "Yes, cancel booking",
+      "backButton": "Go back",
+      "processing": "Cancelling...",
+      "errorDescription": "Could not cancel the booking. Please try again."
+    },
+    "success": {
+      "title": "Booking cancelled",
+      "description": "Your booking {{code}} has been cancelled successfully. We hope to see you soon.",
+      "closeButton": "Close"
+    }
   }
 }
