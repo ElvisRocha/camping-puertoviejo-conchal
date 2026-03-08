@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 }
 
 const TENT_OPTIONS = [
@@ -13,7 +13,7 @@ const TENT_OPTIONS = [
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+    return new Response('ok', { headers: corsHeaders })
   }
 
   try {
@@ -28,6 +28,7 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get('EXTERNAL_SUPABASE_URL')
     const serviceRoleKey = Deno.env.get('EXTERNAL_SUPABASE_SERVICE_ROLE_KEY')
     if (!supabaseUrl || !serviceRoleKey) {
+      console.error('Missing external Supabase credentials:', { hasUrl: !!supabaseUrl, hasKey: !!serviceRoleKey })
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
         status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
@@ -35,11 +36,9 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, serviceRoleKey)
 
-    // Format dates
     const checkIn = booking.checkIn ? new Date(booking.checkIn).toISOString().split('T')[0] : undefined
     const checkOut = booking.checkOut ? new Date(booking.checkOut).toISOString().split('T')[0] : undefined
 
-    // Update main booking
     const { error: bookingError } = await supabase
       .from('bookings')
       .update({
@@ -60,7 +59,6 @@ Deno.serve(async (req) => {
 
     if (bookingError) throw bookingError
 
-    // Delete and re-insert tents
     await supabase.from('booking_tents').delete().eq('booking_id', bookingId)
 
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
@@ -77,7 +75,6 @@ Deno.serve(async (req) => {
       if (tentError) throw tentError
     }
 
-    // Update guest info
     if (booking.guestInfo) {
       const { error: guestError } = await supabase
         .from('guest_info')
@@ -94,7 +91,6 @@ Deno.serve(async (req) => {
       if (guestError) throw guestError
     }
 
-    // Delete and re-insert addons
     await supabase.from('booking_addons').delete().eq('booking_id', bookingId)
 
     if (booking.addOns?.length) {

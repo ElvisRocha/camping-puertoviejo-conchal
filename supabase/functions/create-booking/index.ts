@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 }
 
 interface TentSelection {
@@ -48,14 +48,12 @@ interface BookingRequest {
   pricing: PricingBreakdown;
 }
 
-// Tent options for price lookup
 const TENT_OPTIONS = [
   { id: 'tent-2', pricePerNight: 25 },
   { id: 'tent-4', pricePerNight: 40 },
   { id: 'tent-6', pricePerNight: 55 },
 ];
 
-// Add-ons for price lookup
 const ADD_ONS = [
   { id: 'breakfast', price: 12 },
   { id: 'dinner', price: 18 },
@@ -68,16 +66,13 @@ const ADD_ONS = [
 ];
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    // Parse request body
     const { booking, pricing }: BookingRequest = await req.json();
 
-    // Validation
     if (!booking.checkIn || !booking.checkOut) {
       return new Response(
         JSON.stringify({ error: 'Check-in and check-out dates are required' }),
@@ -110,7 +105,6 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Validate guest info
     if (!booking.guestInfo?.fullName?.trim() || !booking.guestInfo?.email?.trim() || !booking.guestInfo?.phone?.trim() || !booking.guestInfo?.country?.trim()) {
       return new Response(
         JSON.stringify({ error: 'Guest information is incomplete' }),
@@ -118,12 +112,19 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Create Supabase client with service role (bypasses RLS)
-    const supabaseUrl = Deno.env.get('EXTERNAL_SUPABASE_URL')!;
-    const supabaseServiceKey = Deno.env.get('EXTERNAL_SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabaseUrl = Deno.env.get('EXTERNAL_SUPABASE_URL');
+    const supabaseServiceKey = Deno.env.get('EXTERNAL_SUPABASE_SERVICE_ROLE_KEY');
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing external Supabase credentials:', { hasUrl: !!supabaseUrl, hasKey: !!supabaseServiceKey });
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // 1. Create main booking record
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
       .insert({
@@ -155,7 +156,6 @@ Deno.serve(async (req) => {
     const bookingId = bookingData.id;
     const referenceCode = bookingData.reference_code;
 
-    // 2. Insert rented tents if any
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
       const tentsToInsert = booking.accommodation.rentedTents.map((selection) => {
         const tent = TENT_OPTIONS.find(t => t.id === selection.tentId);
@@ -173,11 +173,9 @@ Deno.serve(async (req) => {
 
       if (tentsError) {
         console.error('Error inserting tents:', tentsError);
-        // Continue anyway - booking was created
       }
     }
 
-    // 3. Insert add-ons if any
     if (booking.addOns?.length) {
       const addonsToInsert = booking.addOns.map((addOnId) => {
         const addon = ADD_ONS.find(a => a.id === addOnId);
@@ -195,11 +193,9 @@ Deno.serve(async (req) => {
 
       if (addonsError) {
         console.error('Error inserting addons:', addonsError);
-        // Continue anyway - booking was created
       }
     }
 
-    // 4. Insert guest info
     if (booking.guestInfo) {
       const { error: guestError } = await supabase
         .from('guest_info')
@@ -216,11 +212,9 @@ Deno.serve(async (req) => {
 
       if (guestError) {
         console.error('Error inserting guest info:', guestError);
-        // Continue anyway - booking was created
       }
     }
 
-    // Return success with reference code
     return new Response(
       JSON.stringify({ referenceCode }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
