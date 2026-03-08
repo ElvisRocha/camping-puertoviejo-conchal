@@ -45,6 +45,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bookingSummary, setBookingSummary] = useState<BookingSummary | null>(null);
+  const lookupBookingDataRef = useRef<Partial<Booking> | null>(null);
 
   const handleClose = () => {
     setReferenceCode('');
