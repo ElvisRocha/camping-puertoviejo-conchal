@@ -25,6 +25,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isReserveOpen, setIsReserveOpen] = useState(false);
   const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const reserveMenuRef = useRef<HTMLDivElement>(null);
 
   // How long the Framer Motion exit animation takes for the mobile menu.
