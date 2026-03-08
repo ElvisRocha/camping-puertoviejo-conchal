@@ -40,44 +40,43 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const { data, error } = await supabase
-      .from('bookings')
-      .select(`
-        *,
-        guest_info(*),
-        booking_tents(*),
-        booking_addons(*)
-      `)
-      .eq('reference_code', referenceCode.trim().toUpperCase())
-      .single();
+    // Use the dedicated Supabase RPC function that searches by reference_code
+    const { data: bookingRows, error } = await supabase
+      .rpc('get_booking_by_reference', { ref_code: referenceCode.trim().toUpperCase() });
 
     if (error) {
-      if (error.code === 'PGRST116') {
-        return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
-      }
       return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
     }
 
-    if (!data) {
+    if (!bookingRows || bookingRows.length === 0) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
+
+    const data = bookingRows[0];
 
     if (data.status === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
     }
 
+    // Fetch related records in parallel
+    const [tentsResult, addonsResult, guestInfoResult] = await Promise.all([
+      supabase.from('booking_tents').select('*').eq('booking_id', data.id),
+      supabase.from('booking_addons').select('*').eq('booking_id', data.id),
+      supabase.from('guest_info').select('*').eq('booking_id', data.id).maybeSingle(),
+    ]);
+
     const checkIn = new Date(data.check_in + 'T12:00:00');
     const checkOut = new Date(data.check_out + 'T12:00:00');
     const nights = differenceInDays(checkOut, checkIn);
 
-    const rentedTents: TentSelection[] = (data.booking_tents || []).map((t: { tent_type: string; quantity: number }) => ({
+    const rentedTents: TentSelection[] = (tentsResult.data || []).map((t) => ({
       tentId: t.tent_type,
       quantity: t.quantity,
     }));
 
-    const addonIds: string[] = (data.booking_addons || []).map((a: { addon_type: string }) => a.addon_type);
+    const addonIds: string[] = (addonsResult.data || []).map((a) => a.addon_type);
 
-    const guestInfoRaw = Array.isArray(data.guest_info) ? data.guest_info[0] : data.guest_info;
+    const guestInfoRaw = guestInfoResult.data;
     const guestInfo: GuestInfo = {
       fullName: guestInfoRaw?.full_name || '',
       email: guestInfoRaw?.email || '',
