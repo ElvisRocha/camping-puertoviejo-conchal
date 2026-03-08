@@ -46,6 +46,7 @@ interface BookingRequest {
     guestInfo?: GuestInfo;
   };
   pricing: PricingBreakdown;
+  paymentReceiptUrl?: string;
 }
 
 const TENT_OPTIONS = [
