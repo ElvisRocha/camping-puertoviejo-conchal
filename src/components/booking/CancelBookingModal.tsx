@@ -52,6 +52,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
     setError(null);
     setStep('lookup');
     setBookingSummary(null);
+    lookupBookingDataRef.current = null;
     onClose();
   };
 
