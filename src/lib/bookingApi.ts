@@ -10,15 +10,25 @@ interface CreateBookingParams {
 
 export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
-    // Call the Edge Function which handles all inserts server-side with service role
-    const { data, error } = await supabase.functions.invoke('create-booking', {
-      body: { booking, pricing },
+    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+    const response = await fetch(`${cloudUrl}/functions/v1/create-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({ booking, pricing }),
     });
 
-    if (error) {
-      console.error('Edge function error:', error);
-      return { referenceCode: '', error: new Error(error.message || 'Failed to create booking') };
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      return { referenceCode: '', error: new Error(errBody.error || 'Failed to create booking') };
     }
+
+    const data = await response.json();
 
     if (!data?.referenceCode) {
       return { referenceCode: '', error: new Error('No reference code returned') };
