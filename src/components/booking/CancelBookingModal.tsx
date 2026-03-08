@@ -17,6 +17,7 @@ import { formatDualPrice } from '@/lib/priceFormat';
 interface CancelBookingModalProps {
   open: boolean;
   onClose: () => void;
+  onReschedule?: () => void;
 }
 
 type ModalStep = 'lookup' | 'confirm' | 'success';
