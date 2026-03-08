@@ -181,6 +181,16 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
 
         {step === 'confirm' && bookingSummary && (
           <>
+            {/* Back arrow button in top-right area */}
+            <button
+              onClick={() => { setStep('lookup'); setError(null); }}
+              disabled={isLoading}
+              className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+
             <DialogHeader>
               <DialogTitle className="font-heading text-xl text-destructive flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5" />
