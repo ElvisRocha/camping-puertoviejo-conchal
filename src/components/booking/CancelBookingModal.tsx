@@ -182,7 +182,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
         {step === 'confirm' && bookingSummary && (
           <>
             {/* Back arrow button in top-right area */}
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-4">
               <button
                 onClick={() => { setStep('lookup'); setError(null); }}
                 disabled={isLoading}
@@ -191,7 +191,6 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
-              <div className="h-6 w-px bg-border" />
               <DialogHeader className="flex-1">
               <DialogTitle className="font-heading text-xl text-destructive flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5" />
