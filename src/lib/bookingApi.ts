@@ -40,13 +40,25 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const { data, error } = await supabase.functions.invoke('lookup-booking', {
-      body: { referenceCode: referenceCode.trim().toUpperCase() },
+    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+    const response = await fetch(`${cloudUrl}/functions/v1/lookup-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({ referenceCode: referenceCode.trim().toUpperCase() }),
     });
 
-    if (error) {
-      return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      return { bookingId: null, bookingData: null, error: new Error(errBody.error || 'Failed to lookup booking'), errorType: 'general' };
     }
+
+    const data = await response.json();
 
     if (!data || !data.found) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
