@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Loader2, AlertCircle, AlertTriangle, CalendarX, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,8 @@ import {
 import { lookupBookingByReference, cancelBooking } from '@/lib/bookingApi';
 import { formatLocalizedDate } from '@/lib/dateLocale';
 import { formatDualPrice } from '@/lib/priceFormat';
+import { useBookingStore } from '@/store/bookingStore';
+import type { Booking } from '@/types/booking';
 
 interface CancelBookingModalProps {
   open: boolean;
@@ -34,18 +37,22 @@ interface BookingSummary {
 
 export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookingModalProps) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const { setReschedulingData } = useBookingStore();
 
   const [step, setStep] = useState<ModalStep>('lookup');
   const [referenceCode, setReferenceCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bookingSummary, setBookingSummary] = useState<BookingSummary | null>(null);
+  const lookupBookingDataRef = useRef<Partial<Booking> | null>(null);
 
   const handleClose = () => {
     setReferenceCode('');
     setError(null);
     setStep('lookup');
     setBookingSummary(null);
+    lookupBookingDataRef.current = null;
     onClose();
   };
 
@@ -71,6 +78,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
       return;
     }
 
+    lookupBookingDataRef.current = bookingData;
     setBookingSummary({
       id: bookingId,
       referenceCode: trimmed,
@@ -78,7 +86,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
       checkOut: bookingData.checkOut!,
       adults: bookingData.guests?.adults ?? 0,
       children: bookingData.guests?.children ?? 0,
-      total: 0, // We don't need total for cancel display
+      total: 0,
     });
     setStep('confirm');
   };
@@ -251,8 +259,14 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
                   <Button
                     variant="outline"
                     onClick={() => {
-                      handleClose();
-                      onReschedule();
+                      if (bookingSummary && lookupBookingDataRef.current) {
+                        setReschedulingData(bookingSummary.id, bookingSummary.referenceCode, lookupBookingDataRef.current);
+                        handleClose();
+                        navigate('/book');
+                      } else if (onReschedule) {
+                        handleClose();
+                        onReschedule();
+                      }
                     }}
                     disabled={isLoading}
                     className="font-body"
