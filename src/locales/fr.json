@@ -419,6 +419,18 @@
         "body1": "Votre emplacement au camping sera réservé en toute sécurité une fois que vous aurez confirmé. Le paiement s'effectuera directement à l'arrivée — sans complications, sans frais anticipés.",
         "body2": "Nous nous occupons de tout pour vous accueillir dans les meilleures conditions. Apportez simplement votre envie de vous déconnecter, nous nous chargeons du reste. Nous sommes ravis de partager cette expérience avec vous !",
         "body3": "🌿 Pour confirmer votre aventure, il suffit de verser 50 % du total lors de la réservation. Le reste se règle confortablement à votre arrivée. Simple comme bonjour !"
+      },
+      "receipt": {
+        "title": "Justificatif de paiement",
+        "description": "Téléchargez une photo ou capture d'écran de votre justificatif de virement ou dépôt de 50 %.",
+        "uploadButton": "Télécharger le justificatif",
+        "changeButton": "Changer le justificatif",
+        "uploading": "Téléchargement...",
+        "uploaded": "Justificatif téléchargé ✓",
+        "required": "Le justificatif de paiement est nécessaire pour confirmer votre réservation.",
+        "error": "Erreur lors du téléchargement. Veuillez réessayer.",
+        "maxSize": "Le fichier ne doit pas dépasser 5 Mo.",
+        "formats": "Formats acceptés : JPG, PNG, PDF"
       }
     },
     "confirmation": {

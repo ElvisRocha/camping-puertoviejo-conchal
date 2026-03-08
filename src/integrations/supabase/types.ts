@@ -96,6 +96,7 @@ export type Database = {
           created_at: string
           id: string
           infants: number
+          payment_receipt_url: string | null
           reference_code: string
           status: string
           subtotal: number
@@ -115,6 +116,7 @@ export type Database = {
           created_at?: string
           id?: string
           infants?: number
+          payment_receipt_url?: string | null
           reference_code?: string
           status?: string
           subtotal?: number
@@ -134,6 +136,7 @@ export type Database = {
           created_at?: string
           id?: string
           infants?: number
+          payment_receipt_url?: string | null
           reference_code?: string
           status?: string
           subtotal?: number
@@ -230,6 +233,7 @@ export type Database = {
           created_at: string
           id: string
           infants: number
+          payment_receipt_url: string | null
           reference_code: string
           status: string
           subtotal: number
