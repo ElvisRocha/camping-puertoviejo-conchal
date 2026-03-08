@@ -5,8 +5,8 @@
     "accommodations": "Alojamiento",
     "gallery": "Galería",
     "bookNow": "Reservar",
-    "reschedule": "Reagendar",
-    "cancel_booking": "Cancelar",
+    "reschedule": "Reagendar fecha",
+    "cancel_booking": "Cancelar fecha",
     "contact": "Contacto"
   },
   "gallery": {
