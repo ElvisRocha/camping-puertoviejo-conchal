@@ -185,7 +185,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
             <button
               onClick={() => { setStep('lookup'); setError(null); }}
               disabled={isLoading}
-              className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+              className="absolute left-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
               aria-label="Go back"
             >
               <ArrowLeft className="h-4 w-4" />
