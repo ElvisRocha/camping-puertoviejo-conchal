@@ -419,6 +419,18 @@
         "body1": "Your camping spot will be securely reserved once you confirm. Payment will be made directly upon arrival. No complications, no upfront charges.",
         "body2": "We'll take care of everything to make sure you're welcomed properly. Just bring your desire to disconnect, and we'll handle the rest. We're excited to share this experience with you!",
         "body3": "🌿 To secure your adventure, just pay 50% of the total when booking. The rest you can pay comfortably upon arrival. Easy as that!"
+      },
+      "receipt": {
+        "title": "Payment receipt",
+        "description": "Upload a photo or screenshot of your transfer or deposit receipt for the 50%.",
+        "uploadButton": "Upload receipt",
+        "changeButton": "Change receipt",
+        "uploading": "Uploading...",
+        "uploaded": "Receipt uploaded ✓",
+        "required": "The payment receipt is required to confirm your booking.",
+        "error": "Error uploading receipt. Please try again.",
+        "maxSize": "File must not exceed 5 MB.",
+        "formats": "Accepted formats: JPG, PNG, PDF"
       }
     },
     "confirmation": {
