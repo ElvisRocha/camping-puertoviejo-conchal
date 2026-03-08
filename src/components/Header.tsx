@@ -131,6 +131,10 @@ const Header = () => {
     <CancelBookingModal
       open={isCancelModalOpen}
       onClose={() => setIsCancelModalOpen(false)}
+      onReschedule={() => {
+        setIsCancelModalOpen(false);
+        setIsRescheduleModalOpen(true);
+      }}
     />
     {/* Skip to main content - accessibility */}
     <a

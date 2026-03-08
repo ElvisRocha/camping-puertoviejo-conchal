@@ -519,7 +519,8 @@
       "guests": "Huéspedes",
       "warning": "Esta acción no se puede deshacer. Una vez cancelada, deberás hacer una nueva reserva si deseas visitarnos.",
       "confirmButton": "Sí, cancelar reserva",
-      "backButton": "Volver",
+"backButton": "Volver",
+      "rescheduleButton": "No, reagendar reserva",
       "processing": "Cancelando...",
       "errorDescription": "No se pudo cancelar la reserva. Inténtalo de nuevo."
     },

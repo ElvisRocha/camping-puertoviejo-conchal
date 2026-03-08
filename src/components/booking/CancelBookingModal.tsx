@@ -243,14 +243,19 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
               )}
 
               <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                <Button
-                  variant="outline"
-                  onClick={() => { setStep('lookup'); setError(null); }}
-                  disabled={isLoading}
-                  className="font-body"
-                >
-                  {t('cancelBooking.confirm.backButton')}
-                </Button>
+                {onReschedule && (
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      handleClose();
+                      onReschedule();
+                    }}
+                    disabled={isLoading}
+                    className="font-body"
+                  >
+                    {t('cancelBooking.confirm.rescheduleButton')}
+                  </Button>
+                )}
                 <Button
                   variant="destructive"
                   onClick={handleConfirmCancel}
