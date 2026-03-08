@@ -200,8 +200,8 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
               <DialogDescription className="font-body text-muted-foreground">
                 {t('cancelBooking.confirm.subtitle')}
               </DialogDescription>
-            </DialogHeader>
-
+              </DialogHeader>
+            </div>
             <div className="space-y-4 pt-2">
               {/* Booking summary */}
               <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-3">
