@@ -511,8 +511,8 @@
       "errorAlreadyCancelled": "Esta reserva ya fue cancelada anteriormente."
     },
     "confirm": {
-      "title": "¿Cancelar esta reserva?",
-      "subtitle": "Por favor revisa los detalles antes de confirmar la cancelación",
+      "title": "Estás a punto de cancelar una experiencia inolvidable",
+      "subtitle": "¿Estás seguro de seguir adelante?",
       "referenceCode": "Código de reserva",
       "checkIn": "Llegada",
       "checkOut": "Salida",
