@@ -192,8 +192,10 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
             </button>
 
             <DialogHeader className="pt-6 text-center sm:text-center">
-              <DialogTitle className="font-heading text-xl text-destructive flex items-center justify-center gap-2">
-                <AlertTriangle className="h-5 w-5" />
+              <div className="flex justify-center mb-2">
+                <AlertTriangle className="h-6 w-6 text-destructive" />
+              </div>
+              <DialogTitle className="font-heading text-xl text-destructive">
                 {t('cancelBooking.confirm.title')}
               </DialogTitle>
               <DialogDescription className="font-body text-muted-foreground">
