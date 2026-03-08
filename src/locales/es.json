@@ -417,7 +417,8 @@
       "paymentInfo": {
         "title": "Tu reserva está casi lista",
         "body1": "Tu espacio en el camping quedará reservado de forma segura una vez que confirmes. El pago lo realizarás directamente al llegar. Sin complicaciones, sin cargos anticipados.",
-        "body2": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!"
+        "body2": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!",
+        "body3": "🌿 Para confirmar tu aventura, solo necesitas abonar el 50% del total al momento de reservar. El resto lo pagas cómodamente cuando llegues. ¡Así de fácil!"
       }
     },
     "confirmation": {
