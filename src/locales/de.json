@@ -417,7 +417,8 @@
       "paymentInfo": {
         "title": "Ihre Buchung ist fast fertig",
         "body1": "Ihr Campingplatz wird sicher reserviert, sobald Sie bestätigen. Die Bezahlung erfolgt direkt bei der Ankunft — unkompliziert, ohne Vorauszahlungen.",
-        "body2": "Wir sorgen dafür, dass alles für Ihren Empfang vorbereitet ist. Bringen Sie einfach Ihre Lust zum Abschalten mit — wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!"
+        "body2": "Wir sorgen dafür, dass alles für Ihren Empfang vorbereitet ist. Bringen Sie einfach Ihre Lust zum Abschalten mit — wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!",
+        "body3": "🌿 Um Ihr Abenteuer zu sichern, zahlen Sie bei der Buchung einfach 50 % des Gesamtbetrags. Den Rest begleichen Sie bequem bei Ihrer Ankunft. So einfach ist das!"
       }
     },
     "confirmation": {

@@ -99,6 +99,9 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
             <p className="text-sm text-foreground/80 leading-relaxed">
               {t('booking.step5.paymentInfo.body2')}
             </p>
+            <p className="text-sm font-medium text-forest leading-relaxed mt-1">
+              {t('booking.step5.paymentInfo.body3')}
+            </p>
           </div>
         </div>
       </div>
