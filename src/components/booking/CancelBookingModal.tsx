@@ -32,7 +32,7 @@ interface BookingSummary {
   total: number;
 }
 
-export function CancelBookingModal({ open, onClose }: CancelBookingModalProps) {
+export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookingModalProps) {
   const { t, i18n } = useTranslation();
 
   const [step, setStep] = useState<ModalStep>('lookup');
