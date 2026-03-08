@@ -160,3 +160,30 @@ export async function updateBooking({ bookingId, booking, pricing }: UpdateBooki
     return { error: error as Error };
   }
 }
+
+export async function cancelBooking(bookingId: string): Promise<{ error: Error | null }> {
+  try {
+    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+    const response = await fetch(`${cloudUrl}/functions/v1/cancel-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({ bookingId }),
+    });
+
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      throw new Error(errBody.error || 'Failed to cancel booking');
+    }
+
+    return { error: null };
+  } catch (error) {
+    console.error('Error cancelling booking:', error);
+    return { error: error as Error };
+  }
+}

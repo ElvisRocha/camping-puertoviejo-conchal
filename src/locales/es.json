@@ -496,5 +496,37 @@
       "errorDescription": "No se pudo actualizar la reserva. Inténtalo de nuevo.",
       "keepingCode": "Se mantiene tu código de reserva:"
     }
+  },
+  "cancelBooking": {
+    "modal": {
+      "title": "Cancelar reserva",
+      "subtitle": "Ingresa el código de referencia de tu reserva para continuar",
+      "label": "Código de referencia",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Verificar",
+      "closeButton": "Cerrar",
+      "loading": "Verificando...",
+      "errorNotFound": "No se encontró ninguna reserva con ese código. Verifica que sea correcto.",
+      "errorGeneral": "Ocurrió un error al verificar el código. Inténtalo de nuevo.",
+      "errorAlreadyCancelled": "Esta reserva ya fue cancelada anteriormente."
+    },
+    "confirm": {
+      "title": "¿Cancelar esta reserva?",
+      "subtitle": "Por favor revisa los detalles antes de confirmar la cancelación",
+      "referenceCode": "Código de reserva",
+      "checkIn": "Llegada",
+      "checkOut": "Salida",
+      "guests": "Huéspedes",
+      "warning": "Esta acción no se puede deshacer. Una vez cancelada, deberás hacer una nueva reserva si deseas visitarnos.",
+      "confirmButton": "Sí, cancelar reserva",
+      "backButton": "Volver",
+      "processing": "Cancelando...",
+      "errorDescription": "No se pudo cancelar la reserva. Inténtalo de nuevo."
+    },
+    "success": {
+      "title": "Reserva cancelada",
+      "description": "Tu reserva {{code}} ha sido cancelada exitosamente. Esperamos verte pronto.",
+      "closeButton": "Cerrar"
+    }
   }
 }

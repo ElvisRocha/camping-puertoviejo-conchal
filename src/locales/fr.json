@@ -496,5 +496,37 @@
       "errorDescription": "Impossible de mettre à jour votre réservation. Veuillez réessayer.",
       "keepingCode": "Votre code de référence reste :"
     }
+  },
+  "cancelBooking": {
+    "modal": {
+      "title": "Annuler la réservation",
+      "subtitle": "Entrez votre code de référence pour continuer",
+      "label": "Code de référence",
+      "placeholder": "CPVC-XXXXX",
+      "verifyButton": "Vérifier",
+      "closeButton": "Fermer",
+      "loading": "Vérification...",
+      "errorNotFound": "Aucune réservation trouvée avec ce code. Veuillez vérifier et réessayer.",
+      "errorGeneral": "Une erreur s'est produite lors de la vérification. Veuillez réessayer.",
+      "errorAlreadyCancelled": "Cette réservation a déjà été annulée."
+    },
+    "confirm": {
+      "title": "Annuler cette réservation ?",
+      "subtitle": "Veuillez vérifier les détails avant de confirmer l'annulation",
+      "referenceCode": "Code de réservation",
+      "checkIn": "Arrivée",
+      "checkOut": "Départ",
+      "guests": "Invités",
+      "warning": "Cette action est irréversible. Une fois annulée, vous devrez effectuer une nouvelle réservation.",
+      "confirmButton": "Oui, annuler la réservation",
+      "backButton": "Retour",
+      "processing": "Annulation...",
+      "errorDescription": "Impossible d'annuler la réservation. Veuillez réessayer."
+    },
+    "success": {
+      "title": "Réservation annulée",
+      "description": "Votre réservation {{code}} a été annulée avec succès. Nous espérons vous revoir bientôt.",
+      "closeButton": "Fermer"
+    }
   }
 }
