@@ -518,6 +518,7 @@
       "checkOut": "Salida",
       "guests": "Huéspedes",
       "warning": "Esta acción no se puede deshacer. Una vez cancelada, deberás hacer una nueva reserva si deseas visitarnos.",
+      "noRefund": "Recuerda que el monto de reserva no puede ser reembolsado según las políticas y el acuerdo de condiciones.",
       "confirmButton": "Sí, cancelar reserva",
 "backButton": "Volver",
       "rescheduleButton": "No, reagendar reserva",

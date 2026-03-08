@@ -518,6 +518,7 @@
       "checkOut": "Check-out",
       "guests": "Gäste",
       "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Nach der Stornierung müssen Sie eine neue Buchung vornehmen.",
+      "noRefund": "Bitte beachten Sie, dass der Buchungsbetrag gemäß den Richtlinien und Bedingungen nicht erstattet werden kann.",
       "confirmButton": "Ja, Buchung stornieren",
 "backButton": "Zurück",
       "rescheduleButton": "Nein, Buchung umbuchen",
