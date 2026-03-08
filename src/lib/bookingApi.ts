@@ -10,15 +10,25 @@ interface CreateBookingParams {
 
 export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
-    // Call the Edge Function which handles all inserts server-side with service role
-    const { data, error } = await supabase.functions.invoke('create-booking', {
-      body: { booking, pricing },
+    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+    const response = await fetch(`${cloudUrl}/functions/v1/create-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({ booking, pricing }),
     });
 
-    if (error) {
-      console.error('Edge function error:', error);
-      return { referenceCode: '', error: new Error(error.message || 'Failed to create booking') };
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      return { referenceCode: '', error: new Error(errBody.error || 'Failed to create booking') };
     }
+
+    const data = await response.json();
 
     if (!data?.referenceCode) {
       return { referenceCode: '', error: new Error('No reference code returned') };
@@ -126,65 +136,22 @@ interface UpdateBookingParams {
 
 export async function updateBooking({ bookingId, booking, pricing }: UpdateBookingParams): Promise<{ error: Error | null }> {
   try {
-    const checkInStr = booking.checkIn instanceof Date
-      ? booking.checkIn.toISOString().split('T')[0]
-      : String(booking.checkIn);
-    const checkOutStr = booking.checkOut instanceof Date
-      ? booking.checkOut.toISOString().split('T')[0]
-      : String(booking.checkOut);
+    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-    const { error: bookingError } = await supabase
-      .from('bookings')
-      .update({
-        check_in: checkInStr,
-        check_out: checkOutStr,
-        adults: booking.guests?.adults ?? 0,
-        children: booking.guests?.children ?? 0,
-        infants: booking.guests?.infants ?? 0,
-        bring_own_tent: booking.accommodation?.bringOwnTent ?? true,
-        campsite_fee: pricing.campsiteFee,
-        tent_rental_fee: pricing.tentRental,
-        addons_fee: pricing.addOns,
-        subtotal: pricing.subtotal,
-        taxes: pricing.taxes,
-        total: pricing.total,
-      })
-      .eq('id', bookingId);
+    const response = await fetch(`${cloudUrl}/functions/v1/update-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'apikey': anonKey,
+      },
+      body: JSON.stringify({ bookingId, booking, pricing }),
+    });
 
-    if (bookingError) throw bookingError;
-
-    // Delete and re-insert tents
-    await supabase.from('booking_tents').delete().eq('booking_id', bookingId);
-
-    if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
-      const tentInserts = booking.accommodation.rentedTents.map((t) => {
-        const tentOption = TENT_OPTIONS.find((opt) => opt.id === t.tentId);
-        return {
-          booking_id: bookingId,
-          tent_type: t.tentId,
-          quantity: t.quantity,
-          price_per_night: tentOption?.pricePerNight ?? 0,
-        };
-      });
-      const { error: tentError } = await supabase.from('booking_tents').insert(tentInserts);
-      if (tentError) throw tentError;
-    }
-
-    // Update guest info
-    if (booking.guestInfo) {
-      const { error: guestError } = await supabase
-        .from('guest_info')
-        .update({
-          full_name: booking.guestInfo.fullName,
-          email: booking.guestInfo.email,
-          phone: booking.guestInfo.phone,
-          country: booking.guestInfo.country,
-          arrival_time: booking.guestInfo.arrivalTime || null,
-          special_requests: booking.guestInfo.specialRequests || null,
-          celebrating_occasion: booking.guestInfo.celebratingOccasion || null,
-        })
-        .eq('booking_id', bookingId);
-      if (guestError) throw guestError;
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => ({}));
+      throw new Error(errBody.error || 'Failed to update booking');
     }
 
     return { error: null };

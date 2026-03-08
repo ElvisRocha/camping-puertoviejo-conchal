@@ -1,0 +1,129 @@
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1'
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+const TENT_OPTIONS = [
+  { id: 'tent-2', pricePerNight: 25 },
+  { id: 'tent-4', pricePerNight: 40 },
+  { id: 'tent-6', pricePerNight: 55 },
+]
+
+Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
+
+  try {
+    const { bookingId, booking, pricing } = await req.json()
+
+    if (!bookingId) {
+      return new Response(JSON.stringify({ error: 'Booking ID is required' }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    if (!supabaseUrl || !serviceRoleKey) {
+      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey)
+
+    // Format dates
+    const checkIn = booking.checkIn ? new Date(booking.checkIn).toISOString().split('T')[0] : undefined
+    const checkOut = booking.checkOut ? new Date(booking.checkOut).toISOString().split('T')[0] : undefined
+
+    // Update main booking
+    const { error: bookingError } = await supabase
+      .from('bookings')
+      .update({
+        ...(checkIn && { check_in: checkIn }),
+        ...(checkOut && { check_out: checkOut }),
+        adults: booking.guests?.adults ?? 0,
+        children: booking.guests?.children ?? 0,
+        infants: booking.guests?.infants ?? 0,
+        bring_own_tent: booking.accommodation?.bringOwnTent ?? true,
+        campsite_fee: pricing.campsiteFee,
+        tent_rental_fee: pricing.tentRental,
+        addons_fee: pricing.addOns,
+        subtotal: pricing.subtotal,
+        taxes: pricing.taxes,
+        total: pricing.total,
+      })
+      .eq('id', bookingId)
+
+    if (bookingError) throw bookingError
+
+    // Delete and re-insert tents
+    await supabase.from('booking_tents').delete().eq('booking_id', bookingId)
+
+    if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
+      const tentsToInsert = booking.accommodation.rentedTents.map((t: any) => {
+        const tent = TENT_OPTIONS.find(o => o.id === t.tentId)
+        return {
+          booking_id: bookingId,
+          tent_type: t.tentId,
+          quantity: t.quantity,
+          price_per_night: tent?.pricePerNight ?? 0,
+        }
+      })
+      const { error: tentError } = await supabase.from('booking_tents').insert(tentsToInsert)
+      if (tentError) throw tentError
+    }
+
+    // Update guest info
+    if (booking.guestInfo) {
+      const { error: guestError } = await supabase
+        .from('guest_info')
+        .update({
+          full_name: booking.guestInfo.fullName,
+          email: booking.guestInfo.email,
+          phone: booking.guestInfo.phone,
+          country: booking.guestInfo.country,
+          arrival_time: booking.guestInfo.arrivalTime || null,
+          special_requests: booking.guestInfo.specialRequests || null,
+          celebrating_occasion: booking.guestInfo.celebratingOccasion || null,
+        })
+        .eq('booking_id', bookingId)
+      if (guestError) throw guestError
+    }
+
+    // Delete and re-insert addons
+    await supabase.from('booking_addons').delete().eq('booking_id', bookingId)
+
+    if (booking.addOns?.length) {
+      const ADD_ONS = [
+        { id: 'breakfast', price: 12 }, { id: 'dinner', price: 18 },
+        { id: 'kayak', price: 25 }, { id: 'bonfire', price: 15 },
+        { id: 'hiking', price: 20 }, { id: 'sunset-cruise', price: 45 },
+        { id: 'yoga', price: 15 }, { id: 'fishing', price: 30 },
+      ]
+      const addonsToInsert = booking.addOns.map((addOnId: string) => {
+        const addon = ADD_ONS.find(a => a.id === addOnId)
+        return {
+          booking_id: bookingId,
+          addon_type: addOnId,
+          quantity: 1,
+          price: addon?.price ?? 0,
+        }
+      })
+      const { error: addonError } = await supabase.from('booking_addons').insert(addonsToInsert)
+      if (addonError) throw addonError
+    }
+
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  } catch (error) {
+    console.error('update-booking error:', error)
+    return new Response(JSON.stringify({ error: error.message || 'Internal server error' }), {
+      status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+})
