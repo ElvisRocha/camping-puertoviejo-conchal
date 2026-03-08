@@ -473,6 +473,7 @@
     }
   },
   "reschedule": {
+    "banner": "Estás editando tu reserva {{code}} — tus datos originales están precargados",
     "modal": {
       "title": "Cambiar fecha de reserva",
       "subtitle": "Ingresa el código de referencia de tu reserva para continuar",
