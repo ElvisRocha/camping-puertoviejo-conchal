@@ -40,52 +40,30 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    // Use the dedicated Supabase RPC function that searches by reference_code
-    const { data: bookingRows, error } = await supabase
-      .rpc('get_booking_by_reference', { ref_code: referenceCode.trim().toUpperCase() });
+    // Use Edge Function with service role to bypass RLS and fetch all related data
+    const { data, error } = await supabase.functions.invoke('lookup-booking', {
+      body: { ref_code: referenceCode.trim().toUpperCase() },
+    });
 
     if (error) {
       return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
     }
 
-    if (!bookingRows || bookingRows.length === 0) {
+    if (data?.error === 'not_found') {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
 
-    const data = bookingRows[0];
-
-    if (data.status === 'cancelled') {
+    if (data?.error === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
     }
 
-    // Fetch related records in parallel
-    const [tentsResult, addonsResult, guestInfoResult] = await Promise.all([
-      supabase.from('booking_tents').select('*').eq('booking_id', data.id),
-      supabase.from('booking_addons').select('*').eq('booking_id', data.id),
-      supabase.from('guest_info').select('*').eq('booking_id', data.id).maybeSingle(),
-    ]);
+    if (data?.error || !data?.id) {
+      return { bookingId: null, bookingData: null, error: new Error(data?.error || 'Unknown error'), errorType: 'general' };
+    }
 
-    const checkIn = new Date(data.check_in + 'T12:00:00');
-    const checkOut = new Date(data.check_out + 'T12:00:00');
+    const checkIn = new Date(data.checkIn + 'T12:00:00');
+    const checkOut = new Date(data.checkOut + 'T12:00:00');
     const nights = differenceInDays(checkOut, checkIn);
-
-    const rentedTents: TentSelection[] = (tentsResult.data || []).map((t) => ({
-      tentId: t.tent_type,
-      quantity: t.quantity,
-    }));
-
-    const addonIds: string[] = (addonsResult.data || []).map((a) => a.addon_type);
-
-    const guestInfoRaw = guestInfoResult.data;
-    const guestInfo: GuestInfo = {
-      fullName: guestInfoRaw?.full_name || '',
-      email: guestInfoRaw?.email || '',
-      phone: guestInfoRaw?.phone || '',
-      country: guestInfoRaw?.country || '',
-      arrivalTime: guestInfoRaw?.arrival_time || '',
-      specialRequests: guestInfoRaw?.special_requests || '',
-      celebratingOccasion: guestInfoRaw?.celebrating_occasion || '',
-    };
 
     const bookingData: Partial<Booking> = {
       checkIn,
@@ -97,11 +75,11 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
         infants: data.infants,
       },
       accommodation: {
-        bringOwnTent: data.bring_own_tent,
-        rentedTents,
+        bringOwnTent: data.bringOwnTent,
+        rentedTents: data.tents as TentSelection[],
       },
-      addOns: addonIds,
-      guestInfo,
+      addOns: data.addonIds as string[],
+      guestInfo: data.guestInfo as GuestInfo,
       status: data.status as 'pending' | 'confirmed' | 'cancelled',
     };
 
@@ -153,9 +131,11 @@ export async function updateBooking({ bookingId, booking, pricing }: UpdateBooki
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
       const tentInserts = booking.accommodation.rentedTents.map((t) => {
         const tentOption = TENT_OPTIONS.find((opt) => opt.id === t.tentId);
+        // DB stores tent_type as '2-person', '4-person', '6-person'
+        const dbTentType = t.tentId.replace('tent-', '') + '-person';
         return {
           booking_id: bookingId,
-          tent_type: t.tentId,
+          tent_type: dbTentType,
           quantity: t.quantity,
           price_per_night: tentOption?.pricePerNight ?? 0,
         };
