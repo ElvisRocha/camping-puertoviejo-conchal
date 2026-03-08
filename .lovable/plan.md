@@ -1,26 +1,23 @@
 
 
-## Plan: Tildar la "o" en contextos de precios (₡ ó $)
+## Plan: Fix reschedule pre-fill by using the existing `get_booking_details_by_reference` RPC
 
-### Problema
-En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
+### Problem
+The current `lookupBookingByReference` function in `bookingApi.ts` fetches the booking via `get_booking_by_reference` (works, SECURITY DEFINER), but then queries `booking_tents`, `booking_addons`, and `guest_info` tables directly. These tables have RLS policies that only allow admin SELECT, so anonymous users get empty results -- meaning tents, addons, and guest info are never pre-filled.
 
-### Cambios
+There is already a database function `get_booking_details_by_reference` (SECURITY DEFINER) that returns all data (booking + tents + addons + guest_info) in a single JSON response, bypassing RLS.
 
-**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
-- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
-- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
+### Changes
 
-**2. Archivos de traducciones - textos estaticos con precios**
-Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
+**1. `src/lib/bookingApi.ts` -- Rewrite `lookupBookingByReference`**
+- Replace the current multi-query approach with a single call to `supabase.rpc('get_booking_details_by_reference', { ref_code })`.
+- Parse the returned JSON to extract booking, tents, addons, and guest_info.
+- Map them into the same `Partial<Booking>` shape already expected by `setReschedulingData`.
 
-- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
-- `src/locales/en.json`: mismos campos
-- `src/locales/fr.json`: mismos campos
-- `src/locales/de.json`: mismos campos
-- `src/locales/ru.json`: mismos campos
-- `src/locales/zh.json`: mismos campos
+This single change fixes everything: dates, guests, accommodation, addons, and all guest info fields (name, email, phone, country, arrival time, special requests, celebrating occasion) will be properly loaded and pre-filled across all booking steps.
 
-### Alcance
-- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
-- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1
+### Why no other changes are needed
+- `setReschedulingData` in the store already merges the full `bookingData` into `booking` state.
+- `Step1Dates`, `Step2Guests`, `Step4Summary` all read from `booking` state, so pre-filled data automatically appears in all form fields.
+- Error handling (not_found, cancelled) remains the same.
+
