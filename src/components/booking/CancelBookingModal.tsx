@@ -259,8 +259,14 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
                   <Button
                     variant="outline"
                     onClick={() => {
-                      handleClose();
-                      onReschedule();
+                      if (bookingSummary && lookupBookingDataRef.current) {
+                        setReschedulingData(bookingSummary.id, bookingSummary.referenceCode, lookupBookingDataRef.current);
+                        handleClose();
+                        navigate('/book');
+                      } else if (onReschedule) {
+                        handleClose();
+                        onReschedule();
+                      }
                     }}
                     disabled={isLoading}
                     className="font-body"
