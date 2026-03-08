@@ -40,58 +40,29 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const trimmedCode = referenceCode.trim().toUpperCase();
+    // Use Edge Function with service role to bypass RLS and fetch all related data
+    const { data, error } = await supabase.functions.invoke('lookup-booking', {
+      body: { ref_code: referenceCode.trim().toUpperCase() },
+    });
 
-    // Query bookings table directly by reference_code
-    const { data: bookingRow, error: bookingError } = await supabase
-      .from('bookings')
-      .select('*')
-      .eq('reference_code', trimmedCode)
-      .single();
-
-    if (bookingError) {
-      if (bookingError.code === 'PGRST116') {
-        return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
-      }
-      return { bookingId: null, bookingData: null, error: new Error(bookingError.message), errorType: 'general' };
+    if (error) {
+      return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
     }
 
-    if (!bookingRow) {
+    if (data?.error === 'not_found') {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
 
-    if (bookingRow.status === 'cancelled') {
+    if (data?.error === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
     }
 
-    // Fetch related records in parallel using booking_id
-    const [tentsResult, addonsResult, guestInfoResult] = await Promise.all([
-      supabase.from('booking_tents').select('*').eq('booking_id', bookingRow.id),
-      supabase.from('booking_addons').select('*').eq('booking_id', bookingRow.id),
-      supabase.from('guest_info').select('*').eq('booking_id', bookingRow.id).maybeSingle(),
-    ]);
+    if (data?.error || !data?.id) {
+      return { bookingId: null, bookingData: null, error: new Error(data?.error || 'Unknown error'), errorType: 'general' };
+    }
 
-    // DB stores tent_type as '2-person'; frontend uses 'tent-2'
-    const rentedTents: TentSelection[] = (tentsResult.data || []).map((t) => ({
-      tentId: t.tent_type.replace(/^(\d+)-person$/, 'tent-$1'),
-      quantity: t.quantity,
-    }));
-
-    const addonIds: string[] = (addonsResult.data || []).map((a) => a.addon_type);
-
-    const g = guestInfoResult.data;
-    const guestInfo: GuestInfo = {
-      fullName: g?.full_name || '',
-      email: g?.email || '',
-      phone: g?.phone || '',
-      country: g?.country || '',
-      arrivalTime: g?.arrival_time || '',
-      specialRequests: g?.special_requests || '',
-      celebratingOccasion: g?.celebrating_occasion || '',
-    };
-
-    const checkIn = new Date(bookingRow.check_in + 'T12:00:00');
-    const checkOut = new Date(bookingRow.check_out + 'T12:00:00');
+    const checkIn = new Date(data.checkIn + 'T12:00:00');
+    const checkOut = new Date(data.checkOut + 'T12:00:00');
     const nights = differenceInDays(checkOut, checkIn);
 
     const bookingData: Partial<Booking> = {
@@ -99,20 +70,20 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
       checkOut,
       nights,
       guests: {
-        adults: bookingRow.adults,
-        children: bookingRow.children,
-        infants: bookingRow.infants,
+        adults: data.adults,
+        children: data.children,
+        infants: data.infants,
       },
       accommodation: {
-        bringOwnTent: bookingRow.bring_own_tent,
-        rentedTents,
+        bringOwnTent: data.bringOwnTent,
+        rentedTents: data.tents as TentSelection[],
       },
-      addOns: addonIds,
-      guestInfo,
-      status: bookingRow.status as 'pending' | 'confirmed' | 'cancelled',
+      addOns: data.addonIds as string[],
+      guestInfo: data.guestInfo as GuestInfo,
+      status: data.status as 'pending' | 'confirmed' | 'cancelled',
     };
 
-    return { bookingId: bookingRow.id, bookingData, error: null };
+    return { bookingId: data.id, bookingData, error: null };
   } catch (error) {
     console.error('Error looking up booking:', error);
     return { bookingId: null, bookingData: null, error: error as Error, errorType: 'general' };
@@ -160,8 +131,8 @@ export async function updateBooking({ bookingId, booking, pricing }: UpdateBooki
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
       const tentInserts = booking.accommodation.rentedTents.map((t) => {
         const tentOption = TENT_OPTIONS.find((opt) => opt.id === t.tentId);
-        // Convert frontend ID 'tent-2' back to DB format '2-person'
-        const dbTentType = t.tentId.replace(/^tent-(\d+)$/, '$1-person');
+        // DB stores tent_type as '2-person', '4-person', '6-person'
+        const dbTentType = t.tentId.replace('tent-', '') + '-person';
         return {
           booking_id: bookingId,
           tent_type: dbTentType,

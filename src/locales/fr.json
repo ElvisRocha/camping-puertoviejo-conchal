@@ -473,7 +473,6 @@
     }
   },
   "reschedule": {
-    "banner": "Vous modifiez la réservation {{code}} — vos données originales sont préremplies",
     "modal": {
       "title": "Modifier la réservation",
       "subtitle": "Entrez votre code de référence pour continuer",

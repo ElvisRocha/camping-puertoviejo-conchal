@@ -473,7 +473,6 @@
     }
   },
   "reschedule": {
-    "banner": "You are editing booking {{code}} — your original data is pre-filled",
     "modal": {
       "title": "Reschedule Booking",
       "subtitle": "Enter your booking reference code to continue",

@@ -473,7 +473,6 @@
     }
   },
   "reschedule": {
-    "banner": "正在编辑预订 {{code}} — 您的原始数据已预填",
     "modal": {
       "title": "改期预订",
       "subtitle": "输入您的预订参考代码以继续",
