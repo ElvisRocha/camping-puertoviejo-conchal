@@ -519,7 +519,8 @@
       "guests": "Gäste",
       "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Nach der Stornierung müssen Sie eine neue Buchung vornehmen.",
       "confirmButton": "Ja, Buchung stornieren",
-      "backButton": "Zurück",
+"backButton": "Zurück",
+      "rescheduleButton": "Nein, Buchung umbuchen",
       "processing": "Stornierung...",
       "errorDescription": "Die Buchung konnte nicht storniert werden. Bitte versuchen Sie es erneut."
     },

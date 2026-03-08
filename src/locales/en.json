@@ -519,7 +519,8 @@
       "guests": "Guests",
       "warning": "This action cannot be undone. Once cancelled, you will need to make a new booking if you wish to visit us.",
       "confirmButton": "Yes, cancel booking",
-      "backButton": "Go back",
+"backButton": "Go back",
+      "rescheduleButton": "No, reschedule booking",
       "processing": "Cancelling...",
       "errorDescription": "Could not cancel the booking. Please try again."
     },

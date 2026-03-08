@@ -519,7 +519,8 @@
       "guests": "客人",
       "warning": "此操作无法撤销。取消后，您需要重新预订。",
       "confirmButton": "是的，取消预订",
-      "backButton": "返回",
+"backButton": "返回",
+      "rescheduleButton": "不，改期预订",
       "processing": "取消中...",
       "errorDescription": "无法取消预订，请重试。"
     },

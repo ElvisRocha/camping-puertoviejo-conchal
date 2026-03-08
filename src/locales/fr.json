@@ -519,7 +519,8 @@
       "guests": "Invités",
       "warning": "Cette action est irréversible. Une fois annulée, vous devrez effectuer une nouvelle réservation.",
       "confirmButton": "Oui, annuler la réservation",
-      "backButton": "Retour",
+"backButton": "Retour",
+      "rescheduleButton": "Non, reprogrammer la réservation",
       "processing": "Annulation...",
       "errorDescription": "Impossible d'annuler la réservation. Veuillez réessayer."
     },

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader2, AlertCircle, AlertTriangle, CalendarX, CheckCircle2 } from 'lucide-react';
+import { Loader2, AlertCircle, AlertTriangle, CalendarX, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -17,6 +17,7 @@ import { formatDualPrice } from '@/lib/priceFormat';
 interface CancelBookingModalProps {
   open: boolean;
   onClose: () => void;
+  onReschedule?: () => void;
 }
 
 type ModalStep = 'lookup' | 'confirm' | 'success';
@@ -31,7 +32,7 @@ interface BookingSummary {
   total: number;
 }
 
-export function CancelBookingModal({ open, onClose }: CancelBookingModalProps) {
+export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookingModalProps) {
   const { t, i18n } = useTranslation();
 
   const [step, setStep] = useState<ModalStep>('lookup');
@@ -180,6 +181,16 @@ export function CancelBookingModal({ open, onClose }: CancelBookingModalProps) {
 
         {step === 'confirm' && bookingSummary && (
           <>
+            {/* Back arrow button in top-right area */}
+            <button
+              onClick={() => { setStep('lookup'); setError(null); }}
+              disabled={isLoading}
+              className="absolute right-12 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+
             <DialogHeader>
               <DialogTitle className="font-heading text-xl text-destructive flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5" />
@@ -232,14 +243,19 @@ export function CancelBookingModal({ open, onClose }: CancelBookingModalProps) {
               )}
 
               <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                <Button
-                  variant="outline"
-                  onClick={() => { setStep('lookup'); setError(null); }}
-                  disabled={isLoading}
-                  className="font-body"
-                >
-                  {t('cancelBooking.confirm.backButton')}
-                </Button>
+                {onReschedule && (
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      handleClose();
+                      onReschedule();
+                    }}
+                    disabled={isLoading}
+                    className="font-body"
+                  >
+                    {t('cancelBooking.confirm.rescheduleButton')}
+                  </Button>
+                )}
                 <Button
                   variant="destructive"
                   onClick={handleConfirmCancel}
