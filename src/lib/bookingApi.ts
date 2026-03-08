@@ -40,42 +40,43 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const { data, error } = await supabase.functions.invoke('lookup-booking', {
-      body: { referenceCode: referenceCode.trim().toUpperCase() },
-    });
+    // Use the dedicated Supabase RPC function that searches by reference_code
+    const { data: bookingRows, error } = await supabase
+      .rpc('get_booking_by_reference', { ref_code: referenceCode.trim().toUpperCase() });
 
     if (error) {
       return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
     }
 
-    if (data?.errorType === 'not_found') {
+    if (!bookingRows || bookingRows.length === 0) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
 
-    if (data?.errorType === 'cancelled') {
+    const data = bookingRows[0];
+
+    if (data.status === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
     }
 
-    if (data?.errorType) {
-      return { bookingId: null, bookingData: null, error: new Error(data.error), errorType: 'general' };
-    }
+    // Fetch related records in parallel
+    const [tentsResult, addonsResult, guestInfoResult] = await Promise.all([
+      supabase.from('booking_tents').select('*').eq('booking_id', data.id),
+      supabase.from('booking_addons').select('*').eq('booking_id', data.id),
+      supabase.from('guest_info').select('*').eq('booking_id', data.id).maybeSingle(),
+    ]);
 
-    const booking = data.booking;
-    const tents = data.tents || [];
-    const addons = data.addons || [];
-    const guestInfoRaw = data.guestInfo;
-
-    const checkIn = new Date(booking.check_in + 'T12:00:00');
-    const checkOut = new Date(booking.check_out + 'T12:00:00');
+    const checkIn = new Date(data.check_in + 'T12:00:00');
+    const checkOut = new Date(data.check_out + 'T12:00:00');
     const nights = differenceInDays(checkOut, checkIn);
 
-    const rentedTents: TentSelection[] = tents.map((t: any) => ({
+    const rentedTents: TentSelection[] = (tentsResult.data || []).map((t) => ({
       tentId: t.tent_type,
       quantity: t.quantity,
     }));
 
-    const addonIds: string[] = addons.map((a: any) => a.addon_type);
+    const addonIds: string[] = (addonsResult.data || []).map((a) => a.addon_type);
 
+    const guestInfoRaw = guestInfoResult.data;
     const guestInfo: GuestInfo = {
       fullName: guestInfoRaw?.full_name || '',
       email: guestInfoRaw?.email || '',
@@ -91,20 +92,20 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
       checkOut,
       nights,
       guests: {
-        adults: booking.adults,
-        children: booking.children,
-        infants: booking.infants,
+        adults: data.adults,
+        children: data.children,
+        infants: data.infants,
       },
       accommodation: {
-        bringOwnTent: booking.bring_own_tent,
+        bringOwnTent: data.bring_own_tent,
         rentedTents,
       },
       addOns: addonIds,
       guestInfo,
-      status: booking.status as 'pending' | 'confirmed' | 'cancelled',
+      status: data.status as 'pending' | 'confirmed' | 'cancelled',
     };
 
-    return { bookingId: booking.id, bookingData, error: null };
+    return { bookingId: data.id, bookingData, error: null };
   } catch (error) {
     console.error('Error looking up booking:', error);
     return { bookingId: null, bookingData: null, error: error as Error, errorType: 'general' };
