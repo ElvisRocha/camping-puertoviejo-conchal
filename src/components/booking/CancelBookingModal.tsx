@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader2, AlertCircle, AlertTriangle, CalendarX, CheckCircle2 } from 'lucide-react';
+import { Loader2, AlertCircle, AlertTriangle, CalendarX, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
