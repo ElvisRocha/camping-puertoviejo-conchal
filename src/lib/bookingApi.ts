@@ -96,20 +96,20 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
       checkOut,
       nights,
       guests: {
-        adults: bookingRow.adults,
-        children: bookingRow.children,
-        infants: bookingRow.infants,
+        adults: Number(bookingRow.adults),
+        children: Number(bookingRow.children),
+        infants: Number(bookingRow.infants),
       },
       accommodation: {
-        bringOwnTent: bookingRow.bring_own_tent,
+        bringOwnTent: Boolean(bookingRow.bring_own_tent),
         rentedTents,
       },
       addOns: addonIds,
       guestInfo,
-      status: bookingRow.status as 'pending' | 'confirmed' | 'cancelled',
+      status: String(bookingRow.status) as 'pending' | 'confirmed' | 'cancelled',
     };
 
-    return { bookingId: bookingRow.id, bookingData, error: null };
+    return { bookingId: String(bookingRow.id), bookingData, error: null };
   } catch (error) {
     console.error('Error looking up booking:', error);
     return { bookingId: null, bookingData: null, error: error as Error, errorType: 'general' };
