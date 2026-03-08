@@ -42,52 +42,49 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
   try {
     const trimmedCode = referenceCode.trim().toUpperCase();
 
-    // Query bookings table directly by reference_code
-    const { data: bookingRow, error: bookingError } = await supabase
-      .from('bookings')
-      .select('*')
-      .eq('reference_code', trimmedCode)
-      .single();
+    // Use SECURITY DEFINER function to bypass RLS
+    const { data: details, error: rpcError } = await supabase
+      .rpc('get_booking_details_by_reference', { ref_code: trimmedCode });
 
-    if (bookingError) {
-      if (bookingError.code === 'PGRST116') {
-        return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
-      }
-      return { bookingId: null, bookingData: null, error: new Error(bookingError.message), errorType: 'general' };
+    if (rpcError) {
+      return { bookingId: null, bookingData: null, error: new Error(rpcError.message), errorType: 'general' };
     }
 
-    if (!bookingRow) {
+    const result = details as unknown as {
+      found: boolean;
+      booking?: Record<string, unknown>;
+      tents?: Record<string, unknown>[];
+      addons?: Record<string, unknown>[];
+      guest_info?: Record<string, unknown> | null;
+    };
+
+    if (!result?.found || !result.booking) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
+
+    const bookingRow = result.booking;
 
     if (bookingRow.status === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
     }
 
-    // Fetch related records in parallel using booking_id
-    const [tentsResult, addonsResult, guestInfoResult] = await Promise.all([
-      supabase.from('booking_tents').select('*').eq('booking_id', bookingRow.id),
-      supabase.from('booking_addons').select('*').eq('booking_id', bookingRow.id),
-      supabase.from('guest_info').select('*').eq('booking_id', bookingRow.id).maybeSingle(),
-    ]);
-
     // DB stores tent_type as '2-person'; frontend uses 'tent-2'
-    const rentedTents: TentSelection[] = (tentsResult.data || []).map((t) => ({
-      tentId: t.tent_type.replace(/^(\d+)-person$/, 'tent-$1'),
-      quantity: t.quantity,
+    const rentedTents: TentSelection[] = (result.tents || []).map((t) => ({
+      tentId: String(t.tent_type).replace(/^(\d+)-person$/, 'tent-$1'),
+      quantity: Number(t.quantity),
     }));
 
-    const addonIds: string[] = (addonsResult.data || []).map((a) => a.addon_type);
+    const addonIds: string[] = (result.addons || []).map((a) => String(a.addon_type));
 
-    const g = guestInfoResult.data;
+    const g = result.guest_info;
     const guestInfo: GuestInfo = {
-      fullName: g?.full_name || '',
-      email: g?.email || '',
-      phone: g?.phone || '',
-      country: g?.country || '',
-      arrivalTime: g?.arrival_time || '',
-      specialRequests: g?.special_requests || '',
-      celebratingOccasion: g?.celebrating_occasion || '',
+      fullName: String(g?.full_name || ''),
+      email: String(g?.email || ''),
+      phone: String(g?.phone || ''),
+      country: String(g?.country || ''),
+      arrivalTime: String(g?.arrival_time || ''),
+      specialRequests: String(g?.special_requests || ''),
+      celebratingOccasion: String(g?.celebrating_occasion || ''),
     };
 
     const checkIn = new Date(bookingRow.check_in + 'T12:00:00');
@@ -99,20 +96,20 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
       checkOut,
       nights,
       guests: {
-        adults: bookingRow.adults,
-        children: bookingRow.children,
-        infants: bookingRow.infants,
+        adults: Number(bookingRow.adults),
+        children: Number(bookingRow.children),
+        infants: Number(bookingRow.infants),
       },
       accommodation: {
-        bringOwnTent: bookingRow.bring_own_tent,
+        bringOwnTent: Boolean(bookingRow.bring_own_tent),
         rentedTents,
       },
       addOns: addonIds,
       guestInfo,
-      status: bookingRow.status as 'pending' | 'confirmed' | 'cancelled',
+      status: String(bookingRow.status) as 'pending' | 'confirmed' | 'cancelled',
     };
 
-    return { bookingId: bookingRow.id, bookingData, error: null };
+    return { bookingId: String(bookingRow.id), bookingData, error: null };
   } catch (error) {
     console.error('Error looking up booking:', error);
     return { bookingId: null, bookingData: null, error: error as Error, errorType: 'general' };
