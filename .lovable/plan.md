@@ -1,26 +1,18 @@
 
 
-## Plan: Tildar la "o" en contextos de precios (₡ ó $)
+## Plan: Modify Cancel Booking Confirmation Buttons
 
-### Problema
-En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
+Based on the screenshot, in the "confirm" step of `CancelBookingModal.tsx`:
 
-### Cambios
+1. **Replace "Volver" button** with "No, Reagendar reserva" — this button will close the cancel modal and open the reschedule modal instead.
+2. **Add a back arrow button** in the top-right area (near the X close button) to go back to the lookup step.
+3. **Update translations** in all 6 locale files for the new button label.
 
-**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
-- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
-- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
+### Files to modify:
+- `src/components/booking/CancelBookingModal.tsx` — Add back arrow icon button at top of confirm step, change "Volver" to "No, Reagendar reserva" which triggers opening the reschedule modal
+- `src/components/Header.tsx` — May need to coordinate opening the RescheduleModal from CancelBookingModal (check how reschedule modal is triggered)
+- `src/locales/es.json`, `en.json`, `fr.json`, `de.json`, `ru.json`, `zh.json` — Add/update the new button label
 
-**2. Archivos de traducciones - textos estaticos con precios**
-Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
+### Key detail:
+- The "No, Reagendar reserva" button needs to close the cancel modal and open the reschedule modal. This requires passing an `onReschedule` callback prop from Header into CancelBookingModal.
 
-- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
-- `src/locales/en.json`: mismos campos
-- `src/locales/fr.json`: mismos campos
-- `src/locales/de.json`: mismos campos
-- `src/locales/ru.json`: mismos campos
-- `src/locales/zh.json`: mismos campos
-
-### Alcance
-- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
-- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1
