@@ -1,36 +1,26 @@
 
 
-## Plan: Corregir la pre-carga de datos al reagendar con código de referencia
+## Plan: Tildar la "o" en contextos de precios (₡ ó $)
 
-### Problema raíz
-Hay **dos problemas** que impiden que los datos se pre-carguen correctamente:
+### Problema
+En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
 
-**1. RLS bloquea las consultas de datos relacionados**
-La función `lookupBookingByReference` usa el RPC `get_booking_by_reference` (SECURITY DEFINER) para obtener la reserva principal — esto funciona. Pero luego hace consultas directas a `booking_tents`, `booking_addons` y `guest_info`, y estas tablas solo permiten SELECT a **admins**. Un usuario anónimo no puede leer esos datos, así que las consultas retornan vacío silenciosamente. Resultado: la reserva se encuentra pero sin tiendas, addons ni info del huésped.
+### Cambios
 
-**2. Serialización de fechas en localStorage**
-Zustand persist serializa las fechas como strings. Cuando se rehidrata el store, `checkIn` y `checkOut` son strings en vez de objetos `Date`, lo que puede causar problemas en el calendario y en cálculos.
+**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
+- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
+- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
 
-### Solución
+**2. Archivos de traducciones - textos estaticos con precios**
+Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
 
-**1. Crear una Edge Function `lookup-booking` que centralice toda la consulta** (alternativa preferida)
-- Mover toda la lógica de `lookupBookingByReference` a una Edge Function que use el `service_role` key
-- La Edge Function consulta `bookings`, `booking_tents`, `booking_addons` y `guest_info` sin restricciones de RLS
-- Retorna todos los datos consolidados al cliente
-- El cliente solo invoca `supabase.functions.invoke('lookup-booking', { body: { referenceCode } })`
+- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
+- `src/locales/en.json`: mismos campos
+- `src/locales/fr.json`: mismos campos
+- `src/locales/de.json`: mismos campos
+- `src/locales/ru.json`: mismos campos
+- `src/locales/zh.json`: mismos campos
 
-**2. Actualizar `src/lib/bookingApi.ts`**
-- Reemplazar la implementación actual de `lookupBookingByReference` para que llame a la nueva Edge Function en vez de hacer queries directas
-- Parsear las fechas como `new Date()` al recibir la respuesta
-
-**3. Crear `supabase/functions/lookup-booking/index.ts`**
-- Recibe `referenceCode` en el body
-- Usa `createClient` con `SUPABASE_SERVICE_ROLE_KEY` para bypass de RLS
-- Busca en `bookings` por `reference_code`
-- Consulta `booking_tents`, `booking_addons`, `guest_info` por `booking_id`
-- Retorna el objeto consolidado con toda la info de la reserva
-
-### Archivos a crear/modificar
-- **Crear**: `supabase/functions/lookup-booking/index.ts`
-- **Modificar**: `src/lib/bookingApi.ts` — simplificar `lookupBookingByReference` para usar la Edge Function
-
+### Alcance
+- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
+- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1
