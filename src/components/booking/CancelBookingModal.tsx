@@ -14,6 +14,8 @@ import {
 import { lookupBookingByReference, cancelBooking } from '@/lib/bookingApi';
 import { formatLocalizedDate } from '@/lib/dateLocale';
 import { formatDualPrice } from '@/lib/priceFormat';
+import { useBookingStore } from '@/store/bookingStore';
+import type { Booking } from '@/types/booking';
 
 interface CancelBookingModalProps {
   open: boolean;
