@@ -78,6 +78,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
       return;
     }
 
+    lookupBookingDataRef.current = bookingData;
     setBookingSummary({
       id: bookingId,
       referenceCode: trimmed,
@@ -85,7 +86,7 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
       checkOut: bookingData.checkOut!,
       adults: bookingData.guests?.adults ?? 0,
       children: bookingData.guests?.children ?? 0,
-      total: 0, // We don't need total for cancel display
+      total: 0,
     });
     setStep('confirm');
   };
