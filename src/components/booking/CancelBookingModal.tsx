@@ -37,6 +37,8 @@ interface BookingSummary {
 
 export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookingModalProps) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const { setReschedulingData } = useBookingStore();
 
   const [step, setStep] = useState<ModalStep>('lookup');
   const [referenceCode, setReferenceCode] = useState('');
