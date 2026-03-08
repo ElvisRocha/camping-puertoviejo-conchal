@@ -142,6 +142,7 @@ Deno.serve(async (req) => {
         taxes: pricing.taxes,
         total: pricing.total,
         status: 'confirmed',
+        payment_receipt_url: paymentReceiptUrl || null,
       })
       .select('id, reference_code')
       .single();

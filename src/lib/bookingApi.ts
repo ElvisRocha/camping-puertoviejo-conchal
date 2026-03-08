@@ -21,7 +21,7 @@ export async function createBooking({ booking, pricing, paymentReceiptUrl }: Cre
         'Authorization': `Bearer ${anonKey}`,
         'apikey': anonKey,
       },
-      body: JSON.stringify({ booking, pricing }),
+      body: JSON.stringify({ booking, pricing, paymentReceiptUrl }),
     });
 
     if (!response.ok) {
