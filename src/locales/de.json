@@ -473,6 +473,7 @@
     }
   },
   "reschedule": {
+    "banner": "Sie bearbeiten Buchung {{code}} — Ihre ursprünglichen Daten sind vorausgefüllt",
     "modal": {
       "title": "Buchung umbuchen",
       "subtitle": "Geben Sie Ihren Buchungsreferenzcode ein, um fortzufahren",

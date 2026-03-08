@@ -1,5 +1,6 @@
 // i18n is initialized in main.tsx before React mounts — no need to re-import here.
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BookingProgress } from '@/components/booking/BookingProgress';
@@ -13,9 +14,11 @@ import { RescheduleConfirm } from '@/components/booking/RescheduleConfirm';
 import { BookingConfirmation } from '@/components/booking/BookingConfirmation';
 import { useBookingStore } from '@/store/bookingStore';
 import { AnimatePresence } from 'framer-motion';
+import { CalendarClock } from 'lucide-react';
 
 const BookPage = () => {
-  const { currentStep, resetBooking, isRescheduling } = useBookingStore();
+  const { t } = useTranslation();
+  const { currentStep, resetBooking, isRescheduling, rescheduleReferenceCode } = useBookingStore();
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
 
   useEffect(() => {
@@ -66,6 +69,17 @@ const BookPage = () => {
             {!referenceCode && (
               <BookingProgress currentStep={currentStep} totalSteps={4} />
             )}
+
+            {/* Rescheduling mode banner */}
+            {!referenceCode && isRescheduling && (
+              <div className="mb-6 flex items-start gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3">
+                <CalendarClock className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
+                <p className="text-sm font-body font-medium text-amber-800">
+                  {t('reschedule.banner', { code: rescheduleReferenceCode })}
+                </p>
+              </div>
+            )}
+
             <AnimatePresence mode="wait">
               {renderStep()}
             </AnimatePresence>
