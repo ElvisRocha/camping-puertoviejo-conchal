@@ -6,9 +6,10 @@ import { differenceInDays } from 'date-fns';
 interface CreateBookingParams {
   booking: Partial<Booking>;
   pricing: PricingBreakdown;
+  paymentReceiptUrl?: string;
 }
 
-export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
+export async function createBooking({ booking, pricing, paymentReceiptUrl }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
     const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
     const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
