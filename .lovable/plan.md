@@ -1,26 +1,26 @@
 
 
-## Plan: Create `lookup-booking` Edge Function
+## Plan: Tildar la "o" en contextos de precios (₡ ó $)
 
-### Root cause
-The `get_booking_details_by_reference` RPC was created via migration but PostgREST's schema cache hasn't refreshed, so the client gets a 404. Edge Functions don't depend on the schema cache and already work (e.g. `create-booking`).
+### Problema
+En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
 
-### Changes
+### Cambios
 
-**1. Create `supabase/functions/lookup-booking/index.ts`**
-- New Edge Function that receives `{ referenceCode: string }` in the body
-- Uses `SUPABASE_SERVICE_ROLE_KEY` to query `bookings` by `reference_code`
-- If found, also queries `booking_tents`, `booking_addons`, and `guest_info` by `booking_id`
-- Returns the full data as JSON (same shape the client already expects)
-- Handles not_found, cancelled, and error cases
+**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
+- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
+- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
 
-**2. Update `src/lib/bookingApi.ts` — `lookupBookingByReference`**
-- Replace `supabase.rpc('get_booking_details_by_reference', ...)` with `supabase.functions.invoke('lookup-booking', { body: { referenceCode } })`
-- Parse the response the same way (booking, tents, addons, guest_info)
-- Keep the same return type and error handling
+**2. Archivos de traducciones - textos estaticos con precios**
+Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
 
-### Why this works
-- `create-booking` already uses the same pattern and works fine
-- Edge Functions use the service role key, bypassing all RLS
-- No dependency on PostgREST schema cache
+- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
+- `src/locales/en.json`: mismos campos
+- `src/locales/fr.json`: mismos campos
+- `src/locales/de.json`: mismos campos
+- `src/locales/ru.json`: mismos campos
+- `src/locales/zh.json`: mismos campos
 
+### Alcance
+- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
+- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1

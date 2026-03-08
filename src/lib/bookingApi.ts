@@ -40,20 +40,20 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const { data, error } = await supabase
-      .rpc('get_booking_details_by_reference', { ref_code: referenceCode.trim().toUpperCase() });
+    const { data, error } = await supabase.functions.invoke('lookup-booking', {
+      body: { referenceCode: referenceCode.trim().toUpperCase() },
+    });
 
     if (error) {
       return { bookingId: null, bookingData: null, error: new Error(error.message), errorType: 'general' };
     }
 
-    const result = data as any;
-
-    if (!result || !result.found) {
+    if (!data || !data.found) {
       return { bookingId: null, bookingData: null, error: new Error('not_found'), errorType: 'not_found' };
     }
 
-    const b = result.booking;
+    const b = data.booking;
+    const result = data;
 
     if (b.status === 'cancelled') {
       return { bookingId: null, bookingData: null, error: new Error('cancelled'), errorType: 'cancelled' };
