@@ -518,6 +518,7 @@
       "checkOut": "Check-out",
       "guests": "Guests",
       "warning": "This action cannot be undone. Once cancelled, you will need to make a new booking if you wish to visit us.",
+      "noRefund": "Please note that the booking amount cannot be refunded according to the policies and terms agreement.",
       "confirmButton": "Yes, cancel booking",
 "backButton": "Go back",
       "rescheduleButton": "No, reschedule booking",

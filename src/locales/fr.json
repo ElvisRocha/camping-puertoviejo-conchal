@@ -518,6 +518,7 @@
       "checkOut": "Départ",
       "guests": "Invités",
       "warning": "Cette action est irréversible. Une fois annulée, vous devrez effectuer une nouvelle réservation.",
+      "noRefund": "Veuillez noter que le montant de la réservation ne peut être remboursé conformément aux politiques et conditions.",
       "confirmButton": "Oui, annuler la réservation",
 "backButton": "Retour",
       "rescheduleButton": "Non, reprogrammer la réservation",

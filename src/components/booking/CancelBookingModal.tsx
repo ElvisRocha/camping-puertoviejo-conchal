@@ -233,7 +233,10 @@ export function CancelBookingModal({ open, onClose, onReschedule }: CancelBookin
               {/* Warning */}
               <div className="flex items-start gap-2 rounded-md border border-amber-300/60 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-950/30 dark:text-amber-200 dark:border-amber-700/40">
                 <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                <span className="font-body">{t('cancelBooking.confirm.warning')}</span>
+                <div className="font-body space-y-2">
+                  <span>{t('cancelBooking.confirm.warning')}</span>
+                  <p>{t('cancelBooking.confirm.noRefund')}</p>
+                </div>
               </div>
 
               {error && (

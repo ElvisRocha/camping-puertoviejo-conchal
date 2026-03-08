@@ -518,6 +518,7 @@
       "checkOut": "退房",
       "guests": "客人",
       "warning": "此操作无法撤销。取消后，您需要重新预订。",
+      "noRefund": "请注意，根据政策和条款协议，预订金额不予退还。",
       "confirmButton": "是的，取消预订",
 "backButton": "返回",
       "rescheduleButton": "不，改期预订",
