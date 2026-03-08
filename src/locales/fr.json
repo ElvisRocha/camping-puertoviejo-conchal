@@ -511,8 +511,8 @@
       "errorAlreadyCancelled": "Cette réservation a déjà été annulée."
     },
     "confirm": {
-      "title": "Annuler cette réservation ?",
-      "subtitle": "Veuillez vérifier les détails avant de confirmer l'annulation",
+      "title": "Vous êtes sur le point d'annuler une expérience inoubliable",
+      "subtitle": "Êtes-vous sûr de vouloir continuer ?",
       "referenceCode": "Code de réservation",
       "checkIn": "Arrivée",
       "checkOut": "Départ",

@@ -511,8 +511,8 @@
       "errorAlreadyCancelled": "此预订已被取消。"
     },
     "confirm": {
-      "title": "取消此预订？",
-      "subtitle": "请在确认取消前检查详情",
+      "title": "您即将取消一次难忘的体验",
+      "subtitle": "您确定要继续吗？",
       "referenceCode": "预订参考",
       "checkIn": "入住",
       "checkOut": "退房",

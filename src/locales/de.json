@@ -511,8 +511,8 @@
       "errorAlreadyCancelled": "Diese Buchung wurde bereits storniert."
     },
     "confirm": {
-      "title": "Diese Buchung stornieren?",
-      "subtitle": "Bitte überprüfen Sie die Details vor der Bestätigung der Stornierung",
+      "title": "Sie sind dabei, ein unvergessliches Erlebnis zu stornieren",
+      "subtitle": "Sind Sie sicher, dass Sie fortfahren möchten?",
       "referenceCode": "Buchungsreferenz",
       "checkIn": "Check-in",
       "checkOut": "Check-out",

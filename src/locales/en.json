@@ -511,8 +511,8 @@
       "errorAlreadyCancelled": "This booking has already been cancelled."
     },
     "confirm": {
-      "title": "Cancel this booking?",
-      "subtitle": "Please review the details before confirming cancellation",
+      "title": "You're about to cancel an unforgettable experience",
+      "subtitle": "Are you sure you want to proceed?",
       "referenceCode": "Booking reference",
       "checkIn": "Check-in",
       "checkOut": "Check-out",
