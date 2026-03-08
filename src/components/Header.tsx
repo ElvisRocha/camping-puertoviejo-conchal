@@ -14,6 +14,7 @@ import { languages } from '@/i18n';
 import { SITE_CONFIG } from '@/types/booking';
 import { cn } from '@/lib/utils';
 import { RescheduleModal } from '@/components/booking/RescheduleModal';
+import { CancelBookingModal } from '@/components/booking/CancelBookingModal';
 // Logo - local asset
 import logoImage from '@/assets/Logo-Camping-Puerto-Viejo.png';
 
