@@ -245,10 +245,6 @@ export type Database = {
           isSetofReturn: true
         }
       }
-      get_booking_details_by_reference: {
-        Args: { ref_code: string }
-        Returns: Json
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
