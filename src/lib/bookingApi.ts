@@ -3,8 +3,8 @@ import type { Booking, PricingBreakdown, GuestInfo, TentSelection } from '@/type
 import { TENT_OPTIONS } from '@/types/booking';
 import { differenceInDays } from 'date-fns';
 
-const CLOUD_URL = import.meta.env.VITE_SUPABASE_URL || 'https://dudunklgbjingrdboloe.supabase.co';
-const CLOUD_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1ZHVua2xnYmppbmdyZGJvbG9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc3Mzk3MDIsImV4cCI6MjA4MzMxNTcwMn0.YYdVnst1WdXmVVPFq994fVocRAHpd5Nt8raBF55cjvw';
+const CLOUD_URL = 'https://yvmzzgphvfvaovlmmjsa.supabase.co';
+const CLOUD_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4';
 
 interface CreateBookingParams {
   booking: Partial<Booking>;
