@@ -419,18 +419,6 @@
         "body1": "Ihr Campingplatz wird sicher reserviert, sobald Sie bestätigen. Die Bezahlung erfolgt direkt bei der Ankunft — unkompliziert, ohne Vorauszahlungen.",
         "body2": "Wir sorgen dafür, dass alles für Ihren Empfang vorbereitet ist. Bringen Sie einfach Ihre Lust zum Abschalten mit — wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!",
         "body3": "🌿 Um Ihr Abenteuer zu sichern, zahlen Sie bei der Buchung einfach 50 % des Gesamtbetrags. Den Rest begleichen Sie bequem bei Ihrer Ankunft. So einfach ist das!"
-      },
-      "receipt": {
-        "title": "Zahlungsbeleg",
-        "description": "Laden Sie ein Foto oder einen Screenshot Ihres Überweisungs- oder Einzahlungsbelegs über 50 % hoch.",
-        "uploadButton": "Beleg hochladen",
-        "changeButton": "Beleg ändern",
-        "uploading": "Wird hochgeladen...",
-        "uploaded": "Beleg hochgeladen ✓",
-        "required": "Der Zahlungsbeleg ist erforderlich, um Ihre Buchung zu bestätigen.",
-        "error": "Fehler beim Hochladen. Bitte versuchen Sie es erneut.",
-        "maxSize": "Die Datei darf 5 MB nicht überschreiten.",
-        "formats": "Akzeptierte Formate: JPG, PNG, PDF"
       }
     },
     "confirmation": {

@@ -46,7 +46,6 @@ interface BookingRequest {
     guestInfo?: GuestInfo;
   };
   pricing: PricingBreakdown;
-  paymentReceiptUrl?: string;
 }
 
 const TENT_OPTIONS = [
@@ -72,7 +71,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { booking, pricing, paymentReceiptUrl }: BookingRequest = await req.json();
+    const { booking, pricing }: BookingRequest = await req.json();
 
     if (!booking.checkIn || !booking.checkOut) {
       return new Response(
@@ -142,7 +141,6 @@ Deno.serve(async (req) => {
         taxes: pricing.taxes,
         total: pricing.total,
         status: 'confirmed',
-        payment_receipt_url: paymentReceiptUrl || null,
       })
       .select('id, reference_code')
       .single();
