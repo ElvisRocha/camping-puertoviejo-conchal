@@ -3,6 +3,9 @@ import type { Booking, PricingBreakdown, GuestInfo, TentSelection } from '@/type
 import { TENT_OPTIONS } from '@/types/booking';
 import { differenceInDays } from 'date-fns';
 
+const CLOUD_URL = import.meta.env.VITE_SUPABASE_URL || 'https://dudunklgbjingrdboloe.supabase.co';
+const CLOUD_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1ZHVua2xnYmppbmdyZGJvbG9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc3Mzk3MDIsImV4cCI6MjA4MzMxNTcwMn0.YYdVnst1WdXmVVPFq994fVocRAHpd5Nt8raBF55cjvw';
+
 interface CreateBookingParams {
   booking: Partial<Booking>;
   pricing: PricingBreakdown;
@@ -10,8 +13,8 @@ interface CreateBookingParams {
 
 export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
-    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
-    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    const cloudUrl = CLOUD_URL;
+    const anonKey = CLOUD_ANON_KEY;
 
     const response = await fetch(`${cloudUrl}/functions/v1/create-booking`, {
       method: 'POST',
@@ -50,8 +53,8 @@ export interface LookupBookingResult {
 
 export async function lookupBookingByReference(referenceCode: string): Promise<LookupBookingResult> {
   try {
-    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
-    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    const cloudUrl = CLOUD_URL;
+    const anonKey = CLOUD_ANON_KEY;
 
     const response = await fetch(`${cloudUrl}/functions/v1/lookup-booking`, {
       method: 'POST',
@@ -136,8 +139,8 @@ interface UpdateBookingParams {
 
 export async function updateBooking({ bookingId, booking, pricing }: UpdateBookingParams): Promise<{ error: Error | null }> {
   try {
-    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
-    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    const cloudUrl = CLOUD_URL;
+    const anonKey = CLOUD_ANON_KEY;
 
     const response = await fetch(`${cloudUrl}/functions/v1/update-booking`, {
       method: 'POST',
@@ -163,8 +166,8 @@ export async function updateBooking({ bookingId, booking, pricing }: UpdateBooki
 
 export async function cancelBooking(bookingId: string): Promise<{ error: Error | null }> {
   try {
-    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
-    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    const cloudUrl = CLOUD_URL;
+    const anonKey = CLOUD_ANON_KEY;
 
     const response = await fetch(`${cloudUrl}/functions/v1/cancel-booking`, {
       method: 'POST',
