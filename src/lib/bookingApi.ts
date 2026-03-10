@@ -166,8 +166,8 @@ export async function updateBooking({ bookingId, booking, pricing }: UpdateBooki
 
 export async function cancelBooking(bookingId: string): Promise<{ error: Error | null }> {
   try {
-    const cloudUrl = import.meta.env.VITE_SUPABASE_URL;
-    const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    const cloudUrl = CLOUD_URL;
+    const anonKey = CLOUD_ANON_KEY;
 
     const response = await fetch(`${cloudUrl}/functions/v1/cancel-booking`, {
       method: 'POST',
