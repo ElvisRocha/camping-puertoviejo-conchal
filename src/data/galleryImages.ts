@@ -40,8 +40,8 @@ export const galleryImages: GalleryImage[] = [
   // Wildlife photos
   {
     id: 'wildlife-1',
-    src: 'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=1200&q=80',
-    alt: 'Howler monkey in the canopy',
+    src: 'https://res.cloudinary.com/dcvipikha/image/upload/f_auto,q_auto/v1773264500/Iguana_vhd4wj.webp',
+    alt: 'iguana in the tree',
     category: 'wildlife',
     captionKey: 'gallery.captions.wildlife1',
   },
