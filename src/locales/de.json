@@ -85,7 +85,8 @@
     "features": {
       "beachfront": "Camping am Strand",
       "wildlife": "Begegnungen mit Wildtieren",
-      "sunsets": "Unvergessliche Sonnenuntergänge"
+      "sunsets": "Unvergessliche Sonnenuntergänge",
+      "petFriendly": "Haustierfreundlich (Leine erforderlich)"
     }
   },
   "welcome": {

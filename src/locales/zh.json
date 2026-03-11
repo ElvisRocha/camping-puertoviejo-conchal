@@ -85,7 +85,8 @@
     "features": {
       "beachfront": "海滨露营",
       "wildlife": "野生动物邂逅",
-      "sunsets": "难忘的日落"
+      "sunsets": "难忘的日落",
+      "petFriendly": "宠物友好（需牵绳）"
     }
   },
   "welcome": {

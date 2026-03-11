@@ -85,7 +85,8 @@
     "features": {
       "beachfront": "Beachfront camping",
       "wildlife": "Wildlife encounters",
-      "sunsets": "Unforgettable sunsets"
+      "sunsets": "Unforgettable sunsets",
+      "petFriendly": "Pet Friendly (leash required)"
     }
   },
   "welcome": {
