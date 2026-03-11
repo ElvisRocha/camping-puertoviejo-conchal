@@ -18,9 +18,7 @@ const amenities = [
   { key: 'campfire', icon: Flame },
   { key: 'parking', icon: Car },
   { key: 'wifi', icon: Wifi },
-  { key: 'cooking', icon: ChefHat },
   { key: 'security', icon: Shield },
-  { key: 'tours', icon: Map },
 ];
 
 const AmenitiesSection = () => {
