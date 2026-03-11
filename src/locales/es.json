@@ -85,7 +85,8 @@
     "features": {
       "beachfront": "Camping frente al mar",
       "wildlife": "Encuentros con fauna",
-      "sunsets": "Atardeceres inolvidables"
+      "sunsets": "Atardeceres inolvidables",
+      "petFriendly": "Pet Friendly con correa"
     }
   },
   "welcome": {

@@ -85,7 +85,8 @@
     "features": {
       "beachfront": "Camping en bord de mer",
       "wildlife": "Rencontres avec la faune",
-      "sunsets": "Couchers de soleil inoubliables"
+      "sunsets": "Couchers de soleil inoubliables",
+      "petFriendly": "Animaux acceptés (laisse obligatoire)"
     }
   },
   "welcome": {

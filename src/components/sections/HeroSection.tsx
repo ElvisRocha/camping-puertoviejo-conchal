@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Palmtree, Bird, Sun } from 'lucide-react';
+import { Palmtree, Bird, Sun, PawPrint } from 'lucide-react';
 
 // Cloudinary base path - version comes before folder per Cloudinary URL spec
 const CLD = 'https://res.cloudinary.com/dcvipikha/image/upload';
@@ -126,6 +126,10 @@ const HeroSection = () => {
             <div className="flex items-center gap-2 text-white/90">
               <Sun className="h-5 w-5" />
               <span className="font-body text-sm sm:text-base">{t('hero.features.sunsets')}</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/90">
+              <PawPrint className="h-5 w-5" />
+              <span className="font-body text-sm sm:text-base">{t('hero.features.petFriendly')}</span>
             </div>
           </motion.div>
         </div>
