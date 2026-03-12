@@ -17,6 +17,7 @@ import { AnimatePresence } from 'framer-motion';
 const BookPage = () => {
   const { currentStep, resetBooking, isRescheduling } = useBookingStore();
   const [referenceCode, setReferenceCode] = useState<string | null>(null);
+  const [paymentSummary, setPaymentSummary] = useState<{ depositCRC: number; balanceCRC: number } | null>(null);
 
   useEffect(() => {
     // Don't reset booking if we came from the reschedule modal (data is pre-loaded)
@@ -28,13 +29,14 @@ const BookPage = () => {
     };
   }, [resetBooking]);
 
-  const handleBookingComplete = (code: string) => {
+  const handleBookingComplete = (code: string, depositCRC = 0, balanceCRC = 0) => {
     setReferenceCode(code);
+    setPaymentSummary({ depositCRC, balanceCRC });
   };
 
   const renderStep = () => {
     if (referenceCode) {
-      return <BookingConfirmation referenceCode={referenceCode} />;
+      return <BookingConfirmation referenceCode={referenceCode} depositCRC={paymentSummary?.depositCRC ?? 0} balanceCRC={paymentSummary?.balanceCRC ?? 0} />;
     }
 
     switch (currentStep) {

@@ -20,12 +20,17 @@ import { formatDualPrice } from '@/lib/priceFormat';
 
 interface BookingConfirmationProps {
   referenceCode: string;
+  depositCRC?: number;
+  balanceCRC?: number;
 }
 
-export function BookingConfirmation({ referenceCode }: BookingConfirmationProps) {
+export function BookingConfirmation({ referenceCode, depositCRC = 0, balanceCRC = 0 }: BookingConfirmationProps) {
   const { t, i18n } = useTranslation();
   const { booking, calculatePricing, resetBooking } = useBookingStore();
   const pricing = calculatePricing();
+  const CRC_RATE = 500;
+  const depositUSD = depositCRC / CRC_RATE;
+  const balanceUSD = balanceCRC / CRC_RATE;
 
   const addToGoogleCalendar = () => {
     const checkIn = booking.checkIn ? new Date(booking.checkIn) : new Date();
@@ -98,8 +103,16 @@ export function BookingConfirmation({ referenceCode }: BookingConfirmationProps)
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">{t('booking.confirmation.totalPaid')}</p>
+            <p className="text-muted-foreground">{t('booking.confirmation.reservationTotal')}</p>
             <p className="font-semibold text-forest">{formatDualPrice(pricing.total, t('price_range_connector'))}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">{t('booking.confirmation.depositPaid')}</p>
+            <p className="font-semibold text-forest">{formatDualPrice(depositUSD, t('price_range_connector'))}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">{t('booking.confirmation.balanceDue')}</p>
+            <p className="font-semibold text-amber-600">{formatDualPrice(balanceUSD, t('price_range_connector'))}</p>
           </div>
         </div>
       </div>
