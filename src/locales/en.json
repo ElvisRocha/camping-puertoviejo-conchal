@@ -80,7 +80,7 @@
   },
   "hero": {
     "headline": "Wake Up to the Sound of Waves and Howler Monkeys",
-    "subheadline": "Experience the magic of sleeping under the stars on Costa Rica's most pristine beaches. Where the jungle meets the Pacific, your adventure begins.",
+    "subheadline": "Experience the magic of sleeping under the stars near the most beautiful beaches in Costa Rica. Where the jungle meets the Pacific, your adventure begins.",
     "cta": "Reserve Your Spot in Paradise",
     "features": {
       "beachfront": "Beachfront camping",
@@ -91,27 +91,27 @@
   },
   "welcome": {
     "title": "This Is Not Just Camping. This Is Living.",
-    "paragraph1": "Imagine falling asleep to the rhythm of waves crashing just steps from your tent. Waking up to a symphony of tropical birds while howler monkeys call from the treetops. Watching the sun melt into the Pacific Ocean as you roast marshmallows over a crackling fire.",
-    "paragraph2": "Welcome to Camping Puerto Viejo Conchal, where the boundaries between comfort and wilderness blur into something extraordinary. Nestled along the golden shores of Guanacaste, Costa Rica—just minutes from the famous white shell sands of Playa Conchal—our beachfront camping sanctuary offers an escape from the ordinary and a doorway to pure, untouched nature.",
+    "paragraph1": "Imagine waking up to a symphony of tropical birds while howler monkeys call from the treetops. Watching the sun slowly set as the last rays of daylight peek through the trees, roasting marshmallows over a warm fire with the people you love.",
+    "paragraph2": "Welcome to Camping Puerto Viejo Conchal, where nature welcomes you with open arms and the sea becomes your nearest neighbor. Just minutes from the legendary beaches of Conchal, Puerto Viejo, Minas, and Piratas — famous for their golden sands and unique white shells found nowhere else in the world. This corner of Guanacaste, Costa Rica, is the place where adventurers from across the globe come to breathe deep, disconnect, and remember why it's worth stepping out to explore.",
     "paragraph3": "This isn't roughing it. This is reconnecting with what matters."
   },
   "whyUs": {
     "title": "Why Adventurers Choose Us",
     "location": {
       "title": "Feet in the Sand, Soul in the Jungle",
-      "text": "Our camp sits at the magical intersection where tropical dry forest meets turquoise waters. Fall asleep 50 meters from the ocean, wake up surrounded by wildlife. No resort walls—just you and nature's masterpiece."
+      "text": "Our campsite sits at the magical intersection where tropical dry forest meets turquoise waters. Sleep 3 minutes from the ocean, wake up surrounded by wildlife. Just you and nature's masterpiece."
     },
     "wildlife": {
       "title": "Your Neighbors Have Tails and Wings",
-      "text": "Howler monkeys announce the sunrise. Scarlet macaws paint the sky red. Toucans pose for your camera. White-faced capuchins might just visit your breakfast. This is their home—you're the lucky guest."
+      "text": "Howler monkeys announce the sunrise. Scarlet macaws paint the sky red. Toucans pose for your camera. This is their home — you're the star guest."
     },
     "experience": {
       "title": "Stories You'll Tell Forever",
-      "text": "The bioluminescent plankton lighting up the waves at midnight. The sea turtle you watched nest under moonlight. The coatimundi family that walked through camp. These moments don't happen at hotels."
+      "text": "Stories around the grill with your loved ones, hikes through incredible forests full of natural life, where more than once you'll be amazed by how magnificent nature can be. These moments don't happen at hotels."
     },
     "flexibility": {
       "title": "Your Adventure, Your Way",
-      "text": "Bring your own tent or rent one of ours. Stay one night or one month. Add a sunrise kayak tour or keep it simple. We provide the paradise—you write the story."
+      "text": "Bring your own tent or rent one of ours. Stay one night or one month. Add a sunrise kayak tour or keep it simple. We provide the paradise — you write the story."
     }
   },
   "experience": {
@@ -119,39 +119,39 @@
     "morning": {
       "time": "6:00 AM",
       "title": "Nature's Wake-Up Call",
-      "text": "The howler monkeys start their morning chorus as golden light filters through the palms. Step out of your tent to misty jungle air and the promise of adventure. Early birds catch sight of toucans and parrots in the canopy above."
+      "text": "The howler monkeys start their morning chorus as golden light filters through the trees. Step out of your tent into the open jungle air and the promise of adventure. Early risers spot toucans, monkeys, and parrots passing through the treetops."
     },
     "midMorning": {
       "time": "9:00 AM",
       "title": "Beach Bliss",
-      "text": "After a fresh tropical breakfast, the pristine waters of Conchal await. Snorkel through crystal-clear waves, spot tropical fish, or simply float in water so clear you can see your toes. The famous shell-sand beach is your backyard."
+      "text": "After a fresh tropical breakfast, the turquoise waters of the nearby beaches await, just 3 minutes away. Snorkel through crystal-clear waves, spot tropical fish, or simply float in water so clear you can see your fingers. The famous shell-sand beach is your backyard."
     },
     "afternoon": {
       "time": "2:00 PM",
       "title": "Jungle Secrets",
-      "text": "Explore hidden trails where monkeys swing overhead and iguanas sunbathe on ancient branches. Cool off in a secret swimming hole. Spot wildlife you've only seen in documentaries—here, they're your neighbors."
+      "text": "Explore hidden trails where monkeys swing overhead and iguanas sunbathe on ancient branches. Spot wildlife you've only seen in documentaries — here, they're your neighbors."
     },
     "evening": {
       "time": "6:00 PM",
       "title": "Sunset Rituals",
-      "text": "Grab your favorite drink and claim your spot on the sand. Watch as the Pacific swallows the sun in an explosion of orange, pink, and purple. No two sunsets are alike—each one is a private show just for you."
+      "text": "Grab your favorite drink and watch as the last beams of sunlight slowly disappear through the treetops, giving way to a majestic dusk. No two sunsets are alike — each one is a private show just for you."
     },
     "night": {
       "time": "8:00 PM",
       "title": "Under the Stars",
-      "text": "Gather around the campfire as the Milky Way emerges above. Share stories with fellow travelers. Listen to the jungle's nighttime symphony. Fall asleep to waves and wake up ready to do it all again."
+      "text": "Gather around the grill as the night sky reveals its greatest secrets. Share stories with fellow travelers, listen to the jungle's nighttime symphony, and wake up ready to do it all again."
     }
   },
   "accommodations": {
     "title": "Sleep Your Way",
     "bringOwn": {
       "title": "For the Prepared Explorer",
-      "text": "Already have your trusty tent? Perfect. Reserve your premium beachfront campsite and set up your home-away-from-home exactly how you like it. Flat, cleared spaces with ocean views await.",
+      "text": "Already have your trusted tent? Perfect. Set up your home away from home exactly the way you like it.\n\nFlat, clear spaces surrounded by lush vegetation await you.",
       "price": "From ₡7,000 or $14 per night per person"
     },
     "rental": {
       "title": "Travel Light, Sleep Right",
-      "text": "Flying in or prefer to pack light? We've got you covered—literally. Our quality tents come ready with comfortable sleeping pads, so you can focus on adventure, not logistics."
+      "text": "Flying in or prefer to pack light? We've got you covered — literally. Our quality tents come ready with comfortable sleeping pads, so you can focus on the adventure and enjoy worry-free."
     },
     "guests": "guests",
     "perNight": "per night"
@@ -163,31 +163,31 @@
     },
     "familyExplorer": {
       "name": "Family Explorer",
-      "description": "Room for the whole crew or friend group. Stand-up height, multiple ventilation windows, and covered vestibule."
+      "description": "A medium-sized tent ideal for four people. Plenty of room to sleep comfortably, hang out, and make camping a memorable experience."
     },
     "baseCamp": {
-      "name": "Base Camp",
-      "description": "The luxury of space in the heart of nature. Perfect for families or groups who want to spread out."
+      "name": "The Adventure Clan",
+      "description": "Because the best memories are made together. A spacious tent designed for six people to sleep soundly, laugh into the night, and wake up wanting more."
     }
   },
   "amenities": {
     "title": "Rustic Charm, Real Comfort",
     "intro": "Camping doesn't mean sacrificing comfort. We've thought of everything so you can focus on what matters: disconnecting from the noise and reconnecting with nature.",
     "showers": {
-      "title": "Hot Showers",
-      "text": "Start your day refreshed with solar-heated showers overlooking the jungle"
+      "title": "Fresh Showers",
+      "text": "Start your day refreshed. Often with sun-heated showers."
     },
     "restrooms": {
       "title": "Clean Restrooms",
       "text": "Well-maintained facilities cleaned multiple times daily"
     },
     "campfire": {
-      "title": "Campfire Pits",
-      "text": "Designated fire areas with seating—marshmallows optional but recommended"
+      "title": "Kitchen & Grill Areas",
+      "text": "Shared kitchen spaces with grills and prep stations"
     },
     "parking": {
       "title": "Secure Parking",
-      "text": "Safe, monitored parking for your rental car or motorcycle"
+      "text": "Safe, monitored parking for your car or motorcycle"
     },
     "wifi": {
       "title": "Wi-Fi Zones",
@@ -208,14 +208,14 @@
   },
   "wildlife": {
     "title": "Meet the Locals",
-    "intro": "Our camp isn't just near nature—it's immersed in it. The wildlife here isn't caged or staged. These animals live here, and if you're patient and respectful, they'll share their world with you.",
+    "intro": "Our camp isn't just near nature — it's immersed in it. The wildlife here isn't caged or staged. These animals live here, and if you're patient and respectful, they'll share their world with you.",
     "howler": {
       "name": "Howler Monkeys",
       "text": "Your natural alarm clock. These gentle giants move through the canopy at dawn and dusk, their incredible calls echoing through the forest. Spot whole families grooming and playing in the trees above camp."
     },
     "macaw": {
       "name": "Scarlet Macaws",
-      "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable—and unforgettable."
+      "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable — and unforgettable."
     },
     "toucan": {
       "name": "Keel-Billed Toucans",
@@ -227,9 +227,9 @@
     },
     "iguana": {
       "name": "Iguanas & More",
-      "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups—every walk reveals new neighbors."
+      "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups — every walk reveals new neighbors."
     },
-    "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals—they thrive best on their natural diet, and your respect helps keep them wild."
+    "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals — they thrive best on their natural diet, and your respect helps keep them wild."
   },
   "testimonials": {
     "title": "Stories From the Sand",
@@ -250,11 +250,11 @@
       "volcano": "45 min to Rincón de la Vieja",
       "airport": "45 min from Liberia Airport (LIR)"
     },
-    "gettingHere": "Fly into Daniel Oduber Quirós International Airport (LIR) in Liberia. Rent a car for maximum freedom to explore, or arrange a shuttle pickup directly to camp. The drive is beautiful—your adventure starts the moment you land."
+    "gettingHere": "Fly into Daniel Oduber Quirós International Airport (LIR) in Liberia. Rent a car for maximum freedom to explore, or arrange a shuttle pickup directly to camp. The drive is beautiful — your adventure starts the moment you land."
   },
   "cta": {
     "title": "Your Spot Under the Stars Is Waiting",
-    "text": "Every sunset is different. Every night sky tells a new story. Every day brings unexpected wildlife encounters. But campsites are limited, and the best spots go fast—especially during dry season (December-April).",
+    "text": "Every sunset is different. Every night sky tells a new story. Every day brings unexpected wildlife encounters. But campsites are limited, and the best spots go fast — especially during dry season (December-April).",
     "subtext": "Don't just dream about it. Don't just add it to your bucket list. Make it real.",
     "button": "Book Your Adventure Now",
     "trust": {
@@ -272,11 +272,11 @@
     },
     "packing": {
       "q": "What should I bring?",
-      "a": "Essentials: sunscreen, insect repellent, flashlight, water bottle, and adventure spirit. Nice to have: binoculars for wildlife, waterproof bag for beach days, light layers for cooler evenings. If you're renting a tent, we provide sleeping pads—just bring your own sleeping bag or rent bedding from us."
+      "a": "Essentials: sunscreen, insect repellent, flashlight, water bottle, and adventure spirit. Nice to have: binoculars for wildlife, waterproof bag for beach days, light layers for cooler evenings. If you're renting a tent, we provide sleeping pads — just bring your own sleeping bag or rent bedding from us."
     },
     "weather": {
       "q": "What's the weather like?",
-      "a": "Guanacaste has two seasons: dry (December-April) with sunny days and cool nights, and green (May-November) with afternoon showers and lush landscapes. Both are magical—dry season for guaranteed sun, green season for fewer crowds and dramatic skies."
+      "a": "Guanacaste has two seasons: dry (December-April) with sunny days and cool nights, and green (May-November) with afternoon showers and lush landscapes. Both are magical — dry season for guaranteed sun, green season for fewer crowds and dramatic skies."
     },
     "wildlifeSightings": {
       "q": "Can I see wildlife for sure?",
@@ -284,15 +284,15 @@
     },
     "families": {
       "q": "Is this good for families with kids?",
-      "a": "Kids LOVE it here. The beach is calm for swimming, the wildlife is endlessly fascinating, and there's space to run and explore. We've hosted families with babies to teenagers—all leave with incredible memories."
+      "a": "Kids LOVE it here! The beach is calm for swimming, the wildlife is endlessly fascinating, and there's space to run and explore. We've hosted families with babies to teenagers — all leave with incredible memories."
     },
     "rain": {
       "q": "What if it rains?",
-      "a": "Our tents are waterproof, and we have covered common areas. A tropical rain shower is part of the experience—usually short, dramatic, and followed by the freshest air you've ever breathed. Pack a light rain jacket and embrace it!"
+      "a": "Our tents are waterproof, and we have covered common areas. A tropical rain shower is part of the experience — usually short, followed by the freshest air you've ever breathed. Pack a light jacket and embrace it!"
     },
     "booking": {
       "q": "How do I book?",
-      "a": "Easy! Use our online booking system right here. Select your dates, choose your accommodation, add any extras, and pay securely with card or PayPal. You'll receive instant confirmation."
+      "a": "Easy! Use our online booking system right here. Select your dates, tell us how many people are coming, choose your accommodation, add extras, pay 50% of your booking, and done! You'll receive instant confirmation. You pay the other 50% when you arrive at the campsite. We can't wait to see you!"
     }
   },
   "footer": {
@@ -343,14 +343,14 @@
       "infantsFree": "Free",
       "needTent": "Do you need tent rental?",
       "bringOwn": "I'm bringing my own tent",
-      "bringOwnNote": "Just campsite fee applies",
+      "bringOwnNote": "Campsite fee only",
       "campsiteRate": "Campsite",
       "sleeps": "Sleeps",
       "soldOut": "Sold out"
     },
     "step3": {
       "title": "Make It Unforgettable",
-      "subtitle": "Optional add-ons to level up your experience. Skip if you prefer to keep it simple."
+      "subtitle": "Optional add-ons to enhance your experience. Skip if you prefer to keep it simple."
     },
     "step4": {
       "title": "Review Your Adventure",
@@ -417,9 +417,9 @@
       "termsRequired": "You must agree to the Terms & Conditions to complete your booking.",
       "paymentInfo": {
         "title": "Your booking is almost ready",
-        "body1": "Your camping spot will be securely reserved once you confirm. Payment will be made directly upon arrival. No complications, no upfront charges.",
-        "body2": "We'll take care of everything to make sure you're welcomed properly. Just bring your desire to disconnect, and we'll handle the rest. We're excited to share this experience with you!",
-        "body3": "🌿 To secure your adventure, just pay 50% of the total when booking. The rest you can pay comfortably upon arrival. Easy as that!"
+        "body1": "To confirm your adventure, you only need to pay 50% of the total at the time of booking. You pay the rest comfortably when you arrive. That easy!",
+        "body2": "Your camping spot will be securely reserved once you confirm.",
+        "body3": "We'll take care of having everything ready to welcome you. Just bring your desire to disconnect, and we'll handle the rest. We're excited to share this experience with you!"
       }
     },
     "confirmation": {
@@ -436,7 +436,7 @@
       "step1": "Check your email for detailed confirmation and directions",
       "step2": "Save our WhatsApp for questions",
       "step3": "Review our packing list and travel tips",
-      "step4": "Get excited—you're coming to Costa Rica!",
+      "step4": "Get excited — you're coming to Costa Rica!",
       "addToCalendar": "Add to Calendar",
       "shareTitle": "Share Your Plans",
       "questionsTitle": "Questions? We're here!"
@@ -455,7 +455,7 @@
   "addons": {
     "breakfast": {
       "name": "Breakfast Package",
-      "description": "Fresh tropical fruits, gallo pinto, eggs, Costa Rican coffee. Fuel up for adventure."
+      "description": "Fresh tropical fruits, gallo pinto, eggs, Costa Rican coffee. Energy for the adventure."
     },
     "kayak": {
       "name": "Sunrise Kayak Tour",
