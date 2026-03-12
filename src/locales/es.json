@@ -417,9 +417,9 @@
       "termsRequired": "Debes aceptar los Términos y Condiciones para completar tu reserva.",
       "paymentInfo": {
         "title": "Tu reserva está casi lista",
-        "body1": "Tu espacio en el camping quedará reservado de forma segura una vez que confirmes. El pago lo realizarás directamente al llegar. Sin complicaciones, sin cargos anticipados.",
-        "body2": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!",
-        "body3": "¡Fácil! Usa nuestro sistema de reservas en línea aquí mismo. Selecciona tus fechas, dinos cuantas personas vienen contigo, elige tu alojamiento, añade extras, haz el pago del 50% de tu reserva vía simpe móvil y ¡listo! Recibirás confirmación instantánea. Pagas el otro 50% cuando llegas al camping. ¡Te esperamos!"
+        "body1": "Para confirmar tu aventura, solo necesitas abonar el 50% del total al momento de reservar. El resto lo pagas cómodamente cuando llegues. ¡Así de fácil!",
+        "body2": "Tu espacio en el camping quedará reservado de forma segura una vez que confirmes.",
+        "body3": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!"
       }
     },
     "confirmation": {
