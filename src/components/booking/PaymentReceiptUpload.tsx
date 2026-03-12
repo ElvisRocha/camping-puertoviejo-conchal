@@ -20,7 +20,7 @@ type UploadStatus = 'idle' | 'verifying' | 'verified' | 'error';
 
 interface PaymentReceiptUploadProps {
   expectedAmount: number; // USD — pricing.total / 2
-  onVerified: (verified: boolean) => void;
+  onVerified: (verified: boolean, depositCRC?: number) => void;
 }
 
 // Extract text from a file using local libs (no API cost)
@@ -89,7 +89,7 @@ function parseAmount(text: string): number | null {
 function validate(
   text: string,
   expectedUSD: number
-): { valid: boolean; mensaje: string } {
+): { valid: boolean; mensaje: string; detectedCRC: number | null } {
   const lower = text.toLowerCase();
   const digitsOnly = text.replace(/\D/g, '');
 
@@ -106,17 +106,18 @@ function validate(
     detectedAmount <= maxCRC;
 
   if (!nameValid)
-    return { valid: false, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
+    return { valid: false, detectedCRC: detectedAmount, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
   if (!phoneValid)
-    return { valid: false, mensaje: `Número de celular no encontrado (esperado: 7016-3299)` };
+    return { valid: false, detectedCRC: detectedAmount, mensaje: `Número de celular no encontrado (esperado: 7016-3299)` };
   if (!amountValid) {
     const detected = detectedAmount !== null ? `₡${crcFormat(detectedAmount)}` : 'no detectado';
     return {
       valid: false,
+      detectedCRC: detectedAmount,
       mensaje: `Monto no coincide (detectado: ${detected}, esperado entre ₡${crcFormat(Math.round(expectedCRC))} y ₡${crcFormat(Math.round(expectedCRC * 2))})`,
     };
   }
-  return { valid: true, mensaje: 'Comprobante verificado correctamente' };
+  return { valid: true, detectedCRC: detectedAmount, mensaje: 'Comprobante verificado correctamente' };
 }
 
 export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentReceiptUploadProps) {
@@ -169,10 +170,10 @@ export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentRece
         const text = await extractText(file);
         console.log('[Receipt OCR] extracted text:', text);
         console.log('[Receipt OCR] parseAmount result:', parseAmount(text));
-        const { valid, mensaje } = validate(text, expectedAmount);
+        const { valid, mensaje, detectedCRC } = validate(text, expectedAmount);
         if (valid) {
           setStatus('verified');
-          onVerified(true);
+          onVerified(true, detectedCRC ?? undefined);
         } else {
           setErrorMessage(mensaje);
           setStatus('error');

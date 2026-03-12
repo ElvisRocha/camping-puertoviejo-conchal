@@ -24,6 +24,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   const [newsletter, setNewsletter] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [receiptVerified, setReceiptVerified] = useState(false);
+  const [depositCRC, setDepositCRC] = useState<number | null>(null);
 
   const pricing = calculatePricing();
 
@@ -80,11 +81,12 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         .from('payment-receipts')
         .getPublicUrl(storagePath);
 
-      // 5. Create booking with receipt URL
+      // 5. Create booking with receipt URL and deposit amount
       const { referenceCode, error } = await createBooking({
         booking,
         pricing,
         paymentReceiptUrl: publicUrl,
+        depositCRC: depositCRC ?? undefined,
       });
 
       if (error) {
@@ -172,7 +174,10 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       {/* Payment Receipt Upload */}
       <PaymentReceiptUpload
         expectedAmount={pricing.total / 2}
-        onVerified={setReceiptVerified}
+        onVerified={(verified, amount) => {
+          setReceiptVerified(verified);
+          setDepositCRC(amount ?? null);
+        }}
       />
 
       {/* Terms & Newsletter */}

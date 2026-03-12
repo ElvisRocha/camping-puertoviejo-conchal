@@ -47,6 +47,7 @@ interface BookingRequest {
   };
   pricing: PricingBreakdown;
   paymentReceiptUrl?: string;
+  depositCRC?: number;
 }
 
 const TENT_OPTIONS = [
@@ -72,7 +73,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { booking, pricing, paymentReceiptUrl }: BookingRequest = await req.json();
+    const { booking, pricing, paymentReceiptUrl, depositCRC }: BookingRequest = await req.json();
 
     if (!booking.checkIn || !booking.checkOut) {
       return new Response(
@@ -127,6 +128,9 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const CRC_RATE = 500;
+    const totalCRC = Math.round(pricing.total * CRC_RATE);
+    const depositFinal = depositCRC ?? Math.round((pricing.total / 2) * CRC_RATE);
+    const balanceDue = Math.max(0, totalCRC - depositFinal);
 
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
@@ -142,7 +146,9 @@ Deno.serve(async (req) => {
         addons_fee: Math.round(pricing.addOns * CRC_RATE),
         subtotal: Math.round(pricing.subtotal * CRC_RATE),
         taxes: Math.round(pricing.taxes * CRC_RATE),
-        total: Math.round(pricing.total * CRC_RATE),
+        total: totalCRC,
+        deposit_amount: depositFinal,
+        balance_due: balanceDue,
         status: 'confirmed',
         payment_receipt_url: paymentReceiptUrl || null,
       })
