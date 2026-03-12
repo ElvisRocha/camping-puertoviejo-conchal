@@ -126,6 +126,8 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+    const CRC_RATE = 500;
+
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
       .insert({
@@ -135,12 +137,12 @@ Deno.serve(async (req) => {
         children: booking.guests?.children ?? 0,
         infants: booking.guests?.infants ?? 0,
         bring_own_tent: booking.accommodation?.bringOwnTent ?? true,
-        campsite_fee: pricing.campsiteFee,
-        tent_rental_fee: pricing.tentRental,
-        addons_fee: pricing.addOns,
-        subtotal: pricing.subtotal,
-        taxes: pricing.taxes,
-        total: pricing.total,
+        campsite_fee: Math.round(pricing.campsiteFee * CRC_RATE),
+        tent_rental_fee: Math.round(pricing.tentRental * CRC_RATE),
+        addons_fee: Math.round(pricing.addOns * CRC_RATE),
+        subtotal: Math.round(pricing.subtotal * CRC_RATE),
+        taxes: Math.round(pricing.taxes * CRC_RATE),
+        total: Math.round(pricing.total * CRC_RATE),
         status: 'confirmed',
         payment_receipt_url: paymentReceiptUrl || null,
       })

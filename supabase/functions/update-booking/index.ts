@@ -48,12 +48,12 @@ Deno.serve(async (req) => {
         children: booking.guests?.children ?? 0,
         infants: booking.guests?.infants ?? 0,
         bring_own_tent: booking.accommodation?.bringOwnTent ?? true,
-        campsite_fee: pricing.campsiteFee,
-        tent_rental_fee: pricing.tentRental,
-        addons_fee: pricing.addOns,
-        subtotal: pricing.subtotal,
-        taxes: pricing.taxes,
-        total: pricing.total,
+        campsite_fee: Math.round(pricing.campsiteFee * 500),
+        tent_rental_fee: Math.round(pricing.tentRental * 500),
+        addons_fee: Math.round(pricing.addOns * 500),
+        subtotal: Math.round(pricing.subtotal * 500),
+        taxes: Math.round(pricing.taxes * 500),
+        total: Math.round(pricing.total * 500),
       })
       .eq('id', bookingId)
 
