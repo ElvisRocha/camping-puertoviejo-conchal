@@ -54,21 +54,34 @@ async function extractText(file: File): Promise<string> {
 }
 
 function parseAmount(text: string): number | null {
-  // Match ₡ followed by digits, dots and commas (Costa Rica colones format)
-  // Examples: ₡14,500.00  ₡14.500,00  ₡14500
-  const match = text.match(/₡\s*([\d][\d.,]*)/);
-  if (!match) return null;
-  let raw = match[1];
-  // Determine whether commas or dots are thousands separators
-  // If the last separator is a comma (e.g. 14.500,00) → European format
+  // Tesseract often misreads ₡ as ¢, c, or drops it entirely.
+  // Try multiple strategies in order.
+  let raw: string | null = null;
+
+  // Strategy 1: ₡ or ¢ symbol
+  const currencyMatch = text.match(/[₡¢]\s*([\d][\d.,]*)/);
+  if (currencyMatch) raw = currencyMatch[1];
+
+  // Strategy 2: number right after "Monto" keyword
+  if (!raw) {
+    const montoMatch = text.match(/[Mm]onto[^₡¢\d\n]{0,20}([\d]{1,3}(?:[.,][\d]{3})+(?:[.,]\d{2})?)/);
+    if (montoMatch) raw = montoMatch[1];
+  }
+
+  // Strategy 3: any formatted number with thousands separator (e.g. 3,500.00)
+  if (!raw) {
+    const anyMatch = text.match(/([\d]{1,3}(?:[.,][\d]{3})+(?:[.,]\d{2})?)/);
+    if (anyMatch) raw = anyMatch[1];
+  }
+
+  if (!raw) return null;
+
   const lastComma = raw.lastIndexOf(',');
   const lastDot = raw.lastIndexOf('.');
   if (lastComma > lastDot) {
-    // European: 14.500,00 → remove dots, replace comma with dot
-    raw = raw.replace(/\./g, '').replace(',', '.');
+    raw = raw.replace(/\./g, '').replace(',', '.'); // 3.500,00 → 3500.00
   } else {
-    // American/mixed: 14,500.00 → remove commas
-    raw = raw.replace(/,/g, '');
+    raw = raw.replace(/,/g, ''); // 3,500.00 → 3500.00
   }
   const value = parseFloat(raw);
   return isNaN(value) ? null : value;
