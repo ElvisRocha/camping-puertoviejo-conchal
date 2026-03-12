@@ -407,6 +407,8 @@
       "secureNote": "256-битное SSL шифрование",
       "trustedBy": "Доверяют более 2000 счастливых туристов",
       "totalToPay": "Итого к оплате",
+      "sinpePayment": "Первоначальный платёж через SINPE Móvil (50%)",
+      "paymentBadge": "50% сейчас · 50% по прибытии",
       "includingTaxes": "USD, включая налоги",
       "processing": "Обработка...",
       "toastSuccessTitle": "Бронирование подтверждено! 🎉",

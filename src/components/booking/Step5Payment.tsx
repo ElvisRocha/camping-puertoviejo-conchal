@@ -80,7 +80,15 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       <div className="card-nature p-6 text-center">
         <p className="text-muted-foreground mb-1">{t('booking.step5.totalToPay')}</p>
         <p className="text-4xl font-bold text-forest">{formatDualPrice(pricing.total, t('price_range_connector'))}</p>
-        
+
+        <hr className="my-4 border-border/40" />
+
+        <p className="text-sm text-muted-foreground mb-1">{t('booking.step5.sinpePayment')}</p>
+        <p className="text-xl font-semibold text-sea-green">{formatDualPrice(pricing.total / 2, t('price_range_connector'))}</p>
+
+        <span className="inline-block mt-3 px-3 py-1 rounded-full bg-forest/10 text-forest text-xs font-medium">
+          {t('booking.step5.paymentBadge')}
+        </span>
       </div>
 
       {/* Informative block — payment on arrival */}

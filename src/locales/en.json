@@ -407,6 +407,8 @@
       "secureNote": "256-bit SSL Encryption",
       "trustedBy": "Trusted by 2,000+ happy campers",
       "totalToPay": "Total to pay",
+      "sinpePayment": "Initial payment via SINPE Móvil (50%)",
+      "paymentBadge": "50% now · 50% on arrival",
       "includingTaxes": "USD, including taxes",
       "processing": "Processing...",
       "toastSuccessTitle": "Booking Confirmed! 🎉",

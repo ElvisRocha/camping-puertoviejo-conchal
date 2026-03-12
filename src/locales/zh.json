@@ -407,6 +407,8 @@
       "secureNote": "256位SSL加密",
       "trustedBy": "超过2,000位快乐露营者信赖",
       "totalToPay": "应付总额",
+      "sinpePayment": "通过 SINPE Móvil 初付款（50%）",
+      "paymentBadge": "50% 现在付 · 50% 到达时付",
       "includingTaxes": "美元，含税",
       "processing": "处理中...",
       "toastSuccessTitle": "预订确认！🎉",
