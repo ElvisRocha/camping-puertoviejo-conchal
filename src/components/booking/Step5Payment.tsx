@@ -100,7 +100,19 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         receipt_url: publicUrl,
       });
 
-      // 7. Clear localStorage receipt
+      // 7. Update deposit_amount and balance_due using the OCR-detected amount.
+      //    Done client-side so it works regardless of which edge function version
+      //    is deployed in production.
+      const totalCRC = Math.round(pricing.total * 500);
+      const deposit = depositCRC ?? Math.round((pricing.total / 2) * 500);
+      const balance = Math.max(0, totalCRC - deposit);
+      await supabase.rpc('update_booking_deposit', {
+        ref_code: referenceCode,
+        p_deposit: deposit,
+        p_balance: balance,
+      });
+
+      // 8. Clear localStorage receipt
       localStorage.removeItem(RECEIPT_STORAGE_KEY);
 
       toast({
