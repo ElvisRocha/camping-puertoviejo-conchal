@@ -383,7 +383,7 @@
         "emailPlaceholder": "jean@exemple.com",
         "phonePlaceholder": "+33 6 12 34 56 78",
         "countryPlaceholder": "Sélectionnez votre pays",
-        "arrivalTimePlaceholder": "ex. 15h00",
+        "arrivalTimePlaceholder": "Sélectionnez une heure d'arrivée",
         "specialRequestsPlaceholder": "Restrictions alimentaires, allergies ou demandes spéciales...",
         "celebratingPlaceholder": "Anniversaire, mariage, lune de miel...",
         "errors": {
