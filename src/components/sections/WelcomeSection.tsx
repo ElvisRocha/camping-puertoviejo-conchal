@@ -28,6 +28,9 @@ const WelcomeSection = () => {
         >
           <p>{t('welcome.paragraph1')}</p>
           <p>{t('welcome.paragraph2')}</p>
+          <p className="text-xl font-medium text-forest italic">
+            {t('welcome.paragraph3')}
+          </p>
         </motion.div>
 
         {/* Decorative element */}
