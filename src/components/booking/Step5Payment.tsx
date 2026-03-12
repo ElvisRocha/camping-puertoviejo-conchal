@@ -91,7 +91,14 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         throw error;
       }
 
-      // 6. Clear localStorage receipt
+      // 6. Link receipt URL to booking record (client-side fallback in case
+      //    the deployed edge function predates payment_receipt_url support)
+      await supabase.rpc('link_payment_receipt', {
+        ref_code: referenceCode,
+        receipt_url: publicUrl,
+      });
+
+      // 7. Clear localStorage receipt
       localStorage.removeItem(RECEIPT_STORAGE_KEY);
 
       toast({
