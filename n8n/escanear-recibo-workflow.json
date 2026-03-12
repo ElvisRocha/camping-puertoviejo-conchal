@@ -1,0 +1,115 @@
+{
+  "name": "Escanear Recibo SINPE",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "escanear-recibo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "escanear-recibo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\nconst { file, fileName, fileType, montoEsperado } = body;\n\nif (!file) throw new Error('No se recibió ningún archivo');\n\nlet base64Data = file;\nif (base64Data.includes(',')) {\n  base64Data = base64Data.split(',')[1];\n}\n\nconst mediaType = (fileType || 'image/jpeg').toLowerCase();\nconst isPdf = mediaType === 'application/pdf';\n\nreturn [{\n  json: {\n    base64Data,\n    mediaType,\n    isPdf,\n    montoEsperado: parseFloat(montoEsperado) || 0,\n    fileName: fileName || 'comprobante'\n  }\n}];"
+      },
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "name": "Preparar Datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $vars.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"claude-opus-4-6\",\n  \"max_tokens\": 512,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"{{ $json.isPdf ? 'document' : 'image' }}\",\n        \"source\": {\n          \"type\": \"base64\",\n          \"media_type\": \"{{ $json.mediaType }}\",\n          \"data\": \"{{ $json.base64Data }}\"\n        }\n      },\n      {\n        \"type\": \"text\",\n        \"text\": \"Analiza este comprobante de pago SINPE Móvil. Extrae exactamente los siguientes datos y devuelve SOLO un JSON válido sin texto adicional: { \\\"monto\\\": <número con decimales, solo cifras>, \\\"nombreDestinatario\\\": \\\"<nombre completo tal como aparece>\\\", \\\"celularDestino\\\": \\\"<número de celular, solo dígitos sin guiones ni espacios>\\\" }. Si algún dato no se puede leer claramente, usa null.\"\n      }\n    ]\n  }]\n}",
+        "options": {}
+      },
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "name": "Claude Vision API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const claudeResponse = $input.first().json;\nconst prepData = $('Preparar Datos').first().json;\nconst montoEsperado = prepData.montoEsperado;\n\n// Extract text from Claude response\nconst textContent = claudeResponse.content?.[0]?.text || '';\n\nlet extractedData = { monto: null, nombreDestinatario: null, celularDestino: null };\ntry {\n  const jsonMatch = textContent.match(/\\{[\\s\\S]*?\\}/);\n  if (jsonMatch) {\n    extractedData = JSON.parse(jsonMatch[0]);\n  }\n} catch (e) {\n  console.error('Error parsing Claude response:', e.message, '| Raw text:', textContent);\n}\n\nconst montoDetectado = parseFloat(extractedData.monto) || 0;\nconst nombreDetectado = (extractedData.nombreDestinatario || '').toLowerCase().trim();\nconst celularDetectado = String(extractedData.celularDestino || '').replace(/[^0-9]/g, '');\n\n// Expected SINPE data\nconst NOMBRE_ESPERADO = 'elvis rocha';\nconst CELULAR_ESPERADO = '70163299';\nconst TOLERANCIA = 1.5;\n\nconst montoValido = montoEsperado > 0 && Math.abs(montoDetectado - montoEsperado) <= TOLERANCIA;\nconst nombreValido = nombreDetectado.includes(NOMBRE_ESPERADO) || NOMBRE_ESPERADO.includes(nombreDetectado.split(' ')[0]);\nconst celularValido = celularDetectado === CELULAR_ESPERADO;\n\nconst datosCorrectos = montoValido && nombreValido && celularValido;\n\nconst razonFallo = [];\nif (!montoValido) razonFallo.push('monto detectado: ' + montoDetectado + ', esperado: ' + montoEsperado);\nif (!nombreValido) razonFallo.push('nombre detectado: \"' + extractedData.nombreDestinatario + '\"');\nif (!celularValido) razonFallo.push('celular detectado: \"' + extractedData.celularDestino + '\"');\n\nreturn [{\n  json: {\n    datosCorrectos,\n    montoDetectado,\n    montoEsperado,\n    montoValido,\n    nombreDetectado: extractedData.nombreDestinatario,\n    nombreValido,\n    celularDetectado: extractedData.celularDestino,\n    celularValido,\n    mensaje: datosCorrectos\n      ? 'Comprobante verificado correctamente'\n      : 'Datos no coinciden: ' + razonFallo.join('; ')\n  }\n}];"
+      },
+      "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+      "name": "Validar Datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              { "name": "Content-Type", "value": "application/json" },
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+      "name": "Responder",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [{ "node": "Preparar Datos", "type": "main", "index": 0 }]
+      ]
+    },
+    "Preparar Datos": {
+      "main": [
+        [{ "node": "Claude Vision API", "type": "main", "index": 0 }]
+      ]
+    },
+    "Claude Vision API": {
+      "main": [
+        [{ "node": "Validar Datos", "type": "main", "index": 0 }]
+      ]
+    },
+    "Validar Datos": {
+      "main": [
+        [{ "node": "Responder", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "sinpe-receipt-scanner",
+  "tags": []
+}

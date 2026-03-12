@@ -422,6 +422,24 @@
         "body1": "Um Ihr Abenteuer zu bestätigen, müssen Sie nur 50 % des Gesamtbetrags bei der Buchung anzahlen. Den Rest zahlen Sie bequem bei Ihrer Ankunft. So einfach ist das!",
         "body2": "Ihr Campingplatz wird sicher reserviert, sobald Sie bestätigen.",
         "body3": "Wir sorgen dafür, dass alles für Ihren Empfang bereit ist. Bringen Sie einfach Ihre Lust zum Abschalten mit wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!"
+      },
+      "receiptUpload": {
+        "title": "Zahlungsbeleg",
+        "subtitle": "Laden Sie Ihren SINPE Móvil Zahlungsbeleg hoch (50 % des Gesamtbetrags)",
+        "required": "Dieser Beleg ist erforderlich, um Ihre Buchung abzuschließen",
+        "dropzone": "Klicken Sie zum Hochladen oder ziehen Sie Ihre Datei hierher",
+        "formats": "Bilder (JPG, PNG, WEBP) oder PDF • Max. 5 MB",
+        "verifying": "Beleg wird überprüft...",
+        "verifyingSubtitle": "Wir scannen Ihren Beleg, bitte warten Sie einen Moment",
+        "verified": "Beleg erfolgreich verifiziert!",
+        "verifiedSubtitle": "Die Zahlungsdaten stimmen mit den erwarteten Werten überein",
+        "error": "Beleg konnte nicht verifiziert werden",
+        "errorSubtitle": "Bitte prüfen Sie, ob Betrag, Empfängername und Zielrufnummer korrekt sind",
+        "changeFile": "Datei ändern",
+        "fileSizeError": "Die Datei überschreitet das 5-MB-Limit",
+        "fileTypeError": "Es werden nur Bilder (JPG, PNG, WEBP) oder PDF-Dateien akzeptiert",
+        "receiptRequired": "Sie müssen einen gültigen Zahlungsbeleg hochladen, um Ihre Buchung abzuschließen",
+        "uploadError": "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut."
       }
     },
     "confirmation": {

@@ -422,6 +422,24 @@
         "body1": "To confirm your adventure, you only need to pay 50% of the total at the time of booking. You pay the rest comfortably when you arrive. That easy!",
         "body2": "Your camping spot will be securely reserved once you confirm.",
         "body3": "We'll take care of having everything ready to welcome you. Just bring your desire to disconnect, and we'll handle the rest. We're excited to share this experience with you!"
+      },
+      "receiptUpload": {
+        "title": "Payment Receipt",
+        "subtitle": "Upload your SINPE Móvil payment proof (50% of the total)",
+        "required": "This receipt is required to complete your booking",
+        "dropzone": "Click to upload or drag and drop your file here",
+        "formats": "Images (JPG, PNG, WEBP) or PDF • Max 5MB",
+        "verifying": "Verifying receipt...",
+        "verifyingSubtitle": "We are scanning your receipt, please wait a moment",
+        "verified": "Receipt verified successfully!",
+        "verifiedSubtitle": "Payment details match the expected values",
+        "error": "Could not verify the receipt",
+        "errorSubtitle": "Please check that the amount, recipient name, and destination number are correct",
+        "changeFile": "Change file",
+        "fileSizeError": "The file exceeds the 5MB limit",
+        "fileTypeError": "Only images (JPG, PNG, WEBP) or PDF files are accepted",
+        "receiptRequired": "You must upload a valid payment receipt to complete your booking",
+        "uploadError": "Error uploading the file. Please try again."
       }
     },
     "confirmation": {

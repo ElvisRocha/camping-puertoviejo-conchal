@@ -422,6 +422,24 @@
         "body1": "Pour confirmer votre aventure, il vous suffit de verser 50 % du total au moment de la réservation. Vous payez le reste confortablement à votre arrivée. Simple comme bonjour !",
         "body2": "Votre emplacement au camping sera réservé en toute sécurité une fois que vous aurez confirmé.",
         "body3": "Nous nous occupons de tout préparer pour vous accueillir. Apportez simplement votre envie de vous déconnecter, nous nous chargeons du reste. Nous sommes ravis de partager cette expérience avec vous !"
+      },
+      "receiptUpload": {
+        "title": "Justificatif de Paiement",
+        "subtitle": "Téléchargez votre preuve de paiement SINPE Móvil (50% du total)",
+        "required": "Ce justificatif est requis pour finaliser votre réservation",
+        "dropzone": "Cliquez pour télécharger ou faites glisser votre fichier ici",
+        "formats": "Images (JPG, PNG, WEBP) ou PDF • Max 5 Mo",
+        "verifying": "Vérification du justificatif...",
+        "verifyingSubtitle": "Nous analysons votre justificatif, veuillez patienter un instant",
+        "verified": "Justificatif vérifié avec succès !",
+        "verifiedSubtitle": "Les données du paiement correspondent aux valeurs attendues",
+        "error": "Impossible de vérifier le justificatif",
+        "errorSubtitle": "Vérifiez que le montant, le nom du destinataire et le numéro de destination sont corrects",
+        "changeFile": "Changer de fichier",
+        "fileSizeError": "Le fichier dépasse la limite de 5 Mo",
+        "fileTypeError": "Seules les images (JPG, PNG, WEBP) ou les fichiers PDF sont acceptés",
+        "receiptRequired": "Vous devez télécharger un justificatif de paiement valide pour finaliser votre réservation",
+        "uploadError": "Erreur lors du téléchargement du fichier. Veuillez réessayer."
       }
     },
     "confirmation": {
