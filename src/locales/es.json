@@ -183,7 +183,7 @@
     },
     "campfire": {
       "title": "Áreas de Cocina y Parrillas",
-      "text": "Espacios de cocina compartidos con parrillas y estaciones de preparación"
+      "text": "Espacios de cocina a gas compartidos con parrillas y estaciones de preparación"
     },
     "parking": {
       "title": "Estacionamiento Seguro",
@@ -195,7 +195,7 @@
     },
     "cooking": {
       "title": "Áreas de Cocina",
-      "text": "Espacios de cocina compartidos con parrillas y estaciones de preparación"
+      "text": "Espacios de cocina a gas compartidos con parrillas y estaciones de preparación"
     },
     "security": {
       "title": "Seguridad 24/7",
