@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Upload, CheckCircle, XCircle, Loader2, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const N8N_WEBHOOK_URL = 'https://n8n.smartflow-automations.com/webhook/escanear-recibo';
-const SINPE_RECIPIENT_NAME = 'Elvis Rocha';
-const SINPE_RECIPIENT_PHONE = '70163299';
-const MAX_FILE_SIZE_MB = 5;
-const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+const SINPE_PHONE = '70163299';
+const SINPE_NAME = 'elvis rocha';
+const CRC_RATE = 500;
+const AMOUNT_TOLERANCE = 0.02; // ±2%
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const ACCEPTED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
 export const RECEIPT_STORAGE_KEY = 'camping-payment-receipt';
@@ -15,8 +15,88 @@ export const RECEIPT_STORAGE_KEY = 'camping-payment-receipt';
 type UploadStatus = 'idle' | 'verifying' | 'verified' | 'error';
 
 interface PaymentReceiptUploadProps {
-  expectedAmount: number;
+  expectedAmount: number; // USD — pricing.total / 2
   onVerified: (verified: boolean) => void;
+}
+
+// Extract text from a file using local libs (no API cost)
+async function extractText(file: File): Promise<string> {
+  if (file.type === 'application/pdf') {
+    const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist');
+    // Use the bundled worker via Vite's asset resolution
+    const workerUrl = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+    GlobalWorkerOptions.workerSrc = workerUrl;
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await getDocument({ data: arrayBuffer }).promise;
+    let fullText = '';
+    for (let i = 1; i <= Math.min(pdf.numPages, 3); i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      fullText += content.items.map((item: any) => item.str).join(' ') + ' ';
+    }
+    return fullText;
+  } else {
+    // Image: run Tesseract OCR with Spanish language data
+    const { createWorker } = await import('tesseract.js');
+    const worker = await createWorker('spa', 1, {
+      // Use CDN for language data — keeps bundle small
+      langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+    });
+    const { data: { text } } = await worker.recognize(file);
+    await worker.terminate();
+    return text;
+  }
+}
+
+function parseAmount(text: string): number | null {
+  // Match ₡ followed by digits, dots and commas (Costa Rica colones format)
+  // Examples: ₡14,500.00  ₡14.500,00  ₡14500
+  const match = text.match(/₡\s*([\d][\d.,]*)/);
+  if (!match) return null;
+  let raw = match[1];
+  // Determine whether commas or dots are thousands separators
+  // If the last separator is a comma (e.g. 14.500,00) → European format
+  const lastComma = raw.lastIndexOf(',');
+  const lastDot = raw.lastIndexOf('.');
+  if (lastComma > lastDot) {
+    // European: 14.500,00 → remove dots, replace comma with dot
+    raw = raw.replace(/\./g, '').replace(',', '.');
+  } else {
+    // American/mixed: 14,500.00 → remove commas
+    raw = raw.replace(/,/g, '');
+  }
+  const value = parseFloat(raw);
+  return isNaN(value) ? null : value;
+}
+
+function validate(
+  text: string,
+  expectedUSD: number
+): { valid: boolean; mensaje: string } {
+  const lower = text.toLowerCase();
+  const digitsOnly = text.replace(/\D/g, '');
+
+  const expectedCRC = Math.round(expectedUSD * CRC_RATE);
+  const detectedAmount = parseAmount(text);
+
+  const nameValid = lower.includes(SINPE_NAME);
+  const phoneValid = digitsOnly.includes(SINPE_PHONE);
+  const amountValid =
+    detectedAmount !== null &&
+    Math.abs(detectedAmount - expectedCRC) / expectedCRC <= AMOUNT_TOLERANCE;
+
+  if (!nameValid)
+    return { valid: false, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
+  if (!phoneValid)
+    return { valid: false, mensaje: `Número de celular no encontrado (esperado: 7016-3299)` };
+  if (!amountValid) {
+    const detected = detectedAmount !== null ? `₡${detectedAmount.toLocaleString()}` : 'no detectado';
+    return {
+      valid: false,
+      mensaje: `Monto no coincide (detectado: ${detected}, esperado: ₡${expectedCRC.toLocaleString()})`,
+    };
+  }
+  return { valid: true, mensaje: 'Comprobante verificado correctamente' };
 }
 
 export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentReceiptUploadProps) {
@@ -24,8 +104,8 @@ export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentRece
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [status, setStatus] = useState<UploadStatus>('idle');
-  const [fileName, setFileName] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [fileName, setFileName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
 
   const resetState = () => {
@@ -65,37 +145,19 @@ export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentRece
         JSON.stringify({ file: base64, fileName: file.name, fileType: file.type, fileSize: file.size })
       );
 
-      // Send to n8n webhook for verification
       try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            file: base64,
-            fileName: file.name,
-            fileType: file.type,
-            montoEsperado: expectedAmount,
-            nombreDestinatario: SINPE_RECIPIENT_NAME,
-            celularDestino: SINPE_RECIPIENT_PHONE,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`Webhook error: ${response.status}`);
-        }
-
-        const result = await response.json();
-
-        if (result.datosCorrectos === true) {
+        const text = await extractText(file);
+        const { valid, mensaje } = validate(text, expectedAmount);
+        if (valid) {
           setStatus('verified');
           onVerified(true);
         } else {
-          setErrorMessage(result.mensaje || t('booking.step5.receiptUpload.errorSubtitle'));
+          setErrorMessage(mensaje);
           setStatus('error');
           onVerified(false);
         }
       } catch (err) {
-        console.error('Receipt verification error:', err);
+        console.error('Receipt OCR error:', err);
         setErrorMessage(t('booking.step5.receiptUpload.errorSubtitle'));
         setStatus('error');
         onVerified(false);
