@@ -12,7 +12,7 @@ import { formatDualPrice } from '@/lib/priceFormat';
 import { PaymentReceiptUpload, RECEIPT_STORAGE_KEY } from './PaymentReceiptUpload';
 
 interface Step5PaymentProps {
-  onComplete: (referenceCode: string) => void;
+  onComplete: (referenceCode: string, depositCRC: number, balanceCRC: number) => void;
 }
 
 export function Step5Payment({ onComplete }: Step5PaymentProps) {
@@ -120,7 +120,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         description: t('booking.step5.toastSuccessDescription', { code: referenceCode }),
       });
 
-      onComplete(referenceCode);
+      onComplete(referenceCode, deposit, balance);
     } catch (error) {
       console.error('Booking error:', error);
       toast({
