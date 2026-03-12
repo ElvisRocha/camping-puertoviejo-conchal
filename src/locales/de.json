@@ -147,7 +147,7 @@
     "bringOwn": {
       "title": "Für den Vorbereiteten Entdecker",
       "text": "Haben Sie bereits Ihr bewährtes Zelt? Perfekt. Richten Sie Ihr Zuhause-fern-von-Zuhause genau so ein, wie Sie es mögen.\n\nFlache, geräumte Flächen umgeben von üppiger Vegetation warten auf Sie.",
-      "price": "Ab ₡7,000 oder $14 pro Nacht pro Person"
+      "price": "Ab ₡7,000.00 oder $14 pro Nacht pro Person"
     },
     "rental": {
       "title": "Reisen Sie Leicht, Schlafen Sie Gut",
@@ -324,7 +324,7 @@
     "step1": {
       "title": "Wann Beginnt Ihr Abenteuer?",
       "subtitle": "Wählen Sie Ihr An- und Abreisedatum. Mindestaufenthalt: 1 Nacht.",
-      "priceNote": "₡7,000 oder $14 pro Person pro Nacht Grundpreis",
+      "priceNote": "₡7,000.00 oder $14 pro Person pro Nacht Grundpreis",
       "peakSeason": "Hauptsaison",
       "checkIn": "ANREISE",
       "checkOut": "ABREISE",

@@ -6,6 +6,11 @@ import { Button } from '@/components/ui/button';
 const SINPE_PHONE = '70163299';
 const SINPE_NAME = 'elvis rocha';
 const CRC_RATE = 500;
+
+function crcFormat(n: number): string {
+  const [int, dec] = n.toFixed(2).split('.');
+  return int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + dec;
+}
 const AMOUNT_TOLERANCE = 0.02; // ±2%
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const ACCEPTED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
@@ -90,10 +95,10 @@ function validate(
   if (!phoneValid)
     return { valid: false, mensaje: `Número de celular no encontrado (esperado: 7016-3299)` };
   if (!amountValid) {
-    const detected = detectedAmount !== null ? `₡${detectedAmount.toLocaleString()}` : 'no detectado';
+    const detected = detectedAmount !== null ? `₡${crcFormat(detectedAmount)}` : 'no detectado';
     return {
       valid: false,
-      mensaje: `Monto no coincide (detectado: ${detected}, esperado: ₡${expectedCRC.toLocaleString()})`,
+      mensaje: `Monto no coincide (detectado: ${detected}, esperado: ₡${crcFormat(expectedCRC)}`,
     };
   }
   return { valid: true, mensaje: 'Comprobante verificado correctamente' };

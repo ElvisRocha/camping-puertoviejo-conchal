@@ -147,7 +147,7 @@
     "bringOwn": {
       "title": "For the Prepared Explorer",
       "text": "Already have your trusted tent? Perfect. Set up your home away from home exactly the way you like it.\n\nFlat, clear spaces surrounded by lush vegetation await you.",
-      "price": "From ₡7,000 or $14 per night per person"
+      "price": "From ₡7,000.00 or $14 per night per person"
     },
     "rental": {
       "title": "Travel Light, Sleep Right",
@@ -324,7 +324,7 @@
     "step1": {
       "title": "When Does Your Adventure Begin?",
       "subtitle": "Select your check-in and check-out dates. Minimum stay: 1 night.",
-      "priceNote": "₡7,000 or $14 per person per night base rate",
+      "priceNote": "₡7,000.00 or $14 per person per night base rate",
       "peakSeason": "Peak season",
       "checkIn": "CHECK-IN",
       "checkOut": "CHECK-OUT",

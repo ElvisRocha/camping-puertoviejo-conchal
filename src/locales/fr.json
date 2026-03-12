@@ -147,7 +147,7 @@
     "bringOwn": {
       "title": "Pour l'Explorateur Préparé",
       "text": "Vous avez déjà votre tente de confiance ? Parfait. Installez votre chez-vous loin de chez vous exactement comme vous l'aimez.\n\nDes espaces plats et dégagés entourés d'une végétation luxuriante vous attendent.",
-      "price": "À partir de ₡7,000 ou $14 par nuit par personne"
+      "price": "À partir de ₡7,000.00 ou $14 par nuit par personne"
     },
     "rental": {
       "title": "Voyagez Léger, Dormez Bien",
@@ -324,7 +324,7 @@
     "step1": {
       "title": "Quand Commence Votre Aventure ?",
       "subtitle": "Sélectionnez vos dates d'arrivée et de départ. Séjour minimum : 1 nuit.",
-      "priceNote": "₡7,000 ou $14 par personne par nuit tarif de base",
+      "priceNote": "₡7,000.00 ou $14 par personne par nuit tarif de base",
       "peakSeason": "Haute saison",
       "checkIn": "ARRIVÉE",
       "checkOut": "DÉPART",
