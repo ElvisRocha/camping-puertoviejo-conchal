@@ -99,8 +99,8 @@ function validate(
 
   const nameValid = lower.includes(SINPE_NAME);
   const phoneValid = digitsOnly.includes(SINPE_PHONE);
-  const minCRC = Math.round(expectedCRC * (1 - AMOUNT_TOLERANCE));
-  const maxCRC = Math.round(expectedCRC * 2 * (1 + AMOUNT_TOLERANCE));
+  const minCRC = expectedCRC;
+  const maxCRC = expectedCRC * 2;
   const amountValid =
     detectedAmount !== null &&
     detectedAmount >= minCRC &&
