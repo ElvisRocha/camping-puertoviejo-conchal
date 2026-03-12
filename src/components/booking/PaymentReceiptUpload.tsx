@@ -11,7 +11,6 @@ function crcFormat(n: number): string {
   const [int, dec] = n.toFixed(2).split('.');
   return int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + dec;
 }
-const AMOUNT_TOLERANCE = 0.02; // ±2%
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const ACCEPTED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
@@ -99,9 +98,12 @@ function validate(
 
   const nameValid = lower.includes(SINPE_NAME);
   const phoneValid = digitsOnly.includes(SINPE_PHONE);
+  const minCRC = expectedCRC;
+  const maxCRC = expectedCRC * 2;
   const amountValid =
     detectedAmount !== null &&
-    Math.abs(detectedAmount - expectedCRC) / expectedCRC <= AMOUNT_TOLERANCE;
+    detectedAmount >= minCRC &&
+    detectedAmount <= maxCRC;
 
   if (!nameValid)
     return { valid: false, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
@@ -111,7 +113,7 @@ function validate(
     const detected = detectedAmount !== null ? `₡${crcFormat(detectedAmount)}` : 'no detectado';
     return {
       valid: false,
-      mensaje: `Monto no coincide (detectado: ${detected}, esperado: ₡${crcFormat(expectedCRC)}`,
+      mensaje: `Monto no coincide (detectado: ${detected}, esperado entre ₡${crcFormat(Math.round(expectedCRC))} y ₡${crcFormat(Math.round(expectedCRC * 2))})`,
     };
   }
   return { valid: true, mensaje: 'Comprobante verificado correctamente' };
