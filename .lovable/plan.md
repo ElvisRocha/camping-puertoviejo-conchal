@@ -1,26 +1,32 @@
 
 
-## Plan: Tildar la "o" en contextos de precios (₡ ó $)
+## Plan: Replace em dashes with spaces in non-Spanish locale files
 
-### Problema
-En todas las secciones donde se muestran precios duales (colones y dolares), la conjuncion "o" entre las cifras no tiene tilde. El usuario quiere que sea "o" con tilde: **ó**.
+### Summary
+Replace all em dashes ("—") between words with a normal space in `en.json`, `fr.json`, `de.json`, `zh.json`, and `ru.json`. Spanish (`es.json`) is untouched.
 
-### Cambios
+### Files to modify
 
-**1. `src/lib/priceFormat.ts` (lineas 5 y 10)**
-- Cambiar `" o "` a `" ó "` en ambas funciones (`formatDualPrice` y `formatDualPriceInt`)
-- Esto corrige automaticamente todos los precios generados dinamicamente en la app (tarjetas de tiendas, addons, resumen de reserva, pagos, etc.)
+**1. `src/locales/en.json`** — ~15 replacements
+Lines with " — " pattern: 95, 106, 114, 132, 137, 154, 211, 218, 230, 232, 253, 257, 279, 287
 
-**2. Archivos de traducciones - textos estaticos con precios**
-Cambiar `"o"` a `"ó"` en las cadenas que contienen precios en cada idioma:
+**2. `src/locales/fr.json`** — ~16 replacements
+Lines: 95, 106, 114, 132, 137, 154, 211, 218, 230, 232, 253, 257, 275, 279, 287, 291
 
-- `src/locales/es.json`: "₡7,000 **ó** $14" (en `bringOwn.price` y `step1.priceNote`)
-- `src/locales/en.json`: mismos campos
-- `src/locales/fr.json`: mismos campos
-- `src/locales/de.json`: mismos campos
-- `src/locales/ru.json`: mismos campos
-- `src/locales/zh.json`: mismos campos
+**3. `src/locales/de.json`** — ~16 replacements
+Lines: 95, 106, 114, 132, 137, 154, 211, 218, 230, 232, 253, 257, 279, 287, 291, 422
 
-### Alcance
-- Funcion `formatDualPrice` y `formatDualPriceInt` cubren: tarjetas de alojamiento, addons, resumen de reserva (Step4), paso de pago (Step5)
-- Los archivos de traduccion cubren: seccion de "Trae tu propia tienda" y nota de precio en Step1
+**4. `src/locales/zh.json`** — ~5 replacements (uses "——" double em dash, Chinese convention)
+Lines: 218, 230, 232, 253, 257
+
+**5. `src/locales/ru.json`** — ~14 replacements
+Lines: 132, 137, 218, 230, 232, 253, 257, 279, 287, 291
+
+### Approach
+- Find-and-replace `—` → ` ` (space) in each file
+- Where the pattern is ` — ` (space-dash-space), result will be `   ` (triple space), so we normalize to single space: ` — ` → ` `
+- For Chinese `——`, replace with single space
+
+### No other changes
+Only em dashes between words are affected. No URLs, formatting, or other punctuation is modified.
+
