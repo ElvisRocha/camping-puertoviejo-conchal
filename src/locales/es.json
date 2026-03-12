@@ -147,7 +147,7 @@
     "bringOwn": {
       "title": "Para el Explorador Preparado",
       "text": "¿Ya tienes tu tienda de confianza? Perfecto. Arma tu hogar lejos del hogar exactamente cómo te gusta.\n\nEspacios planos y despejados rodeados de vegetación exuberante te esperan.",
-      "price": "Desde ₡7,000 ó $14/noche por persona"
+      "price": "Desde ₡7,000.00 ó $14/noche por persona"
     },
     "rental": {
       "title": "Viaja Ligero, Duerme Bien",
@@ -324,7 +324,7 @@
     "step1": {
       "title": "¿Cuándo Comienza Tu Aventura?",
       "subtitle": "Selecciona tus fechas de llegada y salida. Estadía mínima: 1 noche.",
-      "priceNote": "₡7,000 ó $14 por persona por noche tarifa base",
+      "priceNote": "₡7,000.00 ó $14 por persona por noche tarifa base",
       "peakSeason": "Temporada alta",
       "checkIn": "LLEGADA",
       "checkOut": "SALIDA",
