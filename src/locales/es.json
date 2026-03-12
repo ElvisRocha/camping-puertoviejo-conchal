@@ -422,6 +422,24 @@
         "body1": "Para confirmar tu aventura, solo necesitas abonar el 50% del total al momento de reservar. El resto lo pagas cómodamente cuando llegues. ¡Así de fácil!",
         "body2": "Tu espacio en el camping quedará reservado de forma segura una vez que confirmes.",
         "body3": "Nos encargamos de tener todo listo para recibirte. Solo trae tus ganas de desconectar, nosotros nos ocupamos del resto. ¡Estamos emocionados de compartir esta experiencia contigo!"
+      },
+      "receiptUpload": {
+        "title": "Comprobante de Pago",
+        "subtitle": "Sube tu comprobante de pago por SINPE Móvil (50% del total)",
+        "required": "Este comprobante es requerido para completar la reserva",
+        "dropzone": "Haz clic para subir o arrastra tu archivo aquí",
+        "formats": "Imágenes (JPG, PNG, WEBP) o PDF • Máx. 5MB",
+        "verifying": "Verificando comprobante...",
+        "verifyingSubtitle": "Estamos escaneando tu comprobante, espera un momento",
+        "verified": "¡Comprobante verificado correctamente!",
+        "verifiedSubtitle": "Los datos del pago coinciden con los esperados",
+        "error": "No se pudo verificar el comprobante",
+        "errorSubtitle": "Revisa que el monto, nombre y número de destino sean correctos",
+        "changeFile": "Cambiar archivo",
+        "fileSizeError": "El archivo supera el límite de 5MB",
+        "fileTypeError": "Solo se aceptan imágenes (JPG, PNG, WEBP) o archivos PDF",
+        "receiptRequired": "Debes subir un comprobante de pago válido para completar tu reserva",
+        "uploadError": "Error al subir el archivo. Por favor intenta nuevamente."
       }
     },
     "confirmation": {

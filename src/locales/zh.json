@@ -421,7 +421,24 @@
         "title": "您的预订即将完成",
         "body1": "确认后，您的营地将被安全预留。付款将在抵达时直接完成 无需复杂手续，无需预付费用。",
         "body2": "我们会确保一切准备就绪，热情迎接您的到来。只需带上您放松身心的心情，其余的交给我们。我们非常期待与您共享这段美好体验！",
-        "body3": "🌿 确认您的冒险之旅，只需在预订时支付总额的50%。剩余部分在抵达时轻松支付。就是这么简单！"
+        "body3": "🌿 确认您的冒险之旅，只需在预订时支付总额的50%。剩余部分在抵达时轻松支付。就是这么简单！",
+      "receiptUpload": {
+        "title": "付款凭证",
+        "subtitle": "请上传您的 SINPE Móvil 付款凭证（总金额的50%）",
+        "required": "完成预订需要上传付款凭证",
+        "dropzone": "点击上传或将文件拖放至此处",
+        "formats": "图片（JPG、PNG、WEBP）或 PDF • 最大 5MB",
+        "verifying": "正在验证凭证...",
+        "verifyingSubtitle": "我们正在扫描您的凭证，请稍候",
+        "verified": "凭证验证成功！",
+        "verifiedSubtitle": "付款信息与预期数值一致",
+        "error": "无法验证凭证",
+        "errorSubtitle": "请检查金额、收款人姓名和目标电话号码是否正确",
+        "changeFile": "更换文件",
+        "fileSizeError": "文件超过 5MB 限制",
+        "fileTypeError": "仅接受图片（JPG、PNG、WEBP）或 PDF 文件",
+        "receiptRequired": "您必须上传有效的付款凭证才能完成预订",
+        "uploadError": "文件上传出错，请重试。"
       }
     },
     "confirmation": {

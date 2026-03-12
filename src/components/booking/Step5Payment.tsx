@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useBookingStore } from '@/store/bookingStore';
 import { createBooking } from '@/lib/bookingApi';
+import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Lock, Shield, Loader2, Tent } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
 import { formatDualPrice } from '@/lib/priceFormat';
+import { PaymentReceiptUpload, RECEIPT_STORAGE_KEY } from './PaymentReceiptUpload';
 
 interface Step5PaymentProps {
   onComplete: (referenceCode: string) => void;
@@ -21,6 +23,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [newsletter, setNewsletter] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [receiptVerified, setReceiptVerified] = useState(false);
 
   const pricing = calculatePricing();
 
@@ -34,17 +37,62 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       return;
     }
 
+    if (!receiptVerified) {
+      toast({
+        title: t('booking.step5.receiptUpload.error'),
+        description: t('booking.step5.receiptUpload.receiptRequired'),
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsProcessing(true);
 
     try {
+      // 1. Retrieve file from localStorage
+      const storedReceipt = localStorage.getItem(RECEIPT_STORAGE_KEY);
+      if (!storedReceipt) {
+        throw new Error('Receipt not found in storage');
+      }
+      const { file: base64, fileName, fileType } = JSON.parse(storedReceipt);
+
+      // 2. Convert base64 → Blob
+      const base64Data = base64.includes(',') ? base64.split(',')[1] : base64;
+      const binaryStr = atob(base64Data);
+      const bytes = new Uint8Array(binaryStr.length);
+      for (let i = 0; i < binaryStr.length; i++) {
+        bytes[i] = binaryStr.charCodeAt(i);
+      }
+      const blob = new Blob([bytes], { type: fileType });
+
+      // 3. Upload to Supabase Storage
+      const storagePath = `${Date.now()}-${fileName}`;
+      const { error: uploadError } = await supabase.storage
+        .from('payment-receipts')
+        .upload(storagePath, blob, { contentType: fileType });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      // 4. Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('payment-receipts')
+        .getPublicUrl(storagePath);
+
+      // 5. Create booking with receipt URL
       const { referenceCode, error } = await createBooking({
         booking,
         pricing,
+        paymentReceiptUrl: publicUrl,
       });
 
       if (error) {
         throw error;
       }
+
+      // 6. Clear localStorage receipt
+      localStorage.removeItem(RECEIPT_STORAGE_KEY);
 
       toast({
         title: t('booking.step5.toastSuccessTitle'),
@@ -56,7 +104,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       console.error('Booking error:', error);
       toast({
         title: t('booking.step5.toastErrorTitle'),
-        description: t('booking.step5.toastErrorDescription'),
+        description: t('booking.step5.receiptUpload.uploadError'),
         variant: 'destructive',
       });
     } finally {
@@ -114,6 +162,12 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         </div>
       </div>
 
+      {/* Payment Receipt Upload */}
+      <PaymentReceiptUpload
+        expectedAmount={pricing.total / 2}
+        onVerified={setReceiptVerified}
+      />
+
       {/* Terms & Newsletter */}
       <div className="card-nature p-6 space-y-4">
         <div className="flex items-start gap-3">
@@ -142,7 +196,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       {/* Complete Booking Button */}
       <Button
         onClick={handleCompleteBooking}
-        disabled={!agreedToTerms || isProcessing}
+        disabled={!agreedToTerms || !receiptVerified || isProcessing}
         className="btn-cta w-full py-6 text-lg"
       >
         {isProcessing ? (

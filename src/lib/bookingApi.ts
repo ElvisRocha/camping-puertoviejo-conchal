@@ -9,9 +9,10 @@ const CLOUD_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 interface CreateBookingParams {
   booking: Partial<Booking>;
   pricing: PricingBreakdown;
+  paymentReceiptUrl?: string;
 }
 
-export async function createBooking({ booking, pricing }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
+export async function createBooking({ booking, pricing, paymentReceiptUrl }: CreateBookingParams): Promise<{ referenceCode: string; error: Error | null }> {
   try {
     const cloudUrl = CLOUD_URL;
     const anonKey = CLOUD_ANON_KEY;
@@ -23,7 +24,7 @@ export async function createBooking({ booking, pricing }: CreateBookingParams): 
         'Authorization': `Bearer ${anonKey}`,
         'apikey': anonKey,
       },
-      body: JSON.stringify({ booking, pricing }),
+      body: JSON.stringify({ booking, pricing, paymentReceiptUrl }),
     });
 
     if (!response.ok) {
