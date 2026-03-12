@@ -11,7 +11,6 @@ function crcFormat(n: number): string {
   const [int, dec] = n.toFixed(2).split('.');
   return int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + dec;
 }
-const AMOUNT_TOLERANCE = 0.02; // ±2%
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const ACCEPTED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
