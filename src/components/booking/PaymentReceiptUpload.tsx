@@ -165,6 +165,8 @@ export function PaymentReceiptUpload({ expectedAmount, onVerified }: PaymentRece
 
       try {
         const text = await extractText(file);
+        console.log('[Receipt OCR] extracted text:', text);
+        console.log('[Receipt OCR] parseAmount result:', parseAmount(text));
         const { valid, mensaje } = validate(text, expectedAmount);
         if (valid) {
           setStatus('verified');
