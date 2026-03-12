@@ -99,9 +99,12 @@ function validate(
 
   const nameValid = lower.includes(SINPE_NAME);
   const phoneValid = digitsOnly.includes(SINPE_PHONE);
+  const minCRC = Math.round(expectedCRC * (1 - AMOUNT_TOLERANCE));
+  const maxCRC = Math.round(expectedCRC * 2 * (1 + AMOUNT_TOLERANCE));
   const amountValid =
     detectedAmount !== null &&
-    Math.abs(detectedAmount - expectedCRC) / expectedCRC <= AMOUNT_TOLERANCE;
+    detectedAmount >= minCRC &&
+    detectedAmount <= maxCRC;
 
   if (!nameValid)
     return { valid: false, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
@@ -111,7 +114,7 @@ function validate(
     const detected = detectedAmount !== null ? `₡${crcFormat(detectedAmount)}` : 'no detectado';
     return {
       valid: false,
-      mensaje: `Monto no coincide (detectado: ${detected}, esperado: ₡${crcFormat(expectedCRC)}`,
+      mensaje: `Monto no coincide (detectado: ${detected}, esperado entre ₡${crcFormat(Math.round(expectedCRC))} y ₡${crcFormat(Math.round(expectedCRC * 2))})`,
     };
   }
   return { valid: true, mensaje: 'Comprobante verificado correctamente' };
