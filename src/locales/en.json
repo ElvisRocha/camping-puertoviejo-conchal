@@ -92,7 +92,7 @@
   "welcome": {
     "title": "This Is Not Just Camping. This Is Living.",
     "paragraph1": "Imagine waking up to a symphony of tropical birds while howler monkeys call from the treetops. Watching the sun slowly set as the last rays of daylight peek through the trees, roasting marshmallows over a warm fire with the people you love.",
-    "paragraph2": "Welcome to Camping Puerto Viejo Conchal, where nature welcomes you with open arms and the sea becomes your nearest neighbor. Just minutes from the legendary beaches of Conchal, Puerto Viejo, Minas, and Piratas — famous for their golden sands and unique white shells found nowhere else in the world. This corner of Guanacaste, Costa Rica, is the place where adventurers from across the globe come to breathe deep, disconnect, and remember why it's worth stepping out to explore.",
+    "paragraph2": "Welcome to Camping Puerto Viejo Conchal, where nature welcomes you with open arms and the sea becomes your nearest neighbor. Just minutes from the legendary beaches of Conchal, Puerto Viejo, Minas, and Piratas famous for their golden sands and unique white shells found nowhere else in the world. This corner of Guanacaste, Costa Rica, is the place where adventurers from across the globe come to breathe deep, disconnect, and remember why it's worth stepping out to explore.",
     "paragraph3": "This isn't roughing it. This is reconnecting with what matters."
   },
   "whyUs": {
@@ -103,7 +103,7 @@
     },
     "wildlife": {
       "title": "Your Neighbors Have Tails and Wings",
-      "text": "Howler monkeys announce the sunrise. Scarlet macaws paint the sky red. Toucans pose for your camera. This is their home — you're the star guest."
+      "text": "Howler monkeys announce the sunrise. Scarlet macaws paint the sky red. Toucans pose for your camera. This is their home you're the star guest."
     },
     "experience": {
       "title": "Stories You'll Tell Forever",
@@ -111,7 +111,7 @@
     },
     "flexibility": {
       "title": "Your Adventure, Your Way",
-      "text": "Bring your own tent or rent one of ours. Stay one night or one month. Add a sunrise kayak tour or keep it simple. We provide the paradise — you write the story."
+      "text": "Bring your own tent or rent one of ours. Stay one night or one month. Add a sunrise kayak tour or keep it simple. We provide the paradise you write the story."
     }
   },
   "experience": {
@@ -129,12 +129,12 @@
     "afternoon": {
       "time": "2:00 PM",
       "title": "Jungle Secrets",
-      "text": "Explore hidden trails where monkeys swing overhead and iguanas sunbathe on ancient branches. Spot wildlife you've only seen in documentaries — here, they're your neighbors."
+      "text": "Explore hidden trails where monkeys swing overhead and iguanas sunbathe on ancient branches. Spot wildlife you've only seen in documentaries here, they're your neighbors."
     },
     "evening": {
       "time": "6:00 PM",
       "title": "Sunset Rituals",
-      "text": "Grab your favorite drink and watch as the last beams of sunlight slowly disappear through the treetops, giving way to a majestic dusk. No two sunsets are alike — each one is a private show just for you."
+      "text": "Grab your favorite drink and watch as the last beams of sunlight slowly disappear through the treetops, giving way to a majestic dusk. No two sunsets are alike each one is a private show just for you."
     },
     "night": {
       "time": "8:00 PM",
@@ -151,7 +151,7 @@
     },
     "rental": {
       "title": "Travel Light, Sleep Right",
-      "text": "Flying in or prefer to pack light? We've got you covered — literally. Our quality tents come ready with comfortable sleeping pads, so you can focus on the adventure and enjoy worry-free."
+      "text": "Flying in or prefer to pack light? We've got you covered literally. Our quality tents come ready with comfortable sleeping pads, so you can focus on the adventure and enjoy worry-free."
     },
     "guests": "guests",
     "perNight": "per night"
@@ -208,14 +208,14 @@
   },
   "wildlife": {
     "title": "Meet the Locals",
-    "intro": "Our camp isn't just near nature — it's immersed in it. The wildlife here isn't caged or staged. These animals live here, and if you're patient and respectful, they'll share their world with you.",
+    "intro": "Our camp isn't just near nature it's immersed in it. The wildlife here isn't caged or staged. These animals live here, and if you're patient and respectful, they'll share their world with you.",
     "howler": {
       "name": "Howler Monkeys",
       "text": "Your natural alarm clock. These gentle giants move through the canopy at dawn and dusk, their incredible calls echoing through the forest. Spot whole families grooming and playing in the trees above camp."
     },
     "macaw": {
       "name": "Scarlet Macaws",
-      "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable — and unforgettable."
+      "text": "Costa Rica's most dazzling residents. These brilliant red, yellow, and blue parrots fly in pairs over the beach at sunrise and sunset. Their calls are unmistakable and unforgettable."
     },
     "toucan": {
       "name": "Keel-Billed Toucans",
@@ -227,9 +227,9 @@
     },
     "iguana": {
       "name": "Iguanas & More",
-      "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups — every walk reveals new neighbors."
+      "text": "Green iguanas sunbathing on branches, Jesus Christ lizards running across water, coatimundis foraging in groups every walk reveals new neighbors."
     },
-    "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals — they thrive best on their natural diet, and your respect helps keep them wild."
+    "note": "Important: We practice responsible wildlife interaction. Please don't feed the animals they thrive best on their natural diet, and your respect helps keep them wild."
   },
   "testimonials": {
     "title": "Stories From the Sand",
@@ -250,11 +250,11 @@
       "volcano": "45 min to Rincón de la Vieja",
       "airport": "45 min from Liberia Airport (LIR)"
     },
-    "gettingHere": "Fly into Daniel Oduber Quirós International Airport (LIR) in Liberia. Rent a car for maximum freedom to explore, or arrange a shuttle pickup directly to camp. The drive is beautiful — your adventure starts the moment you land."
+    "gettingHere": "Fly into Daniel Oduber Quirós International Airport (LIR) in Liberia. Rent a car for maximum freedom to explore, or arrange a shuttle pickup directly to camp. The drive is beautiful your adventure starts the moment you land."
   },
   "cta": {
     "title": "Your Spot Under the Stars Is Waiting",
-    "text": "Every sunset is different. Every night sky tells a new story. Every day brings unexpected wildlife encounters. But campsites are limited, and the best spots go fast — especially during dry season (December-April).",
+    "text": "Every sunset is different. Every night sky tells a new story. Every day brings unexpected wildlife encounters. But campsites are limited, and the best spots go fast especially during dry season (December-April).",
     "subtext": "Don't just dream about it. Don't just add it to your bucket list. Make it real.",
     "button": "Book Your Adventure Now",
     "trust": {
@@ -272,11 +272,11 @@
     },
     "packing": {
       "q": "What should I bring?",
-      "a": "Essentials: sunscreen, insect repellent, flashlight, water bottle, and adventure spirit. Nice to have: binoculars for wildlife, waterproof bag for beach days, light layers for cooler evenings. If you're renting a tent, we provide sleeping pads — just bring your own sleeping bag or rent bedding from us."
+      "a": "Essentials: sunscreen, insect repellent, flashlight, water bottle, and adventure spirit. Nice to have: binoculars for wildlife, waterproof bag for beach days, light layers for cooler evenings. If you're renting a tent, we provide sleeping pads just bring your own sleeping bag or rent bedding from us."
     },
     "weather": {
       "q": "What's the weather like?",
-      "a": "Guanacaste has two seasons: dry (December-April) with sunny days and cool nights, and green (May-November) with afternoon showers and lush landscapes. Both are magical — dry season for guaranteed sun, green season for fewer crowds and dramatic skies."
+      "a": "Guanacaste has two seasons: dry (December-April) with sunny days and cool nights, and green (May-November) with afternoon showers and lush landscapes. Both are magical dry season for guaranteed sun, green season for fewer crowds and dramatic skies."
     },
     "wildlifeSightings": {
       "q": "Can I see wildlife for sure?",
@@ -284,11 +284,11 @@
     },
     "families": {
       "q": "Is this good for families with kids?",
-      "a": "Kids LOVE it here! The beach is calm for swimming, the wildlife is endlessly fascinating, and there's space to run and explore. We've hosted families with babies to teenagers — all leave with incredible memories."
+      "a": "Kids LOVE it here! The beach is calm for swimming, the wildlife is endlessly fascinating, and there's space to run and explore. We've hosted families with babies to teenagers all leave with incredible memories."
     },
     "rain": {
       "q": "What if it rains?",
-      "a": "Our tents are waterproof, and we have covered common areas. A tropical rain shower is part of the experience — usually short, followed by the freshest air you've ever breathed. Pack a light jacket and embrace it!"
+      "a": "Our tents are waterproof, and we have covered common areas. A tropical rain shower is part of the experience usually short, followed by the freshest air you've ever breathed. Pack a light jacket and embrace it!"
     },
     "booking": {
       "q": "How do I book?",
@@ -436,7 +436,7 @@
       "step1": "Check your email for detailed confirmation and directions",
       "step2": "Save our WhatsApp for questions",
       "step3": "Review our packing list and travel tips",
-      "step4": "Get excited — you're coming to Costa Rica!",
+      "step4": "Get excited you're coming to Costa Rica!",
       "addToCalendar": "Add to Calendar",
       "shareTitle": "Share Your Plans",
       "questionsTitle": "Questions? We're here!"

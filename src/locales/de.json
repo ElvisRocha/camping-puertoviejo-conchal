@@ -92,7 +92,7 @@
   "welcome": {
     "title": "Das Ist Nicht Nur Camping. Das Ist Leben.",
     "paragraph1": "Stellen Sie sich vor, zum Klang einer Symphonie tropischer Vögel aufzuwachen, während Brüllaffen von den Baumkronen rufen. Die Sonne langsam untergehen zu sehen, während die letzten Strahlen des Tageslichts zwischen den Bäumen hervorlugen, und Marshmallows am warmen Feuer mit den Menschen zu rösten, die Sie lieben.",
-    "paragraph2": "Willkommen im Camping Puerto Viejo Conchal, wo die Natur Sie mit offenen Armen empfängt und das Meer Ihr nächster Nachbar wird. Nur wenige Minuten von den legendären Stränden Conchal, Puerto Viejo, Minas und Piratas entfernt — bekannt für ihren goldenen Sand und die einzigartigen weißen Muscheln, die es nirgendwo sonst auf der Welt gibt. Diese Ecke von Guanacaste, Costa Rica, ist der Ort, wo Abenteurer aus aller Welt herkommen, um tief durchzuatmen, abzuschalten und sich zu erinnern, warum es sich lohnt, hinauszugehen und zu erkunden.",
+    "paragraph2": "Willkommen im Camping Puerto Viejo Conchal, wo die Natur Sie mit offenen Armen empfängt und das Meer Ihr nächster Nachbar wird. Nur wenige Minuten von den legendären Stränden Conchal, Puerto Viejo, Minas und Piratas entfernt bekannt für ihren goldenen Sand und die einzigartigen weißen Muscheln, die es nirgendwo sonst auf der Welt gibt. Diese Ecke von Guanacaste, Costa Rica, ist der Ort, wo Abenteurer aus aller Welt herkommen, um tief durchzuatmen, abzuschalten und sich zu erinnern, warum es sich lohnt, hinauszugehen und zu erkunden.",
     "paragraph3": "Das ist nicht Überleben. Das ist Wiederverbindung mit dem Wesentlichen."
   },
   "whyUs": {
@@ -103,7 +103,7 @@
     },
     "wildlife": {
       "title": "Ihre Nachbarn Haben Schwänze und Flügel",
-      "text": "Brüllaffen kündigen den Sonnenaufgang an. Hellrote Aras malen den Himmel rot. Tukane posieren für Ihre Kamera. Das ist ihr Zuhause — Sie sind der Ehrengast."
+      "text": "Brüllaffen kündigen den Sonnenaufgang an. Hellrote Aras malen den Himmel rot. Tukane posieren für Ihre Kamera. Das ist ihr Zuhause Sie sind der Ehrengast."
     },
     "experience": {
       "title": "Geschichten, Die Sie Für Immer Erzählen",
@@ -111,7 +111,7 @@
     },
     "flexibility": {
       "title": "Ihr Abenteuer, Auf Ihre Weise",
-      "text": "Bringen Sie Ihr eigenes Zelt mit oder mieten Sie eines von uns. Bleiben Sie eine Nacht oder einen Monat. Fügen Sie eine Kayaktour bei Sonnenaufgang hinzu oder halten Sie es einfach. Wir bieten das Paradies — Sie schreiben die Geschichte."
+      "text": "Bringen Sie Ihr eigenes Zelt mit oder mieten Sie eines von uns. Bleiben Sie eine Nacht oder einen Monat. Fügen Sie eine Kayaktour bei Sonnenaufgang hinzu oder halten Sie es einfach. Wir bieten das Paradies Sie schreiben die Geschichte."
     }
   },
   "experience": {
@@ -129,12 +129,12 @@
     "afternoon": {
       "time": "14:00",
       "title": "Geheimnisse des Dschungels",
-      "text": "Erkunden Sie versteckte Pfade, wo Affen über Ihnen schwingen und Leguane auf uralten Ästen Sonne tanken. Beobachten Sie Wildtiere, die Sie nur aus Dokumentarfilmen kennen — hier sind sie Ihre Nachbarn."
+      "text": "Erkunden Sie versteckte Pfade, wo Affen über Ihnen schwingen und Leguane auf uralten Ästen Sonne tanken. Beobachten Sie Wildtiere, die Sie nur aus Dokumentarfilmen kennen hier sind sie Ihre Nachbarn."
     },
     "evening": {
       "time": "18:00",
       "title": "Sonnenuntergangs-Rituale",
-      "text": "Nehmen Sie Ihr Lieblingsgetränk und beobachten Sie, wie die letzten Lichtstrahlen des Tages langsam zwischen den Bäumen verschwinden und einem majestätischen Abend Platz machen. Kein Sonnenuntergang gleicht dem anderen — jeder ist eine private Show nur für Sie."
+      "text": "Nehmen Sie Ihr Lieblingsgetränk und beobachten Sie, wie die letzten Lichtstrahlen des Tages langsam zwischen den Bäumen verschwinden und einem majestätischen Abend Platz machen. Kein Sonnenuntergang gleicht dem anderen jeder ist eine private Show nur für Sie."
     },
     "night": {
       "time": "20:00",
@@ -151,7 +151,7 @@
     },
     "rental": {
       "title": "Reisen Sie Leicht, Schlafen Sie Gut",
-      "text": "Fliegen Sie an oder packen Sie lieber leicht? Wir haben für Sie vorgesorgt — buchstäblich. Unsere Qualitätszelte kommen fertig mit bequemen Schlafmatten, damit Sie sich auf das Abenteuer konzentrieren und sorgenfrei genießen können."
+      "text": "Fliegen Sie an oder packen Sie lieber leicht? Wir haben für Sie vorgesorgt buchstäblich. Unsere Qualitätszelte kommen fertig mit bequemen Schlafmatten, damit Sie sich auf das Abenteuer konzentrieren und sorgenfrei genießen können."
     },
     "guests": "Gäste",
     "perNight": "pro Nacht"
@@ -208,14 +208,14 @@
   },
   "wildlife": {
     "title": "Treffen Sie die Einheimischen",
-    "intro": "Unser Camp ist nicht nur in der Nähe der Natur — es ist in sie eingetaucht. Die Wildtiere hier sind nicht eingesperrt oder inszeniert. Diese Tiere leben hier, und wenn Sie geduldig und respektvoll sind, werden sie ihre Welt mit Ihnen teilen.",
+    "intro": "Unser Camp ist nicht nur in der Nähe der Natur es ist in sie eingetaucht. Die Wildtiere hier sind nicht eingesperrt oder inszeniert. Diese Tiere leben hier, und wenn Sie geduldig und respektvoll sind, werden sie ihre Welt mit Ihnen teilen.",
     "howler": {
       "name": "Brüllaffen",
       "text": "Ihr natürlicher Wecker. Diese sanften Riesen bewegen sich bei Morgen- und Abenddämmerung durch das Blätterdach, ihre unglaublichen Rufe hallen durch den Wald. Beobachten Sie ganze Familien beim Pflegen und Spielen in den Bäumen über dem Camp."
     },
     "macaw": {
       "name": "Hellrote Aras",
-      "text": "Costa Ricas schillerndste Bewohner. Diese leuchtend roten, gelben und blauen Papageien fliegen paarweise über den Strand bei Sonnenauf- und -untergang. Ihre Rufe sind unverwechselbar — und unvergesslich."
+      "text": "Costa Ricas schillerndste Bewohner. Diese leuchtend roten, gelben und blauen Papageien fliegen paarweise über den Strand bei Sonnenauf- und -untergang. Ihre Rufe sind unverwechselbar und unvergesslich."
     },
     "toucan": {
       "name": "Regenbogentukane",
@@ -227,9 +227,9 @@
     },
     "iguana": {
       "name": "Leguane und Mehr",
-      "text": "Grüne Leguane beim Sonnenbaden auf Ästen, Jesus-Christus-Eidechsen, die übers Wasser laufen, Nasenbären, die in Gruppen nach Nahrung suchen — jeder Spaziergang enthüllt neue Nachbarn."
+      "text": "Grüne Leguane beim Sonnenbaden auf Ästen, Jesus-Christus-Eidechsen, die übers Wasser laufen, Nasenbären, die in Gruppen nach Nahrung suchen jeder Spaziergang enthüllt neue Nachbarn."
     },
-    "note": "Wichtig: Wir praktizieren verantwortungsvolle Wildtier-Interaktion. Bitte füttern Sie die Tiere nicht — sie gedeihen am besten mit ihrer natürlichen Ernährung, und Ihr Respekt hilft, sie wild zu halten."
+    "note": "Wichtig: Wir praktizieren verantwortungsvolle Wildtier-Interaktion. Bitte füttern Sie die Tiere nicht sie gedeihen am besten mit ihrer natürlichen Ernährung, und Ihr Respekt hilft, sie wild zu halten."
   },
   "testimonials": {
     "title": "Geschichten aus dem Sand",
@@ -250,11 +250,11 @@
       "volcano": "45 Min nach Rincón de la Vieja",
       "airport": "45 Min vom Flughafen Liberia (LIR)"
     },
-    "gettingHere": "Fliegen Sie zum internationalen Flughafen Daniel Oduber Quirós (LIR) in Liberia. Mieten Sie ein Auto für maximale Erkundungsfreiheit, oder organisieren Sie einen Shuttle direkt zum Camp. Die Fahrt ist wunderschön — Ihr Abenteuer beginnt in dem Moment, in dem Sie landen."
+    "gettingHere": "Fliegen Sie zum internationalen Flughafen Daniel Oduber Quirós (LIR) in Liberia. Mieten Sie ein Auto für maximale Erkundungsfreiheit, oder organisieren Sie einen Shuttle direkt zum Camp. Die Fahrt ist wunderschön Ihr Abenteuer beginnt in dem Moment, in dem Sie landen."
   },
   "cta": {
     "title": "Ihr Platz Unter den Sternen Wartet",
-    "text": "Jeder Sonnenuntergang ist anders. Jeder Nachthimmel erzählt eine neue Geschichte. Jeder Tag bringt unerwartete Begegnungen mit Wildtieren. Aber die Stellplätze sind begrenzt, und die besten Plätze sind schnell weg — besonders während der Trockenzeit (Dezember-April).",
+    "text": "Jeder Sonnenuntergang ist anders. Jeder Nachthimmel erzählt eine neue Geschichte. Jeder Tag bringt unerwartete Begegnungen mit Wildtieren. Aber die Stellplätze sind begrenzt, und die besten Plätze sind schnell weg besonders während der Trockenzeit (Dezember-April).",
     "subtext": "Träumen Sie nicht nur davon. Fügen Sie es nicht nur Ihrer Wunschliste hinzu. Machen Sie es wahr.",
     "button": "Buchen Sie Jetzt Ihr Abenteuer",
     "trust": {
@@ -272,11 +272,11 @@
     },
     "packing": {
       "q": "Was sollte ich mitbringen?",
-      "a": "Wesentliches: Sonnencreme, Insektenschutzmittel, Taschenlampe, Wasserflasche und Abenteuerlust. Nützlich: Fernglas für Wildtiere, wasserdichte Tasche für Strandtage, leichte Schichten für kühlere Abende. Wenn Sie ein Zelt mieten, stellen wir Schlafmatten bereit — bringen Sie nur Ihren Schlafsack mit oder mieten Sie Bettwäsche."
+      "a": "Wesentliches: Sonnencreme, Insektenschutzmittel, Taschenlampe, Wasserflasche und Abenteuerlust. Nützlich: Fernglas für Wildtiere, wasserdichte Tasche für Strandtage, leichte Schichten für kühlere Abende. Wenn Sie ein Zelt mieten, stellen wir Schlafmatten bereit bringen Sie nur Ihren Schlafsack mit oder mieten Sie Bettwäsche."
     },
     "weather": {
       "q": "Wie ist das Wetter?",
-      "a": "Guanacaste hat zwei Jahreszeiten: Trockenzeit (Dezember-April) mit sonnigen Tagen und kühlen Nächten, und Grüne Saison (Mai-November) mit Nachmittagsschauern und üppigen Landschaften. Beide sind magisch — Trockenzeit für garantierte Sonne, Grüne Saison für weniger Menschenmassen und dramatische Himmel."
+      "a": "Guanacaste hat zwei Jahreszeiten: Trockenzeit (Dezember-April) mit sonnigen Tagen und kühlen Nächten, und Grüne Saison (Mai-November) mit Nachmittagsschauern und üppigen Landschaften. Beide sind magisch Trockenzeit für garantierte Sonne, Grüne Saison für weniger Menschenmassen und dramatische Himmel."
     },
     "wildlifeSightings": {
       "q": "Kann ich garantiert Wildtiere sehen?",
@@ -284,11 +284,11 @@
     },
     "families": {
       "q": "Ist das gut für Familien mit Kindern?",
-      "a": "Kinder LIEBEN es hier! Der Strand ist ruhig zum Schwimmen, die Wildtiere sind endlos faszinierend, und es gibt Platz zum Rennen und Erkunden. Wir haben Familien mit Babys bis zu Teenagern beherbergt — alle gehen mit unglaublichen Erinnerungen."
+      "a": "Kinder LIEBEN es hier! Der Strand ist ruhig zum Schwimmen, die Wildtiere sind endlos faszinierend, und es gibt Platz zum Rennen und Erkunden. Wir haben Familien mit Babys bis zu Teenagern beherbergt alle gehen mit unglaublichen Erinnerungen."
     },
     "rain": {
       "q": "Was passiert, wenn es regnet?",
-      "a": "Unsere Zelte sind wasserdicht, und wir haben überdachte Gemeinschaftsbereiche. Ein tropischer Regenschauer ist Teil des Erlebnisses — normalerweise kurz, gefolgt von der frischesten Luft, die Sie je geatmet haben. Packen Sie eine leichte Jacke ein und genießen Sie es!"
+      "a": "Unsere Zelte sind wasserdicht, und wir haben überdachte Gemeinschaftsbereiche. Ein tropischer Regenschauer ist Teil des Erlebnisses normalerweise kurz, gefolgt von der frischesten Luft, die Sie je geatmet haben. Packen Sie eine leichte Jacke ein und genießen Sie es!"
     },
     "booking": {
       "q": "Wie buche ich?",
@@ -419,7 +419,7 @@
         "title": "Ihre Buchung ist fast fertig",
         "body1": "Um Ihr Abenteuer zu bestätigen, müssen Sie nur 50 % des Gesamtbetrags bei der Buchung anzahlen. Den Rest zahlen Sie bequem bei Ihrer Ankunft. So einfach ist das!",
         "body2": "Ihr Campingplatz wird sicher reserviert, sobald Sie bestätigen.",
-        "body3": "Wir sorgen dafür, dass alles für Ihren Empfang bereit ist. Bringen Sie einfach Ihre Lust zum Abschalten mit — wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!"
+        "body3": "Wir sorgen dafür, dass alles für Ihren Empfang bereit ist. Bringen Sie einfach Ihre Lust zum Abschalten mit wir kümmern uns um den Rest. Wir freuen uns darauf, dieses Erlebnis mit Ihnen zu teilen!"
       }
     },
     "confirmation": {
@@ -436,7 +436,7 @@
       "step1": "Überprüfen Sie Ihre E-Mail für detaillierte Bestätigung und Wegbeschreibung",
       "step2": "Speichern Sie unser WhatsApp für Fragen",
       "step3": "Überprüfen Sie unsere Packliste und Reisetipps",
-      "step4": "Freuen Sie sich — Sie kommen nach Costa Rica!",
+      "step4": "Freuen Sie sich Sie kommen nach Costa Rica!",
       "addToCalendar": "Zum Kalender Hinzufügen",
       "shareTitle": "Ihre Pläne Teilen",
       "questionsTitle": "Fragen? Wir sind hier!"

@@ -92,7 +92,7 @@
   "welcome": {
     "title": "Ce N'est Pas du Camping. C'est Vivre.",
     "paragraph1": "Imaginez vous réveiller au son d'une symphonie d'oiseaux tropicaux tandis que les singes hurleurs appellent depuis les cimes des arbres. Regarder le soleil se coucher lentement, tandis que les derniers rayons de lumière du jour percent entre les arbres, et faire griller des guimauves sur un feu chaleureux entouré des personnes que vous aimez.",
-    "paragraph2": "Bienvenue au Camping Puerto Viejo Conchal, où la nature vous accueille les bras ouverts et la mer devient votre voisin le plus proche. À quelques minutes des légendaires plages de Conchal, Puerto Viejo, Minas et Piratas — célèbres pour leurs sables dorés et leurs coquillages blancs uniques au monde. Ce coin du Guanacaste, au Costa Rica, est l'endroit où les aventuriers du monde entier viennent respirer profondément, se déconnecter et se rappeler pourquoi cela vaut la peine de partir explorer.",
+    "paragraph2": "Bienvenue au Camping Puerto Viejo Conchal, où la nature vous accueille les bras ouverts et la mer devient votre voisin le plus proche. À quelques minutes des légendaires plages de Conchal, Puerto Viejo, Minas et Piratas célèbres pour leurs sables dorés et leurs coquillages blancs uniques au monde. Ce coin du Guanacaste, au Costa Rica, est l'endroit où les aventuriers du monde entier viennent respirer profondément, se déconnecter et se rappeler pourquoi cela vaut la peine de partir explorer.",
     "paragraph3": "Ce n'est pas survivre. C'est se reconnecter à l'essentiel."
   },
   "whyUs": {
@@ -103,7 +103,7 @@
     },
     "wildlife": {
       "title": "Vos Voisins Ont des Queues et des Ailes",
-      "text": "Les singes hurleurs annoncent le lever du soleil. Les aras écarlates peignent le ciel en rouge. Les toucans posent pour votre appareil photo. C'est leur maison — vous êtes l'invité vedette."
+      "text": "Les singes hurleurs annoncent le lever du soleil. Les aras écarlates peignent le ciel en rouge. Les toucans posent pour votre appareil photo. C'est leur maison vous êtes l'invité vedette."
     },
     "experience": {
       "title": "Des Histoires Que Vous Raconterez Toujours",
@@ -111,7 +111,7 @@
     },
     "flexibility": {
       "title": "Votre Aventure, À Votre Façon",
-      "text": "Apportez votre propre tente ou louez l'une des nôtres. Restez une nuit ou un mois. Ajoutez un tour de kayak au lever du soleil ou restez simple. Nous fournissons le paradis — vous écrivez l'histoire."
+      "text": "Apportez votre propre tente ou louez l'une des nôtres. Restez une nuit ou un mois. Ajoutez un tour de kayak au lever du soleil ou restez simple. Nous fournissons le paradis vous écrivez l'histoire."
     }
   },
   "experience": {
@@ -129,12 +129,12 @@
     "afternoon": {
       "time": "14h00",
       "title": "Secrets de la Jungle",
-      "text": "Explorez des sentiers cachés où les singes se balancent au-dessus de votre tête et les iguanes prennent le soleil sur des branches anciennes. Observez une faune que vous n'avez vue que dans les documentaires — ici, ce sont vos voisins."
+      "text": "Explorez des sentiers cachés où les singes se balancent au-dessus de votre tête et les iguanes prennent le soleil sur des branches anciennes. Observez une faune que vous n'avez vue que dans les documentaires ici, ce sont vos voisins."
     },
     "evening": {
       "time": "18h00",
       "title": "Rituels du Coucher de Soleil",
-      "text": "Prenez votre boisson préférée et regardez les derniers rayons de lumière du jour disparaître lentement entre les arbres pour laisser place à un crépuscule majestueux. Aucun coucher de soleil n'est identique — chacun est un spectacle privé rien que pour vous."
+      "text": "Prenez votre boisson préférée et regardez les derniers rayons de lumière du jour disparaître lentement entre les arbres pour laisser place à un crépuscule majestueux. Aucun coucher de soleil n'est identique chacun est un spectacle privé rien que pour vous."
     },
     "night": {
       "time": "20h00",
@@ -151,7 +151,7 @@
     },
     "rental": {
       "title": "Voyagez Léger, Dormez Bien",
-      "text": "Vous venez en avion ou préférez voyager léger ? Nous avons tout prévu — littéralement. Nos tentes de qualité sont prêtes avec des matelas confortables, pour que vous puissiez vous concentrer sur l'aventure et profiter sans souci."
+      "text": "Vous venez en avion ou préférez voyager léger ? Nous avons tout prévu littéralement. Nos tentes de qualité sont prêtes avec des matelas confortables, pour que vous puissiez vous concentrer sur l'aventure et profiter sans souci."
     },
     "guests": "invités",
     "perNight": "par nuit"
@@ -208,14 +208,14 @@
   },
   "wildlife": {
     "title": "Rencontrez les Locaux",
-    "intro": "Notre camp n'est pas seulement près de la nature — il y est immergé. La faune ici n'est ni en cage ni mise en scène. Ces animaux vivent ici, et si vous êtes patient et respectueux, ils partageront leur monde avec vous.",
+    "intro": "Notre camp n'est pas seulement près de la nature il y est immergé. La faune ici n'est ni en cage ni mise en scène. Ces animaux vivent ici, et si vous êtes patient et respectueux, ils partageront leur monde avec vous.",
     "howler": {
       "name": "Singes Hurleurs",
       "text": "Votre réveil naturel. Ces gentils géants se déplacent dans la canopée à l'aube et au crépuscule, leurs appels incroyables résonnant à travers la forêt. Observez des familles entières se toiletter et jouer dans les arbres au-dessus du camp."
     },
     "macaw": {
       "name": "Aras Écarlates",
-      "text": "Les résidents les plus éblouissants du Costa Rica. Ces perroquets brillants rouges, jaunes et bleus volent en couples au-dessus de la plage au lever et au coucher du soleil. Leurs appels sont incomparables — et inoubliables."
+      "text": "Les résidents les plus éblouissants du Costa Rica. Ces perroquets brillants rouges, jaunes et bleus volent en couples au-dessus de la plage au lever et au coucher du soleil. Leurs appels sont incomparables et inoubliables."
     },
     "toucan": {
       "name": "Toucans à Carène",
@@ -227,9 +227,9 @@
     },
     "iguana": {
       "name": "Iguanes et Plus",
-      "text": "Iguanes verts se dorant au soleil sur les branches, lézards Jésus-Christ courant sur l'eau, coatis fouillant en groupes — chaque promenade révèle de nouveaux voisins."
+      "text": "Iguanes verts se dorant au soleil sur les branches, lézards Jésus-Christ courant sur l'eau, coatis fouillant en groupes chaque promenade révèle de nouveaux voisins."
     },
-    "note": "Important : Nous pratiquons une interaction responsable avec la faune. Veuillez ne pas nourrir les animaux — ils prospèrent mieux avec leur régime naturel, et votre respect aide à les garder sauvages."
+    "note": "Important : Nous pratiquons une interaction responsable avec la faune. Veuillez ne pas nourrir les animaux ils prospèrent mieux avec leur régime naturel, et votre respect aide à les garder sauvages."
   },
   "testimonials": {
     "title": "Histoires Depuis le Sable",
@@ -250,11 +250,11 @@
       "volcano": "45 min de Rincón de la Vieja",
       "airport": "45 min de l'Aéroport de Liberia (LIR)"
     },
-    "gettingHere": "Atterrissez à l'Aéroport International Daniel Oduber Quirós (LIR) à Liberia. Louez une voiture pour une liberté maximale d'exploration, ou organisez une navette directement au camp. Le trajet est magnifique — votre aventure commence dès l'atterrissage."
+    "gettingHere": "Atterrissez à l'Aéroport International Daniel Oduber Quirós (LIR) à Liberia. Louez une voiture pour une liberté maximale d'exploration, ou organisez une navette directement au camp. Le trajet est magnifique votre aventure commence dès l'atterrissage."
   },
   "cta": {
     "title": "Votre Place Sous les Étoiles Vous Attend",
-    "text": "Chaque coucher de soleil est différent. Chaque ciel nocturne raconte une nouvelle histoire. Chaque jour apporte des rencontres inattendues avec la faune. Mais les emplacements sont limités, et les meilleures places partent vite — surtout pendant la saison sèche (décembre-avril).",
+    "text": "Chaque coucher de soleil est différent. Chaque ciel nocturne raconte une nouvelle histoire. Chaque jour apporte des rencontres inattendues avec la faune. Mais les emplacements sont limités, et les meilleures places partent vite surtout pendant la saison sèche (décembre-avril).",
     "subtext": "Ne vous contentez pas d'en rêver. Ne l'ajoutez pas seulement à votre liste. Faites-le devenir réalité.",
     "button": "Réservez Votre Aventure Maintenant",
     "trust": {
@@ -272,11 +272,11 @@
     },
     "packing": {
       "q": "Que dois-je apporter ?",
-      "a": "Essentiels : crème solaire, répulsif anti-insectes, lampe de poche, bouteille d'eau et esprit d'aventure. Utiles : jumelles pour la faune, sac étanche pour les jours de plage, couches légères pour les soirées fraîches. Si vous louez une tente, nous fournissons les matelas — apportez juste votre sac de couchage ou louez la literie."
+      "a": "Essentiels : crème solaire, répulsif anti-insectes, lampe de poche, bouteille d'eau et esprit d'aventure. Utiles : jumelles pour la faune, sac étanche pour les jours de plage, couches légères pour les soirées fraîches. Si vous louez une tente, nous fournissons les matelas apportez juste votre sac de couchage ou louez la literie."
     },
     "weather": {
       "q": "Quel temps fait-il ?",
-      "a": "Le Guanacaste a deux saisons : sèche (décembre-avril) avec des journées ensoleillées et des nuits fraîches, et verte (mai-novembre) avec des averses l'après-midi et des paysages luxuriants. Les deux sont magiques — saison sèche pour le soleil garanti, saison verte pour moins de monde et des ciels dramatiques."
+      "a": "Le Guanacaste a deux saisons : sèche (décembre-avril) avec des journées ensoleillées et des nuits fraîches, et verte (mai-novembre) avec des averses l'après-midi et des paysages luxuriants. Les deux sont magiques saison sèche pour le soleil garanti, saison verte pour moins de monde et des ciels dramatiques."
     },
     "wildlifeSightings": {
       "q": "Puis-je voir de la faune à coup sûr ?",
@@ -284,11 +284,11 @@
     },
     "families": {
       "q": "C'est bien pour les familles avec enfants ?",
-      "a": "Les enfants ADORENT ici ! La plage est calme pour la baignade, la faune est fascinante à l'infini, et il y a de l'espace pour courir et explorer. Nous avons accueilli des familles avec des bébés jusqu'aux adolescents — tous repartent avec des souvenirs incroyables."
+      "a": "Les enfants ADORENT ici ! La plage est calme pour la baignade, la faune est fascinante à l'infini, et il y a de l'espace pour courir et explorer. Nous avons accueilli des familles avec des bébés jusqu'aux adolescents tous repartent avec des souvenirs incroyables."
     },
     "rain": {
       "q": "Et s'il pleut ?",
-      "a": "Nos tentes sont imperméables, et nous avons des espaces communs couverts. Une averse tropicale fait partie de l'expérience — généralement courte, suivie de l'air le plus frais que vous ayez jamais respiré. Emportez une veste légère et profitez-en !"
+      "a": "Nos tentes sont imperméables, et nous avons des espaces communs couverts. Une averse tropicale fait partie de l'expérience généralement courte, suivie de l'air le plus frais que vous ayez jamais respiré. Emportez une veste légère et profitez-en !"
     },
     "booking": {
       "q": "Comment réserver ?",
@@ -436,7 +436,7 @@
       "step1": "Consultez votre e-mail pour la confirmation détaillée et les directions",
       "step2": "Enregistrez notre WhatsApp pour vos questions",
       "step3": "Consultez notre liste de bagages et conseils de voyage",
-      "step4": "Préparez-vous — vous venez au Costa Rica !",
+      "step4": "Préparez-vous vous venez au Costa Rica !",
       "addToCalendar": "Ajouter au Calendrier",
       "shareTitle": "Partagez Vos Plans",
       "questionsTitle": "Des questions ? Nous sommes là !"
