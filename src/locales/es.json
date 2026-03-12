@@ -383,7 +383,7 @@
         "emailPlaceholder": "juan@ejemplo.com",
         "phonePlaceholder": "+506 8888-8888",
         "countryPlaceholder": "Selecciona tu país",
-        "arrivalTimePlaceholder": "Ej. 3:00 PM",
+        "arrivalTimePlaceholder": "Selecciona una hora",
         "specialRequestsPlaceholder": "Restricciones alimentarias, alergias o solicitudes especiales...",
         "celebratingPlaceholder": "Cumpleaños, aniversario, luna de miel...",
         "errors": {

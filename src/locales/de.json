@@ -383,7 +383,7 @@
         "emailPlaceholder": "max@beispiel.de",
         "phonePlaceholder": "+49 151 12345678",
         "countryPlaceholder": "Land auswählen",
-        "arrivalTimePlaceholder": "z.B. 15:00 Uhr",
+        "arrivalTimePlaceholder": "Ankunftszeit auswählen",
         "specialRequestsPlaceholder": "Ernährungseinschränkungen, Allergien oder besondere Wünsche...",
         "celebratingPlaceholder": "Geburtstag, Jahrestag, Flitterwochen...",
         "errors": {

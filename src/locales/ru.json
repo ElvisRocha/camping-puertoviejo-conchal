@@ -383,7 +383,7 @@
         "emailPlaceholder": "ivan@primer.com",
         "phonePlaceholder": "+7 999 123-45-67",
         "countryPlaceholder": "Выберите страну",
-        "arrivalTimePlaceholder": "Напр. 15:00",
+        "arrivalTimePlaceholder": "Выберите время прибытия",
         "specialRequestsPlaceholder": "Диетические ограничения, аллергии или особые пожелания...",
         "celebratingPlaceholder": "День рождения, годовщина, медовый месяц...",
         "errors": {
