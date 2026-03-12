@@ -38,9 +38,7 @@ export function Step1Dates() {
   const { t, i18n } = useTranslation();
   const { booking, setDates, nextStep } = useBookingStore();
   const isMobile = useIsMobile();
-  const [selectionPhase, setSelectionPhase] = useState<SelectionPhase>(
-    booking.checkIn ? 'checkOut' : 'checkIn'
-  );
+  const [selectionPhase, setSelectionPhase] = useState<SelectionPhase>('checkIn');
   const [checkInText, setCheckInText] = useState(dateToText(booking.checkIn));
   const [checkOutText, setCheckOutText] = useState(dateToText(booking.checkOut));
   const [checkInError, setCheckInError] = useState(false);
