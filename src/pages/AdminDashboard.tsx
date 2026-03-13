@@ -82,28 +82,39 @@ function fmt(value: number) {
 }
 
 function getPaymentBadge(booking: Booking) {
-  switch (booking.status) {
-    case 'completed':
-      return (
-        <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
-          Completed
-        </Badge>
-      );
-    case 'pending':
-      return (
-        <Badge className="bg-blue-400/15 text-blue-700 border-blue-400/30 hover:bg-blue-400/20">
-          Pending
-        </Badge>
-      );
-    case 'cancelled':
-      return (
-        <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
-          Cancelled
-        </Badge>
-      );
-    default:
-      return null;
+  const total = Number(booking.total);
+  const deposit = Number(booking.deposit_amount);
+  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
+
+  if (booking.status === 'cancelled') {
+    return (
+      <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
+        Cancelled
+      </Badge>
+    );
   }
+
+  if (pct >= 100) {
+    return (
+      <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
+        deposito 100%
+      </Badge>
+    );
+  }
+
+  if (pct > 0) {
+    return (
+      <Badge className="bg-yellow-400/15 text-yellow-700 border-yellow-400/30 hover:bg-yellow-400/20">
+        deposito {pct}%
+      </Badge>
+    );
+  }
+
+  return (
+    <Badge className="bg-blue-400/15 text-blue-700 border-blue-400/30 hover:bg-blue-400/20">
+      deposito 0%
+    </Badge>
+  );
 }
 
 export default function AdminDashboard() {
