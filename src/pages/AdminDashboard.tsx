@@ -89,12 +89,6 @@ function getPaymentBadge(booking: Booking) {
           Completed
         </Badge>
       );
-    case 'confirmed':
-      return (
-        <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-          Confirmed
-        </Badge>
-      );
     case 'pending':
       return (
         <Badge className="bg-blue-400/15 text-blue-700 border-blue-400/30 hover:bg-blue-400/20">
@@ -320,7 +314,7 @@ export default function AdminDashboard() {
   // Stats
   const stats = {
     total: bookings.length,
-    confirmed: bookings.filter((b) => b.status === 'confirmed').length,
+    confirmed: bookings.filter((b) => b.status === 'pending').length,
     paidFull: bookings.filter((b) => b.status === 'completed').length,
     partialPayment: bookings.filter((b) => b.status === 'pending').length,
     totalCollected: bookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),

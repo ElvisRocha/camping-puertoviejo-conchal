@@ -9,8 +9,8 @@ ALTER TABLE public.bookings
 -- Helper: compute the appropriate status from deposit vs total.
 -- Rules:
 --   cancelled  → always stays cancelled (manual override)
---   deposit >= total (100%)       → completed
---   deposit >= 50% of total       → confirmed
+--   deposit >= 100% of total      → completed
+--   deposit >= 50% and < 100%     → pending
 --   deposit <  50% of total       → pending
 CREATE OR REPLACE FUNCTION public.compute_booking_status(
   p_deposit        NUMERIC,
@@ -32,8 +32,6 @@ BEGIN
 
   IF p_deposit >= p_total THEN
     RETURN 'completed';
-  ELSIF p_deposit >= (p_total * 0.5) THEN
-    RETURN 'confirmed';
   ELSE
     RETURN 'pending';
   END IF;

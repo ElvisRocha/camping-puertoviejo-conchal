@@ -132,15 +132,8 @@ Deno.serve(async (req) => {
     const depositFinal = depositCRC ?? Math.round((pricing.total / 2) * CRC_RATE);
     const balanceDue = Math.max(0, totalCRC - depositFinal);
 
-    // Derive initial status from deposit percentage
-    let initialStatus: string;
-    if (totalCRC > 0 && depositFinal >= totalCRC) {
-      initialStatus = 'completed';
-    } else if (totalCRC > 0 && depositFinal >= totalCRC * 0.5) {
-      initialStatus = 'confirmed';
-    } else {
-      initialStatus = 'pending';
-    }
+    // Derive initial status from deposit: 100% → completed, otherwise → pending
+    const initialStatus = totalCRC > 0 && depositFinal >= totalCRC ? 'completed' : 'pending';
 
     const { data: bookingData, error: bookingError } = await supabase
       .from('bookings')
