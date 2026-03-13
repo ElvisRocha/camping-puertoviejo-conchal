@@ -84,19 +84,25 @@ function fmt(value: number) {
 function getPaymentBadge(booking: Booking) {
   const total = Number(booking.total);
   const deposit = Number(booking.deposit_amount);
-  const balance = Number(booking.balance_due);
+  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
 
-  if (balance === 0) {
+  if (pct >= 100) {
     return (
       <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
-        Pagado al 100%
+        Completado
       </Badge>
     );
   }
-  if (total > 0 && deposit > 0) {
-    const pct = Math.round((deposit / total) * 100);
+  if (pct > 50) {
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
+        Pendiente {pct}%
+      </Badge>
+    );
+  }
+  if (pct > 0) {
+    return (
+      <Badge className="bg-orange-400/15 text-orange-700 border-orange-400/30 hover:bg-orange-400/20">
         Depósito {pct}%
       </Badge>
     );
