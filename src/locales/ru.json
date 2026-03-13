@@ -563,7 +563,7 @@
       "warning": "Это действие нельзя отменить. После отмены вам потребуется сделать новое бронирование.",
       "noRefund": "Обратите внимание, что сумма бронирования не подлежит возврату согласно политике и условиям соглашения.",
       "confirmButton": "Да, отменить бронирование",
-"backButton": "Назад",
+      "backButton": "Назад",
       "rescheduleButton": "Нет, перенести бронирование",
       "processing": "Отмена...",
       "errorDescription": "Не удалось отменить бронирование. Попробуйте снова."
@@ -573,5 +573,21 @@
       "description": "Ваше бронирование {{code}} успешно отменено. Надеемся увидеть вас снова.",
       "closeButton": "Закрыть"
     }
-  }
+  },
+  "Aguas turquesas prístinas de Playa Conchal": "Нетронутые бирюзовые воды Плайя Кончал",
+  "Playa de arena de conchas al atardecer": "Ракушечный пляж в золотой час",
+  "Palmeras a lo largo de la costa": "Пальмы вдоль побережья",
+  "Olas rompiendo en la costa tropical": "Волны на тропическом берегу",
+  "Iguana en el árbol": "Игуана на дереве",
+  "Guacamayo escarlata en vuelo": "Красный ара в полёте",
+  "Tucán pico iris en rama": "Радужный тукан на ветке",
+  "Mono capuchino carablanca": "Белолицый капуцин",
+  "Tienda al atardecer cerca de la playa": "Палатка на закате у пляжа",
+  "Fogata bajo las estrellas": "Костёр под звёздами",
+  "Sendero de jungla entre el bosque": "Тропинка через джунгли",
+  "Mañana en el campamento": "Утро в кемпинге",
+  "Atardecer pacífico sobre aguas tranquilas": "Тихоокеанский закат над спокойными водами",
+  "Hora dorada en la playa": "Золотой час на пляже",
+  "Cielo crepuscular dramático": "Драматичное сумеречное небо",
+  "Siluetas al atardecer": "Силуэты на закате"
 }

@@ -563,7 +563,7 @@
       "warning": "Cette action est irréversible. Une fois annulée, vous devrez effectuer une nouvelle réservation.",
       "noRefund": "Veuillez noter que le montant de la réservation ne peut être remboursé conformément aux politiques et conditions.",
       "confirmButton": "Oui, annuler la réservation",
-"backButton": "Retour",
+      "backButton": "Retour",
       "rescheduleButton": "Non, reprogrammer la réservation",
       "processing": "Annulation...",
       "errorDescription": "Impossible d'annuler la réservation. Veuillez réessayer."
@@ -573,5 +573,21 @@
       "description": "Votre réservation {{code}} a été annulée avec succès. Nous espérons vous revoir bientôt.",
       "closeButton": "Fermer"
     }
-  }
+  },
+  "Aguas turquesas prístinas de Playa Conchal": "Eaux turquoise immaculées de Playa Conchal",
+  "Playa de arena de conchas al atardecer": "Plage de sable coquillage à l'heure dorée",
+  "Palmeras a lo largo de la costa": "Palmiers le long du littoral",
+  "Olas rompiendo en la costa tropical": "Vagues déferlant sur la côte tropicale",
+  "Iguana en el árbol": "Iguane dans l'arbre",
+  "Guacamayo escarlata en vuelo": "Ara écarlate en vol",
+  "Tucán pico iris en rama": "Toucan à carène sur une branche",
+  "Mono capuchino carablanca": "Singe capucin à face blanche",
+  "Tienda al atardecer cerca de la playa": "Tente au coucher du soleil près de la plage",
+  "Fogata bajo las estrellas": "Feu de camp sous les étoiles",
+  "Sendero de jungla entre el bosque": "Sentier de jungle à travers la forêt",
+  "Mañana en el campamento": "Matin au camping",
+  "Atardecer pacífico sobre aguas tranquilas": "Coucher de soleil pacifique sur eaux calmes",
+  "Hora dorada en la playa": "Heure dorée sur la plage",
+  "Cielo crepuscular dramático": "Ciel crépusculaire dramatique",
+  "Siluetas al atardecer": "Silhouettes au coucher du soleil"
 }

@@ -563,7 +563,7 @@
       "warning": "This action cannot be undone. Once cancelled, you will need to make a new booking if you wish to visit us.",
       "noRefund": "Please note that the booking amount cannot be refunded according to the policies and terms agreement.",
       "confirmButton": "Yes, cancel booking",
-"backButton": "Go back",
+      "backButton": "Go back",
       "rescheduleButton": "No, reschedule booking",
       "processing": "Cancelling...",
       "errorDescription": "Could not cancel the booking. Please try again."
@@ -573,5 +573,21 @@
       "description": "Your booking {{code}} has been cancelled successfully. We hope to see you soon.",
       "closeButton": "Close"
     }
-  }
+  },
+  "Aguas turquesas prístinas de Playa Conchal": "Pristine turquoise waters of Playa Conchal",
+  "Playa de arena de conchas al atardecer": "Shell sand beach at golden hour",
+  "Palmeras a lo largo de la costa": "Palm trees along the coastline",
+  "Olas rompiendo en la costa tropical": "Waves crashing on tropical shore",
+  "Iguana en el árbol": "Iguana in the tree",
+  "Guacamayo escarlata en vuelo": "Scarlet macaw in flight",
+  "Tucán pico iris en rama": "Keel-billed toucan on branch",
+  "Mono capuchino carablanca": "White-faced capuchin monkey",
+  "Tienda al atardecer cerca de la playa": "Tent at sunset near the beach",
+  "Fogata bajo las estrellas": "Campfire under the stars",
+  "Sendero de jungla entre el bosque": "Jungle trail through the forest",
+  "Mañana en el campamento": "Morning at the campsite",
+  "Atardecer pacífico sobre aguas tranquilas": "Pacific sunset over calm waters",
+  "Hora dorada en la playa": "Golden hour on the beach",
+  "Cielo crepuscular dramático": "Dramatic twilight sky",
+  "Siluetas al atardecer": "Silhouettes at sunset"
 }
