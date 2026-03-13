@@ -325,7 +325,7 @@ export default function AdminDashboard() {
       const t = Number(b.total);
       const d = Number(b.deposit_amount);
       const ratio = t > 0 ? d / t : 0;
-      return ratio > 0.5 && ratio < 1.0;
+      return ratio >= 0.5 && ratio < 1.0;
     }).length,
     totalCollected: bookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
   };
