@@ -2,6 +2,7 @@ export interface GalleryImage {
   id: string;
   src: string;
   alt: string;
+  altKey: string;
   category: 'beach' | 'wildlife' | 'campsite' | 'sunsets';
   captionKey: string;
 }
@@ -64,7 +65,7 @@ export const galleryImages: GalleryImage[] = [
     category: 'beach',
     captionKey: 'gallery.captions.beach4',
   },
-  
+
   // Wildlife photos
   {
     id: 'wildlife-1',
@@ -119,7 +120,7 @@ export const galleryImages: GalleryImage[] = [
     category: 'wildlife',
     captionKey: 'gallery.captions.wildlife4',
   },
-  
+
   // Campsite photos
   {
     id: 'campsite-1',

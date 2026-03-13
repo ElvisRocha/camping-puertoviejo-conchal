@@ -131,7 +131,7 @@ export function Lightbox({ images, currentIndex, isOpen, onClose, onNavigate }: 
               
               <img
                 src={currentImage.src}
-                alt={t(currentImage.captionKey)}
+                alt={t(currentImage.altKey)}
                 onLoad={() => setIsImageLoaded(true)}
                 className={`max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
                   isImageLoaded ? 'opacity-100' : 'opacity-0'
@@ -144,7 +144,7 @@ export function Lightbox({ images, currentIndex, isOpen, onClose, onNavigate }: 
         {/* Caption */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm max-w-[90%]">
           <p className="text-white text-center text-sm md:text-base truncate">
-            {t(currentImage.captionKey)}
+            {t(currentImage.altKey)}
           </p>
         </div>
 
