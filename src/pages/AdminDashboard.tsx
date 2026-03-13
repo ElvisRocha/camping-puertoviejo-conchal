@@ -85,7 +85,7 @@ function getPaymentBadge(booking: Booking) {
   if (booking.status === 'cancelled') {
     return (
       <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
-        Cancelado
+        Cancelled
       </Badge>
     );
   }
@@ -97,14 +97,14 @@ function getPaymentBadge(booking: Booking) {
   if (pct >= 100) {
     return (
       <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
-        Completado
+        Completed
       </Badge>
     );
   }
   if (pct >= 50 && pct <= 99) {
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Depósito {pct}%
+        Pending
       </Badge>
     );
   }
