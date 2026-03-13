@@ -34,33 +34,12 @@ const Header = () => {
   // The fixed header is ~72-80px tall.
   const HEADER_OFFSET = 80;
 
-  // Custom scroll animation — browser's native `behavior:'smooth'` has no
-  // speed control. Using requestAnimationFrame + easeInOutCubic lets us set
-  // an explicit duration (ms) for a slower, more deliberate feel.
-  const smoothScroll = (targetY: number, duration = 900) => {
-    const startY = window.pageYOffset;
-    const distance = targetY - startY;
-    const startTime = performance.now();
-
-    const easeInOutCubic = (t: number) =>
-      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-    const step = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (!element) return;
     const top =
       element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-    smoothScroll(top);
+    window.scrollTo({ top, behavior: 'auto' });
   };
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
@@ -79,7 +58,7 @@ const Header = () => {
       e.preventDefault();
       const delay = isMobileMenuOpen ? MENU_ANIMATION_MS : 0;
       setIsMobileMenuOpen(false);
-      setTimeout(() => smoothScroll(0), delay);
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), delay);
     }
   };
 

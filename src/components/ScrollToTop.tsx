@@ -9,9 +9,7 @@ const ScrollToTop = () => {
       // If there's a hash, scroll to that element
       const element = document.getElementById(hash.slice(1));
       if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        element.scrollIntoView({ behavior: 'auto' });
       } else {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }
