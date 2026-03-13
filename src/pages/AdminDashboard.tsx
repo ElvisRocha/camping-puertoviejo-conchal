@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -118,6 +118,8 @@ export default function AdminDashboard() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  const dateFromRef = useRef<HTMLInputElement>(null);
+  const dateToRef = useRef<HTMLInputElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedBooking, setSelectedBooking] = useState<BookingWithGuest | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -218,11 +220,11 @@ export default function AdminDashboard() {
     }
 
     if (dateFrom) {
-      filtered = filtered.filter((b) => b.check_in >= dateFrom);
+      filtered = filtered.filter((b) => b.created_at.slice(0, 10) >= dateFrom);
     }
 
     if (dateTo) {
-      filtered = filtered.filter((b) => b.check_in <= dateTo);
+      filtered = filtered.filter((b) => b.created_at.slice(0, 10) <= dateTo);
     }
 
     setFilteredBookings(filtered);
@@ -441,24 +443,28 @@ export default function AdminDashboard() {
               </SelectContent>
             </Select>
 
-            {/* Date range */}
+            {/* Date range (by creation date) */}
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm text-muted-foreground whitespace-nowrap">Desde</span>
+                <span className="text-sm text-muted-foreground whitespace-nowrap">Creado desde</span>
                 <Input
+                  ref={dateFromRef}
                   type="date"
                   value={dateFrom}
                   onChange={(e) => setDateFrom(e.target.value)}
-                  className="w-[145px]"
+                  onClick={() => dateFromRef.current?.showPicker()}
+                  className="w-[145px] cursor-pointer"
                 />
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-sm text-muted-foreground whitespace-nowrap">Hasta</span>
+                <span className="text-sm text-muted-foreground whitespace-nowrap">hasta</span>
                 <Input
+                  ref={dateToRef}
                   type="date"
                   value={dateTo}
                   onChange={(e) => setDateTo(e.target.value)}
-                  className="w-[145px]"
+                  onClick={() => dateToRef.current?.showPicker()}
+                  className="w-[145px] cursor-pointer"
                 />
               </div>
               {(dateFrom || dateTo) && (
