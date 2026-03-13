@@ -2,7 +2,7 @@ export interface GalleryImage {
   id: string;
   src: string;
   alt: string;
-  altKey: string;
+  altKey?: string;
   category: 'beach' | 'wildlife' | 'campsite' | 'sunsets';
   captionKey: string;
 }
