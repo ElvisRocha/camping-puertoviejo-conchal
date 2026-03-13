@@ -101,14 +101,11 @@ function getPaymentBadge(booking: Booking) {
       </Badge>
     );
   }
-  if (pct >= 50) {
-    return (
-      <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Depósito {pct}%
-      </Badge>
-    );
-  }
-  return null;
+  return (
+    <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
+      Depósito {pct}%
+    </Badge>
+  );
 }
 
 export default function AdminDashboard() {
