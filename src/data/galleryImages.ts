@@ -204,7 +204,7 @@ export const galleryImages: GalleryImage[] = [
   {
     id: 'sunset-4',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773372318/Camping%20Puerto%20Viejo%20Conchal/Gallery/Sunsets/ATARDECER8.jpg',
-    alt: 'Un final de gran dia',
+    alt: 'El final de gran dia',
     category: 'sunsets',
     captionKey: 'gallery.captions.sunset4',
   },
