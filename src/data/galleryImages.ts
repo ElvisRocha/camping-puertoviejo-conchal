@@ -197,7 +197,7 @@ export const galleryImages: GalleryImage[] = [
   {
     id: 'sunset-3',
     src: 'https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=1200&q=80',
-    alt: 'Dramatic twilight sky',
+    alt: 'Puesta de sol naranja',
     category: 'sunsets',
     captionKey: 'gallery.captions.sunset3',
   },
