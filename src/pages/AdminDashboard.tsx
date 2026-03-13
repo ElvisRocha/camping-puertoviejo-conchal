@@ -218,11 +218,11 @@ export default function AdminDashboard() {
     }
 
     if (dateFrom) {
-      filtered = filtered.filter((b) => b.check_in >= dateFrom);
+      filtered = filtered.filter((b) => b.created_at.slice(0, 10) >= dateFrom);
     }
 
     if (dateTo) {
-      filtered = filtered.filter((b) => b.check_in <= dateTo);
+      filtered = filtered.filter((b) => b.created_at.slice(0, 10) <= dateTo);
     }
 
     setFilteredBookings(filtered);
@@ -441,10 +441,10 @@ export default function AdminDashboard() {
               </SelectContent>
             </Select>
 
-            {/* Date range */}
+            {/* Date range (by creation date) */}
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm text-muted-foreground whitespace-nowrap">Desde</span>
+                <span className="text-sm text-muted-foreground whitespace-nowrap">Creado desde</span>
                 <Input
                   type="date"
                   value={dateFrom}
@@ -453,7 +453,7 @@ export default function AdminDashboard() {
                 />
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-sm text-muted-foreground whitespace-nowrap">Hasta</span>
+                <span className="text-sm text-muted-foreground whitespace-nowrap">hasta</span>
                 <Input
                   type="date"
                   value={dateTo}
