@@ -93,10 +93,11 @@ function getPaymentBadge(booking: Booking) {
       </Badge>
     );
   }
-  if (total > 0 && deposit >= total * 0.5) {
+  if (total > 0 && deposit > 0) {
+    const pct = Math.round((deposit / total) * 100);
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Depósito 50%+
+        Depósito {pct}%
       </Badge>
     );
   }
