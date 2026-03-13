@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 import type { GalleryImage as GalleryImageType } from '@/data/galleryImages';
 
 interface GalleryImageProps {
@@ -11,7 +10,6 @@ interface GalleryImageProps {
 
 export function GalleryImage({ image, index, onClick }: GalleryImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -29,7 +27,7 @@ export function GalleryImage({ image, index, onClick }: GalleryImageProps) {
       
       <img
         src={image.src}
-        alt={t(image.captionKey)}
+        alt={image.alt}
         width="400"
         height="300"
         loading="lazy"
