@@ -82,33 +82,34 @@ function fmt(value: number) {
 }
 
 function getPaymentBadge(booking: Booking) {
-  if (booking.status === 'cancelled') {
-    return (
-      <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
-        Cancelled
-      </Badge>
-    );
+  switch (booking.status) {
+    case 'completed':
+      return (
+        <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
+          Completed
+        </Badge>
+      );
+    case 'confirmed':
+      return (
+        <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
+          Confirmed
+        </Badge>
+      );
+    case 'pending':
+      return (
+        <Badge className="bg-blue-400/15 text-blue-700 border-blue-400/30 hover:bg-blue-400/20">
+          Pending
+        </Badge>
+      );
+    case 'cancelled':
+      return (
+        <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
+          Cancelled
+        </Badge>
+      );
+    default:
+      return null;
   }
-
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-
-  if (pct >= 100) {
-    return (
-      <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
-        Completed
-      </Badge>
-    );
-  }
-  if (pct >= 50 && pct <= 99) {
-    return (
-      <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Pending
-      </Badge>
-    );
-  }
-  return null;
 }
 
 export default function AdminDashboard() {
@@ -320,13 +321,8 @@ export default function AdminDashboard() {
   const stats = {
     total: bookings.length,
     confirmed: bookings.filter((b) => b.status === 'confirmed').length,
-    paidFull: bookings.filter((b) => Number(b.balance_due) === 0).length,
-    partialPayment: bookings.filter((b) => {
-      const t = Number(b.total);
-      const d = Number(b.deposit_amount);
-      const ratio = t > 0 ? d / t : 0;
-      return ratio > 0.5 && ratio < 1.0;
-    }).length,
+    paidFull: bookings.filter((b) => b.status === 'completed').length,
+    partialPayment: bookings.filter((b) => b.status === 'pending').length,
     totalCollected: bookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
   };
 
