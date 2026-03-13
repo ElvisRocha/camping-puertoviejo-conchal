@@ -20,6 +20,24 @@
       "sunsets": "Sunsets"
     },
     "cta": "Ready to create your own memories?",
+    "alts": {
+      "beach1": "Pristine turquoise waters of Playa Conchal",
+      "beach2": "Shell sand beach at golden hour",
+      "beach3": "Palm trees along the coastline",
+      "beach4": "Waves crashing on tropical shore",
+      "wildlife1": "Iguana in the tree",
+      "wildlife2": "Scarlet macaw in flight",
+      "wildlife3": "Keel-billed toucan on branch",
+      "wildlife4": "White-faced capuchin monkey",
+      "campsite1": "Tent at sunset near the beach",
+      "campsite2": "Campfire under the stars",
+      "campsite3": "Jungle trail through the forest",
+      "campsite4": "Morning at the campsite",
+      "sunset1": "Pacific sunset over calm waters",
+      "sunset2": "Golden hour on the beach",
+      "sunset3": "Dramatic twilight sky",
+      "sunset4": "Silhouettes at sunset"
+    },
     "captions": {
       "beach1": "Pristine turquoise waters of Playa Conchal",
       "beach2": "Shell sand beach at golden hour",
