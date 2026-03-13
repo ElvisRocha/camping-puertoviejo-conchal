@@ -82,6 +82,14 @@ function fmt(value: number) {
 }
 
 function getPaymentBadge(booking: Booking) {
+  if (booking.status === 'cancelled') {
+    return (
+      <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
+        Cancelado
+      </Badge>
+    );
+  }
+
   const total = Number(booking.total);
   const deposit = Number(booking.deposit_amount);
   const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
@@ -93,23 +101,9 @@ function getPaymentBadge(booking: Booking) {
       </Badge>
     );
   }
-  if (pct > 50) {
-    return (
-      <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Pendiente {pct}%
-      </Badge>
-    );
-  }
-  if (pct > 0) {
-    return (
-      <Badge className="bg-orange-400/15 text-orange-700 border-orange-400/30 hover:bg-orange-400/20">
-        Depósito {pct}%
-      </Badge>
-    );
-  }
   return (
-    <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
-      Pendiente
+    <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
+      Depósito {pct}%
     </Badge>
   );
 }
