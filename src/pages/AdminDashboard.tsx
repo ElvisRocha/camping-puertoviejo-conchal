@@ -23,7 +23,6 @@ import { useToast } from '@/hooks/use-toast';
 import {
   LogOut,
   Search,
-  Filter,
   Calendar,
   Users,
   DollarSign,
@@ -32,6 +31,8 @@ import {
   Eye,
   ChevronLeft,
   ChevronRight,
+  CheckCircle,
+  X,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import {
@@ -51,6 +52,8 @@ interface Booking {
   infants: number;
   status: string;
   total: number;
+  deposit_amount: number;
+  balance_due: number;
   created_at: string;
   guest_info?: {
     full_name: string;
@@ -74,6 +77,36 @@ interface BookingWithGuest extends Booking {
 
 const ITEMS_PER_PAGE = 10;
 
+function fmt(value: number) {
+  return `$${Number(value).toFixed(2)}`;
+}
+
+function getPaymentBadge(booking: Booking) {
+  const total = Number(booking.total);
+  const deposit = Number(booking.deposit_amount);
+  const balance = Number(booking.balance_due);
+
+  if (balance === 0) {
+    return (
+      <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
+        Pagado al 100%
+      </Badge>
+    );
+  }
+  if (total > 0 && deposit >= total * 0.5) {
+    return (
+      <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
+        Depósito 50%+
+      </Badge>
+    );
+  }
+  return (
+    <Badge className="bg-red-500/15 text-red-700 border-red-500/30 hover:bg-red-500/20">
+      Pendiente
+    </Badge>
+  );
+}
+
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -83,6 +116,8 @@ export default function AdminDashboard() {
   const [filteredBookings, setFilteredBookings] = useState<Booking[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedBooking, setSelectedBooking] = useState<BookingWithGuest | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -92,13 +127,12 @@ export default function AdminDashboard() {
   useEffect(() => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       if (!session) {
         navigate('/auth');
         return;
       }
 
-      // Check if user is admin
       const { data: roles } = await supabase
         .from('user_roles')
         .select('role')
@@ -169,7 +203,6 @@ export default function AdminDashboard() {
   useEffect(() => {
     let filtered = [...bookings];
 
-    // Search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -180,14 +213,26 @@ export default function AdminDashboard() {
       );
     }
 
-    // Status filter
     if (statusFilter !== 'all') {
       filtered = filtered.filter((b) => b.status === statusFilter);
     }
 
+    if (dateFrom) {
+      filtered = filtered.filter((b) => b.check_in >= dateFrom);
+    }
+
+    if (dateTo) {
+      filtered = filtered.filter((b) => b.check_in <= dateTo);
+    }
+
     setFilteredBookings(filtered);
     setCurrentPage(1);
-  }, [searchQuery, statusFilter, bookings]);
+  }, [searchQuery, statusFilter, dateFrom, dateTo, bookings]);
+
+  const clearDateFilter = () => {
+    setDateFrom('');
+    setDateTo('');
+  };
 
   const handleStatusUpdate = async (bookingId: string, newStatus: string) => {
     setIsUpdating(true);
@@ -204,7 +249,6 @@ export default function AdminDashboard() {
         description: `Booking status changed to ${newStatus}.`,
       });
 
-      // Update local state
       setBookings((prev) =>
         prev.map((b) =>
           b.id === bookingId ? { ...b, status: newStatus } : b
@@ -226,7 +270,6 @@ export default function AdminDashboard() {
   };
 
   const viewBookingDetails = async (booking: Booking) => {
-    // Fetch full guest info
     const { data: guestData } = await supabase
       .from('guest_info')
       .select('*')
@@ -271,10 +314,14 @@ export default function AdminDashboard() {
   const stats = {
     total: bookings.length,
     confirmed: bookings.filter((b) => b.status === 'confirmed').length,
-    pending: bookings.filter((b) => b.status === 'pending').length,
-    revenue: bookings
-      .filter((b) => b.status === 'confirmed' || b.status === 'completed')
-      .reduce((sum, b) => sum + Number(b.total), 0),
+    paidFull: bookings.filter((b) => Number(b.balance_due) === 0).length,
+    partialPayment: bookings.filter((b) => {
+      const t = Number(b.total);
+      const d = Number(b.deposit_amount);
+      const ratio = t > 0 ? d / t : 0;
+      return ratio > 0.5 && ratio < 1.0;
+    }).length,
+    totalCollected: bookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
   };
 
   if (!isAdmin) {
@@ -302,52 +349,64 @@ export default function AdminDashboard() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-card rounded-xl p-6 border shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-lg">
-                <Calendar className="h-6 w-6 text-primary" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-primary/10 rounded-lg">
+                <Calendar className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Bookings</p>
+                <p className="text-xs text-muted-foreground">Total de Reservas</p>
                 <p className="text-2xl font-bold text-foreground">{stats.total}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 border shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-green-500/10 rounded-lg">
-                <Users className="h-6 w-6 text-green-500" />
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-green-500/10 rounded-lg">
+                <Users className="h-5 w-5 text-green-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Confirmed</p>
+                <p className="text-xs text-muted-foreground">Confirmadas</p>
                 <p className="text-2xl font-bold text-foreground">{stats.confirmed}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 border shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-yellow-500/10 rounded-lg">
-                <Filter className="h-6 w-6 text-yellow-500" />
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-emerald-500/10 rounded-lg">
+                <CheckCircle className="h-5 w-5 text-emerald-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Pending</p>
-                <p className="text-2xl font-bold text-foreground">{stats.pending}</p>
+                <p className="text-xs text-muted-foreground">Pagado al 100%</p>
+                <p className="text-2xl font-bold text-foreground">{stats.paidFull}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 border shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-500/10 rounded-lg">
-                <DollarSign className="h-6 w-6 text-blue-500" />
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-amber-400/10 rounded-lg">
+                <DollarSign className="h-5 w-5 text-amber-500" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Revenue</p>
-                <p className="text-2xl font-bold text-foreground">
-                  ${stats.revenue.toFixed(2)}
+                <p className="text-xs text-muted-foreground">Pago Parcial</p>
+                <p className="text-2xl font-bold text-foreground">{stats.partialPayment}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-blue-500/10 rounded-lg">
+                <DollarSign className="h-5 w-5 text-blue-500" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Total Recaudado</p>
+                <p className="text-xl font-bold text-foreground">
+                  {fmt(stats.totalCollected)}
                 </p>
               </div>
             </div>
@@ -356,8 +415,9 @@ export default function AdminDashboard() {
 
         {/* Filters */}
         <div className="bg-card rounded-xl p-4 border shadow-sm mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
+          <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+            {/* Search */}
+            <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search by reference, name, or email..."
@@ -367,8 +427,9 @@ export default function AdminDashboard() {
               />
             </div>
 
+            {/* Status filter */}
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[160px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -379,6 +440,34 @@ export default function AdminDashboard() {
                 <SelectItem value="cancelled">Cancelled</SelectItem>
               </SelectContent>
             </Select>
+
+            {/* Date range */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm text-muted-foreground whitespace-nowrap">Desde</span>
+                <Input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="w-[145px]"
+                />
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm text-muted-foreground whitespace-nowrap">Hasta</span>
+                <Input
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="w-[145px]"
+                />
+              </div>
+              {(dateFrom || dateTo) && (
+                <Button variant="ghost" size="sm" onClick={clearDateFilter} className="px-2">
+                  <X className="h-4 w-4 mr-1" />
+                  Limpiar
+                </Button>
+              )}
+            </div>
 
             <Button variant="outline" onClick={fetchBookings}>
               <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
@@ -404,57 +493,69 @@ export default function AdminDashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Reference</TableHead>
-                      <TableHead>Guest</TableHead>
+                      <TableHead>Referencia</TableHead>
+                      <TableHead>Huésped</TableHead>
                       <TableHead>Check-in</TableHead>
                       <TableHead>Check-out</TableHead>
-                      <TableHead>Guests</TableHead>
                       <TableHead>Total</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead>Depósito Pagado</TableHead>
+                      <TableHead>Saldo Pendiente</TableHead>
+                      <TableHead>Estado de Pago</TableHead>
+                      <TableHead>Acciones</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {paginatedBookings.map((booking) => (
-                      <TableRow key={booking.id}>
-                        <TableCell className="font-mono font-medium">
-                          {booking.reference_code}
-                        </TableCell>
-                        <TableCell>
-                          <div>
-                            <p className="font-medium">
-                              {booking.guest_info?.full_name || 'N/A'}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {booking.guest_info?.email || ''}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          {format(new Date(booking.check_in), 'MMM d, yyyy')}
-                        </TableCell>
-                        <TableCell>
-                          {format(new Date(booking.check_out), 'MMM d, yyyy')}
-                        </TableCell>
-                        <TableCell>
-                          {booking.adults + booking.children}
-                          {booking.infants > 0 && ` (+${booking.infants})`}
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          ${Number(booking.total).toFixed(2)}
-                        </TableCell>
-                        <TableCell>{getStatusBadge(booking.status)}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => viewBookingDetails(booking)}
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {paginatedBookings.map((booking) => {
+                      const balanceDue = Number(booking.balance_due);
+                      return (
+                        <TableRow key={booking.id}>
+                          <TableCell className="font-mono font-medium">
+                            {booking.reference_code}
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium">
+                                {booking.guest_info?.full_name || 'N/A'}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {booking.guest_info?.email || ''}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            {format(new Date(booking.check_in), 'MMM d, yyyy')}
+                          </TableCell>
+                          <TableCell>
+                            {format(new Date(booking.check_out), 'MMM d, yyyy')}
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            {fmt(booking.total)}
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            {fmt(booking.deposit_amount)}
+                          </TableCell>
+                          <TableCell>
+                            <span
+                              className={`font-bold ${
+                                balanceDue > 0 ? 'text-red-600' : 'text-green-600'
+                              }`}
+                            >
+                              {fmt(booking.balance_due)}
+                            </span>
+                          </TableCell>
+                          <TableCell>{getPaymentBadge(booking)}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => viewBookingDetails(booking)}
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
@@ -606,12 +707,25 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* Total */}
-              <div className="flex items-center justify-between p-4 bg-primary/10 rounded-lg">
-                <span className="font-semibold">Total Amount</span>
-                <span className="text-2xl font-bold">
-                  ${Number(selectedBooking.total).toFixed(2)}
-                </span>
+              {/* Payment Summary */}
+              <div className="bg-muted/50 rounded-lg p-4">
+                <h3 className="font-semibold mb-3">Resumen de Pago</h3>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Total</span>
+                    <p className="font-bold text-lg">{fmt(selectedBooking.total)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Depósito Pagado</span>
+                    <p className="font-bold text-lg text-green-600">{fmt(selectedBooking.deposit_amount)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Saldo Pendiente</span>
+                    <p className={`font-bold text-lg ${Number(selectedBooking.balance_due) > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                      {fmt(selectedBooking.balance_due)}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           )}
