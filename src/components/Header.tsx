@@ -34,12 +34,25 @@ const Header = () => {
   // The fixed header is ~72-80px tall.
   const HEADER_OFFSET = 80;
 
+  const smoothScroll = (targetY: number, duration = 400) => {
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    const startTime = performance.now();
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, startY + distance * easeOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (!element) return;
     const top =
       element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-    window.scrollTo({ top, behavior: 'auto' });
+    smoothScroll(top);
   };
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
@@ -58,7 +71,7 @@ const Header = () => {
       e.preventDefault();
       const delay = isMobileMenuOpen ? MENU_ANIMATION_MS : 0;
       setIsMobileMenuOpen(false);
-      setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), delay);
+      setTimeout(() => smoothScroll(0), delay);
     }
   };
 

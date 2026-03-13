@@ -28,7 +28,17 @@ const Index = () => {
       if (!element) return;
       const targetY =
         element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-      window.scrollTo({ top: targetY, behavior: 'auto' });
+      const startY = window.pageYOffset;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+      const duration = 400;
+      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+      const step = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        window.scrollTo(0, startY + distance * easeOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
     }, 0);
     return () => clearTimeout(timer);
   }, [location.hash]);
