@@ -29,7 +29,7 @@ export function GalleryImage({ image, index, onClick }: GalleryImageProps) {
       
       <img
         src={image.src}
-        alt={image.altKey ? t(image.altKey) : image.alt}
+        alt={t(image.altKey, { defaultValue: image.alt })}
         width="400"
         height="300"
         loading="lazy"
