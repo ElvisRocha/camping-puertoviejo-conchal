@@ -31,7 +31,7 @@ const Index = () => {
       const startY = window.pageYOffset;
       const distance = targetY - startY;
       const startTime = performance.now();
-      const duration = 400;
+      const duration = 200;
       const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
       const step = (now: number) => {
         const progress = Math.min((now - startTime) / duration, 1);
