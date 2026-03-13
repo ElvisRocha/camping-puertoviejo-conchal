@@ -34,7 +34,7 @@ const Header = () => {
   // The fixed header is ~72-80px tall.
   const HEADER_OFFSET = 80;
 
-  const smoothScroll = (targetY: number, duration = 200) => {
+  const smoothScroll = (targetY: number, duration = 700) => {
     const startY = window.pageYOffset;
     const distance = targetY - startY;
     const startTime = performance.now();
