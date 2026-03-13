@@ -21,27 +21,15 @@ const Index = () => {
   useEffect(() => {
     if (!location.hash) return;
     // This fires when navigating from another page (e.g. /gallery → /#experience).
-    // The 150ms delay lets the page finish painting before we calculate positions.
+    // A minimal delay lets the page finish painting before we calculate positions.
     const HEADER_OFFSET = 80;
     const timer = setTimeout(() => {
       const element = document.querySelector(location.hash);
       if (!element) return;
       const targetY =
         element.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-      // Same custom scroll used in Header so speed is consistent.
-      const duration = 900;
-      const startY = window.pageYOffset;
-      const distance = targetY - startY;
-      const startTime = performance.now();
-      const easeInOutCubic = (t: number) =>
-        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      const step = (now: number) => {
-        const progress = Math.min((now - startTime) / duration, 1);
-        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }, 150);
+      window.scrollTo({ top: targetY, behavior: 'auto' });
+    }, 0);
     return () => clearTimeout(timer);
   }, [location.hash]);
 
