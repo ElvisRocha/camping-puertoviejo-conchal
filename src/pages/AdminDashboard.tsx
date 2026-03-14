@@ -87,13 +87,11 @@ function fmt(value: number) {
 
 function getPaymentLabel(booking: Booking): string {
   if (booking.status === 'cancelled') return 'Cancelado';
-  if (booking.status === 'completed' || Number(booking.balance_due) === 0) return 'Completado';
-  if (booking.status === 'confirmed') return 'Confirmado';
-  // pending — show deposit percentage if any deposit exists
   const total = Number(booking.total);
   const deposit = Number(booking.deposit_amount);
   const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-  if (pct > 0) return `Depósito ${pct}%`;
+  if (pct >= 100) return 'Completado';
+  if (pct >= 50 && pct <= 99) return `Depósito ${pct}%`;
   return 'Pendiente';
 }
 
@@ -106,40 +104,25 @@ function getPaymentBadge(booking: Booking) {
     );
   }
 
-  if (booking.status === 'completed' || Number(booking.balance_due) === 0) {
+  const total = Number(booking.total);
+  const deposit = Number(booking.deposit_amount);
+  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
+
+  if (pct >= 100) {
     return (
       <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
         Completado
       </Badge>
     );
   }
-
-  if (booking.status === 'confirmed') {
-    return (
-      <Badge className="bg-blue-500/15 text-blue-700 border-blue-500/30 hover:bg-blue-500/20">
-        Confirmado
-      </Badge>
-    );
-  }
-
-  // pending — show deposit percentage
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-
-  if (pct > 0) {
+  if (pct >= 50 && pct <= 99) {
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
         Depósito {pct}%
       </Badge>
     );
   }
-
-  return (
-    <Badge className="bg-secondary text-secondary-foreground border hover:bg-secondary/80">
-      Pendiente
-    </Badge>
-  );
+  return null;
 }
 
 export default function AdminDashboard() {
@@ -252,11 +235,7 @@ export default function AdminDashboard() {
       );
     }
 
-    if (statusFilter === 'completed') {
-      filtered = filtered.filter(
-        (b) => b.status === 'completed' || Number(b.balance_due) === 0
-      );
-    } else if (statusFilter !== 'all') {
+    if (statusFilter !== 'all') {
       filtered = filtered.filter((b) => b.status === statusFilter);
     }
 
@@ -396,12 +375,12 @@ export default function AdminDashboard() {
   const stats = {
     total: filteredBookings.length,
     confirmed: filteredBookings.filter((b) => b.status === 'confirmed').length,
-    paidFull: filteredBookings.filter(
-      (b) => b.status === 'completed' || Number(b.balance_due) === 0
-    ).length,
+    paidFull: filteredBookings.filter((b) => Number(b.balance_due) === 0).length,
     partialPayment: filteredBookings.filter((b) => {
-      if (b.status === 'cancelled' || b.status === 'completed') return false;
-      return Number(b.balance_due) > 0 && Number(b.deposit_amount) > 0;
+      const t = Number(b.total);
+      const d = Number(b.deposit_amount);
+      const ratio = t > 0 ? d / t : 0;
+      return ratio >= 0.5 && ratio < 1.0;
     }).length,
     totalCollected: filteredBookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
     totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
