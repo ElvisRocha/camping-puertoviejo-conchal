@@ -251,8 +251,10 @@ export default function AdminDashboard() {
     try {
       const { error } = await supabase
         .from('camping_settings')
-        .update({ value: String(parsed), updated_at: new Date().toISOString() })
-        .eq('key', 'max_capacity_persons');
+        .upsert(
+          { key: 'max_capacity_persons', value: String(parsed), updated_at: new Date().toISOString() },
+          { onConflict: 'key' }
+        );
 
       if (error) throw error;
 
