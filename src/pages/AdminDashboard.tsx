@@ -282,11 +282,11 @@ export default function AdminDashboard() {
         description: 'La capacidad máxima se ha actualizado correctamente.',
       });
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : JSON.stringify(err);
+      console.error('[settings] save error:', err);
       toast({
         variant: 'destructive',
         title: 'Error al guardar',
-        description: msg || 'No se pudo actualizar la configuración. Intente de nuevo.',
+        description: 'No se pudo actualizar la configuración. Intente de nuevo.',
       });
     } finally {
       setIsSavingSettings(false);
