@@ -251,29 +251,12 @@ export default function AdminDashboard() {
     try {
       const now = new Date().toISOString();
 
-      // Try UPDATE first
-      const { error: updateError, count } = await supabase
+      const { error } = await supabase
         .from('camping_settings')
         .update({ value: String(parsed), updated_at: now })
-        .eq('key', 'max_capacity_persons')
-        .select('id', { count: 'exact', head: true });
+        .eq('key', 'max_capacity_persons');
 
-      if (updateError) {
-        console.error('[settings] update error:', updateError);
-        throw updateError;
-      }
-
-      // If no row existed, INSERT it
-      if ((count ?? 0) === 0) {
-        const { error: insertError } = await supabase
-          .from('camping_settings')
-          .insert({ key: 'max_capacity_persons', value: String(parsed), updated_at: now });
-
-        if (insertError) {
-          console.error('[settings] insert error:', insertError);
-          throw insertError;
-        }
-      }
+      if (error) throw error;
 
       setMaxCapacity(parsed);
       setCapacityUpdatedAt(now);
