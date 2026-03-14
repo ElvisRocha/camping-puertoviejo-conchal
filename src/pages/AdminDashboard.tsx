@@ -40,6 +40,8 @@ import { format } from 'date-fns';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -81,6 +83,16 @@ const ITEMS_PER_PAGE = 10;
 
 function fmt(value: number) {
   return `₡${Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function getPaymentLabel(booking: Booking): string {
+  if (booking.status === 'cancelled') return 'Cancelado';
+  const total = Number(booking.total);
+  const deposit = Number(booking.deposit_amount);
+  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
+  if (pct >= 100) return 'Completado';
+  if (pct >= 50 && pct <= 99) return `Depósito ${pct}%`;
+  return 'Pendiente';
 }
 
 function getPaymentBadge(booking: Booking) {
@@ -130,6 +142,8 @@ export default function AdminDashboard() {
   const [selectedBooking, setSelectedBooking] = useState<BookingWithGuest | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [confirmPaymentBooking, setConfirmPaymentBooking] = useState<Booking | null>(null);
+  const [isMarkingPaid, setIsMarkingPaid] = useState(false);
 
   // Check auth and admin status
   useEffect(() => {
@@ -274,6 +288,45 @@ export default function AdminDashboard() {
       });
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const handleMarkAsCompleted = async () => {
+    if (!confirmPaymentBooking) return;
+    setIsMarkingPaid(true);
+    try {
+      const { error } = await supabase
+        .from('bookings')
+        .update({
+          deposit_amount: confirmPaymentBooking.total,
+          balance_due: 0,
+        })
+        .eq('id', confirmPaymentBooking.id);
+
+      if (error) throw error;
+
+      setBookings((prev) =>
+        prev.map((b) =>
+          b.id === confirmPaymentBooking.id
+            ? { ...b, deposit_amount: b.total, balance_due: 0 }
+            : b
+        )
+      );
+
+      toast({
+        title: 'Pago actualizado',
+        description: `Reserva ${confirmPaymentBooking.reference_code} marcada como completada.`,
+      });
+
+      setConfirmPaymentBooking(null);
+    } catch {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'No se pudo actualizar el estado de pago.',
+      });
+    } finally {
+      setIsMarkingPaid(false);
     }
   };
 
@@ -546,6 +599,7 @@ export default function AdminDashboard() {
                       <TableHead>Depósito Pagado</TableHead>
                       <TableHead>Saldo Pendiente</TableHead>
                       <TableHead>Estado de Pago</TableHead>
+                      <TableHead>Acciones de Pago</TableHead>
                       <TableHead>Acciones</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -589,6 +643,34 @@ export default function AdminDashboard() {
                             </span>
                           </TableCell>
                           <TableCell>{getPaymentBadge(booking)}</TableCell>
+                          <TableCell>
+                            {Number(booking.balance_due) === 0 || booking.status === 'cancelled' ? (
+                              <Badge className="bg-green-500/15 text-green-700 border-green-500/30 pointer-events-none">
+                                {booking.status === 'cancelled' ? 'Cancelado' : 'Completado'}
+                              </Badge>
+                            ) : (
+                              <Select
+                                value="__current__"
+                                onValueChange={(val) => {
+                                  if (val === 'mark_complete') {
+                                    setConfirmPaymentBooking(booking);
+                                  }
+                                }}
+                              >
+                                <SelectTrigger className="h-8 w-[155px] text-xs border-dashed">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="__current__" disabled>
+                                    {getPaymentLabel(booking)}
+                                  </SelectItem>
+                                  <SelectItem value="mark_complete">
+                                    Marcar como Completado
+                                  </SelectItem>
+                                </SelectContent>
+                              </Select>
+                            )}
+                          </TableCell>
                           <TableCell>
                             <Button
                               variant="ghost"
@@ -637,6 +719,44 @@ export default function AdminDashboard() {
           )}
         </div>
       </main>
+
+      {/* Confirm Payment Dialog */}
+      <Dialog
+        open={!!confirmPaymentBooking}
+        onOpenChange={(open) => { if (!open) setConfirmPaymentBooking(null); }}
+      >
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Confirmar pago completo</DialogTitle>
+            <DialogDescription>
+              ¿Confirmar pago completo recibido en físico para la reserva{' '}
+              <span className="font-semibold text-foreground">
+                {confirmPaymentBooking?.reference_code}
+              </span>
+              ?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setConfirmPaymentBooking(null)}
+              disabled={isMarkingPaid}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleMarkAsCompleted}
+              disabled={isMarkingPaid}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              {isMarkingPaid ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : null}
+              Confirmar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Booking Details Dialog */}
       <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
