@@ -87,12 +87,14 @@ function fmt(value: number) {
 
 function getPaymentLabel(booking: Booking): string {
   if (booking.status === 'cancelled') return 'Cancelado';
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-  if (pct >= 100) return 'Completado';
-  if (pct >= 50 && pct <= 99) return `Depósito ${pct}%`;
-  return 'Pendiente';
+  if (booking.status === 'completed' || Number(booking.balance_due) === 0) return 'Completado';
+  if (booking.status === 'pending' && Number(booking.deposit_amount) > 0) {
+    const total = Number(booking.total);
+    const deposit = Number(booking.deposit_amount);
+    const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
+    return `Depósito ${pct}%`;
+  }
+  return '';
 }
 
 function getPaymentBadge(booking: Booking) {
@@ -104,24 +106,25 @@ function getPaymentBadge(booking: Booking) {
     );
   }
 
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-
-  if (pct >= 100) {
+  if (booking.status === 'completed' || Number(booking.balance_due) === 0) {
     return (
       <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
         Completado
       </Badge>
     );
   }
-  if (pct >= 50 && pct <= 99) {
+
+  if (booking.status === 'pending' && Number(booking.deposit_amount) > 0) {
+    const total = Number(booking.total);
+    const deposit = Number(booking.deposit_amount);
+    const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
         Depósito {pct}%
       </Badge>
     );
   }
+
   return null;
 }
 
@@ -235,9 +238,14 @@ export default function AdminDashboard() {
       );
     }
 
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter((b) => b.status === statusFilter);
+    if (statusFilter === 'cancelado') {
+      filtered = filtered.filter((b) => b.status === 'cancelled');
+    } else if (statusFilter === 'completado') {
+      filtered = filtered.filter((b) => b.status === 'completed' || Number(b.balance_due) === 0);
+    } else if (statusFilter === 'pendiente') {
+      filtered = filtered.filter((b) => b.status === 'pending' && Number(b.deposit_amount) > 0);
     }
+    // 'all' and 'confirmado' show all bookings without filtering
 
     if (dateFrom) {
       filtered = filtered.filter((b) => b.created_at.slice(0, 10) >= dateFrom);
@@ -375,13 +383,8 @@ export default function AdminDashboard() {
   const stats = {
     total: filteredBookings.length,
     confirmed: filteredBookings.filter((b) => b.status === 'confirmed').length,
-    paidFull: filteredBookings.filter((b) => Number(b.balance_due) === 0).length,
-    partialPayment: filteredBookings.filter((b) => {
-      const t = Number(b.total);
-      const d = Number(b.deposit_amount);
-      const ratio = t > 0 ? d / t : 0;
-      return ratio >= 0.5 && ratio < 1.0;
-    }).length,
+    paidFull: filteredBookings.filter((b) => b.status === 'completed' || Number(b.balance_due) === 0).length,
+    partialPayment: filteredBookings.filter((b) => b.status === 'pending' && Number(b.deposit_amount) > 0).length,
     totalCollected: filteredBookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
     totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
     totalPendiente: filteredBookings.reduce((sum, b) => sum + Number(b.balance_due), 0),
@@ -528,10 +531,10 @@ export default function AdminDashboard() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
+                <SelectItem value="confirmado">Confirmado</SelectItem>
+                <SelectItem value="pendiente">Pendiente</SelectItem>
+                <SelectItem value="completado">Completado</SelectItem>
+                <SelectItem value="cancelado">Cancelado</SelectItem>
               </SelectContent>
             </Select>
 
@@ -644,31 +647,33 @@ export default function AdminDashboard() {
                           </TableCell>
                           <TableCell>{getPaymentBadge(booking)}</TableCell>
                           <TableCell>
-                            {Number(booking.balance_due) === 0 || booking.status === 'cancelled' ? (
-                              <Badge className="bg-green-500/15 text-green-700 border-green-500/30 pointer-events-none">
-                                {booking.status === 'cancelled' ? 'Cancelado' : 'Completado'}
-                              </Badge>
-                            ) : (
-                              <Select
-                                value="__current__"
-                                onValueChange={(val) => {
-                                  if (val === 'mark_complete') {
-                                    setConfirmPaymentBooking(booking);
-                                  }
-                                }}
-                              >
-                                <SelectTrigger className="h-8 w-[155px] text-xs border-dashed">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="__current__" disabled>
-                                    {getPaymentLabel(booking)}
-                                  </SelectItem>
-                                  <SelectItem value="mark_complete">
-                                    Marcar como Completado
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
+                            {booking.status === 'cancelled' ? null : (
+                              booking.status === 'completed' || Number(booking.balance_due) === 0 ? (
+                                <Badge className="bg-green-500/15 text-green-700 border-green-500/30 pointer-events-none">
+                                  Completado
+                                </Badge>
+                              ) : booking.status === 'pending' && Number(booking.deposit_amount) > 0 ? (
+                                <Select
+                                  value="__current__"
+                                  onValueChange={(val) => {
+                                    if (val === 'mark_complete') {
+                                      setConfirmPaymentBooking(booking);
+                                    }
+                                  }}
+                                >
+                                  <SelectTrigger className="h-8 w-[155px] text-xs border-dashed">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="__current__" disabled>
+                                      {getPaymentLabel(booking)}
+                                    </SelectItem>
+                                    <SelectItem value="mark_complete">
+                                      Marcar como Completado
+                                    </SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              ) : null
                             )}
                           </TableCell>
                           <TableCell>
