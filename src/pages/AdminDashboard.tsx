@@ -85,6 +85,10 @@ function fmt(value: number) {
   return `₡${Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+function getCancellationCharge(booking: Booking): number {
+  return Number(booking.total) / 2;
+}
+
 function getPaymentLabel(booking: Booking): string {
   if (booking.status === 'cancelled') return 'Cancelado';
   const total = Number(booking.total);
@@ -407,9 +411,15 @@ export default function AdminDashboard() {
       const ratio = t > 0 ? d / t : 0;
       return ratio >= 0.5 && ratio < 1.0;
     }).length,
-    totalCollected: filteredBookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
+    totalCollected: filteredBookings.reduce((sum, b) => {
+      const charge = b.status === 'cancelled' ? getCancellationCharge(b) : Number(b.deposit_amount);
+      return sum + charge;
+    }, 0),
     totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
-    totalPendiente: filteredBookings.reduce((sum, b) => sum + Number(b.balance_due), 0),
+    totalPendiente: filteredBookings.reduce((sum, b) => {
+      if (b.status === 'cancelled') return sum;
+      return sum + Number(b.balance_due);
+    }, 0),
   };
 
   if (!isAdmin) {
@@ -656,15 +666,22 @@ export default function AdminDashboard() {
                             {fmt(booking.total)}
                           </TableCell>
                           <TableCell className="font-medium">
-                            {fmt(booking.deposit_amount)}
+                            {booking.status === 'cancelled' ? (
+                              <span className="text-red-600">
+                                {fmt(getCancellationCharge(booking))}
+                                <span className="block text-xs text-muted-foreground font-normal">cargo cancelación</span>
+                              </span>
+                            ) : (
+                              fmt(booking.deposit_amount)
+                            )}
                           </TableCell>
                           <TableCell>
                             <span
                               className={`font-bold ${
-                                balanceDue > 0 ? 'text-red-600' : 'text-green-600'
+                                booking.status === 'cancelled' || balanceDue === 0 ? 'text-green-600' : 'text-red-600'
                               }`}
                             >
-                              {fmt(booking.balance_due)}
+                              {booking.status === 'cancelled' ? fmt(0) : fmt(booking.balance_due)}
                             </span>
                           </TableCell>
                           <TableCell>{getPaymentBadge(booking)}</TableCell>
@@ -900,22 +917,39 @@ export default function AdminDashboard() {
               {/* Payment Summary */}
               <div className="bg-muted/50 rounded-lg p-4">
                 <h3 className="font-semibold mb-3">Resumen de Pago</h3>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Total</span>
-                    <p className="font-bold text-lg">{fmt(selectedBooking.total)}</p>
+                {selectedBooking.status === 'cancelled' ? (
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Total</span>
+                      <p className="font-bold text-lg">{fmt(selectedBooking.total)}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Cargo por Cancelación (50%)</span>
+                      <p className="font-bold text-lg text-red-600">{fmt(getCancellationCharge(selectedBooking))}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Saldo Pendiente</span>
+                      <p className="font-bold text-lg text-green-600">{fmt(0)}</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground">Depósito Pagado</span>
-                    <p className="font-bold text-lg text-green-600">{fmt(selectedBooking.deposit_amount)}</p>
+                ) : (
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Total</span>
+                      <p className="font-bold text-lg">{fmt(selectedBooking.total)}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Depósito Pagado</span>
+                      <p className="font-bold text-lg text-green-600">{fmt(selectedBooking.deposit_amount)}</p>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Saldo Pendiente</span>
+                      <p className={`font-bold text-lg ${Number(selectedBooking.balance_due) > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                        {fmt(selectedBooking.balance_due)}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground">Saldo Pendiente</span>
-                    <p className={`font-bold text-lg ${Number(selectedBooking.balance_due) > 0 ? 'text-red-600' : 'text-green-600'}`}>
-                      {fmt(selectedBooking.balance_due)}
-                    </p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           )}
