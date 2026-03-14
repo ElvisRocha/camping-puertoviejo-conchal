@@ -28,6 +28,60 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
 
   const pricing = calculatePricing();
 
+  const checkCapacity = async (): Promise<boolean> => {
+    try {
+      // Step 1 — Get max capacity from settings
+      const { data: settingData, error: settingError } = await supabase
+        .from('camping_settings')
+        .select('value')
+        .eq('key', 'max_capacity_persons')
+        .single();
+
+      if (settingError || !settingData) return true; // If setting unavailable, allow booking
+
+      const maxCapacity = parseInt(settingData.value, 10);
+      if (isNaN(maxCapacity)) return true;
+
+      const newCheckIn = booking.checkIn;
+      const newCheckOut = booking.checkOut;
+      if (!newCheckIn || !newCheckOut) return true;
+
+      const checkInISO = newCheckIn instanceof Date ? newCheckIn.toISOString().slice(0, 10) : String(newCheckIn);
+      const checkOutISO = newCheckOut instanceof Date ? newCheckOut.toISOString().slice(0, 10) : String(newCheckOut);
+
+      // Step 2 — Get overlapping confirmed bookings
+      const { data: overlapping, error: overlapError } = await supabase
+        .from('bookings')
+        .select('adults, children')
+        .eq('status', 'confirmed')
+        .lt('check_in', checkOutISO)
+        .gt('check_out', checkInISO);
+
+      if (overlapError) return true; // On error, allow booking
+
+      // Step 3 — Calculate current occupancy
+      const currentOccupancy = (overlapping ?? []).reduce(
+        (sum, b) => sum + (b.adults ?? 0) + (b.children ?? 0),
+        0
+      );
+
+      // Step 4 — Validate
+      const newGuests = (booking.guests?.adults ?? 0) + (booking.guests?.children ?? 0);
+      if (currentOccupancy + newGuests > maxCapacity) {
+        toast({
+          variant: 'destructive',
+          title: 'Sin disponibilidad',
+          description: `No hay disponibilidad para las fechas seleccionadas. El camping ha alcanzado su capacidad máxima de ${maxCapacity} personas.`,
+        });
+        return false;
+      }
+
+      return true;
+    } catch {
+      return true; // On unexpected error, allow booking
+    }
+  };
+
   const handleCompleteBooking = async () => {
     if (!agreedToTerms) {
       toast({
@@ -48,6 +102,13 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
     }
 
     setIsProcessing(true);
+
+    // Capacity validation
+    const hasCapacity = await checkCapacity();
+    if (!hasCapacity) {
+      setIsProcessing(false);
+      return;
+    }
 
     try {
       // 1. Retrieve file from localStorage

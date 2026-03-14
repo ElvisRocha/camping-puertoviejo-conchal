@@ -35,6 +35,8 @@ import {
   X,
   Receipt,
   Clock,
+  Settings,
+  Save,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import {
@@ -45,6 +47,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface Booking {
   id: string;
@@ -158,6 +161,13 @@ export default function AdminDashboard() {
   const [confirmPaymentBooking, setConfirmPaymentBooking] = useState<Booking | null>(null);
   const [isMarkingPaid, setIsMarkingPaid] = useState(false);
 
+  // Settings state
+  const [maxCapacity, setMaxCapacity] = useState<number | null>(null);
+  const [capacityUpdatedAt, setCapacityUpdatedAt] = useState<string | null>(null);
+  const [capacityInput, setCapacityInput] = useState('');
+  const [isSavingSettings, setIsSavingSettings] = useState(false);
+  const [isLoadingSettings, setIsLoadingSettings] = useState(false);
+
   // Check auth and admin status
   useEffect(() => {
     const checkAuth = async () => {
@@ -188,6 +198,7 @@ export default function AdminDashboard() {
 
       setIsAdmin(true);
       fetchBookings();
+      fetchSettings();
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -202,6 +213,65 @@ export default function AdminDashboard() {
 
     return () => subscription.unsubscribe();
   }, [navigate, toast]);
+
+  const fetchSettings = async () => {
+    setIsLoadingSettings(true);
+    try {
+      const { data, error } = await supabase
+        .from('camping_settings')
+        .select('value, updated_at')
+        .eq('key', 'max_capacity_persons')
+        .single();
+
+      if (error) throw error;
+
+      const val = parseInt(data.value, 10);
+      setMaxCapacity(val);
+      setCapacityInput(String(val));
+      setCapacityUpdatedAt(data.updated_at);
+    } catch {
+      // Table may not exist yet; leave fields empty
+    } finally {
+      setIsLoadingSettings(false);
+    }
+  };
+
+  const handleSaveSettings = async () => {
+    const parsed = parseInt(capacityInput, 10);
+    if (isNaN(parsed) || parsed < 1 || parsed > 500) {
+      toast({
+        variant: 'destructive',
+        title: 'Valor inválido',
+        description: 'La capacidad debe ser un número entero entre 1 y 500.',
+      });
+      return;
+    }
+
+    setIsSavingSettings(true);
+    try {
+      const { error } = await supabase
+        .from('camping_settings')
+        .update({ value: String(parsed), updated_at: new Date().toISOString() })
+        .eq('key', 'max_capacity_persons');
+
+      if (error) throw error;
+
+      setMaxCapacity(parsed);
+      setCapacityUpdatedAt(new Date().toISOString());
+      toast({
+        title: 'Configuración guardada',
+        description: 'La capacidad máxima se ha actualizado correctamente.',
+      });
+    } catch {
+      toast({
+        variant: 'destructive',
+        title: 'Error al guardar',
+        description: 'No se pudo actualizar la configuración. Intente de nuevo.',
+      });
+    } finally {
+      setIsSavingSettings(false);
+    }
+  };
 
   const fetchBookings = async () => {
     setIsLoading(true);
@@ -446,6 +516,19 @@ export default function AdminDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
+        <Tabs defaultValue="reservas">
+          <TabsList className="mb-6">
+            <TabsTrigger value="reservas" className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              Reservas
+            </TabsTrigger>
+            <TabsTrigger value="configuracion" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Configuración
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="reservas">
         {/* Stats Cards — Row 1: count cards (4 columns) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div className="bg-card rounded-xl p-5 border shadow-sm">
@@ -760,6 +843,70 @@ export default function AdminDashboard() {
             </>
           )}
         </div>
+          </TabsContent>
+
+          <TabsContent value="configuracion">
+            <div className="max-w-lg">
+              <div className="bg-card rounded-xl border shadow-sm p-6 space-y-6">
+                <div>
+                  <h2 className="text-lg font-semibold text-foreground">Configuración del Camping</h2>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Ajusta los parámetros operativos del camping.
+                  </p>
+                </div>
+
+                {isLoadingSettings ? (
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span className="text-sm">Cargando configuración…</span>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label htmlFor="max-capacity" className="text-sm font-medium text-foreground">
+                        Capacidad máxima de personas por noche
+                      </label>
+                      <div className="flex gap-3">
+                        <Input
+                          id="max-capacity"
+                          type="number"
+                          min={1}
+                          max={500}
+                          value={capacityInput}
+                          onChange={(e) => setCapacityInput(e.target.value)}
+                          placeholder="Ej. 25"
+                          className="w-40"
+                        />
+                        <Button
+                          onClick={handleSaveSettings}
+                          disabled={isSavingSettings}
+                          className="bg-forest hover:bg-forest-light text-white"
+                        >
+                          {isSavingSettings ? (
+                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                          ) : (
+                            <Save className="h-4 w-4 mr-2" />
+                          )}
+                          Guardar
+                        </Button>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Acepta valores enteros entre 1 y 500.
+                      </p>
+                    </div>
+
+                    {capacityUpdatedAt && (
+                      <p className="text-xs text-muted-foreground">
+                        Última actualización:{' '}
+                        {format(new Date(capacityUpdatedAt), "d 'de' MMMM yyyy, HH:mm")}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </main>
 
       {/* Confirm Payment Dialog */}
