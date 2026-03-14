@@ -108,13 +108,22 @@ function getPaymentBadge(booking: Booking) {
   const deposit = Number(booking.deposit_amount);
   const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
 
-  if (pct >= 100) {
+  if (pct >= 100 || booking.status === 'completed') {
     return (
       <Badge className="bg-green-500/15 text-green-700 border-green-500/30 hover:bg-green-500/20">
         Completado
       </Badge>
     );
   }
+
+  if (booking.status === 'confirmed') {
+    return (
+      <Badge className="bg-blue-500/15 text-blue-700 border-blue-500/30 hover:bg-blue-500/20">
+        Confirmado
+      </Badge>
+    );
+  }
+
   if (pct >= 50 && pct <= 99) {
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
@@ -236,7 +245,20 @@ export default function AdminDashboard() {
     }
 
     if (statusFilter !== 'all') {
-      filtered = filtered.filter((b) => b.status === statusFilter);
+      filtered = filtered.filter((b) => {
+        switch (statusFilter) {
+          case 'pending':
+            return b.status === 'pending';
+          case 'confirmed':
+            return b.status === 'confirmed';
+          case 'completed':
+            return b.status === 'completed' || (Number(b.balance_due) === 0 && b.status !== 'cancelled');
+          case 'cancelled':
+            return b.status === 'cancelled';
+          default:
+            return true;
+        }
+      });
     }
 
     if (dateFrom) {
@@ -375,8 +397,11 @@ export default function AdminDashboard() {
   const stats = {
     total: filteredBookings.length,
     confirmed: filteredBookings.filter((b) => b.status === 'confirmed').length,
-    paidFull: filteredBookings.filter((b) => Number(b.balance_due) === 0).length,
+    paidFull: filteredBookings.filter(
+      (b) => b.status === 'completed' || (Number(b.balance_due) === 0 && b.status !== 'cancelled')
+    ).length,
     partialPayment: filteredBookings.filter((b) => {
+      if (b.status === 'cancelled') return false;
       const t = Number(b.total);
       const d = Number(b.deposit_amount);
       const ratio = t > 0 ? d / t : 0;
