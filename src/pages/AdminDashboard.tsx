@@ -248,7 +248,7 @@ export default function AdminDashboard() {
       filtered = filtered.filter((b) => {
         switch (statusFilter) {
           case 'pending':
-            return b.status === 'pending';
+            return b.status !== 'cancelled' && Number(b.balance_due) > 0;
           case 'confirmed':
             return b.status === 'confirmed';
           case 'completed':
