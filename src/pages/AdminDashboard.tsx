@@ -249,26 +249,44 @@ export default function AdminDashboard() {
 
     setIsSavingSettings(true);
     try {
-      const { error } = await supabase
-        .from('camping_settings')
-        .upsert(
-          { key: 'max_capacity_persons', value: String(parsed), updated_at: new Date().toISOString() },
-          { onConflict: 'key' }
-        );
+      const now = new Date().toISOString();
 
-      if (error) throw error;
+      // Try UPDATE first
+      const { error: updateError, count } = await supabase
+        .from('camping_settings')
+        .update({ value: String(parsed), updated_at: now })
+        .eq('key', 'max_capacity_persons')
+        .select('id', { count: 'exact', head: true });
+
+      if (updateError) {
+        console.error('[settings] update error:', updateError);
+        throw updateError;
+      }
+
+      // If no row existed, INSERT it
+      if ((count ?? 0) === 0) {
+        const { error: insertError } = await supabase
+          .from('camping_settings')
+          .insert({ key: 'max_capacity_persons', value: String(parsed), updated_at: now });
+
+        if (insertError) {
+          console.error('[settings] insert error:', insertError);
+          throw insertError;
+        }
+      }
 
       setMaxCapacity(parsed);
-      setCapacityUpdatedAt(new Date().toISOString());
+      setCapacityUpdatedAt(now);
       toast({
         title: 'Configuración guardada',
         description: 'La capacidad máxima se ha actualizado correctamente.',
       });
-    } catch {
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : JSON.stringify(err);
       toast({
         variant: 'destructive',
         title: 'Error al guardar',
-        description: 'No se pudo actualizar la configuración. Intente de nuevo.',
+        description: msg || 'No se pudo actualizar la configuración. Intente de nuevo.',
       });
     } finally {
       setIsSavingSettings(false);
