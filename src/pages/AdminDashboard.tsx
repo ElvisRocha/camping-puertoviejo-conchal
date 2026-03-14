@@ -358,8 +358,8 @@ export default function AdminDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 mb-8">
+        {/* Stats Cards — Row 1: count cards (4 columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div className="bg-card rounded-xl p-5 border shadow-sm">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-primary/10 rounded-lg">
@@ -407,7 +407,10 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* Stats Cards — Row 2: monetary totals (3 wider columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="bg-card rounded-xl p-5 border shadow-sm">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-blue-500/10 rounded-lg">
