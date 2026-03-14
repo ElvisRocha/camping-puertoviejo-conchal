@@ -88,12 +88,7 @@ function fmt(value: number) {
 function getPaymentLabel(booking: Booking): string {
   if (booking.status === 'cancelled') return 'Cancelado';
   if (booking.status === 'completed' || Number(booking.balance_due) === 0) return 'Completado';
-  if (booking.status === 'confirmed') return 'Confirmado';
-  // pending — show deposit percentage if any deposit exists
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-  if (pct > 0) return `Depósito ${pct}%`;
+  if (booking.status === 'pending' && Number(booking.deposit_amount) > 0) return 'Pendiente';
   return 'Pendiente';
 }
 
@@ -114,32 +109,15 @@ function getPaymentBadge(booking: Booking) {
     );
   }
 
-  if (booking.status === 'confirmed') {
-    return (
-      <Badge className="bg-blue-500/15 text-blue-700 border-blue-500/30 hover:bg-blue-500/20">
-        Confirmado
-      </Badge>
-    );
-  }
-
-  // pending — show deposit percentage
-  const total = Number(booking.total);
-  const deposit = Number(booking.deposit_amount);
-  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
-
-  if (pct > 0) {
+  if (booking.status === 'pending' && Number(booking.deposit_amount) > 0) {
     return (
       <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30 hover:bg-amber-400/20">
-        Depósito {pct}%
+        Pendiente
       </Badge>
     );
   }
 
-  return (
-    <Badge className="bg-secondary text-secondary-foreground border hover:bg-secondary/80">
-      Pendiente
-    </Badge>
-  );
+  return null;
 }
 
 export default function AdminDashboard() {
@@ -252,13 +230,18 @@ export default function AdminDashboard() {
       );
     }
 
-    if (statusFilter === 'completed') {
+    if (statusFilter === 'completado') {
       filtered = filtered.filter(
         (b) => b.status === 'completed' || Number(b.balance_due) === 0
       );
-    } else if (statusFilter !== 'all') {
-      filtered = filtered.filter((b) => b.status === statusFilter);
+    } else if (statusFilter === 'pendiente') {
+      filtered = filtered.filter(
+        (b) => b.status === 'pending' && Number(b.deposit_amount) > 0
+      );
+    } else if (statusFilter === 'cancelado') {
+      filtered = filtered.filter((b) => b.status === 'cancelled');
     }
+    // 'all' and 'confirmado' show all bookings — no filter applied
 
     if (dateFrom) {
       filtered = filtered.filter((b) => b.created_at.slice(0, 10) >= dateFrom);
@@ -399,10 +382,9 @@ export default function AdminDashboard() {
     paidFull: filteredBookings.filter(
       (b) => b.status === 'completed' || Number(b.balance_due) === 0
     ).length,
-    partialPayment: filteredBookings.filter((b) => {
-      if (b.status === 'cancelled' || b.status === 'completed') return false;
-      return Number(b.balance_due) > 0 && Number(b.deposit_amount) > 0;
-    }).length,
+    partialPayment: filteredBookings.filter(
+      (b) => b.status === 'pending' && Number(b.deposit_amount) > 0
+    ).length,
     totalCollected: filteredBookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
     totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
     totalPendiente: filteredBookings.reduce((sum, b) => sum + Number(b.balance_due), 0),
@@ -549,10 +531,10 @@ export default function AdminDashboard() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
+                <SelectItem value="confirmado">Confirmado</SelectItem>
+                <SelectItem value="pendiente">Pendiente</SelectItem>
+                <SelectItem value="completado">Completado</SelectItem>
+                <SelectItem value="cancelado">Cancelado</SelectItem>
               </SelectContent>
             </Select>
 
