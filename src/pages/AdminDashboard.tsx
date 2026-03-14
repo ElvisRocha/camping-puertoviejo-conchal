@@ -33,6 +33,8 @@ import {
   ChevronRight,
   CheckCircle,
   X,
+  Receipt,
+  Clock,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import {
@@ -78,7 +80,7 @@ interface BookingWithGuest extends Booking {
 const ITEMS_PER_PAGE = 10;
 
 function fmt(value: number) {
-  return `$${Number(value).toFixed(2)}`;
+  return `₡${Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function getPaymentBadge(booking: Booking) {
@@ -316,18 +318,20 @@ export default function AdminDashboard() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // Stats
+  // Stats — computed from filteredBookings so they react to search/filter changes
   const stats = {
-    total: bookings.length,
-    confirmed: bookings.filter((b) => b.status === 'confirmed').length,
-    paidFull: bookings.filter((b) => Number(b.balance_due) === 0).length,
-    partialPayment: bookings.filter((b) => {
+    total: filteredBookings.length,
+    confirmed: filteredBookings.filter((b) => b.status === 'confirmed').length,
+    paidFull: filteredBookings.filter((b) => Number(b.balance_due) === 0).length,
+    partialPayment: filteredBookings.filter((b) => {
       const t = Number(b.total);
       const d = Number(b.deposit_amount);
       const ratio = t > 0 ? d / t : 0;
       return ratio >= 0.5 && ratio < 1.0;
     }).length,
-    totalCollected: bookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
+    totalCollected: filteredBookings.reduce((sum, b) => sum + Number(b.deposit_amount), 0),
+    totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
+    totalPendiente: filteredBookings.reduce((sum, b) => sum + Number(b.balance_due), 0),
   };
 
   if (!isAdmin) {
@@ -355,7 +359,7 @@ export default function AdminDashboard() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 mb-8">
           <div className="bg-card rounded-xl p-5 border shadow-sm">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-primary/10 rounded-lg">
@@ -413,6 +417,34 @@ export default function AdminDashboard() {
                 <p className="text-xs text-muted-foreground">Total Recaudado</p>
                 <p className="text-xl font-bold text-foreground">
                   {fmt(stats.totalCollected)}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-indigo-500/10 rounded-lg">
+                <Receipt className="h-5 w-5 text-indigo-500" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Total Reservas</p>
+                <p className="text-xl font-bold text-foreground">
+                  {fmt(stats.totalReservas)}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-amber-400/10 rounded-lg">
+                <Clock className="h-5 w-5 text-amber-500" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Total Pendiente</p>
+                <p className={`text-xl font-bold ${stats.totalPendiente === 0 ? 'text-green-600' : 'text-foreground'}`}>
+                  {fmt(stats.totalPendiente)}
                 </p>
               </div>
             </div>
