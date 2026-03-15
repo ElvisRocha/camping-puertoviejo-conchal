@@ -49,11 +49,11 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       const checkInISO = newCheckIn instanceof Date ? newCheckIn.toISOString().slice(0, 10) : String(newCheckIn);
       const checkOutISO = newCheckOut instanceof Date ? newCheckOut.toISOString().slice(0, 10) : String(newCheckOut);
 
-      // Step 2 — Get overlapping confirmed bookings
+      // Step 2 — Get overlapping active bookings (all except cancelled)
       const { data: overlapping, error: overlapError } = await supabase
         .from('bookings')
         .select('adults, children')
-        .eq('status', 'confirmed')
+        .neq('status', 'cancelled')
         .lt('check_in', checkOutISO)
         .gt('check_out', checkInISO);
 
