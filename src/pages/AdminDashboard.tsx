@@ -776,7 +776,7 @@ export default function AdminDashboard() {
                           <TableCell>{getPaymentBadge(booking)}</TableCell>
                           <TableCell>
                             {Number(booking.balance_due) === 0 || booking.status === 'cancelled' ? (
-                              <Badge className="bg-green-500/15 text-green-700 border-green-500/30 pointer-events-none">
+                              <Badge className={booking.status === 'cancelled' ? 'bg-red-500/15 text-red-700 border-red-500/30 pointer-events-none' : 'bg-green-500/15 text-green-700 border-green-500/30 pointer-events-none'}>
                                 {booking.status === 'cancelled' ? 'Cancelado' : 'Completado'}
                               </Badge>
                             ) : (
