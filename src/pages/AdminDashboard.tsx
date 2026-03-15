@@ -238,11 +238,11 @@ export default function AdminDashboard() {
 
   const handleSaveSettings = async () => {
     const parsed = parseInt(capacityInput, 10);
-    if (isNaN(parsed) || parsed < 1 || parsed > 500) {
+    if (isNaN(parsed) || parsed < 0 || parsed > 500) {
       toast({
         variant: 'destructive',
         title: 'Valor inválido',
-        description: 'La capacidad debe ser un número entero entre 1 y 500.',
+        description: 'La capacidad debe ser un número entero entre 0 y 500.',
       });
       return;
     }
@@ -873,7 +873,7 @@ export default function AdminDashboard() {
                         <Input
                           id="max-capacity"
                           type="number"
-                          min={1}
+                          min={0}
                           max={500}
                           value={capacityInput}
                           onChange={(e) => setCapacityInput(e.target.value)}
@@ -894,7 +894,7 @@ export default function AdminDashboard() {
                         </Button>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Acepta valores enteros entre 1 y 500.
+                        Acepta valores enteros entre 0 y 500.
                       </p>
                     </div>
 
