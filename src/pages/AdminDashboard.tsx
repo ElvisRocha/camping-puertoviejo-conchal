@@ -89,7 +89,7 @@ function fmt(value: number) {
 }
 
 function getCancellationCharge(booking: Booking): number {
-  return Number(booking.total) / 2;
+  return Number(booking.total);
 }
 
 function getPaymentLabel(booking: Booking): string {
@@ -753,9 +753,9 @@ export default function AdminDashboard() {
                           </TableCell>
                           <TableCell className="font-medium">
                             {booking.status === 'cancelled' ? (
-                              <span className="text-red-600">
+                              <span className="text-green-600">
                                 {fmt(getCancellationCharge(booking))}
-                                <span className="block text-xs text-muted-foreground font-normal">cargo cancelación</span>
+                                <span className="block text-xs text-muted-foreground font-normal">reembolso total</span>
                               </span>
                             ) : (
                               fmt(booking.deposit_amount)
@@ -1074,8 +1074,8 @@ export default function AdminDashboard() {
                       <p className="font-bold text-lg">{fmt(selectedBooking.total)}</p>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Cargo por Cancelación (50%)</span>
-                      <p className="font-bold text-lg text-red-600">{fmt(getCancellationCharge(selectedBooking))}</p>
+                      <span className="text-muted-foreground">Reembolso Total (100%)</span>
+                      <p className="font-bold text-lg text-green-600">{fmt(getCancellationCharge(selectedBooking))}</p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Saldo Pendiente</span>
