@@ -50,17 +50,19 @@ const AmenitiesSection = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bg-card rounded-2xl p-3 sm:p-6 text-center shadow-soft hover:shadow-medium transition-all duration-300 group"
+                className="bg-card rounded-2xl p-4 sm:p-6 shadow-soft hover:shadow-medium transition-all duration-300 group flex items-start gap-4 sm:flex-col sm:items-center sm:text-center"
               >
-                <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 rounded-2xl bg-gradient-to-br from-sea-green to-forest flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="h-5 w-5 sm:h-7 sm:w-7 text-cream" />
+                <div className="w-12 h-12 shrink-0 sm:w-14 sm:h-14 sm:mx-auto sm:mb-4 rounded-2xl bg-gradient-to-br from-sea-green to-forest flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-cream" />
                 </div>
-                <h4 className="font-heading font-semibold text-forest mb-1 sm:mb-2 text-xs sm:text-sm leading-snug">
-                  {t(`amenities.${amenity.key}.title`)}
-                </h4>
-                <p className="font-body text-xs sm:text-sm text-foreground/60">
-                  {t(`amenities.${amenity.key}.text`)}
-                </p>
+                <div>
+                  <h4 className="font-heading font-semibold text-forest mb-1 sm:mb-2 text-sm leading-snug">
+                    {t(`amenities.${amenity.key}.title`)}
+                  </h4>
+                  <p className="font-body text-sm text-foreground/60">
+                    {t(`amenities.${amenity.key}.text`)}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
