@@ -746,10 +746,10 @@ export default function AdminDashboard() {
                             </div>
                           </TableCell>
                           <TableCell>
-                            {format(new Date(booking.check_in), 'MMM d, yyyy')}
+                            {format(new Date(booking.check_in + 'T12:00:00'), 'MMM d, yyyy')}
                           </TableCell>
                           <TableCell>
-                            {format(new Date(booking.check_out), 'MMM d, yyyy')}
+                            {format(new Date(booking.check_out + 'T12:00:00'), 'MMM d, yyyy')}
                           </TableCell>
                           <TableCell className="font-medium">
                             {fmt(booking.total)}
@@ -1035,13 +1035,13 @@ export default function AdminDashboard() {
                   <div>
                     <span className="text-muted-foreground">Check-in:</span>
                     <p className="font-medium">
-                      {format(new Date(selectedBooking.check_in), 'EEEE, MMMM d, yyyy')}
+                      {format(new Date(selectedBooking.check_in + 'T12:00:00'), 'EEEE, MMMM d, yyyy')}
                     </p>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Check-out:</span>
                     <p className="font-medium">
-                      {format(new Date(selectedBooking.check_out), 'EEEE, MMMM d, yyyy')}
+                      {format(new Date(selectedBooking.check_out + 'T12:00:00'), 'EEEE, MMMM d, yyyy')}
                     </p>
                   </div>
                   <div>
