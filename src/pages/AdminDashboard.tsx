@@ -590,6 +590,20 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="bg-card rounded-xl p-5 border shadow-sm">
             <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-amber-400/10 rounded-lg">
+                <Clock className="h-5 w-5 text-amber-500" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Total Pendiente</p>
+                <p className={`text-xl font-bold ${stats.totalPendiente === 0 ? 'text-green-600' : 'text-foreground'}`}>
+                  {fmt(stats.totalPendiente)}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card rounded-xl p-5 border shadow-sm">
+            <div className="flex items-center gap-3">
               <div className="p-2.5 bg-blue-500/10 rounded-lg">
                 <DollarSign className="h-5 w-5 text-blue-500" />
               </div>
@@ -611,20 +625,6 @@ export default function AdminDashboard() {
                 <p className="text-xs text-muted-foreground">Total Reservas</p>
                 <p className="text-xl font-bold text-foreground">
                   {fmt(stats.totalReservas)}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-card rounded-xl p-5 border shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-amber-400/10 rounded-lg">
-                <Clock className="h-5 w-5 text-amber-500" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Total Pendiente</p>
-                <p className={`text-xl font-bold ${stats.totalPendiente === 0 ? 'text-green-600' : 'text-foreground'}`}>
-                  {fmt(stats.totalPendiente)}
                 </p>
               </div>
             </div>
