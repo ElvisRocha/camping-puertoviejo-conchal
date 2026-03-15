@@ -188,8 +188,8 @@ export default function AdminDashboard() {
       if (!roles) {
         toast({
           variant: 'destructive',
-          title: 'Access Denied',
-          description: 'You do not have admin privileges.',
+          title: 'Acceso denegado',
+          description: 'No tienes privilegios de administrador.',
         });
         await supabase.auth.signOut();
         navigate('/auth');
@@ -300,7 +300,7 @@ export default function AdminDashboard() {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to fetch bookings.',
+        description: 'No se pudieron cargar las reservas.',
       });
     } finally {
       setIsLoading(false);
@@ -366,8 +366,8 @@ export default function AdminDashboard() {
       if (error) throw error;
 
       toast({
-        title: 'Status Updated',
-        description: `Booking status changed to ${newStatus}.`,
+        title: 'Estado actualizado',
+        description: `El estado de la reserva cambió a ${newStatus}.`,
       });
 
       setBookings((prev) =>
@@ -383,7 +383,7 @@ export default function AdminDashboard() {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to update booking status.',
+        description: 'No se pudo actualizar el estado de la reserva.',
       });
     } finally {
       setIsUpdating(false);
@@ -456,9 +456,15 @@ export default function AdminDashboard() {
       completed: 'outline',
     };
 
+    const labels: Record<string, string> = {
+      confirmed: 'Confirmado',
+      pending: 'Pendiente',
+      cancelled: 'Cancelado',
+      completed: 'Completado',
+    };
     return (
       <Badge variant={variants[status] || 'secondary'}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+        {labels[status] ?? status.charAt(0).toUpperCase() + status.slice(1)}
       </Badge>
     );
   };
@@ -512,11 +518,11 @@ export default function AdminDashboard() {
       <header className="bg-card border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-xl font-bold text-foreground">
-            Booking Dashboard
+            Panel de Reservas
           </h1>
           <Button variant="outline" onClick={handleSignOut}>
             <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
+            Cerrar sesión
           </Button>
         </div>
       </header>
@@ -638,7 +644,7 @@ export default function AdminDashboard() {
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search by reference, name, or email..."
+                placeholder="Buscar por referencia, nombre o correo..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -648,14 +654,14 @@ export default function AdminDashboard() {
             {/* Status filter */}
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-full sm:w-[160px]">
-                <SelectValue placeholder="Filter by status" />
+                <SelectValue placeholder="Filtrar por estado" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
+                <SelectItem value="all">Todos los estados</SelectItem>
+                <SelectItem value="pending">Pendiente</SelectItem>
+                <SelectItem value="confirmed">Confirmado</SelectItem>
+                <SelectItem value="completed">Completado</SelectItem>
+                <SelectItem value="cancelled">Cancelado</SelectItem>
               </SelectContent>
             </Select>
 
@@ -693,7 +699,7 @@ export default function AdminDashboard() {
 
             <Button variant="outline" onClick={fetchBookings}>
               <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-              Refresh
+              Actualizar
             </Button>
           </div>
         </div>
@@ -707,7 +713,7 @@ export default function AdminDashboard() {
           ) : filteredBookings.length === 0 ? (
             <div className="text-center py-20 text-muted-foreground">
               <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No bookings found</p>
+              <p>No se encontraron reservas</p>
             </div>
           ) : (
             <>
@@ -822,9 +828,9 @@ export default function AdminDashboard() {
               {totalPages > 1 && (
                 <div className="flex items-center justify-between px-4 py-3 border-t">
                   <p className="text-sm text-muted-foreground">
-                    Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} to{' '}
-                    {Math.min(currentPage * ITEMS_PER_PAGE, filteredBookings.length)} of{' '}
-                    {filteredBookings.length} bookings
+                    Mostrando {(currentPage - 1) * ITEMS_PER_PAGE + 1} al{' '}
+                    {Math.min(currentPage * ITEMS_PER_PAGE, filteredBookings.length)} de{' '}
+                    {filteredBookings.length} reservas
                   </p>
                   <div className="flex gap-2">
                     <Button
@@ -958,7 +964,7 @@ export default function AdminDashboard() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              Booking Details - {selectedBooking?.reference_code}
+              Detalles de Reserva - {selectedBooking?.reference_code}
             </DialogTitle>
           </DialogHeader>
 
@@ -966,7 +972,7 @@ export default function AdminDashboard() {
             <div className="space-y-6">
               {/* Status Update */}
               <div className="flex items-center gap-4">
-                <span className="text-sm font-medium">Status:</span>
+                <span className="text-sm font-medium">Estado:</span>
                 <Select
                   value={selectedBooking.status}
                   onValueChange={(value) =>
@@ -978,10 +984,10 @@ export default function AdminDashboard() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="confirmed">Confirmed</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="cancelled">Cancelled</SelectItem>
+                    <SelectItem value="pending">Pendiente</SelectItem>
+                    <SelectItem value="confirmed">Confirmado</SelectItem>
+                    <SelectItem value="completed">Completado</SelectItem>
+                    <SelectItem value="cancelled">Cancelado</SelectItem>
                   </SelectContent>
                 </Select>
                 {isUpdating && <Loader2 className="h-4 w-4 animate-spin" />}
@@ -989,40 +995,40 @@ export default function AdminDashboard() {
 
               {/* Guest Info */}
               <div className="bg-muted/50 rounded-lg p-4">
-                <h3 className="font-semibold mb-3">Guest Information</h3>
+                <h3 className="font-semibold mb-3">Información del Huésped</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-muted-foreground">Name:</span>
+                    <span className="text-muted-foreground">Nombre:</span>
                     <p className="font-medium">{selectedBooking.guest_info?.full_name || 'N/A'}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Email:</span>
+                    <span className="text-muted-foreground">Correo:</span>
                     <p className="font-medium">{selectedBooking.guest_info?.email || 'N/A'}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Phone:</span>
+                    <span className="text-muted-foreground">Teléfono:</span>
                     <p className="font-medium">{selectedBooking.guest_info?.phone || 'N/A'}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Country:</span>
+                    <span className="text-muted-foreground">País:</span>
                     <p className="font-medium">{selectedBooking.guest_info?.country || 'N/A'}</p>
                   </div>
                   {selectedBooking.guest_info?.arrival_time && (
                     <div>
-                      <span className="text-muted-foreground">Arrival Time:</span>
+                      <span className="text-muted-foreground">Hora de llegada:</span>
                       <p className="font-medium">{selectedBooking.guest_info.arrival_time}</p>
                     </div>
                   )}
                   {selectedBooking.guest_info?.celebrating_occasion && (
                     <div>
-                      <span className="text-muted-foreground">Celebrating:</span>
+                      <span className="text-muted-foreground">Celebración:</span>
                       <p className="font-medium">{selectedBooking.guest_info.celebrating_occasion}</p>
                     </div>
                   )}
                 </div>
                 {selectedBooking.guest_info?.special_requests && (
                   <div className="mt-4">
-                    <span className="text-muted-foreground text-sm">Special Requests:</span>
+                    <span className="text-muted-foreground text-sm">Solicitudes especiales:</span>
                     <p className="font-medium mt-1">{selectedBooking.guest_info.special_requests}</p>
                   </div>
                 )}
@@ -1030,7 +1036,7 @@ export default function AdminDashboard() {
 
               {/* Booking Info */}
               <div className="bg-muted/50 rounded-lg p-4">
-                <h3 className="font-semibold mb-3">Booking Details</h3>
+                <h3 className="font-semibold mb-3">Detalles de la Reserva</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-muted-foreground">Check-in:</span>
@@ -1045,21 +1051,21 @@ export default function AdminDashboard() {
                     </p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Adults:</span>
+                    <span className="text-muted-foreground">Adultos:</span>
                     <p className="font-medium">{selectedBooking.adults}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Children:</span>
+                    <span className="text-muted-foreground">Niños:</span>
                     <p className="font-medium">{selectedBooking.children}</p>
                   </div>
                   {selectedBooking.infants > 0 && (
                     <div>
-                      <span className="text-muted-foreground">Infants:</span>
+                      <span className="text-muted-foreground">Bebés:</span>
                       <p className="font-medium">{selectedBooking.infants}</p>
                     </div>
                   )}
                   <div>
-                    <span className="text-muted-foreground">Created:</span>
+                    <span className="text-muted-foreground">Creado:</span>
                     <p className="font-medium">
                       {format(new Date(selectedBooking.created_at), 'MMM d, yyyy HH:mm')}
                     </p>
