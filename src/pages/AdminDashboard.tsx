@@ -485,10 +485,13 @@ export default function AdminDashboard() {
       return ratio >= 0.5 && ratio < 1.0;
     }).length,
     totalCollected: filteredBookings.reduce((sum, b) => {
-      const charge = b.status === 'cancelled' ? getCancellationCharge(b) : Number(b.deposit_amount);
-      return sum + charge;
+      if (b.status === 'cancelled') return sum;
+      return sum + Number(b.deposit_amount);
     }, 0),
-    totalReservas: filteredBookings.reduce((sum, b) => sum + Number(b.total), 0),
+    totalReservas: filteredBookings.reduce((sum, b) => {
+      if (b.status === 'cancelled') return sum;
+      return sum + Number(b.total);
+    }, 0),
     totalPendiente: filteredBookings.reduce((sum, b) => {
       if (b.status === 'cancelled') return sum;
       return sum + Number(b.balance_due);
