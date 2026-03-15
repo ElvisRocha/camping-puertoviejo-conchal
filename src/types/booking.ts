@@ -113,7 +113,7 @@ export const TENT_OPTIONS: TentOption[] = [
     pricePerNight: 15,
     description: 'Perfect for couples or solo travelers who like space. Compact, waterproof, and surprisingly roomy.',
     descriptionKey: 'tents.cozyDuo.description',
-    image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600',
+    image: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773594991/Camping%20Puerto%20Viejo%20Conchal/Gallery/Tent%20rental/tienda2.jpg',
     icon: '🏕️',
   },
   {
@@ -124,7 +124,7 @@ export const TENT_OPTIONS: TentOption[] = [
     pricePerNight: 25,
     description: 'Room for the whole crew or friend group. Stand-up height, multiple ventilation windows, and covered vestibule.',
     descriptionKey: 'tents.familyExplorer.description',
-    image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600',
+    image: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773594991/Camping%20Puerto%20Viejo%20Conchal/Gallery/Tent%20rental/tienda3.jpg',
     icon: '🏕️',
   },
   {
@@ -135,7 +135,7 @@ export const TENT_OPTIONS: TentOption[] = [
     pricePerNight: 35,
     description: 'The luxury of space in the heart of nature. Perfect for families or groups who want to spread out.',
     descriptionKey: 'tents.baseCamp.description',
-    image: 'https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=600',
+    image: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773594991/Camping%20Puerto%20Viejo%20Conchal/Gallery/Tent%20rental/tienda.jpg',
     icon: '🏕️',
   },
 ];
