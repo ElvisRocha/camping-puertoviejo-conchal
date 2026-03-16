@@ -29,6 +29,7 @@ const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"));
 const AuthPage = lazyWithRetry(() => import("./pages/AuthPage"));
 const AdminDashboard = lazyWithRetry(() => import("./pages/AdminDashboard"));
 const PrivacyPolicyPage = lazyWithRetry(() => import("./pages/PrivacyPolicyPage"));
+const TermsAndConditionsPage = lazyWithRetry(() => import("./pages/TermsAndConditionsPage"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 // Minimal loading fallback for better perceived performance
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms" element={<TermsAndConditionsPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

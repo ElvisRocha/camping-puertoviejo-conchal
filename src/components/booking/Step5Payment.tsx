@@ -5,6 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useBookingStore } from '@/store/bookingStore';
 import { createBooking } from '@/lib/bookingApi';
 import { supabase } from '@/integrations/supabase/client';
+import { Link } from 'react-router-dom';
 import { ArrowLeft, Lock, Shield, Loader2, Tent } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
@@ -261,8 +262,18 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
             checked={agreedToTerms}
             onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
           />
-          <label htmlFor="terms" className="text-sm cursor-pointer">
-            {t('booking.step5.agreeTerms')}
+          <label htmlFor="terms" className="text-sm cursor-pointer leading-snug">
+            {t('booking.step5.agreeTermsPre')}
+            <Link
+              to="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline text-forest hover:text-forest/80 font-medium"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {t('booking.step5.agreeTermsLink')}
+            </Link>
+            {t('booking.step5.agreeTermsPost')}
           </label>
         </div>
 

@@ -419,6 +419,9 @@
       "cardPayment": "Carte de Crédit/Débit",
       "paypal": "PayPal",
       "agreeTerms": "J'accepte les Conditions Générales et la Politique d'Annulation",
+      "agreeTermsPre": "J'accepte les ",
+      "agreeTermsLink": "Conditions Générales",
+      "agreeTermsPost": " et la Politique d'Annulation",
       "newsletter": "Inscrivez-moi pour des mises à jour occasionnelles et des offres (pas de spam, promis !)",
       "cancellationPolicy": "Annulation gratuite avec remboursement intégral de 100% à tout moment avant l'arrivée. Les no-shows ne sont pas remboursables.",
       "completeBooking": "Finaliser la Réservation",
@@ -576,6 +579,81 @@
         "email": "E-mail : elvis.rocha@smartflow-automations.com",
         "address": "Adresse : Puerto Viejo de Conchal, Guanacaste, Costa Rica",
         "phone": "Téléphone/WhatsApp : +506 XXXX-XXXX"
+      }
+    }
+  },
+  "termsAndConditions": {
+    "title": "Conditions Générales",
+    "lastUpdated": "Dernière mise à jour : 16 mars 2026",
+    "backHome": "Retour à l'accueil",
+    "intro": "En effectuant une réservation au Camping Puerto Viejo Conchal, vous (l'hôte) acceptez les présentes Conditions Générales qui régissent l'utilisation de nos services et les conditions de votre séjour.",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction et Parties au Contrat",
+        "content": "Le présent contrat est établi entre Camping Puerto Viejo Conchal (ci-après, 'le Camping') et la personne effectuant la réservation (ci-après, 'l'Hôte'). En complétant le processus de réservation en ligne et en cochant la case d'acceptation, l'Hôte déclare avoir lu, compris et pleinement accepté les présentes Conditions Générales."
+      },
+      "services": {
+        "title": "2. Services Proposés",
+        "content": "Camping Puerto Viejo Conchal propose un espace extérieur sécurisé pour que les clients profitent de la nature :",
+        "list": [
+          "Espace en plein air pour que les clients installent leur propre équipement de camping",
+          "Les campeurs doivent apporter leur propre tente, équipement de camping et matériel personnel",
+          "Services complémentaires : douches, sanitaires, espaces de cuisine, parking et zones Wi-Fi",
+          "Activités et excursions optionnelles disponibles lors de la réservation",
+          "Toutes les réservations sont soumises à disponibilité"
+        ]
+      },
+      "payment": {
+        "title": "3. Processus de Paiement",
+        "content": "Les méthodes de paiement acceptées sont SINPE Móvil et les espèces. Le processus de paiement fonctionne comme suit :",
+        "list": [
+          "Un acompte de 50 % du montant total est requis au moment de la réservation",
+          "Les 50 % restants sont réglés directement au camping lors du check-in",
+          "La réservation est confirmée uniquement après vérification du justificatif de paiement",
+          "L'hôte doit télécharger le justificatif de paiement sur la plateforme lors du processus de réservation",
+          "Le justificatif doit clairement indiquer le montant transféré, la date et le numéro de destination"
+        ]
+      },
+      "cancellation": {
+        "title": "4. Politique d'Annulation et de Remboursement",
+        "content": "Le Camping propose une politique d'annulation flexible pour protéger l'hôte :",
+        "list": [
+          "L'hôte a droit à un remboursement total de 100 % en cas d'annulation, quelle que soit la date d'annulation",
+          "Pour demander l'annulation, l'hôte doit accéder à la plateforme et entrer son code de réservation dans la section 'Annuler la Réservation'",
+          "Une fois l'annulation traitée, le remboursement sera effectué par le même moyen de paiement utilisé",
+          "Le Camping se réserve le droit d'annuler les réservations en cas de force majeure, en notifiant l'hôte dans les meilleurs délais et en offrant un remboursement complet"
+        ]
+      },
+      "rules": {
+        "title": "5. Règles de Vie et Restrictions",
+        "content": "Pour garantir une expérience sûre et agréable à tous les clients, les règles suivantes s'appliquent :",
+        "list": [
+          "La consommation d'alcool et de drogues est strictement interdite dans les installations du camping",
+          "Le respect envers les autres clients, le personnel et la faune locale doit être maintenu",
+          "Heures calmes : de 22h00 à 7h00",
+          "Les feux sont interdits en dehors des zones désignées",
+          "Les clients sont responsables de maintenir les espaces communs propres",
+          "Le non-respect de ces règles peut entraîner l'expulsion immédiate sans droit de remboursement"
+        ]
+      },
+      "liability": {
+        "title": "6. Responsabilité",
+        "content": "Camping Puerto Viejo Conchal établit les conditions suivantes concernant la responsabilité :",
+        "list": [
+          "Le Camping n'est pas responsable des objets personnels perdus, volés ou endommagés pendant le séjour",
+          "L'hôte utilise toutes les installations à ses propres risques",
+          "Le Camping n'est pas responsable des accidents ou blessures sauf en cas de négligence directe du personnel",
+          "Il est recommandé de souscrire une assurance voyage couvrant les activités de plein air",
+          "Le Camping ne garantit pas l'observation d'espèces fauniques spécifiques, ces animaux vivant dans leur habitat naturel"
+        ]
+      },
+      "modifications": {
+        "title": "7. Modifications des Conditions",
+        "content": "Camping Puerto Viejo Conchal se réserve le droit de mettre à jour ou de modifier les présentes Conditions Générales à tout moment. Les modifications prendront effet dès leur publication sur cette page. Les réservations effectuées avant une modification seront régies par les conditions en vigueur au moment de la réservation."
+      },
+      "jurisdiction": {
+        "title": "8. Juridiction",
+        "content": "Le présent contrat est régi par la législation en vigueur de la République du Costa Rica. Pour tout litige découlant des présentes Conditions Générales, les parties se soumettent à la juridiction des tribunaux compétents du Costa Rica. Camping Puerto Viejo Conchal est situé à Puerto Viejo de Conchal, Guanacaste, Costa Rica."
       }
     }
   },

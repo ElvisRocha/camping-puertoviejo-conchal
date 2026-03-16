@@ -419,6 +419,9 @@
       "cardPayment": "Kredit-/Debitkarte",
       "paypal": "PayPal",
       "agreeTerms": "Ich stimme den AGB und Stornierungsrichtlinien zu",
+      "agreeTermsPre": "Ich stimme den ",
+      "agreeTermsLink": "AGB",
+      "agreeTermsPost": " und Stornierungsrichtlinien zu",
       "newsletter": "Ich möchte gelegentliche Updates und Angebote erhalten (kein Spam, versprochen!)",
       "cancellationPolicy": "Kostenlose Stornierung mit vollständiger 100% Rückerstattung jederzeit vor der Anreise. Nichterscheinen ist nicht erstattungsfähig.",
       "completeBooking": "Buchung Abschließen",
@@ -576,6 +579,81 @@
         "email": "E-Mail: elvis.rocha@smartflow-automations.com",
         "address": "Adresse: Puerto Viejo de Conchal, Guanacaste, Costa Rica",
         "phone": "Telefon/WhatsApp: +506 XXXX-XXXX"
+      }
+    }
+  },
+  "termsAndConditions": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "lastUpdated": "Letzte Aktualisierung: 16. März 2026",
+    "backHome": "Zurück zur Startseite",
+    "intro": "Mit der Buchung beim Camping Puerto Viejo Conchal akzeptieren Sie (der Gast) die vorliegenden Allgemeinen Geschäftsbedingungen, die die Nutzung unserer Dienstleistungen und die Bedingungen Ihres Aufenthalts regeln.",
+    "sections": {
+      "introduction": {
+        "title": "1. Einleitung und Vertragsparteien",
+        "content": "Dieser Vertrag wird zwischen Camping Puerto Viejo Conchal (nachfolgend 'das Camping') und der buchenden Person (nachfolgend 'der Gast') geschlossen. Durch Abschluss des Online-Buchungsprozesses und Ankreuzen des Akzeptanzfeldes erklärt der Gast, diese AGB gelesen, verstanden und vollständig akzeptiert zu haben."
+      },
+      "services": {
+        "title": "2. Angebotene Leistungen",
+        "content": "Camping Puerto Viejo Conchal bietet einen sicheren Außenbereich, in dem Gäste die Natur genießen können:",
+        "list": [
+          "Freifläche für Gäste zum Aufstellen ihrer eigenen Campingausrüstung",
+          "Camper müssen ihr eigenes Zelt, Campingausrüstung und persönliches Equipment mitbringen",
+          "Ergänzende Services: Duschen, Toiletten, Kochbereiche, Parkplatz und WLAN-Zonen",
+          "Optionale Aktivitäten und Touren zum Zeitpunkt der Buchung verfügbar",
+          "Alle Buchungen unterliegen der Verfügbarkeit"
+        ]
+      },
+      "payment": {
+        "title": "3. Zahlungsprozess",
+        "content": "Akzeptierte Zahlungsmethoden sind SINPE Móvil und Bargeld. Der Zahlungsablauf gestaltet sich wie folgt:",
+        "list": [
+          "Zum Zeitpunkt der Buchung ist eine Anzahlung von 50 % des Gesamtbetrags als Bestätigung erforderlich",
+          "Die verbleibenden 50 % werden direkt beim Camping beim Check-in bezahlt",
+          "Die Buchung wird erst nach Überprüfung des Zahlungsbelegs bestätigt",
+          "Der Gast muss den Zahlungsbeleg während des Buchungsprozesses auf der Plattform hochladen",
+          "Der Beleg muss den überwiesenen Betrag, das Datum und die Zielnummer klar ausweisen"
+        ]
+      },
+      "cancellation": {
+        "title": "4. Stornierungsrichtlinie und Erstattung",
+        "content": "Das Camping bietet eine flexible Stornierungsrichtlinie zum Schutz des Gastes:",
+        "list": [
+          "Der Gast hat im Stornierungsfall Anspruch auf eine vollständige Erstattung von 100 %, unabhängig vom Stornierungszeitpunkt",
+          "Zur Stornierung muss der Gast auf die Plattform zugreifen und seinen Buchungscode im Bereich 'Buchung stornieren' eingeben",
+          "Nach Bearbeitung der Stornierung wird die Erstattung über dasselbe Zahlungsmittel abgewickelt",
+          "Das Camping behält sich das Recht vor, Buchungen bei höherer Gewalt zu stornieren, den Gast so früh wie möglich zu benachrichtigen und eine vollständige Erstattung anzubieten"
+        ]
+      },
+      "rules": {
+        "title": "5. Verhaltensregeln und Einschränkungen",
+        "content": "Um ein sicheres und angenehmes Erlebnis für alle Gäste zu gewährleisten, gelten folgende Regeln:",
+        "list": [
+          "Der Konsum von Alkohol und Drogen ist im Camping-Gelände strengstens verboten",
+          "Respekt gegenüber anderen Gästen, dem Personal und der lokalen Tierwelt ist einzuhalten",
+          "Ruhezeiten: von 22:00 bis 7:00 Uhr",
+          "Feuer sind außerhalb ausgewiesener Bereiche nicht gestattet",
+          "Gäste sind für die Sauberkeit der Gemeinschaftsbereiche mitverantwortlich",
+          "Verstöße gegen diese Regeln können zur sofortigen Ausweisung ohne Rückerstattungsanspruch führen"
+        ]
+      },
+      "liability": {
+        "title": "6. Haftung",
+        "content": "Camping Puerto Viejo Conchal legt folgende Haftungsbedingungen fest:",
+        "list": [
+          "Das Camping haftet nicht für verlorene, gestohlene oder beschädigte persönliche Gegenstände während des Aufenthalts",
+          "Der Gast nutzt alle Einrichtungen auf eigene Gefahr",
+          "Das Camping haftet nicht für Unfälle oder Verletzungen, außer bei direkter Fahrlässigkeit des Personals",
+          "Es wird empfohlen, eine Reiseversicherung abzuschließen, die Outdoor-Aktivitäten abdeckt",
+          "Das Camping garantiert keine Sichtungen bestimmter Tierarten, da es sich um Tiere in ihrem natürlichen Lebensraum handelt"
+        ]
+      },
+      "modifications": {
+        "title": "7. Änderungen der Bedingungen",
+        "content": "Camping Puerto Viejo Conchal behält sich das Recht vor, diese AGB jederzeit zu aktualisieren oder zu ändern. Änderungen treten mit ihrer Veröffentlichung auf dieser Seite in Kraft. Buchungen, die vor einer Änderung vorgenommen wurden, unterliegen den zum Zeitpunkt der Buchung geltenden Bedingungen."
+      },
+      "jurisdiction": {
+        "title": "8. Gerichtsstand",
+        "content": "Dieser Vertrag unterliegt dem geltenden Recht der Republik Costa Rica. Bei Streitigkeiten aus diesen AGB unterwerfen sich die Parteien der Zuständigkeit der zuständigen Gerichte Costa Ricas. Camping Puerto Viejo Conchal befindet sich in Puerto Viejo de Conchal, Guanacaste, Costa Rica."
       }
     }
   },
