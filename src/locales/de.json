@@ -657,6 +657,61 @@
       }
     }
   },
+  "cancellationPolicy": {
+    "title": "Stornierungsrichtlinie",
+    "lastUpdated": "Letzte Aktualisierung: 16. März 2026",
+    "backHome": "Zurück zur Startseite",
+    "intro": "Diese Stornierungsrichtlinie gilt für alle Buchungen, die über die Plattform von Camping Puerto Viejo Conchal vorgenommen werden. Mit dem Abschluss einer Buchung akzeptiert der Gast die hier beschriebenen Bedingungen.",
+    "sections": {
+      "guestCancellation": {
+        "title": "1. Stornierungsrecht des Gastes",
+        "content": "Der Gast hat das volle Recht, seine Buchung jederzeit zu stornieren, unabhängig vom Zeitpunkt der Anfrage. Es fallen keine Gebühren oder Strafen an.",
+        "list": [
+          "Die Stornierung kann jederzeit vor dem Check-in vorgenommen werden",
+          "Es werden keine Gebühren oder Strafen für Stornierungen erhoben",
+          "Die Stornierungsanfrage muss über die Webplattform unter Verwendung des Buchungscodes eingereicht werden"
+        ]
+      },
+      "refundPolicy": {
+        "title": "2. Erstattungsrichtlinie",
+        "content": "Der Gast hat Anspruch auf vollständige Erstattung des gezahlten Anzahlungsbetrags.",
+        "list": [
+          "Die Erstattung entspricht 100 % des gezahlten Betrags",
+          "Die Erstattung wird sofort nach Genehmigung der Stornierungsanfrage bearbeitet",
+          "Erstattungen erfolgen ausschließlich über SINPE Móvil an dieselbe Telefonnummer, die für die ursprüngliche Zahlung verwendet wurde",
+          "Die Bearbeitungszeit hängt von den Bankverfahren ab und kann bis zu 3 Werktage dauern"
+        ]
+      },
+      "campingCancellation": {
+        "title": "3. Stornierung durch das Camping",
+        "content": "In außergewöhnlichen Umständen, die außerhalb der Kontrolle von Camping Puerto Viejo Conchal liegen, behält sich das Camping das Recht vor, bestätigte Buchungen zu stornieren.",
+        "list": [
+          "Umstände, die zu einer Stornierung führen können: höhere Gewalt, extreme Wetterbedingungen, Gesundheitsnotfälle oder andere Umstände außerhalb der Kontrolle des Campings",
+          "In allen Fällen erhält der Gast eine vollständige Erstattung von 100 % des gezahlten Betrags",
+          "Das Camping wird den Gast so schnell wie möglich über die auf der Plattform registrierten Kontaktdaten (E-Mail und/oder Telefon) benachrichtigen"
+        ]
+      },
+      "process": {
+        "title": "4. Schritt-für-Schritt-Stornierungsprozess",
+        "content": "Gehen Sie wie folgt vor, um eine Buchung zu stornieren:",
+        "list": [
+          "Besuchen Sie die Webplattform von Camping Puerto Viejo Conchal",
+          "Greifen Sie auf Ihre aktive Buchung mit Ihrem Referenzcode zu",
+          "Wählen Sie die Option «Buchung stornieren»",
+          "Bestätigen Sie die Stornierungsanfrage",
+          "Sie erhalten eine Bestätigung und die Erstattung wird innerhalb von maximal 3 Werktagen bearbeitet und gesendet"
+        ]
+      },
+      "modifications": {
+        "title": "5. Änderungen dieser Richtlinie",
+        "content": "Camping Puerto Viejo Conchal behält sich das Recht vor, diese Stornierungsrichtlinie jederzeit zu aktualisieren oder zu ändern. Änderungen gelten nur für Buchungen, die nach dem Aktualisierungsdatum vorgenommen wurden. Wir empfehlen, diese Richtlinie regelmäßig zu überprüfen."
+      },
+      "jurisdiction": {
+        "title": "6. Gerichtsstand",
+        "content": "Diese Richtlinie unterliegt dem geltenden Recht der Republik Costa Rica. Bei Streitigkeiten aus dieser Richtlinie unterwerfen sich die Parteien der Zuständigkeit der zuständigen Gerichte Costa Ricas. Camping Puerto Viejo Conchal befindet sich in Puerto Viejo de Conchal, Guanacaste, Costa Rica."
+      }
+    }
+  },
   "price_range_connector": "oder",
   "addons": {
     "breakfast": {
