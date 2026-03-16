@@ -608,7 +608,7 @@
         "content": "Los métodos de pago aceptados son SINPE Móvil y efectivo. El proceso funciona de la siguiente manera:",
         "list": [
           "Se requiere el pago de al menos 50% del total como depósito de confirmación al momento de la reserva",
-          "El 50% restante se cancela directamente en el camping al momento del check-in",
+          "El monto pendiente de la reserva se cancelará directamente en el camping al momento del check-in",
           "La reserva se confirma únicamente tras la verificación del comprobante de pago",
           "El huésped debe cargar el comprobante de pago en la plataforma durante el proceso de reserva",
           "El comprobante debe mostrar claramente el monto transferido, la fecha y el número de destino"
