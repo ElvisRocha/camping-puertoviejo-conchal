@@ -657,6 +657,61 @@
       }
     }
   },
+  "cancellationPolicy": {
+    "title": "Cancellation Policy",
+    "lastUpdated": "Last updated: March 16, 2026",
+    "backHome": "Back to home",
+    "intro": "This Cancellation Policy applies to all reservations made through the Camping Puerto Viejo Conchal platform. By completing a reservation, the guest accepts the terms described herein.",
+    "sections": {
+      "guestCancellation": {
+        "title": "1. Guest Right to Cancel",
+        "content": "The guest has the full right to cancel their reservation at any time, regardless of how far in advance it is requested. No fees or penalties apply.",
+        "list": [
+          "Cancellation can be made at any time before check-in",
+          "No fees or penalties are applied for cancellation",
+          "The cancellation request must be submitted through the web platform using the reservation code"
+        ]
+      },
+      "refundPolicy": {
+        "title": "2. Refund Policy",
+        "content": "The guest is entitled to a full refund of the deposit amount paid.",
+        "list": [
+          "The refund corresponds to 100% of the amount paid",
+          "The refund is processed immediately once the cancellation request is approved",
+          "Refunds are issued exclusively via SINPE Móvil, to the same phone number used for the original payment",
+          "Processing time depends on banking procedures and may take up to 3 business days"
+        ]
+      },
+      "campingCancellation": {
+        "title": "3. Cancellation by the Campground",
+        "content": "In exceptional circumstances beyond the control of Camping Puerto Viejo Conchal, the campground reserves the right to cancel confirmed reservations.",
+        "list": [
+          "Circumstances that may lead to cancellation: force majeure, extreme weather conditions, health emergencies, or other circumstances beyond the campground's control",
+          "In all cases, the guest will receive a full 100% refund of the amount paid",
+          "The campground will notify the guest as soon as possible through the contact details registered on the platform (email and/or phone)"
+        ]
+      },
+      "process": {
+        "title": "4. Step-by-Step Cancellation Process",
+        "content": "To cancel a reservation, follow these steps:",
+        "list": [
+          "Visit the Camping Puerto Viejo Conchal web platform",
+          "Access your active reservation using your reference code",
+          "Select the «Cancel Reservation» option",
+          "Confirm the cancellation request",
+          "You will receive a confirmation and the refund will be processed and sent within a maximum of 3 business days"
+        ]
+      },
+      "modifications": {
+        "title": "5. Modifications to This Policy",
+        "content": "Camping Puerto Viejo Conchal reserves the right to update or modify this Cancellation Policy at any time. Changes will apply only to reservations made after the update date. We recommend reviewing this policy periodically."
+      },
+      "jurisdiction": {
+        "title": "6. Jurisdiction",
+        "content": "This policy is governed by the laws of the Republic of Costa Rica. For any dispute arising from this policy, the parties submit to the jurisdiction of the competent courts of Costa Rica. Camping Puerto Viejo Conchal is located in Puerto Viejo de Conchal, Guanacaste, Costa Rica."
+      }
+    }
+  },
   "price_range_connector": "or",
   "addons": {
     "breakfast": {

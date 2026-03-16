@@ -657,6 +657,61 @@
       }
     }
   },
+  "cancellationPolicy": {
+    "title": "取消政策",
+    "lastUpdated": "最后更新：2026年3月16日",
+    "backHome": "返回首页",
+    "intro": "本取消政策适用于通过Camping Puerto Viejo Conchal平台完成的所有预订。完成预订即表示住客接受本文所述条款。",
+    "sections": {
+      "guestCancellation": {
+        "title": "1. 住客取消权",
+        "content": "住客有权在任何时间取消预订，无论提前多久提出申请，均不收取任何费用或罚款。",
+        "list": [
+          "可在入住前任何时间办理取消",
+          "取消不收取任何费用或罚款",
+          "取消申请须通过网络平台使用预订代码提交"
+        ]
+      },
+      "refundPolicy": {
+        "title": "2. 退款政策",
+        "content": "住客有权获得已支付押金的全额退款。",
+        "list": [
+          "退款金额为已付金额的100%",
+          "取消申请获批后立即处理退款",
+          "退款仅通过SINPE Móvil退回至原付款所用的同一手机号码",
+          "处理时间视银行流程而定，最长可能需要3个工作日"
+        ]
+      },
+      "campingCancellation": {
+        "title": "3. 营地取消预订",
+        "content": "在Camping Puerto Viejo Conchal无法控制的特殊情况下，营地保留取消已确认预订的权利。",
+        "list": [
+          "可能导致取消的情况：不可抗力、极端天气、卫生紧急情况或其他超出营地控制范围的情况",
+          "任何情况下，住客均将获得已付金额100%的全额退款",
+          "营地将尽快通过平台上登记的联系方式（电子邮件和/或电话）通知住客"
+        ]
+      },
+      "process": {
+        "title": "4. 取消步骤",
+        "content": "如需取消预订，请按以下步骤操作：",
+        "list": [
+          "访问Camping Puerto Viejo Conchal网络平台",
+          "使用参考代码访问您的有效预订",
+          "选择「取消预订」选项",
+          "确认取消申请",
+          "您将收到确认通知，退款将在最多3个工作日内处理完成并发送"
+        ]
+      },
+      "modifications": {
+        "title": "5. 本政策的变更",
+        "content": "Camping Puerto Viejo Conchal保留随时更新或修改本取消政策的权利。变更仅适用于更新日期之后完成的预订。建议定期查阅本政策。"
+      },
+      "jurisdiction": {
+        "title": "6. 司法管辖",
+        "content": "本政策受哥斯达黎加共和国现行法律管辖。因本政策引起的任何争议，双方同意提交哥斯达黎加有管辖权的法院裁决。Camping Puerto Viejo Conchal位于哥斯达黎加瓜纳卡斯特省孔查尔旧港。"
+      }
+    }
+  },
   "price_range_connector": "或",
   "addons": {
     "breakfast": {
