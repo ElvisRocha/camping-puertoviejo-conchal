@@ -492,6 +492,93 @@
       "personNight": "persona por noche"
     }
   },
+  "privacyPolicy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 16 de marzo de 2026",
+    "backHome": "Volver al inicio",
+    "intro": "En Camping Puerto Viejo Conchal nos comprometemos a proteger tu privacidad. Esta política explica qué información recopilamos, cómo la usamos y cuáles son tus derechos.",
+    "sections": {
+      "dataController": {
+        "title": "1. Responsable del Tratamiento de Datos",
+        "content": "El responsable del tratamiento de tus datos personales es Camping Puerto Viejo Conchal, ubicado en Puerto Viejo de Conchal, Guanacaste, Costa Rica. Para cualquier consulta relacionada con la privacidad de tus datos, puedes contactarnos en: elvis.rocha@smartflow-automations.com"
+      },
+      "dataCollected": {
+        "title": "2. Datos que Recopilamos",
+        "content": "Recopilamos los siguientes datos personales cuando realizas una reserva o nos contactas:",
+        "list": [
+          "Nombre completo",
+          "Correo electrónico",
+          "Número de teléfono (con código de país)",
+          "País de residencia",
+          "Hora estimada de llegada",
+          "Solicitudes especiales o restricciones alimentarias",
+          "Información de celebraciones especiales (opcional)",
+          "Comprobante de pago (imagen o PDF)"
+        ]
+      },
+      "purpose": {
+        "title": "3. Finalidad del Tratamiento",
+        "content": "Utilizamos tus datos personales para los siguientes fines:",
+        "list": [
+          "Procesar y gestionar tu reserva de alojamiento",
+          "Enviarte confirmaciones y comunicaciones relacionadas con tu estadía",
+          "Responder a tus consultas y solicitudes de soporte",
+          "Mejorar nuestros servicios y experiencia de usuario",
+          "Cumplir con obligaciones legales y fiscales",
+          "Enviarte comunicaciones de marketing si has dado tu consentimiento (puedes darte de baja en cualquier momento)"
+        ]
+      },
+      "dataStorage": {
+        "title": "4. Almacenamiento y Seguridad",
+        "content": "Tus datos se almacenan de forma segura en servidores de Supabase, que cumple con los estándares internacionales de seguridad (SOC 2 Type II). Implementamos medidas técnicas y organizativas apropiadas para proteger tu información contra acceso no autorizado, pérdida o divulgación. Toda la transmisión de datos se realiza mediante encriptación SSL de 256 bits."
+      },
+      "thirdParties": {
+        "title": "5. Compartir Datos con Terceros",
+        "content": "No vendemos ni alquilamos tus datos personales a terceros. Podemos compartir tu información únicamente con:",
+        "list": [
+          "Proveedores de servicios de pago (para procesar transacciones de forma segura)",
+          "Proveedores de servicios de email (para el envío de confirmaciones y comunicaciones)",
+          "Autoridades competentes cuando sea requerido por ley"
+        ]
+      },
+      "cookies": {
+        "title": "6. Cookies y Tecnologías de Seguimiento",
+        "content": "Actualmente utilizamos cookies esenciales para el funcionamiento del sitio web (como la preferencia de idioma). Próximamente implementaremos herramientas de análisis como Google Analytics y Facebook Pixel para mejorar nuestros servicios. Cuando esto ocurra, actualizaremos esta política y añadiremos un banner de consentimiento de cookies. Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar la funcionalidad del sitio."
+      },
+      "rights": {
+        "title": "7. Tus Derechos",
+        "content": "De acuerdo con la legislación aplicable sobre protección de datos, tienes los siguientes derechos:",
+        "list": [
+          "Derecho de acceso: conocer qué datos personales tenemos sobre ti",
+          "Derecho de rectificación: corregir datos inexactos o incompletos",
+          "Derecho de supresión: solicitar la eliminación de tus datos",
+          "Derecho de oposición: oponerte al tratamiento de tus datos",
+          "Derecho de portabilidad: recibir tus datos en un formato estructurado",
+          "Derecho a retirar el consentimiento en cualquier momento"
+        ],
+        "contact": "Para ejercer cualquiera de estos derechos, contáctanos en: elvis.rocha@smartflow-automations.com"
+      },
+      "dataRetention": {
+        "title": "8. Retención de Datos",
+        "content": "Conservamos tus datos personales durante el tiempo necesario para los fines descritos en esta política. Los datos de reservas se conservan durante 5 años por razones fiscales y legales. Los datos de marketing se conservan hasta que retires tu consentimiento."
+      },
+      "children": {
+        "title": "9. Menores de Edad",
+        "content": "Nuestros servicios no están dirigidos a menores de 18 años sin el consentimiento de sus padres o tutores. No recopilamos conscientemente datos personales de menores de edad. Si crees que hemos recopilado datos de un menor, contáctanos de inmediato."
+      },
+      "changes": {
+        "title": "10. Cambios a Esta Política",
+        "content": "Podemos actualizar esta Política de Privacidad periódicamente. Te notificaremos sobre cambios significativos publicando la nueva política en esta página con una fecha de actualización revisada. Te recomendamos revisar esta política regularmente."
+      },
+      "contact": {
+        "title": "11. Contacto",
+        "content": "Si tienes preguntas, preocupaciones o solicitudes relacionadas con esta Política de Privacidad o el tratamiento de tus datos personales, puedes contactarnos a través de:",
+        "email": "Correo electrónico: elvis.rocha@smartflow-automations.com",
+        "address": "Dirección: Puerto Viejo de Conchal, Guanacaste, Costa Rica",
+        "phone": "Teléfono/WhatsApp: +506 XXXX-XXXX"
+      }
+    }
+  },
   "price_range_connector": "ó",
   "addons": {
     "breakfast": {

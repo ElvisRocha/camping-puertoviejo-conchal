@@ -492,6 +492,93 @@
       "personNight": "personne par nuit"
     }
   },
+  "privacyPolicy": {
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour : 16 mars 2026",
+    "backHome": "Retour à l'accueil",
+    "intro": "Chez Camping Puerto Viejo Conchal, nous nous engageons à protéger votre vie privée. Cette politique explique quelles informations nous collectons, comment nous les utilisons et quels sont vos droits.",
+    "sections": {
+      "dataController": {
+        "title": "1. Responsable du Traitement des Données",
+        "content": "Le responsable du traitement de vos données personnelles est Camping Puerto Viejo Conchal, situé à Puerto Viejo de Conchal, Guanacaste, Costa Rica. Pour toute question relative à la confidentialité de vos données, vous pouvez nous contacter à : elvis.rocha@smartflow-automations.com"
+      },
+      "dataCollected": {
+        "title": "2. Données que Nous Collectons",
+        "content": "Nous collectons les données personnelles suivantes lorsque vous effectuez une réservation ou nous contactez :",
+        "list": [
+          "Nom complet",
+          "Adresse e-mail",
+          "Numéro de téléphone (avec indicatif pays)",
+          "Pays de résidence",
+          "Heure d'arrivée estimée",
+          "Demandes spéciales ou restrictions alimentaires",
+          "Informations sur les célébrations spéciales (facultatif)",
+          "Justificatif de paiement (image ou PDF)"
+        ]
+      },
+      "purpose": {
+        "title": "3. Finalités du Traitement",
+        "content": "Nous utilisons vos données personnelles aux fins suivantes :",
+        "list": [
+          "Traiter et gérer votre réservation d'hébergement",
+          "Vous envoyer des confirmations et communications liées à votre séjour",
+          "Répondre à vos questions et demandes d'assistance",
+          "Améliorer nos services et l'expérience utilisateur",
+          "Respecter les obligations légales et fiscales",
+          "Vous envoyer des communications marketing si vous avez donné votre consentement (vous pouvez vous désabonner à tout moment)"
+        ]
+      },
+      "dataStorage": {
+        "title": "4. Stockage et Sécurité des Données",
+        "content": "Vos données sont stockées de manière sécurisée sur les serveurs de Supabase, conformes aux normes internationales de sécurité (SOC 2 Type II). Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations contre tout accès non autorisé, perte ou divulgation. Toutes les transmissions de données sont effectuées avec un chiffrement SSL 256 bits."
+      },
+      "thirdParties": {
+        "title": "5. Partage des Données avec des Tiers",
+        "content": "Nous ne vendons ni ne louons vos données personnelles à des tiers. Nous pouvons partager vos informations uniquement avec :",
+        "list": [
+          "Prestataires de services de paiement (pour traiter les transactions en toute sécurité)",
+          "Prestataires de services e-mail (pour l'envoi de confirmations et communications)",
+          "Autorités compétentes lorsque la loi l'exige"
+        ]
+      },
+      "cookies": {
+        "title": "6. Cookies et Technologies de Suivi",
+        "content": "Nous utilisons actuellement des cookies essentiels au fonctionnement du site (comme la préférence de langue). Nous prévoyons d'implémenter prochainement des outils d'analyse tels que Google Analytics et Facebook Pixel pour améliorer nos services. Lorsque cela se produira, nous mettrons à jour cette politique et ajouterons une bannière de consentement aux cookies. Vous pouvez configurer votre navigateur pour refuser les cookies, bien que cela puisse affecter la fonctionnalité du site."
+      },
+      "rights": {
+        "title": "7. Vos Droits",
+        "content": "Conformément à la législation applicable en matière de protection des données, vous disposez des droits suivants :",
+        "list": [
+          "Droit d'accès : savoir quelles données personnelles nous détenons sur vous",
+          "Droit de rectification : corriger des données inexactes ou incomplètes",
+          "Droit à l'effacement : demander la suppression de vos données",
+          "Droit d'opposition : vous opposer au traitement de vos données",
+          "Droit à la portabilité : recevoir vos données dans un format structuré",
+          "Droit de retirer votre consentement à tout moment"
+        ],
+        "contact": "Pour exercer l'un de ces droits, contactez-nous à : elvis.rocha@smartflow-automations.com"
+      },
+      "dataRetention": {
+        "title": "8. Conservation des Données",
+        "content": "Nous conservons vos données personnelles pendant le temps nécessaire aux finalités décrites dans cette politique. Les données de réservation sont conservées 5 ans pour des raisons fiscales et légales. Les données marketing sont conservées jusqu'au retrait de votre consentement."
+      },
+      "children": {
+        "title": "9. Mineurs",
+        "content": "Nos services ne s'adressent pas aux mineurs de moins de 18 ans sans le consentement de leurs parents ou tuteurs. Nous ne collectons pas sciemment de données personnelles de mineurs. Si vous pensez que nous avons collecté des données d'un mineur, contactez-nous immédiatement."
+      },
+      "changes": {
+        "title": "10. Modifications de Cette Politique",
+        "content": "Nous pouvons mettre à jour cette Politique de Confidentialité périodiquement. Nous vous informerons des changements importants en publiant la nouvelle politique sur cette page avec une date de mise à jour révisée. Nous vous recommandons de consulter régulièrement cette politique."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "Si vous avez des questions, préoccupations ou demandes relatives à cette Politique de Confidentialité ou au traitement de vos données personnelles, vous pouvez nous contacter via :",
+        "email": "E-mail : elvis.rocha@smartflow-automations.com",
+        "address": "Adresse : Puerto Viejo de Conchal, Guanacaste, Costa Rica",
+        "phone": "Téléphone/WhatsApp : +506 XXXX-XXXX"
+      }
+    }
+  },
   "price_range_connector": "ou",
   "addons": {
     "breakfast": {
