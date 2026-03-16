@@ -2,7 +2,6 @@ export interface GalleryImage {
   id: string;
   src: string;
   alt: string;
-  altKey: string;
   category: 'beach' | 'wildlife' | 'campsite' | 'sunsets';
   captionKey: string;
 }
@@ -14,21 +13,21 @@ export const galleryImages: GalleryImage[] = [
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373014/Camping%20Puerto%20Viejo%20Conchal/Gallery/Beach/Playa8.jpg',
     alt: 'Paisajes Majestuosos',
     category: 'beach',
-    captionKey: 'gallery.captions.beach-1',
+    captionKey: 'gallery.captions.beach1',
   },
   {
     id: 'beach-2',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373003/Camping%20Puerto%20Viejo%20Conchal/Gallery/Beach/Playa1.jpg',
     alt: 'Aguas cristalinas',
     category: 'beach',
-    captionKey: 'gallery.captions.beach-2',
+    captionKey: 'gallery.captions.beach2',
   },
   {
     id: 'beach-3',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373012/Camping%20Puerto%20Viejo%20Conchal/Gallery/Beach/Playa7.jpg',
     alt: 'Playas de conchitas',
     category: 'beach',
-    captionKey: 'gallery.captions.beach-3',
+    captionKey: 'gallery.captions.beach3',
   },
   {
     id: 'beach-4',
@@ -63,30 +62,30 @@ export const galleryImages: GalleryImage[] = [
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773410875/Camping%20Puerto%20Viejo%20Conchal/Gallery/Beach/PlayaM1.jpg',
     alt: 'Playa Minas',
     category: 'beach',
-    captionKey: 'gallery.captions.beach-4',
+    captionKey: 'gallery.captions.beach4',
   },
-
+  
   // Wildlife photos
   {
     id: 'wildlife-1',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373826/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna6.jpg',
     alt: '3 guacamayas en un arbol',
     category: 'wildlife',
-    captionKey: 'gallery.captions.wildlife-1',
+    captionKey: 'gallery.captions.wildlife1',
   },
   {
     id: 'wildlife-2',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373594/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna5.jpg',
     alt: 'Monos Aulladores',
     category: 'wildlife',
-    captionKey: 'gallery.captions.wildlife-2',
+    captionKey: 'gallery.captions.wildlife2',
   },
   {
     id: 'wildlife-3',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373591/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna4.jpg',
     alt: 'Iguana en el arbol',
     category: 'wildlife',
-    captionKey: 'gallery.captions.wildlife-3',
+    captionKey: 'gallery.captions.wildlife3',
   },
   {
     id: 'wildlife-4',
@@ -97,8 +96,8 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: 'wildlife-5',
-    src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373589/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna3.jpg',
-    alt: 'Mono en el arbol',
+    src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773696614/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna-n.png',
+    alt: 'pareja de pericos',
     category: 'wildlife',
     captionKey: 'gallery.captions.wildlife4',
   },{
@@ -118,30 +117,30 @@ export const galleryImages: GalleryImage[] = [
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773373583/Camping%20Puerto%20Viejo%20Conchal/Gallery/Fauna/fauna7.jpg',
     alt: 'Bandada de guacamayas',
     category: 'wildlife',
-    captionKey: 'gallery.captions.wildlife-4',
+    captionKey: 'gallery.captions.wildlife4',
   },
-
+  
   // Campsite photos
   {
     id: 'campsite-1',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773412473/Camping%20Puerto%20Viejo%20Conchal/Gallery/Camping/Camping.jpg',
     alt: 'trae tu propio camper',
     category: 'campsite',
-    captionKey: 'gallery.captions.campsite-1',
+    captionKey: 'gallery.captions.campsite1',
   },
   {
     id: 'campsite-3',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773372535/Camping%20Puerto%20Viejo%20Conchal/Gallery/Camping/camping8.jpg',
     alt: 'Espacio amplio para camping',
     category: 'campsite',
-    captionKey: 'gallery.captions.campsite-3',
+    captionKey: 'gallery.captions.campsite3',
   },
   {
     id: 'campsite-4',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773372534/Camping%20Puerto%20Viejo%20Conchal/Gallery/Camping/camping6.jpg',
     alt: 'Area de Cocinas y Parrilladas',
     category: 'campsite',
-    captionKey: 'gallery.captions.campsite-4',
+    captionKey: 'gallery.captions.campsite4',
   },
    {
     id: 'campsite-2',
@@ -186,21 +185,21 @@ export const galleryImages: GalleryImage[] = [
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773412677/Camping%20Puerto%20Viejo%20Conchal/Gallery/Sunsets/Atardecer.jpg',
     alt: 'Atardeceres Hermosos',
     category: 'sunsets',
-    captionKey: 'gallery.captions.sunset-1',
+    captionKey: 'gallery.captions.sunset1',
   },
   {
     id: 'sunset-2',
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773372318/Camping%20Puerto%20Viejo%20Conchal/Gallery/Sunsets/ATARDECER9.jpg',
     alt: 'Vistas increibles',
     category: 'sunsets',
-    captionKey: 'gallery.captions.sunset-2',
+    captionKey: 'gallery.captions.sunset2',
   },
   {
     id: 'sunset-3',
     src: 'https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=1200&q=80',
     alt: 'Puesta de sol naranja',
     category: 'sunsets',
-    captionKey: 'gallery.captions.sunset-3',
+    captionKey: 'gallery.captions.sunset3',
   },
   {
     id: 'sunset-4',
@@ -235,6 +234,6 @@ export const galleryImages: GalleryImage[] = [
     src: 'https://res.cloudinary.com/da1sq9diw/image/upload/v1773372316/Camping%20Puerto%20Viejo%20Conchal/Gallery/Sunsets/ATARDECER3.jpg',
     alt: 'Atardecer tranquilo sobre el océano Pacífico visto desde la costa tropical',
     category: 'sunsets',
-    captionKey: 'gallery.captions.sunset-4',
+    captionKey: 'gallery.captions.sunset4',
   },
 ];
