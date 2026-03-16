@@ -84,8 +84,8 @@ export interface SiteConfig {
 export const SITE_CONFIG: SiteConfig = {
   domain: 'camping-puertoviejo-conchal.com',
   brandName: 'Camping Puerto Viejo Conchal',
-  email: 'hello@camping-puertoviejo-conchal.com',
-  whatsapp: '+506 XXXX-XXXX',
+  email: 'jj111w559@gmail.com',
+  whatsapp: '+506 8303-4342',
   location: 'Puerto Viejo de Conchal, Guanacaste, Costa Rica',
   social: {
     instagram: '@campingpuertoviejo',
