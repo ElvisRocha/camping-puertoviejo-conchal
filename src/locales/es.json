@@ -611,7 +611,7 @@
           "El monto pendiente de la reserva se cancelará directamente en el camping al momento del check-in",
           "La reserva se confirma únicamente tras la verificación del comprobante de pago",
           "El huésped debe cargar el comprobante de pago en la plataforma durante el proceso de reserva",
-          "El comprobante debe mostrar claramente el monto transferido, la fecha y el número de destino"
+          "El comprobante debe mostrar claramente el monto transferido, la fecha, el número de destino y el nombre del destinatario"
         ]
       },
       "cancellation": {
