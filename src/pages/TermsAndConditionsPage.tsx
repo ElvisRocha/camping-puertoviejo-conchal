@@ -24,7 +24,7 @@ export default function TermsAndConditionsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-6 pb-3 md:pt-8 md:pb-4 bg-gradient-to-b from-primary/10 to-background">
+      <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-b from-primary/10 to-background">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
