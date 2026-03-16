@@ -419,6 +419,9 @@
       "cardPayment": "Tarjeta de Crédito/Débito",
       "paypal": "PayPal",
       "agreeTerms": "Acepto los Términos y Condiciones y la Política de Cancelación",
+      "agreeTermsPre": "Acepto los ",
+      "agreeTermsLink": "Términos y Condiciones",
+      "agreeTermsPost": " y la Política de Cancelación",
       "newsletter": "Inscríbeme para actualizaciones ocasionales y ofertas (¡sin spam, prometido!)",
       "cancellationPolicy": "Cancelación gratuita con reembolso completo del 100% en cualquier momento antes del check-in. No presentarse no es reembolsable.",
       "completeBooking": "Completar Reserva",
@@ -576,6 +579,81 @@
         "email": "Correo electrónico: elvis.rocha@smartflow-automations.com",
         "address": "Dirección: Puerto Viejo de Conchal, Guanacaste, Costa Rica",
         "phone": "Teléfono/WhatsApp: +506 XXXX-XXXX"
+      }
+    }
+  },
+  "termsAndConditions": {
+    "title": "Términos y Condiciones",
+    "lastUpdated": "Última actualización: 16 de marzo de 2026",
+    "backHome": "Volver al inicio",
+    "intro": "Al realizar una reserva en Camping Puerto Viejo Conchal, usted (el huésped) acepta los presentes Términos y Condiciones que regulan el uso de nuestros servicios y las condiciones de su estadía.",
+    "sections": {
+      "introduction": {
+        "title": "1. Introducción y Partes del Contrato",
+        "content": "El presente contrato se establece entre Camping Puerto Viejo Conchal (en adelante, 'el Camping') y la persona que realiza la reserva (en adelante, 'el Huésped'). Al completar el proceso de reserva en línea y marcar la casilla de aceptación, el Huésped declara haber leído, entendido y aceptado íntegramente estos Términos y Condiciones."
+      },
+      "services": {
+        "title": "2. Servicios Ofrecidos",
+        "content": "Camping Puerto Viejo Conchal ofrece un espacio seguro al aire libre para que los huéspedes disfruten de la naturaleza:",
+        "list": [
+          "Espacio al aire libre para instalar equipo de campamento propio",
+          "Los campistas deben traer su propia carpa, tienda de campaña y equipo personal",
+          "Servicios complementarios: duchas, baños, áreas de cocina, estacionamiento y zonas Wi-Fi",
+          "Actividades y tours opcionales disponibles al momento de la reserva",
+          "Todas las reservas están sujetas a disponibilidad"
+        ]
+      },
+      "payment": {
+        "title": "3. Proceso de Pago",
+        "content": "Los métodos de pago aceptados son SINPE Móvil y efectivo. El proceso funciona de la siguiente manera:",
+        "list": [
+          "Se requiere el pago del 50% del total como depósito de confirmación al momento de la reserva",
+          "El 50% restante se cancela directamente en el camping al momento del check-in",
+          "La reserva se confirma únicamente tras la verificación del comprobante de pago",
+          "El huésped debe cargar el comprobante de pago en la plataforma durante el proceso de reserva",
+          "El comprobante debe mostrar claramente el monto transferido, la fecha y el número de destino"
+        ]
+      },
+      "cancellation": {
+        "title": "4. Política de Cancelación y Reembolso",
+        "content": "El Camping ofrece una política de cancelación flexible para proteger al huésped:",
+        "list": [
+          "El huésped tiene derecho a reembolso total del 100% en caso de cancelación, sin importar la anticipación con que se realice",
+          "Para solicitar la cancelación, el huésped debe acceder a la plataforma e ingresar su código de reserva en la sección 'Cancelar Reserva'",
+          "Una vez procesada la cancelación, el reembolso se gestionará a través del mismo medio de pago utilizado",
+          "El Camping se reserva el derecho de cancelar reservas en casos de fuerza mayor, notificando al huésped con la mayor anticipación posible y ofreciendo reembolso completo"
+        ]
+      },
+      "rules": {
+        "title": "5. Normas de Convivencia y Restricciones",
+        "content": "Para garantizar una experiencia segura y agradable para todos los huéspedes, se establecen las siguientes normas:",
+        "list": [
+          "Queda estrictamente prohibido el consumo de alcohol y drogas dentro de las instalaciones del camping",
+          "Se debe mantener el respeto hacia los demás huéspedes, el personal y la fauna local",
+          "Horario de silencio: de 10:00 PM a 7:00 AM",
+          "No está permitido hacer fuego fuera de las áreas designadas para ello",
+          "Los huéspedes son responsables de mantener limpias las áreas comunes",
+          "El incumplimiento de estas normas puede resultar en la expulsión inmediata sin derecho a reembolso"
+        ]
+      },
+      "liability": {
+        "title": "6. Responsabilidad",
+        "content": "Camping Puerto Viejo Conchal establece las siguientes condiciones respecto a la responsabilidad:",
+        "list": [
+          "El Camping no se hace responsable por objetos personales perdidos, robados o dañados durante la estadía",
+          "El huésped utiliza todas las instalaciones bajo su propio riesgo",
+          "El Camping no se responsabiliza por accidentes o lesiones salvo en casos de negligencia directa del personal",
+          "Se recomienda contratar un seguro de viaje que cubra actividades al aire libre",
+          "El Camping no garantiza avistamientos de fauna específica, ya que se trata de animales en su hábitat natural"
+        ]
+      },
+      "modifications": {
+        "title": "7. Modificaciones a los Términos",
+        "content": "Camping Puerto Viejo Conchal se reserva el derecho de actualizar o modificar estos Términos y Condiciones en cualquier momento. Los cambios entrarán en vigencia a partir de su publicación en esta página. Las reservas realizadas antes de una modificación se regirán por los términos vigentes al momento de la reserva."
+      },
+      "jurisdiction": {
+        "title": "8. Jurisdicción",
+        "content": "El presente contrato se rige por la legislación vigente de la República de Costa Rica. Para cualquier disputa derivada de estos Términos y Condiciones, las partes se someten a la jurisdicción de los tribunales competentes de Costa Rica. Camping Puerto Viejo Conchal se encuentra ubicado en Puerto Viejo de Conchal, Guanacaste, Costa Rica."
       }
     }
   },

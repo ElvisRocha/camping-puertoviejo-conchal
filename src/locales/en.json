@@ -419,6 +419,9 @@
       "cardPayment": "Credit/Debit Card",
       "paypal": "PayPal",
       "agreeTerms": "I agree to the Terms & Conditions and Cancellation Policy",
+      "agreeTermsPre": "I agree to the ",
+      "agreeTermsLink": "Terms & Conditions",
+      "agreeTermsPost": " and Cancellation Policy",
       "newsletter": "Sign me up for occasional updates and offers (no spam, promise!)",
       "cancellationPolicy": "Free cancellation with a full 100% refund at any time before check-in. No-shows are non-refundable.",
       "completeBooking": "Complete Booking",
@@ -576,6 +579,81 @@
         "email": "Email: elvis.rocha@smartflow-automations.com",
         "address": "Address: Puerto Viejo de Conchal, Guanacaste, Costa Rica",
         "phone": "Phone/WhatsApp: +506 XXXX-XXXX"
+      }
+    }
+  },
+  "termsAndConditions": {
+    "title": "Terms and Conditions",
+    "lastUpdated": "Last updated: March 16, 2026",
+    "backHome": "Back to home",
+    "intro": "By making a reservation at Camping Puerto Viejo Conchal, you (the guest) agree to these Terms and Conditions governing the use of our services and the conditions of your stay.",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction and Parties",
+        "content": "This agreement is established between Camping Puerto Viejo Conchal (hereinafter, 'the Campground') and the person making the reservation (hereinafter, 'the Guest'). By completing the online booking process and checking the acceptance box, the Guest declares having read, understood, and fully accepted these Terms and Conditions."
+      },
+      "services": {
+        "title": "2. Services Offered",
+        "content": "Camping Puerto Viejo Conchal offers a safe outdoor space for guests to enjoy nature:",
+        "list": [
+          "Open-air space for guests to set up their own camping equipment",
+          "Campers must bring their own tent, camping gear, and personal equipment",
+          "Complementary services: showers, restrooms, cooking areas, parking, and Wi-Fi zones",
+          "Optional activities and tours available at the time of booking",
+          "All reservations are subject to availability"
+        ]
+      },
+      "payment": {
+        "title": "3. Payment Process",
+        "content": "Accepted payment methods are SINPE Móvil and cash. The payment process works as follows:",
+        "list": [
+          "A 50% deposit of the total amount is required at the time of booking as confirmation",
+          "The remaining 50% is paid directly at the campground upon check-in",
+          "The reservation is confirmed only after verification of the payment receipt",
+          "The guest must upload the payment receipt on the platform during the booking process",
+          "The receipt must clearly show the amount transferred, the date, and the destination number"
+        ]
+      },
+      "cancellation": {
+        "title": "4. Cancellation and Refund Policy",
+        "content": "The Campground offers a flexible cancellation policy to protect the guest:",
+        "list": [
+          "The guest is entitled to a full 100% refund in case of cancellation, regardless of how far in advance it is made",
+          "To request cancellation, the guest must access the platform and enter their booking code in the 'Cancel Reservation' section",
+          "Once the cancellation is processed, the refund will be handled through the same payment method used",
+          "The Campground reserves the right to cancel reservations in cases of force majeure, notifying the guest as early as possible and offering a full refund"
+        ]
+      },
+      "rules": {
+        "title": "5. House Rules and Restrictions",
+        "content": "To ensure a safe and enjoyable experience for all guests, the following rules apply:",
+        "list": [
+          "The consumption of alcohol and drugs is strictly prohibited within the campground premises",
+          "Respect must be maintained toward other guests, staff, and local wildlife",
+          "Quiet hours: from 10:00 PM to 7:00 AM",
+          "Fires are not permitted outside designated areas",
+          "Guests are responsible for keeping common areas clean",
+          "Violation of these rules may result in immediate expulsion without the right to a refund"
+        ]
+      },
+      "liability": {
+        "title": "6. Liability",
+        "content": "Camping Puerto Viejo Conchal establishes the following conditions regarding liability:",
+        "list": [
+          "The Campground is not responsible for personal items lost, stolen, or damaged during the stay",
+          "The guest uses all facilities at their own risk",
+          "The Campground is not liable for accidents or injuries except in cases of direct staff negligence",
+          "It is recommended to purchase travel insurance covering outdoor activities",
+          "The Campground does not guarantee sightings of specific wildlife, as these are animals in their natural habitat"
+        ]
+      },
+      "modifications": {
+        "title": "7. Modifications to Terms",
+        "content": "Camping Puerto Viejo Conchal reserves the right to update or modify these Terms and Conditions at any time. Changes will take effect upon publication on this page. Reservations made prior to a modification will be governed by the terms in effect at the time of booking."
+      },
+      "jurisdiction": {
+        "title": "8. Jurisdiction",
+        "content": "This agreement is governed by the laws of the Republic of Costa Rica. For any dispute arising from these Terms and Conditions, the parties submit to the jurisdiction of the competent courts of Costa Rica. Camping Puerto Viejo Conchal is located in Puerto Viejo de Conchal, Guanacaste, Costa Rica."
       }
     }
   },
