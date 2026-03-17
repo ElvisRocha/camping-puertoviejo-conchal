@@ -24,6 +24,7 @@ import {
   LogOut,
   Search,
   Calendar,
+  CalendarDays,
   Users,
   DollarSign,
   Loader2,
@@ -48,6 +49,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AdminCalendar from '@/components/admin/AdminCalendar';
 
 interface Booking {
   id: string;
@@ -534,6 +536,10 @@ export default function AdminDashboard() {
               <Calendar className="h-4 w-4" />
               Reservas
             </TabsTrigger>
+            <TabsTrigger value="calendario" className="flex items-center gap-2">
+              <CalendarDays className="h-4 w-4" />
+              Calendario
+            </TabsTrigger>
             <TabsTrigger value="configuracion" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               Configuración
@@ -855,6 +861,20 @@ export default function AdminDashboard() {
             </>
           )}
         </div>
+          </TabsContent>
+
+          <TabsContent value="calendario">
+            <AdminCalendar
+              bookings={bookings}
+              onBookingUpdated={(bookingId, newStatus) => {
+                setBookings((prev) =>
+                  prev.map((b) =>
+                    b.id === bookingId ? { ...b, status: newStatus } : b
+                  )
+                );
+              }}
+              onOpenDetails={(booking) => viewBookingDetails(booking)}
+            />
           </TabsContent>
 
           <TabsContent value="configuracion">
