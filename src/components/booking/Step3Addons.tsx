@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
 import { ADD_ONS } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ContinueFromAddOnsButton } from './buttons/ContinueFromAddOnsButton';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { formatDualPriceInt } from '@/lib/priceFormat';
@@ -90,10 +91,7 @@ export function Step3Addons() {
           <ArrowLeft className="mr-2 w-4 h-4" />
           {t('booking.back')}
         </Button>
-        <Button onClick={nextStep} className="btn-cta px-8">
-          {t('booking.next')}
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </Button>
+        <ContinueFromAddOnsButton />
       </div>
     </motion.div>
   );

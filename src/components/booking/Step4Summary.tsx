@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useBookingStore } from '@/store/bookingStore';
 import { TENT_OPTIONS, ADD_ONS, COUNTRIES } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Calendar, Users, Tent, Sparkles } from 'lucide-react';
-import { Step4NextButton } from './StepNextButtons';
+import { ContinueFromSummaryButton } from './buttons/ContinueFromSummaryButton';
 import { motion } from 'framer-motion';
 import { z } from 'zod';
 import { useState } from 'react';
@@ -277,7 +277,7 @@ export function Step4Summary() {
           <ArrowLeft className="mr-2 w-4 h-4" />
           {t('booking.back')}
         </Button>
-        <Step4NextButton onClick={validateAndContinue} />
+        <ContinueFromSummaryButton onClick={validateAndContinue} />
       </div>
     </motion.div>
   );
