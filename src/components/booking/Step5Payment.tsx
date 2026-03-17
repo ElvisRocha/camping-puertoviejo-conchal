@@ -13,6 +13,8 @@ import { useToast } from '@/hooks/use-toast';
 import { formatDualPrice } from '@/lib/priceFormat';
 import { PaymentReceiptUpload, RECEIPT_STORAGE_KEY } from './PaymentReceiptUpload';
 
+declare const fbq: Function;
+
 interface Step5PaymentProps {
   onComplete: (referenceCode: string, depositCRC: number, balanceCRC: number) => void;
 }
@@ -85,6 +87,11 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   };
 
   const handleCompleteBooking = async () => {
+    fbq('track', 'Purchase', {
+      value: Math.round(pricing.total * 500),
+      currency: 'CRC',
+    });
+
     if (!agreedToTerms) {
       toast({
         title: t('booking.step5.termsRequiredTitle'),
