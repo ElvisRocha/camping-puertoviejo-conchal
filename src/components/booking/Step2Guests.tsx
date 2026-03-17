@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
 import { TENT_OPTIONS, PRICING } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Minus, Plus, Users, Tent, Check } from 'lucide-react';
-import { Step2NextButton } from './StepNextButtons';
+import { ContinueFromGuestsButton } from './buttons/ContinueFromGuestsButton';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { formatDualPriceInt } from '@/lib/priceFormat';
@@ -188,7 +188,7 @@ export function Step2Guests() {
           <ArrowLeft className="mr-2 w-4 h-4" />
           {t('booking.back')}
         </Button>
-        <Step2NextButton />
+        <ContinueFromGuestsButton />
       </div>
     </motion.div>
   );
