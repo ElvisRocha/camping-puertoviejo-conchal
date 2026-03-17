@@ -87,7 +87,7 @@ function getBlockStyle(booking: Booking): string {
     case 'paid':
       return 'bg-green-600 hover:bg-green-700 text-white';
     case 'cancelled':
-      return 'bg-red-400 hover:bg-red-500 text-white opacity-70 line-through';
+      return 'bg-red-600 hover:bg-red-700 text-white line-through';
     case 'partial':
     case 'unpaid':
     default:
@@ -307,7 +307,7 @@ export default function AdminCalendar({
             Pagado
           </span>
           <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded-sm bg-red-400 opacity-70" />
+            <span className="inline-block w-3 h-3 rounded-sm bg-red-600" />
             Cancelado
           </span>
         </div>
