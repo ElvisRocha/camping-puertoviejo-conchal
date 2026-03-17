@@ -68,14 +68,28 @@ interface AdminCalendarProps {
   onOpenDetails: (booking: Booking) => void;
 }
 
-// Color by status
-function getBlockStyle(status: string): string {
-  switch (status) {
-    case 'confirmed':
-      return 'bg-blue-500 hover:bg-blue-600 text-white';
-    case 'completed':
+// Derive a payment tier from the booking figures — this drives block color
+type PaymentTier = 'paid' | 'partial' | 'unpaid' | 'cancelled';
+
+function getPaymentTier(booking: Booking): PaymentTier {
+  if (booking.status === 'cancelled') return 'cancelled';
+  const total = Number(booking.total);
+  const deposit = Number(booking.deposit_amount);
+  const pct = total > 0 ? deposit / total : 0;
+  if (pct >= 1 || booking.status === 'completed') return 'paid';
+  if (pct > 0) return 'partial';
+  return 'unpaid';
+}
+
+function getBlockStyle(booking: Booking): string {
+  const tier = getPaymentTier(booking);
+  switch (tier) {
+    case 'paid':
       return 'bg-green-600 hover:bg-green-700 text-white';
-    case 'pending':
+    case 'cancelled':
+      return 'bg-red-400 hover:bg-red-500 text-white opacity-70 line-through';
+    case 'partial':
+    case 'unpaid':
     default:
       return 'bg-amber-500 hover:bg-amber-600 text-white';
   }
@@ -170,11 +184,8 @@ export default function AdminCalendar({
   const [isCancelConfirmOpen, setIsCancelConfirmOpen] = useState(false);
   const [isCancelling, setIsCancelling] = useState(false);
 
-  // Only show non-cancelled bookings
-  const activeBookings = useMemo(
-    () => bookings.filter((b) => b.status !== 'cancelled'),
-    [bookings]
-  );
+  // Show all bookings (including cancelled — they appear faded/strikethrough)
+  const activeBookings = useMemo(() => bookings, [bookings]);
 
   const weeks = useMemo(() => getCalendarWeeks(currentMonth), [currentMonth]);
 
@@ -290,15 +301,15 @@ export default function AdminCalendar({
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <span className="inline-block w-3 h-3 rounded-sm bg-amber-500" />
-            Pendiente
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded-sm bg-blue-500" />
-            Confirmado
+            Pendiente / Parcial
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block w-3 h-3 rounded-sm bg-green-600" />
-            Completado
+            Pagado
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block w-3 h-3 rounded-sm bg-red-400 opacity-70" />
+            Cancelado
           </span>
         </div>
       </div>
@@ -379,7 +390,7 @@ export default function AdminCalendar({
                           height: '22px',
                           zIndex: 10,
                         }}
-                        className={`flex items-center px-2 text-xs font-medium truncate transition-colors cursor-pointer ${getBlockStyle(booking.status)} ${
+                        className={`flex items-center px-2 text-xs font-medium truncate transition-colors cursor-pointer ${getBlockStyle(booking)} ${
                           isStartInWeek ? 'rounded-l-full' : 'rounded-l-none'
                         } ${isEndInWeek ? 'rounded-r-full' : 'rounded-r-none'}`}
                       >
@@ -434,11 +445,33 @@ export default function AdminCalendar({
 
           {selectedBooking && (
             <div className="space-y-4">
-              {/* Status badge */}
-              <div>
+              {/* Status badges */}
+              <div className="flex items-center gap-2 flex-wrap">
                 <Badge className={getStatusBadgeClass(selectedBooking.status)}>
                   {getStatusLabel(selectedBooking.status)}
                 </Badge>
+                {selectedBooking.status !== 'cancelled' && (() => {
+                  const total = Number(selectedBooking.total);
+                  const deposit = Number(selectedBooking.deposit_amount);
+                  const pct = total > 0 ? Math.round((deposit / total) * 100) : 0;
+                  if (pct >= 100 || selectedBooking.status === 'completed') {
+                    return (
+                      <Badge className="bg-green-500/15 text-green-700 border-green-500/30">
+                        Pagado al 100%
+                      </Badge>
+                    );
+                  }
+                  if (pct > 0) {
+                    return (
+                      <Badge className="bg-amber-400/15 text-amber-700 border-amber-400/30">
+                        Pago parcial {pct}%
+                      </Badge>
+                    );
+                  }
+                  return (
+                    <Badge variant="secondary">Sin pago</Badge>
+                  );
+                })()}
               </div>
 
               {/* Guest info */}
