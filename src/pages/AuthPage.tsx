@@ -12,8 +12,8 @@ import { z } from 'zod';
 import { Link } from 'react-router-dom';
 
 const authSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().email('Por favor ingresa un correo electrónico válido'),
+  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
 });
 
 export default function AuthPage() {
@@ -81,20 +81,20 @@ export default function AuthPage() {
           if (error.message.includes('Invalid login credentials')) {
             toast({
               variant: 'destructive',
-              title: 'Login failed',
-              description: 'Invalid email or password. Please try again.',
+              title: 'Error al iniciar sesión',
+              description: 'Correo electrónico o contraseña inválidos. Por favor intenta de nuevo.',
             });
           } else {
             toast({
               variant: 'destructive',
-              title: 'Login failed',
+              title: 'Error al iniciar sesión',
               description: error.message,
             });
           }
         } else {
           toast({
-            title: 'Welcome back!',
-            description: 'You have successfully logged in.',
+            title: '¡Bienvenido de nuevo!',
+            description: 'Has iniciado sesión exitosamente.',
           });
           navigate('/admin');
         }
@@ -111,21 +111,21 @@ export default function AuthPage() {
           if (error.message.includes('already registered')) {
             toast({
               variant: 'destructive',
-              title: 'Account exists',
-              description: 'This email is already registered. Please log in instead.',
+              title: 'La cuenta ya existe',
+              description: 'Este correo ya está registrado. Por favor inicia sesión.',
             });
             setIsLogin(true);
           } else {
             toast({
               variant: 'destructive',
-              title: 'Signup failed',
+              title: 'Error al registrarse',
               description: error.message,
             });
           }
         } else {
           toast({
-            title: 'Account created!',
-            description: 'Please check your email to confirm your account, or contact an admin to be granted access.',
+            title: '¡Cuenta creada!',
+            description: 'Por favor revisa tu correo para confirmar tu cuenta, o contacta a un administrador para obtener acceso.',
           });
         }
       }
@@ -148,24 +148,24 @@ export default function AuthPage() {
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to site
+          Volver al sitio
         </Link>
 
         <div className="bg-card rounded-2xl p-8 shadow-lg border">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-foreground mb-2">
-              {isLogin ? 'Admin Login' : 'Create Account'}
+              {isLogin ? 'Inicio de Sesión Admin' : 'Crear Cuenta'}
             </h1>
             <p className="text-muted-foreground">
               {isLogin
-                ? 'Sign in to access the admin dashboard'
-                : 'Create an account to get started'}
+                ? 'Inicia sesión para acceder al panel de administración'
+                : 'Crea una cuenta para comenzar'}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Correo electrónico</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
@@ -183,7 +183,7 @@ export default function AuthPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Contraseña</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
@@ -217,12 +217,12 @@ export default function AuthPage() {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {isLogin ? 'Signing in...' : 'Creating account...'}
+                  {isLogin ? 'Iniciando sesión...' : 'Creando cuenta...'}
                 </>
               ) : isLogin ? (
-                'Sign In'
+                'Iniciar Sesión'
               ) : (
-                'Create Account'
+                'Crear Cuenta'
               )}
             </Button>
           </form>
@@ -234,14 +234,14 @@ export default function AuthPage() {
               className="text-sm text-primary hover:underline"
             >
               {isLogin
-                ? "Don't have an account? Sign up"
-                : 'Already have an account? Sign in'}
+                ? '¿No tienes una cuenta? Regístrate'
+                : '¿Ya tienes una cuenta? Inicia sesión'}
             </button>
           </div>
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-4">
-          Note: Admin access requires manual role assignment by an existing administrator.
+          Nota: El acceso de administrador requiere asignación manual de rol por un administrador existente.
         </p>
       </motion.div>
     </div>
