@@ -86,13 +86,12 @@ function getBlockStyle(booking: Booking): string {
   switch (tier) {
     case 'paid':
       return 'bg-green-600 hover:bg-green-700 text-white';
-    case 'partial':
-      return 'bg-amber-500 hover:bg-amber-600 text-white';
     case 'cancelled':
       return 'bg-red-400 hover:bg-red-500 text-white opacity-70 line-through';
+    case 'partial':
     case 'unpaid':
     default:
-      return 'bg-blue-500 hover:bg-blue-600 text-white';
+      return 'bg-amber-500 hover:bg-amber-600 text-white';
   }
 }
 
@@ -301,12 +300,8 @@ export default function AdminCalendar({
         <h2 className="text-lg font-semibold text-foreground">{capitalizedMonth}</h2>
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
-            <span className="inline-block w-3 h-3 rounded-sm bg-blue-500" />
-            Sin pago
-          </span>
-          <span className="flex items-center gap-1">
             <span className="inline-block w-3 h-3 rounded-sm bg-amber-500" />
-            Pago parcial
+            Pendiente / Parcial
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block w-3 h-3 rounded-sm bg-green-600" />
