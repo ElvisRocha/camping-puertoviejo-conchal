@@ -170,7 +170,6 @@ function getCalendarWeeks(month: Date): Date[][] {
 }
 
 const DAY_NAMES = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-const MAX_VISIBLE_LANES = 3;
 
 export default function AdminCalendar({
   bookings,
@@ -366,11 +365,9 @@ export default function AdminCalendar({
               {(() => {
                 const activeBlocks = blocks.filter((b) => b.booking.status !== 'cancelled');
                 const cancelledBlocks = blocks.filter((b) => b.booking.status === 'cancelled');
-                const visibleActive = activeBlocks.filter((b) => b.lane < MAX_VISIBLE_LANES);
-                const overflowActive = activeBlocks.filter((b) => b.lane >= MAX_VISIBLE_LANES);
                 // Re-assign lanes for cancelled blocks independently so they always show
                 const cancelledWithLanes = assignLanes(cancelledBlocks);
-                const maxActiveLane = visibleActive.length > 0 ? Math.max(...visibleActive.map((b) => b.lane)) : -1;
+                const maxActiveLane = activeBlocks.length > 0 ? Math.max(...activeBlocks.map((b) => b.lane)) : -1;
                 const maxCancelledLane = cancelledWithLanes.length > 0 ? Math.max(...cancelledWithLanes.map((b) => b.lane)) : -1;
                 const activeHeight = (maxActiveLane + 1) * 26 + 4;
                 const cancelledHeight = cancelledWithLanes.length > 0 ? (maxCancelledLane + 1) * 26 + 4 : 0;
@@ -415,29 +412,8 @@ export default function AdminCalendar({
                     className="relative px-0 pb-1"
                     style={{ minHeight: `${activeHeight + cancelledHeight}px` }}
                   >
-                    {/* Active (non-cancelled) blocks */}
-                    {visibleActive.map((b) => renderBlock(b, 0))}
-
-                    {/* Overflow indicator for active bookings */}
-                    {overflowActive.length > 0 && (() => {
-                      const overflowByCol: Record<number, number> = {};
-                      overflowActive.forEach(({ colStart }) => {
-                        overflowByCol[colStart] = (overflowByCol[colStart] ?? 0) + 1;
-                      });
-                      return Object.entries(overflowByCol).map(([col, count]) => (
-                        <span
-                          key={`overflow-${col}`}
-                          style={{
-                            position: 'absolute',
-                            top: `${MAX_VISIBLE_LANES * 26 + 2}px`,
-                            left: `calc(${(Number(col) / 7) * 100}% + 4px)`,
-                          }}
-                          className="text-xs text-muted-foreground"
-                        >
-                          +{count} más
-                        </span>
-                      ));
-                    })()}
+                    {/* Active (non-cancelled) blocks — all shown, no lane cap */}
+                    {activeBlocks.map((b) => renderBlock(b, 0))}
 
                     {/* Cancelled blocks — always shown in their own section below */}
                     {cancelledWithLanes.map((b) => renderBlock(b, activeHeight))}
