@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun, PawPrint } from 'lucide-react';
 
+declare const fbq: Function;
+
 // Cloudinary base path - version comes before folder per Cloudinary URL spec
 const CLD = 'https://res.cloudinary.com/dcvipikha/image/upload';
 
@@ -101,7 +103,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
           >
-            <Link to="/book" className="w-full sm:w-auto">
+            <Link to="/book" className="w-full sm:w-auto" onClick={() => fbq('track', 'InitiateCheckout')}>
               <Button className="btn-hero w-full sm:w-auto text-base sm:text-xl px-6 sm:px-12 py-4 sm:py-7">
                 {t('hero.cta')}
               </Button>

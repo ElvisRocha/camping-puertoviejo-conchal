@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Lock, MessageCircle } from 'lucide-react';
 
+declare const fbq: Function;
+
 const CTASection = () => {
   const { t } = useTranslation();
   const ref = useRef(null);
@@ -54,7 +56,7 @@ const CTASection = () => {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="px-4 sm:px-0"
         >
-          <Link to="/book" className="block sm:inline-block">
+          <Link to="/book" className="block sm:inline-block" onClick={() => fbq('track', 'InitiateCheckout')}>
             <Button className="bg-sunset hover:bg-sunset-warm text-primary-foreground w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-heading font-bold rounded-full shadow-strong hover:scale-105 transition-all duration-300">
               {t('cta.button')}
             </Button>
