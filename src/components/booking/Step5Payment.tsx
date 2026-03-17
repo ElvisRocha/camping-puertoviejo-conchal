@@ -7,6 +7,7 @@ import { createBooking } from '@/lib/bookingApi';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Lock, Shield, Loader2, Tent } from 'lucide-react';
+import { Step5CompleteButton } from './StepNextButtons';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
 import { formatDualPrice } from '@/lib/priceFormat';
@@ -290,23 +291,11 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       </div>
 
       {/* Complete Booking Button */}
-      <Button
+      <Step5CompleteButton
         onClick={handleCompleteBooking}
         disabled={!agreedToTerms || !receiptVerified || isProcessing}
-        className="btn-cta w-full py-6 text-lg"
-      >
-        {isProcessing ? (
-          <>
-            <Loader2 className="mr-2 w-5 h-5 animate-spin" />
-            {t('booking.step5.processing')}
-          </>
-        ) : (
-          <>
-            <Lock className="mr-2 w-5 h-5" />
-            {t('booking.step5.completeBooking')}
-          </>
-        )}
-      </Button>
+        isProcessing={isProcessing}
+      />
 
       {/* Trust Badges */}
       <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">

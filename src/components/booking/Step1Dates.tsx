@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useBookingStore } from '@/store/bookingStore';
 import { isBefore, startOfDay, parse, isValid, format } from 'date-fns';
 import { CalendarIcon, ArrowRight, X } from 'lucide-react';
+import { Step1NextButton } from './StepNextButtons';
 import { motion } from 'framer-motion';
 import { getDateLocale, getWeekStartsOn, formatLocalizedDate } from '@/lib/dateLocale';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -321,14 +322,7 @@ export function Step1Dates() {
       )}
 
       <div className="flex justify-end pt-4">
-        <Button
-          onClick={nextStep}
-          disabled={!canContinue}
-          className="btn-cta px-8"
-        >
-          {t('booking.next')}
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </Button>
+        <Step1NextButton />
       </div>
     </motion.div>
   );
