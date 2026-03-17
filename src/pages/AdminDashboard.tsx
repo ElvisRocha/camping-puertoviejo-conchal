@@ -665,7 +665,6 @@ export default function AdminDashboard() {
               <SelectContent>
                 <SelectItem value="all">Todos los estados</SelectItem>
                 <SelectItem value="pending">Pendiente</SelectItem>
-                <SelectItem value="confirmed">Confirmado</SelectItem>
                 <SelectItem value="completed">Completado</SelectItem>
                 <SelectItem value="cancelled">Cancelado</SelectItem>
               </SelectContent>
