@@ -362,72 +362,88 @@ export default function AdminCalendar({
                 })}
               </div>
 
-              {/* Booking blocks */}
-              {blocks.length > 0 && (
-                <div className="relative px-0 pb-1" style={{ minHeight: `${Math.min(maxLane + 1, MAX_VISIBLE_LANES) * 26 + 4}px` }}>
-                  {blocks.map(({ booking, colStart, colEnd, lane }) => {
-                    if (lane >= MAX_VISIBLE_LANES) return null;
-                    const span = colEnd - colStart + 1;
-                    const guestName = booking.guest_info?.full_name ?? booking.reference_code;
-                    const isStartInWeek = differenceInDays(parseISO(booking.check_in), week[0]) >= 0;
-                    // check_out is inclusive — end is in this week if checkout day ≤ last day of week
-                    const isEndInWeek = parseISO(booking.check_out) <= week[6];
+                      {/* Booking blocks */}
+              {(() => {
+                const activeBlocks = blocks.filter((b) => b.booking.status !== 'cancelled');
+                const cancelledBlocks = blocks.filter((b) => b.booking.status === 'cancelled');
+                const visibleActive = activeBlocks.filter((b) => b.lane < MAX_VISIBLE_LANES);
+                const overflowActive = activeBlocks.filter((b) => b.lane >= MAX_VISIBLE_LANES);
+                // Re-assign lanes for cancelled blocks independently so they always show
+                const cancelledWithLanes = assignLanes(cancelledBlocks);
+                const maxActiveLane = visibleActive.length > 0 ? Math.max(...visibleActive.map((b) => b.lane)) : -1;
+                const maxCancelledLane = cancelledWithLanes.length > 0 ? Math.max(...cancelledWithLanes.map((b) => b.lane)) : -1;
+                const activeHeight = (maxActiveLane + 1) * 26 + 4;
+                const cancelledHeight = cancelledWithLanes.length > 0 ? (maxCancelledLane + 1) * 26 + 4 : 0;
+                const hasAnything = blocks.length > 0;
 
-                    // Margins: give 2px breathing room only on sides that have a rounded end
-                    const leftMargin = isStartInWeek ? 2 : 0;
-                    const rightMargin = isEndInWeek ? 2 : 0;
+                if (!hasAnything) return <div className="h-4" />;
 
-                    return (
-                      <button
-                        key={`${booking.id}-w${weekIdx}`}
-                        onClick={() => handleBlockClick(booking)}
-                        title={`${guestName} · ${format(parseISO(booking.check_in), 'dd/MM')} – ${format(parseISO(booking.check_out), 'dd/MM')}`}
-                        style={{
-                          position: 'absolute',
-                          top: `${lane * 26 + 2}px`,
-                          left: `calc(${(colStart / 7) * 100}% + ${leftMargin}px)`,
-                          width: `calc(${(span / 7) * 100}% - ${leftMargin + rightMargin}px)`,
-                          height: '22px',
-                          zIndex: 10,
-                        }}
-                        className={`flex items-center px-2 text-xs font-medium truncate transition-colors cursor-pointer ${getBlockStyle(booking)} ${
-                          isStartInWeek ? 'rounded-l-full' : 'rounded-l-none'
-                        } ${isEndInWeek ? 'rounded-r-full' : 'rounded-r-none'}`}
-                      >
-                        <span className="truncate">{guestName}</span>
-                      </button>
-                    );
-                  })}
-                  {/* "+N more" overflow indicator */}
-                  {blocks.filter((b) => b.lane >= MAX_VISIBLE_LANES).length > 0 && (() => {
-                    // Group overflow by starting column to show "+N" in the right cell
-                    const overflowByCol: Record<number, number> = {};
-                    blocks
-                      .filter((b) => b.lane >= MAX_VISIBLE_LANES)
-                      .forEach(({ colStart }) => {
+                const renderBlock = (
+                  { booking, colStart, colEnd, lane }: { booking: Booking; colStart: number; colEnd: number; lane: number },
+                  topOffset: number
+                ) => {
+                  const span = colEnd - colStart + 1;
+                  const guestName = booking.guest_info?.full_name ?? booking.reference_code;
+                  const isStartInWeek = differenceInDays(parseISO(booking.check_in), week[0]) >= 0;
+                  const isEndInWeek = parseISO(booking.check_out) <= week[6];
+                  const leftMargin = isStartInWeek ? 2 : 0;
+                  const rightMargin = isEndInWeek ? 2 : 0;
+                  return (
+                    <button
+                      key={`${booking.id}-w${weekIdx}`}
+                      onClick={() => handleBlockClick(booking)}
+                      title={`${guestName} · ${format(parseISO(booking.check_in), 'dd/MM')} – ${format(parseISO(booking.check_out), 'dd/MM')}`}
+                      style={{
+                        position: 'absolute',
+                        top: `${topOffset + lane * 26 + 2}px`,
+                        left: `calc(${(colStart / 7) * 100}% + ${leftMargin}px)`,
+                        width: `calc(${(span / 7) * 100}% - ${leftMargin + rightMargin}px)`,
+                        height: '22px',
+                        zIndex: 10,
+                      }}
+                      className={`flex items-center px-2 text-xs font-medium truncate transition-colors cursor-pointer ${getBlockStyle(booking)} ${
+                        isStartInWeek ? 'rounded-l-full' : 'rounded-l-none'
+                      } ${isEndInWeek ? 'rounded-r-full' : 'rounded-r-none'}`}
+                    >
+                      <span className="truncate">{guestName}</span>
+                    </button>
+                  );
+                };
+
+                return (
+                  <div
+                    className="relative px-0 pb-1"
+                    style={{ minHeight: `${activeHeight + cancelledHeight}px` }}
+                  >
+                    {/* Active (non-cancelled) blocks */}
+                    {visibleActive.map((b) => renderBlock(b, 0))}
+
+                    {/* Overflow indicator for active bookings */}
+                    {overflowActive.length > 0 && (() => {
+                      const overflowByCol: Record<number, number> = {};
+                      overflowActive.forEach(({ colStart }) => {
                         overflowByCol[colStart] = (overflowByCol[colStart] ?? 0) + 1;
                       });
-                    return Object.entries(overflowByCol).map(([col, count]) => (
-                      <span
-                        key={`overflow-${col}`}
-                        style={{
-                          position: 'absolute',
-                          top: `${MAX_VISIBLE_LANES * 26 + 2}px`,
-                          left: `calc(${(Number(col) / 7) * 100}% + 4px)`,
-                        }}
-                        className="text-xs text-muted-foreground"
-                      >
-                        +{count} más
-                      </span>
-                    ));
-                  })()}
-                </div>
-              )}
+                      return Object.entries(overflowByCol).map(([col, count]) => (
+                        <span
+                          key={`overflow-${col}`}
+                          style={{
+                            position: 'absolute',
+                            top: `${MAX_VISIBLE_LANES * 26 + 2}px`,
+                            left: `calc(${(Number(col) / 7) * 100}% + 4px)`,
+                          }}
+                          className="text-xs text-muted-foreground"
+                        >
+                          +{count} más
+                        </span>
+                      ));
+                    })()}
 
-              {/* Spacer for weeks with no bookings */}
-              {blocks.length === 0 && (
-                <div className="h-4" />
-              )}
+                    {/* Cancelled blocks — always shown in their own section below */}
+                    {cancelledWithLanes.map((b) => renderBlock(b, activeHeight))}
+                  </div>
+                );
+              })()}
             </div>
           );
         })}
