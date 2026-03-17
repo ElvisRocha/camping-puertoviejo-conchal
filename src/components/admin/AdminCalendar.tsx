@@ -188,15 +188,15 @@ export default function AdminCalendar({
         .filter((b) => {
           const checkIn = parseISO(b.check_in);
           const checkOut = parseISO(b.check_out);
-          // booking spans at least partially in this week
-          return checkIn <= weekEnd && checkOut > weekStart;
+          // check_out day is inclusive (guest still present that day)
+          return checkIn <= weekEnd && checkOut >= weekStart;
         })
         .map((b) => {
           const checkIn = parseISO(b.check_in);
           const checkOut = parseISO(b.check_out);
-          // Clamp to week boundaries
+          // Treat check_out as inclusive: use checkOut+1 as exclusive boundary
           const blockStart = max([checkIn, weekStart]);
-          const blockEnd = min([checkOut, addDays(weekEnd, 1)]);
+          const blockEnd = min([addDays(checkOut, 1), addDays(weekEnd, 1)]);
           const colStart = differenceInDays(blockStart, weekStart);
           const colEnd = differenceInDays(blockEnd, weekStart) - 1;
           return { booking: b, colStart, colEnd };
@@ -359,7 +359,12 @@ export default function AdminCalendar({
                     const span = colEnd - colStart + 1;
                     const guestName = booking.guest_info?.full_name ?? booking.reference_code;
                     const isStartInWeek = differenceInDays(parseISO(booking.check_in), week[0]) >= 0;
-                    const isEndInWeek = differenceInDays(parseISO(booking.check_out), week[6]) <= 0;
+                    // check_out is inclusive — end is in this week if checkout day ≤ last day of week
+                    const isEndInWeek = parseISO(booking.check_out) <= week[6];
+
+                    // Margins: give 2px breathing room only on sides that have a rounded end
+                    const leftMargin = isStartInWeek ? 2 : 0;
+                    const rightMargin = isEndInWeek ? 2 : 0;
 
                     return (
                       <button
@@ -369,14 +374,14 @@ export default function AdminCalendar({
                         style={{
                           position: 'absolute',
                           top: `${lane * 26 + 2}px`,
-                          left: `calc(${(colStart / 7) * 100}% + 2px)`,
-                          width: `calc(${(span / 7) * 100}% - 4px)`,
+                          left: `calc(${(colStart / 7) * 100}% + ${leftMargin}px)`,
+                          width: `calc(${(span / 7) * 100}% - ${leftMargin + rightMargin}px)`,
                           height: '22px',
                           zIndex: 10,
                         }}
-                        className={`flex items-center px-2 text-xs font-medium rounded-sm truncate transition-colors cursor-pointer ${getBlockStyle(booking.status)} ${
-                          isStartInWeek ? 'rounded-l-sm' : 'rounded-l-none'
-                        } ${isEndInWeek ? 'rounded-r-sm' : 'rounded-r-none'}`}
+                        className={`flex items-center px-2 text-xs font-medium truncate transition-colors cursor-pointer ${getBlockStyle(booking.status)} ${
+                          isStartInWeek ? 'rounded-l-full' : 'rounded-l-none'
+                        } ${isEndInWeek ? 'rounded-r-full' : 'rounded-r-none'}`}
                       >
                         <span className="truncate">{guestName}</span>
                       </button>
