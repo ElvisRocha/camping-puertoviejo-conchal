@@ -390,14 +390,16 @@
       "total": "Total",
       "guestInfo": {
         "title": "Información del Huésped",
-        "fullName": "Nombre completo",
+        "firstName": "Nombre",
+        "lastName": "Apellidos",
         "email": "Correo electrónico",
         "phone": "Teléfono (con código de país)",
         "country": "País de residencia",
         "arrivalTime": "Hora estimada de llegada",
         "specialRequests": "Solicitudes especiales / restricciones alimentarias",
         "celebrating": "¿Celebrando algo especial?",
-        "fullNamePlaceholder": "Ej. Juan Pérez",
+        "firstNamePlaceholder": "Tu Nombre",
+        "lastNamePlaceholder": "Tus Apellidos",
         "emailPlaceholder": "juan@ejemplo.com",
         "phonePlaceholder": "+506 8888-8888",
         "countryPlaceholder": "Selecciona tu país",
@@ -405,7 +407,8 @@
         "specialRequestsPlaceholder": "Restricciones alimentarias, alergias o solicitudes especiales...",
         "celebratingPlaceholder": "Cumpleaños, aniversario, luna de miel...",
         "errors": {
-          "nameRequired": "El nombre es requerido",
+          "firstNameRequired": "El nombre es requerido",
+          "lastNameRequired": "Los apellidos son requeridos",
           "invalidEmail": "Correo electrónico inválido",
           "phoneRequired": "El teléfono es requerido",
           "countryRequired": "El país es requerido"

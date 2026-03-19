@@ -1,0 +1,293 @@
+{
+  "name": "Reserva Cancelada - Camping Puerto Viejo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reserva-cancelada",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "wh-cancelada-001",
+      "name": "Webhook Reserva Cancelada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "reserva-cancelada"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://services.leadconnectorhq.com/contacts/?locationId={{ $env.GHL_LOCATION_ID }}&email={{ encodeURIComponent($json.body.email) }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-buscar-contacto-canc-001",
+      "name": "Buscar Contacto por Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-contacto-found-canc",
+              "leftValue": "={{ $json.contacts?.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-contacto-found-canc-001",
+      "name": "Contacto Encontrado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id={{ $env.GHL_LOCATION_ID }}&pipeline_id={{ $env.GHL_PIPELINE_ID }}&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-buscar-oportunidad-canc-001",
+      "name": "Buscar Oportunidad",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $json.opportunities[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"pipelineStageId\": \"{{ $env.GHL_STAGE_CANCELADA }}\",\n  \"status\": \"lost\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-mover-cancelada-001",
+      "name": "Mover a Cancelada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Buscar Contacto por Email').item.json.contacts[0].id }}\",\n  \"message\": \"Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }},\\n\\nTe informamos que tu reserva en Camping Puerto Viejo Conchal ha sido cancelada. 😔\\n\\nTu depósito será devuelto en las próximas 24 horas al mismo método de pago que usaste.\\n\\nSi fue un error o querés hacer una nueva reserva en el futuro, no dudés en escribirnos. ¡Siempre serás bienvenido/a! 🌴\\n\\nSaludos,\\nEquipo Camping Puerto Viejo Conchal\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-whatsapp-cancelacion-001",
+      "name": "WhatsApp Cancelación",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('Error: Contacto no encontrado para cancelar reserva:', JSON.stringify($input.first().json));\nreturn [{ json: { error: true, message: 'Contacto no encontrado en GHL' } }];"
+      },
+      "id": "log-error-canc-001",
+      "name": "Log Error No Encontrado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 420]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \"success\": true, \"message\": \"Reserva marcada como cancelada\" }",
+        "options": {}
+      },
+      "id": "respuesta-ok-canc-001",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1560, 200]
+    }
+  ],
+  "connections": {
+    "Webhook Reserva Cancelada": {
+      "main": [
+        [
+          {
+            "node": "Buscar Contacto por Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Contacto por Email": {
+      "main": [
+        [
+          {
+            "node": "Contacto Encontrado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacto Encontrado?": {
+      "main": [
+        [
+          {
+            "node": "Buscar Oportunidad",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error No Encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Oportunidad": {
+      "main": [
+        [
+          {
+            "node": "Mover a Cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mover a Cancelada": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Cancelación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Cancelación": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-19T00:00:00.000Z",
+  "versionId": "1"
+}

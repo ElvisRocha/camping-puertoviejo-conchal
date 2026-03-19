@@ -390,14 +390,16 @@
       "total": "Gesamt",
       "guestInfo": {
         "title": "Gästeinformationen",
-        "fullName": "Vollständiger Name",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
         "email": "E-Mail",
         "phone": "Telefon (mit Ländervorwahl)",
         "country": "Wohnsitzland",
         "arrivalTime": "Geschätzte Ankunftszeit",
         "specialRequests": "Besondere Wünsche / Ernährungseinschränkungen",
         "celebrating": "Feiern Sie etwas Besonderes?",
-        "fullNamePlaceholder": "z.B. Max Mustermann",
+        "firstNamePlaceholder": "Ihr Vorname",
+        "lastNamePlaceholder": "Ihr Nachname",
         "emailPlaceholder": "max@beispiel.de",
         "phonePlaceholder": "+49 151 12345678",
         "countryPlaceholder": "Land auswählen",
@@ -405,7 +407,8 @@
         "specialRequestsPlaceholder": "Ernährungseinschränkungen, Allergien oder besondere Wünsche...",
         "celebratingPlaceholder": "Geburtstag, Jahrestag, Flitterwochen...",
         "errors": {
-          "nameRequired": "Name ist erforderlich",
+          "firstNameRequired": "Vorname ist erforderlich",
+          "lastNameRequired": "Nachname ist erforderlich",
           "invalidEmail": "Ungültige E-Mail-Adresse",
           "phoneRequired": "Telefon ist erforderlich",
           "countryRequired": "Land ist erforderlich"

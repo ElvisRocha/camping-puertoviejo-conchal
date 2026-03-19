@@ -67,7 +67,8 @@ const initialBooking: Partial<Booking> = {
   accommodation: { bringOwnTent: true, rentedTents: [] },
   addOns: [],
   guestInfo: {
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     country: '',

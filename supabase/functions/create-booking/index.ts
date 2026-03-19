@@ -11,7 +11,8 @@ interface TentSelection {
 }
 
 interface GuestInfo {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   country: string;
@@ -107,7 +108,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    if (!booking.guestInfo?.fullName?.trim() || !booking.guestInfo?.email?.trim() || !booking.guestInfo?.phone?.trim() || !booking.guestInfo?.country?.trim()) {
+    if (!booking.guestInfo?.firstName?.trim() || !booking.guestInfo?.lastName?.trim() || !booking.guestInfo?.email?.trim() || !booking.guestInfo?.phone?.trim() || !booking.guestInfo?.country?.trim()) {
       return new Response(
         JSON.stringify({ error: 'Guest information is incomplete' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -211,7 +212,7 @@ Deno.serve(async (req) => {
         .from('guest_info')
         .insert({
           booking_id: bookingId,
-          full_name: booking.guestInfo.fullName.trim().slice(0, 200),
+          full_name: `${booking.guestInfo.firstName.trim()} ${booking.guestInfo.lastName.trim()}`.slice(0, 200),
           email: booking.guestInfo.email.trim().slice(0, 255),
           phone: booking.guestInfo.phone.trim().slice(0, 50),
           country: booking.guestInfo.country.trim().slice(0, 100),

@@ -17,7 +17,8 @@ export function Step4Summary() {
   const { t, i18n } = useTranslation();
 
   const guestInfoSchema = z.object({
-    fullName: z.string().min(2, t('booking.step4.guestInfo.errors.nameRequired')).max(100),
+    firstName: z.string().min(2, t('booking.step4.guestInfo.errors.firstNameRequired')).max(50),
+    lastName: z.string().min(2, t('booking.step4.guestInfo.errors.lastNameRequired')).max(50),
     email: z.string().email(t('booking.step4.guestInfo.errors.invalidEmail')).max(255),
     phone: z.string().min(5, t('booking.step4.guestInfo.errors.phoneRequired')).max(30),
     country: z.string().min(1, t('booking.step4.guestInfo.errors.countryRequired')),
@@ -28,7 +29,8 @@ export function Step4Summary() {
   const pricing = calculatePricing();
   const guests = booking.guests || { adults: 0, children: 0, infants: 0 };
   const guestInfo = booking.guestInfo || {
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     country: '',
@@ -46,7 +48,8 @@ export function Step4Summary() {
 
   const validateAndContinue = () => {
     const result = guestInfoSchema.safeParse({
-      fullName: guestInfo.fullName,
+      firstName: guestInfo.firstName,
+      lastName: guestInfo.lastName,
       email: guestInfo.email,
       phone: guestInfo.phone,
       country: guestInfo.country,
@@ -83,15 +86,27 @@ export function Step4Summary() {
           <h3 className="font-heading font-bold text-xl mb-4">{t('booking.step4.guestInfo.title')}</h3>
 
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.fullName')} *</label>
-              <Input
-                value={guestInfo.fullName || ''}
-                onChange={(e) => handleInputChange('fullName', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.fullNamePlaceholder')}
-                className={errors.fullName ? 'border-destructive' : ''}
-              />
-              {errors.fullName && <p className="text-sm text-destructive mt-1">{errors.fullName}</p>}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.firstName')} *</label>
+                <Input
+                  value={guestInfo.firstName || ''}
+                  onChange={(e) => handleInputChange('firstName', e.target.value)}
+                  placeholder={t('booking.step4.guestInfo.firstNamePlaceholder')}
+                  className={errors.firstName ? 'border-destructive' : ''}
+                />
+                {errors.firstName && <p className="text-sm text-destructive mt-1">{errors.firstName}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.lastName')} *</label>
+                <Input
+                  value={guestInfo.lastName || ''}
+                  onChange={(e) => handleInputChange('lastName', e.target.value)}
+                  placeholder={t('booking.step4.guestInfo.lastNamePlaceholder')}
+                  className={errors.lastName ? 'border-destructive' : ''}
+                />
+                {errors.lastName && <p className="text-sm text-destructive mt-1">{errors.lastName}</p>}
+              </div>
             </div>
 
             <div>

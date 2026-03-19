@@ -390,14 +390,16 @@
       "total": "Итого",
       "guestInfo": {
         "title": "Информация о Госте",
-        "fullName": "Полное имя",
+        "firstName": "Имя",
+        "lastName": "Фамилия",
         "email": "Email",
         "phone": "Телефон (с кодом страны)",
         "country": "Страна проживания",
         "arrivalTime": "Примерное время прибытия",
         "specialRequests": "Особые пожелания / диетические ограничения",
         "celebrating": "Празднуете что-то особенное?",
-        "fullNamePlaceholder": "Напр. Иван Иванов",
+        "firstNamePlaceholder": "Ваше имя",
+        "lastNamePlaceholder": "Ваша фамилия",
         "emailPlaceholder": "ivan@primer.com",
         "phonePlaceholder": "+7 999 123-45-67",
         "countryPlaceholder": "Выберите страну",
@@ -405,7 +407,8 @@
         "specialRequestsPlaceholder": "Диетические ограничения, аллергии или особые пожелания...",
         "celebratingPlaceholder": "День рождения, годовщина, медовый месяц...",
         "errors": {
-          "nameRequired": "Имя обязательно",
+          "firstNameRequired": "Имя обязательно",
+          "lastNameRequired": "Фамилия обязательна",
           "invalidEmail": "Неверный адрес электронной почты",
           "phoneRequired": "Телефон обязателен",
           "countryRequired": "Страна обязательна"
