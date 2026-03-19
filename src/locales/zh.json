@@ -390,14 +390,16 @@
       "total": "总计",
       "guestInfo": {
         "title": "客人信息",
-        "fullName": "全名",
+        "firstName": "名",
+        "lastName": "姓",
         "email": "邮箱",
         "phone": "电话（含国家代码）",
         "country": "居住国家",
         "arrivalTime": "预计到达时间",
         "specialRequests": "特殊要求/饮食限制",
         "celebrating": "正在庆祝特别的事情？",
-        "fullNamePlaceholder": "例：张三",
+        "firstNamePlaceholder": "您的名字",
+        "lastNamePlaceholder": "您的姓氏",
         "emailPlaceholder": "zhangsan@example.com",
         "phonePlaceholder": "+86 138 0000 0000",
         "countryPlaceholder": "选择国家",
@@ -405,7 +407,8 @@
         "specialRequestsPlaceholder": "饮食限制、过敏症或特殊要求...",
         "celebratingPlaceholder": "生日、周年纪念、蜜月...",
         "errors": {
-          "nameRequired": "姓名为必填项",
+          "firstNameRequired": "名字为必填项",
+          "lastNameRequired": "姓氏为必填项",
           "invalidEmail": "电子邮件地址无效",
           "phoneRequired": "电话为必填项",
           "countryRequired": "国家为必填项"

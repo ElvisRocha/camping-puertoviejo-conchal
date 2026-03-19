@@ -1,0 +1,293 @@
+{
+  "name": "Reserva Completada - Camping Puerto Viejo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reserva-completada",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "wh-completada-001",
+      "name": "Webhook Reserva Completada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "reserva-completada"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://services.leadconnectorhq.com/contacts/?locationId=REPLACE_WITH_YOUR_GHL_LOCATION_ID&email={{ encodeURIComponent($json.body.email) }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-buscar-contacto-comp-001",
+      "name": "Buscar Contacto por Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-contacto-found",
+              "leftValue": "={{ $json.contacts?.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-contacto-found-comp-001",
+      "name": "Contacto Encontrado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id=REPLACE_WITH_YOUR_GHL_LOCATION_ID&pipeline_id=REPLACE_WITH_YOUR_GHL_PIPELINE_ID&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-buscar-oportunidad-comp-001",
+      "name": "Buscar Oportunidad",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $json.opportunities[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"pipelineStageId\": \"REPLACE_WITH_YOUR_GHL_STAGE_COMPLETADA\",\n  \"status\": \"won\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-mover-completada-001",
+      "name": "Mover a Completada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Buscar Contacto por Email').item.json.contacts[0].id }}\",\n  \"message\": \"¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅\\n\\n¡Muchas gracias por hospedarte con nosotros en Camping Puerto Viejo Conchal! Esperamos que hayas disfrutado la experiencia al máximo. 🏕️🌴\\n\\nNos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:\\n\\n⭐ Google: https://g.page/r/campingpuertoviejoconchal/review\\n⭐ TripAdvisor: https://www.tripadvisor.com/campingpuertoviejoconchal\\n\\n¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "http-whatsapp-gracias-001",
+      "name": "WhatsApp Agradecimiento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('Error: Contacto no encontrado para completar reserva:', JSON.stringify($input.first().json));\nreturn [{ json: { error: true, message: 'Contacto no encontrado en GHL' } }];"
+      },
+      "id": "log-error-comp-001",
+      "name": "Log Error No Encontrado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 420]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \"success\": true, \"message\": \"Reserva marcada como completada\" }",
+        "options": {}
+      },
+      "id": "respuesta-ok-comp-001",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1560, 200]
+    }
+  ],
+  "connections": {
+    "Webhook Reserva Completada": {
+      "main": [
+        [
+          {
+            "node": "Buscar Contacto por Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Contacto por Email": {
+      "main": [
+        [
+          {
+            "node": "Contacto Encontrado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacto Encontrado?": {
+      "main": [
+        [
+          {
+            "node": "Buscar Oportunidad",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error No Encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Oportunidad": {
+      "main": [
+        [
+          {
+            "node": "Mover a Completada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mover a Completada": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Agradecimiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Agradecimiento": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-19T00:00:00.000Z",
+  "versionId": "1"
+}

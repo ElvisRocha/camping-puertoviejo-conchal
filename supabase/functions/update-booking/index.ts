@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
       const { error: guestError } = await supabase
         .from('guest_info')
         .update({
-          full_name: booking.guestInfo.fullName,
+          full_name: `${booking.guestInfo.firstName?.trim() ?? ''} ${booking.guestInfo.lastName?.trim() ?? ''}`.trim(),
           email: booking.guestInfo.email,
           phone: booking.guestInfo.phone,
           country: booking.guestInfo.country,

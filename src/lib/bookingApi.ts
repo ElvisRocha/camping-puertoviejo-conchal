@@ -98,8 +98,10 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
     const addonIds: string[] = (result.addons || []).map((a: any) => a.addon_type);
 
     const g = result.guest_info;
+    const fullNameParts = (g?.full_name || '').split(' ');
     const guestInfo: GuestInfo = {
-      fullName: g?.full_name || '',
+      firstName: fullNameParts[0] || '',
+      lastName: fullNameParts.slice(1).join(' ') || '',
       email: g?.email || '',
       phone: g?.phone || '',
       country: g?.country || '',
