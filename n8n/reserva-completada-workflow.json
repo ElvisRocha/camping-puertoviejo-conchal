@@ -18,13 +18,13 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "=https://services.leadconnectorhq.com/contacts/?locationId={{ $env.GHL_LOCATION_ID }}&email={{ encodeURIComponent($json.body.email) }}",
+        "url": "=https://services.leadconnectorhq.com/contacts/?locationId=REPLACE_WITH_YOUR_GHL_LOCATION_ID&email={{ encodeURIComponent($json.body.email) }}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -78,13 +78,13 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id={{ $env.GHL_LOCATION_ID }}&pipeline_id={{ $env.GHL_PIPELINE_ID }}&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id=REPLACE_WITH_YOUR_GHL_LOCATION_ID&pipeline_id=REPLACE_WITH_YOUR_GHL_PIPELINE_ID&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -115,7 +115,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
             },
             {
               "name": "Content-Type",
@@ -130,7 +130,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"pipelineStageId\": \"{{ $env.GHL_STAGE_COMPLETADA }}\",\n  \"status\": \"won\"\n}",
+        "body": "={\n  \"pipelineStageId\": \"REPLACE_WITH_YOUR_GHL_STAGE_COMPLETADA\",\n  \"status\": \"won\"\n}",
         "options": {
           "response": {
             "response": {
@@ -154,7 +154,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.GHL_API_KEY }}"
+              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
             },
             {
               "name": "Content-Type",
