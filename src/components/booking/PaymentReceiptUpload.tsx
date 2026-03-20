@@ -37,48 +37,58 @@ async function ocrImage(source: File | Blob): Promise<string> {
   return text;
 }
 
-// Render a PDF page to canvas and return it as a PNG Blob
-async function pdfPageToBlob(page: any): Promise<Blob> {
-  const viewport = page.getViewport({ scale: 2.5 }); // higher scale = better OCR quality
+// Render a single PDF page to a PNG Blob via pdfjs canvas rendering
+async function pdfPageToBlob(page: any, scale = 2.0): Promise<Blob> {
+  const viewport = page.getViewport({ scale });
   const canvas = document.createElement('canvas');
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
-  const ctx = canvas.getContext('2d')!;
+  canvas.width = Math.round(viewport.width);
+  canvas.height = Math.round(viewport.height);
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D context unavailable');
   await page.render({ canvasContext: ctx, viewport }).promise;
   return new Promise<Blob>((resolve, reject) =>
-    canvas.toBlob(b => (b ? resolve(b) : reject(new Error('canvas toBlob failed'))), 'image/png')
+    canvas.toBlob(b => (b ? resolve(b) : reject(new Error('canvas.toBlob returned null'))), 'image/png')
   );
 }
 
 // Extract text from a file using local libs (no API cost)
 async function extractText(file: File): Promise<string> {
   if (file.type === 'application/pdf') {
-    const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist');
-    const workerUrl = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
-    GlobalWorkerOptions.workerSrc = workerUrl;
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await getDocument({ data: arrayBuffer }).promise;
+    const pdfjs = await import('pdfjs-dist');
 
-    // First attempt: extract embedded text layer
+    // Use CDN worker matching the installed package version.
+    // new URL('pdfjs-dist/...', import.meta.url) does NOT resolve node_modules
+    // bare specifiers in Vite — using CDN is the reliable alternative.
+    pdfjs.GlobalWorkerOptions.workerSrc =
+      `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+    const pageCount = Math.min(pdf.numPages, 3);
+
+    // First attempt: extract embedded text layer (works for text-based PDFs)
     let fullText = '';
-    const pages: any[] = [];
-    for (let i = 1; i <= Math.min(pdf.numPages, 3); i++) {
+    for (let i = 1; i <= pageCount; i++) {
       const page = await pdf.getPage(i);
-      pages.push(page);
       const content = await page.getTextContent();
       fullText += content.items.map((item: any) => item.str).join(' ') + ' ';
     }
 
-    // If the PDF has no text layer (image-based PDF, e.g. from WhatsApp),
-    // fall back to rendering each page as an image and running Tesseract OCR.
+    // If insufficient text found, the PDF is image-based (e.g. WhatsApp screenshot).
+    // Render each page to canvas and run Tesseract OCR on it.
     if (fullText.trim().length < 50) {
-      console.log('[Receipt OCR] PDF has no text layer — falling back to image OCR');
+      console.log('[Receipt OCR] PDF has no text layer — running canvas OCR fallback');
       let ocrText = '';
-      for (const page of pages) {
-        const blob = await pdfPageToBlob(page);
-        ocrText += await ocrImage(blob) + ' ';
+      for (let i = 1; i <= pageCount; i++) {
+        try {
+          const page = await pdf.getPage(i); // re-fetch for a clean render state
+          const blob = await pdfPageToBlob(page, 2.0);
+          ocrText += await ocrImage(blob) + ' ';
+        } catch (pageErr) {
+          console.warn(`[Receipt OCR] Canvas OCR failed for page ${i}:`, pageErr);
+        }
       }
-      return ocrText;
+      return ocrText || fullText;
     }
 
     return fullText;
