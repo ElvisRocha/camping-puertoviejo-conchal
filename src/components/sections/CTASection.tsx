@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Lock, MessageCircle } from 'lucide-react';
 
-declare const fbq: Function;
+declare const fbq: (...args: unknown[]) => void;
 
 const CTASection = () => {
   const { t } = useTranslation();

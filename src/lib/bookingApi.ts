@@ -90,12 +90,12 @@ export async function lookupBookingByReference(referenceCode: string): Promise<L
     const checkOut = new Date(b.check_out + 'T12:00:00');
     const nights = differenceInDays(checkOut, checkIn);
 
-    const rentedTents: TentSelection[] = (result.tents || []).map((t: any) => ({
+    const rentedTents: TentSelection[] = (result.tents || []).map((t: { tent_type: string; quantity: number }) => ({
       tentId: t.tent_type,
       quantity: t.quantity,
     }));
 
-    const addonIds: string[] = (result.addons || []).map((a: any) => a.addon_type);
+    const addonIds: string[] = (result.addons || []).map((a: { addon_type: string }) => a.addon_type);
 
     const g = result.guest_info;
     const fullNameParts = (g?.full_name || '').split(' ');

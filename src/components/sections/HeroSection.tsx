@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Palmtree, Bird, Sun, PawPrint } from 'lucide-react';
 
-declare const fbq: Function;
+declare const fbq: (...args: unknown[]) => void;
 
 // Cloudinary base path - version comes before folder per Cloudinary URL spec
 const CLD = 'https://res.cloudinary.com/dcvipikha/image/upload';

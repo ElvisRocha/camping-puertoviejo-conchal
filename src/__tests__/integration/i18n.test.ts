@@ -6,22 +6,22 @@ import de from '@/locales/de.json';
 import zh from '@/locales/zh.json';
 import ru from '@/locales/ru.json';
 
-function flattenKeys(obj: Record<string, any>, prefix = ''): string[] {
+function flattenKeys(obj: Record<string, unknown>, prefix = ''): string[] {
   return Object.entries(obj).flatMap(([key, value]) => {
     const fullKey = prefix ? `${prefix}.${key}` : key;
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      return flattenKeys(value, fullKey);
+      return flattenKeys(value as Record<string, unknown>, fullKey);
     }
     return [fullKey];
   });
 }
 
-function getFlatValues(obj: Record<string, any>, prefix = ''): Record<string, string> {
+function getFlatValues(obj: Record<string, unknown>, prefix = ''): Record<string, string> {
   const result: Record<string, string> = {};
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      Object.assign(result, getFlatValues(value, fullKey));
+      Object.assign(result, getFlatValues(value as Record<string, unknown>, fullKey));
     } else {
       result[fullKey] = String(value);
     }
@@ -30,7 +30,7 @@ function getFlatValues(obj: Record<string, any>, prefix = ''): Record<string, st
 }
 
 const enKeys = flattenKeys(en);
-const translations: Record<string, Record<string, any>> = { es, fr, de, zh, ru };
+const translations: Record<string, Record<string, unknown>> = { es, fr, de, zh, ru };
 
 describe('i18n Translation Completeness', () => {
   // I18N-01 to I18N-05

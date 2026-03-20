@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { test, expect, Locator } from '@playwright/test';
 import path from 'path';
 import { fileURLToPath } from 'url';
