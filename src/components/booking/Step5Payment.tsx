@@ -143,7 +143,14 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         .upload(storagePath, blob, { contentType: fileType });
 
       if (uploadError) {
-        throw uploadError;
+        console.error('Storage upload error:', uploadError);
+        toast({
+          title: t('booking.step5.toastErrorTitle'),
+          description: `Error al subir el archivo: ${uploadError.message}`,
+          variant: 'destructive',
+        });
+        setIsProcessing(false);
+        return;
       }
 
       // 4. Get public URL
@@ -160,15 +167,25 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       });
 
       if (error) {
-        throw error;
+        console.error('Create booking error:', error);
+        toast({
+          title: t('booking.step5.toastErrorTitle'),
+          description: `Error al crear la reserva: ${typeof error === 'object' && error !== null && 'message' in error ? (error as Error).message : String(error)}`,
+          variant: 'destructive',
+        });
+        setIsProcessing(false);
+        return;
       }
 
       // 6. Link receipt URL to booking record (client-side fallback in case
       //    the deployed edge function predates payment_receipt_url support)
-      await supabase.rpc('link_payment_receipt', {
+      const { error: linkError } = await supabase.rpc('link_payment_receipt', {
         ref_code: referenceCode,
         receipt_url: publicUrl,
       });
+      if (linkError) {
+        console.error('link_payment_receipt error:', linkError);
+      }
 
       // 7. Update deposit_amount and balance_due using the OCR-detected amount.
       //    Done client-side so it works regardless of which edge function version
@@ -176,11 +193,14 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       const totalCRC = Math.round(pricing.total * 500);
       const deposit = depositCRC ?? Math.round((pricing.total / 2) * 500);
       const balance = Math.max(0, totalCRC - deposit);
-      await supabase.rpc('update_booking_deposit', {
+      const { error: depositError } = await supabase.rpc('update_booking_deposit', {
         ref_code: referenceCode,
         p_deposit: deposit,
         p_balance: balance,
       });
+      if (depositError) {
+        console.error('update_booking_deposit error:', depositError);
+      }
 
       // 8. Clear localStorage receipt
       localStorage.removeItem(RECEIPT_STORAGE_KEY);
