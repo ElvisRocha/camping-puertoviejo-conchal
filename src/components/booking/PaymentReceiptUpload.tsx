@@ -26,65 +26,32 @@ interface PaymentReceiptUploadProps {
   onVerified: (verified: boolean, depositCRC?: number) => void;
 }
 
-// Run Tesseract OCR on a File or Blob (image)
-async function ocrImage(source: File | Blob): Promise<string> {
-  const { createWorker } = await import('tesseract.js');
-  const worker = await createWorker('spa', 1, {
-    langPath: 'https://tessdata.projectnaptha.com/4.0.0',
-  });
-  const { data: { text } } = await worker.recognize(source);
-  await worker.terminate();
-  return text;
-}
-
-// Render a PDF page to canvas and return it as a PNG Blob
-async function pdfPageToBlob(page: any): Promise<Blob> {
-  const viewport = page.getViewport({ scale: 2.5 }); // higher scale = better OCR quality
-  const canvas = document.createElement('canvas');
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
-  const ctx = canvas.getContext('2d')!;
-  await page.render({ canvasContext: ctx, viewport }).promise;
-  return new Promise<Blob>((resolve, reject) =>
-    canvas.toBlob(b => (b ? resolve(b) : reject(new Error('canvas toBlob failed'))), 'image/png')
-  );
-}
-
 // Extract text from a file using local libs (no API cost)
 async function extractText(file: File): Promise<string> {
   if (file.type === 'application/pdf') {
     const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist');
+    // Use the bundled worker via Vite's asset resolution
     const workerUrl = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
     GlobalWorkerOptions.workerSrc = workerUrl;
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await getDocument({ data: arrayBuffer }).promise;
-
-    // First attempt: extract embedded text layer
     let fullText = '';
-    const pages: any[] = [];
     for (let i = 1; i <= Math.min(pdf.numPages, 3); i++) {
       const page = await pdf.getPage(i);
-      pages.push(page);
       const content = await page.getTextContent();
       fullText += content.items.map((item: any) => item.str).join(' ') + ' ';
     }
-
-    // If the PDF has no text layer (image-based PDF, e.g. from WhatsApp),
-    // fall back to rendering each page as an image and running Tesseract OCR.
-    if (fullText.trim().length < 50) {
-      console.log('[Receipt OCR] PDF has no text layer — falling back to image OCR');
-      let ocrText = '';
-      for (const page of pages) {
-        const blob = await pdfPageToBlob(page);
-        ocrText += await ocrImage(blob) + ' ';
-      }
-      return ocrText;
-    }
-
     return fullText;
   } else {
     // Image: run Tesseract OCR with Spanish language data
-    return ocrImage(file);
+    const { createWorker } = await import('tesseract.js');
+    const worker = await createWorker('spa', 1, {
+      // Use CDN for language data — keeps bundle small
+      langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+    });
+    const { data: { text } } = await worker.recognize(file);
+    await worker.terminate();
+    return text;
   }
 }
 
