@@ -162,6 +162,7 @@ export default function AdminDashboard() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [confirmPaymentBooking, setConfirmPaymentBooking] = useState<Booking | null>(null);
   const [isMarkingPaid, setIsMarkingPaid] = useState(false);
+  const [pendingStatusChange, setPendingStatusChange] = useState<{ bookingId: string; newStatus: string } | null>(null);
 
   // Settings state
   const [maxCapacity, setMaxCapacity] = useState<number | null>(null);
@@ -357,7 +358,14 @@ export default function AdminDashboard() {
     setDateTo('');
   };
 
-  const handleStatusUpdate = async (bookingId: string, newStatus: string) => {
+  const requestStatusUpdate = (bookingId: string, newStatus: string) => {
+    setPendingStatusChange({ bookingId, newStatus });
+  };
+
+  const confirmStatusUpdate = async () => {
+    if (!pendingStatusChange) return;
+    const { bookingId, newStatus } = pendingStatusChange;
+    setPendingStatusChange(null);
     setIsUpdating(true);
     try {
       const { error } = await supabase
@@ -369,7 +377,7 @@ export default function AdminDashboard() {
 
       toast({
         title: 'Estado actualizado',
-        description: `El estado de la reserva cambió a ${newStatus}.`,
+        description: `El estado de la reserva cambió a ${statusLabels[newStatus] || newStatus}.`,
       });
 
       setBookings((prev) =>
@@ -381,6 +389,45 @@ export default function AdminDashboard() {
       if (selectedBooking?.id === bookingId) {
         setSelectedBooking({ ...selectedBooking, status: newStatus });
       }
+
+      // Trigger n8n webhook for completed/cancelled status changes
+      if (newStatus === 'completed' || newStatus === 'cancelled') {
+        try {
+          const { data: bookingData } = await supabase
+            .from('bookings')
+            .select('reference_code, check_in, check_out, total, adults, children')
+            .eq('id', bookingId)
+            .single();
+
+          const { data: guestData } = await supabase
+            .from('guest_info')
+            .select('full_name, email, phone')
+            .eq('booking_id', bookingId)
+            .single();
+
+          if (bookingData && guestData) {
+            const n8nBaseUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+            if (n8nBaseUrl) {
+              const webhookPath = newStatus === 'completed' ? '/reserva-completada' : '/reserva-cancelada';
+              fetch(`${n8nBaseUrl}${webhookPath}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  email: guestData.email,
+                  name: guestData.full_name,
+                  phone: guestData.phone,
+                  reference_code: bookingData.reference_code,
+                  fecha_checkin: bookingData.check_in,
+                  fecha_checkout: bookingData.check_out,
+                  total: bookingData.total,
+                }),
+              }).catch((err) => console.error('n8n webhook error:', err));
+            }
+          }
+        } catch (webhookError) {
+          console.error('Error triggering n8n webhook:', webhookError);
+        }
+      }
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -389,6 +436,43 @@ export default function AdminDashboard() {
       });
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const statusLabels: Record<string, string> = {
+    pending: 'Pendiente',
+    confirmed: 'Confirmado',
+    completed: 'Completado',
+    cancelled: 'Cancelado',
+  };
+
+  const getStatusConfirmationMessage = (newStatus: string): { title: string; description: string } => {
+    switch (newStatus) {
+      case 'cancelled':
+        return {
+          title: 'Cancelar reserva',
+          description: 'Esta acción cancelará la reserva y se le notificará al huésped por WhatsApp y correo electrónico sobre la cancelación y el reembolso de su depósito. ¿Estás seguro?',
+        };
+      case 'completed':
+        return {
+          title: 'Marcar como completada',
+          description: 'Se marcará la reserva como completada y se le enviará al huésped un mensaje de agradecimiento por WhatsApp y correo electrónico con los enlaces para dejar una reseña. ¿Deseas continuar?',
+        };
+      case 'confirmed':
+        return {
+          title: 'Confirmar reserva',
+          description: 'Se confirmará la reserva y el huésped será notificado. ¿Deseas cambiar el estado a Confirmado?',
+        };
+      case 'pending':
+        return {
+          title: 'Marcar como pendiente',
+          description: 'La reserva volverá al estado Pendiente. ¿Estás seguro de que deseas revertir el estado?',
+        };
+      default:
+        return {
+          title: 'Cambiar estado',
+          description: `¿Estás seguro de que deseas cambiar el estado a ${newStatus}?`,
+        };
     }
   };
 
@@ -978,6 +1062,43 @@ export default function AdminDashboard() {
         </DialogContent>
       </Dialog>
 
+      {/* Confirm Status Change Dialog */}
+      <Dialog
+        open={!!pendingStatusChange}
+        onOpenChange={(open) => { if (!open) setPendingStatusChange(null); }}
+      >
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {pendingStatusChange ? getStatusConfirmationMessage(pendingStatusChange.newStatus).title : ''}
+            </DialogTitle>
+            <DialogDescription>
+              {pendingStatusChange ? getStatusConfirmationMessage(pendingStatusChange.newStatus).description : ''}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setPendingStatusChange(null)}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={confirmStatusUpdate}
+              className={
+                pendingStatusChange?.newStatus === 'cancelled'
+                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                  : pendingStatusChange?.newStatus === 'completed'
+                    ? 'bg-green-600 hover:bg-green-700 text-white'
+                    : ''
+              }
+            >
+              Confirmar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Booking Details Dialog */}
       <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -995,7 +1116,7 @@ export default function AdminDashboard() {
                 <Select
                   value={selectedBooking.status}
                   onValueChange={(value) =>
-                    handleStatusUpdate(selectedBooking.id, value)
+                    requestStatusUpdate(selectedBooking.id, value)
                   }
                   disabled={isUpdating}
                 >
