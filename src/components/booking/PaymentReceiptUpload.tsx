@@ -3,8 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Upload, CheckCircle, XCircle, Loader2, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const SINPE_PHONE = '70163299';
-const SINPE_NAME = 'elvis rocha';
+const SINPE_PHONE = '83034342';
+// Full name parts used for fuzzy matching: first name + first surname must both appear
+const SINPE_FIRST_NAME = 'jorge';
+const SINPE_FIRST_SURNAME = 'jimenez';
+const SINPE_FULL_NAME_DISPLAY = 'Jorge Gerardo Jimenez Granados';
 const CRC_RATE = 500;
 
 function crcFormat(n: number): string {
@@ -96,7 +99,9 @@ function validate(
   const expectedCRC = Math.round(expectedUSD * CRC_RATE);
   const detectedAmount = parseAmount(text);
 
-  const nameValid = lower.includes(SINPE_NAME);
+  // Name: both first name and first surname must appear (fuzzy match for truncated receipts)
+  const nameValid = lower.includes(SINPE_FIRST_NAME) && lower.includes(SINPE_FIRST_SURNAME);
+  // Phone: exact match required — no partial or fuzzy matching
   const phoneValid = digitsOnly.includes(SINPE_PHONE);
   const minCRC = expectedCRC;
   const maxCRC = expectedCRC * 2;
@@ -106,9 +111,9 @@ function validate(
     detectedAmount <= maxCRC;
 
   if (!nameValid)
-    return { valid: false, detectedCRC: detectedAmount, mensaje: `Nombre no coincide (esperado: "Elvis Rocha")` };
+    return { valid: false, detectedCRC: detectedAmount, mensaje: `Nombre no coincide (esperado: "${SINPE_FULL_NAME_DISPLAY}")` };
   if (!phoneValid)
-    return { valid: false, detectedCRC: detectedAmount, mensaje: `Número de celular no encontrado (esperado: 7016-3299)` };
+    return { valid: false, detectedCRC: detectedAmount, mensaje: `Número de celular no encontrado (esperado: 8303-4342)` };
   if (!amountValid) {
     const detected = detectedAmount !== null ? `₡${crcFormat(detectedAmount)}` : 'no detectado';
     return {
