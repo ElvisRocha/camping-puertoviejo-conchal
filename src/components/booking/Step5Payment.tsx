@@ -87,11 +87,6 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
   };
 
   const handleCompleteBooking = async () => {
-    fbq('track', 'Purchase', {
-      value: Math.round(pricing.total * 500),
-      currency: 'CRC',
-    });
-
     if (!agreedToTerms) {
       toast({
         title: t('booking.step5.termsRequiredTitle'),
@@ -108,6 +103,15 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
         variant: 'destructive',
       });
       return;
+    }
+
+    try {
+      fbq('track', 'Purchase', {
+        value: Math.round(pricing.total * 500),
+        currency: 'CRC',
+      });
+    } catch {
+      // Facebook Pixel may not be loaded (ad blockers, slow network)
     }
 
     setIsProcessing(true);
