@@ -30,3 +30,4 @@ src/assets/originals
 *.njsproj
 *.sln
 *.sw?
+test-results/
