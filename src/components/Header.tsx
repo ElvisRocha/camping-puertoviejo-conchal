@@ -24,9 +24,11 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isReserveOpen, setIsReserveOpen] = useState(false);
+  const [isMobileReserveOpen, setIsMobileReserveOpen] = useState(false);
   const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const reserveMenuRef = useRef<HTMLDivElement>(null);
+  const mobileReserveMenuRef = useRef<HTMLDivElement>(null);
 
   // How long the Framer Motion exit animation takes for the mobile menu.
   const MENU_ANIMATION_MS = 350;
@@ -91,10 +93,20 @@ const Header = () => {
       if (reserveMenuRef.current && !reserveMenuRef.current.contains(e.target as Node)) {
         setIsReserveOpen(false);
       }
+      if (mobileReserveMenuRef.current && !mobileReserveMenuRef.current.contains(e.target as Node)) {
+        setIsMobileReserveOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleMouseDown);
     return () => document.removeEventListener('mousedown', handleMouseDown);
   }, []);
+
+  // Reset mobile dropdown when mobile menu closes
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      setIsMobileReserveOpen(false);
+    }
+  }, [isMobileMenuOpen]);
 
   // Header should have solid background on non-home pages or when scrolled
   const hasBackground = !isHomePage || isScrolled;
@@ -303,29 +315,47 @@ const Header = () => {
                   {t(`nav.${item.key}`)}
                 </Link>
               ))}
-              <Link to="/book" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-cta w-full mt-4">
-                  {t('nav.bookNow')}
-                </Button>
-              </Link>
-              <button
-                className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors border-t border-border"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsRescheduleModalOpen(true);
-                }}
-              >
-                {t('nav.reschedule')}
-              </button>
-              <button
-                className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors border-t border-border"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsCancelModalOpen(true);
-                }}
-              >
-                {t('nav.cancel_booking')}
-              </button>
+              {/* Mobile Split Button: Reservar + Dropdown */}
+              <div className="relative mt-4" ref={mobileReserveMenuRef}>
+                <div className="flex items-stretch">
+                  <Link to="/book" onClick={() => setIsMobileMenuOpen(false)} className="flex-1">
+                    <Button className="btn-cta w-full rounded-r-none">
+                      {t('nav.bookNow')}
+                    </Button>
+                  </Link>
+                  <div className="w-px bg-white/30 self-stretch" />
+                  <Button
+                    className="btn-cta rounded-l-none px-2"
+                    onClick={() => setIsMobileReserveOpen(!isMobileReserveOpen)}
+                    aria-label="More booking options"
+                    aria-expanded={isMobileReserveOpen}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </div>
+                {isMobileReserveOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-white rounded-lg shadow-lg border border-border">
+                    <button
+                      className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsRescheduleModalOpen(true);
+                      }}
+                    >
+                      {t('nav.reschedule')}
+                    </button>
+                    <button
+                      className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsCancelModalOpen(true);
+                      }}
+                    >
+                      {t('nav.cancel_booking')}
+                    </button>
+                  </div>
+                )}
+              </div>
             </nav>
           </motion.div>
         )}
