@@ -64,7 +64,7 @@ Deno.serve(async (req) => {
     await supabase.from('booking_tents').delete().eq('booking_id', bookingId)
 
     if (!booking.accommodation?.bringOwnTent && booking.accommodation?.rentedTents?.length) {
-      const tentsToInsert = booking.accommodation.rentedTents.map((t: any) => {
+      const tentsToInsert = booking.accommodation.rentedTents.map((t: { tentId: string; quantity: number }) => {
         const tent = TENT_OPTIONS.find(o => o.id === t.tentId)
         return {
           booking_id: bookingId,

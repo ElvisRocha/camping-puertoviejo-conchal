@@ -38,6 +38,7 @@ async function ocrImage(source: File | Blob): Promise<string> {
 }
 
 // Render a single PDF page to a PNG Blob via pdfjs canvas rendering
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function pdfPageToBlob(page: any, scale = 2.0): Promise<Blob> {
   const viewport = page.getViewport({ scale });
   const canvas = document.createElement('canvas');
@@ -71,7 +72,7 @@ async function extractText(file: File): Promise<string> {
     for (let i = 1; i <= pageCount; i++) {
       const page = await pdf.getPage(i);
       const content = await page.getTextContent();
-      fullText += content.items.map((item: any) => item.str).join(' ') + ' ';
+      fullText += content.items.map((item: { str: string }) => item.str).join(' ') + ' ';
     }
 
     // If insufficient text found, the PDF is image-based (e.g. WhatsApp screenshot).

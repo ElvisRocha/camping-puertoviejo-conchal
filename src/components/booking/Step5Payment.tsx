@@ -13,7 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import { formatDualPrice } from '@/lib/priceFormat';
 import { PaymentReceiptUpload, RECEIPT_STORAGE_KEY } from './PaymentReceiptUpload';
 
-declare const fbq: Function;
+declare const fbq: (...args: unknown[]) => void;
 
 interface Step5PaymentProps {
   onComplete: (referenceCode: string, depositCRC: number, balanceCRC: number) => void;
