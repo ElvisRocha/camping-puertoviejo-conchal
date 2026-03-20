@@ -24,7 +24,7 @@ export default defineConfig({
       use: {
         browserName: 'chromium',
         launchOptions: {
-          executablePath: '/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome',
+          executablePath: process.env.CI ? undefined : '/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome',
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
         },
       },
