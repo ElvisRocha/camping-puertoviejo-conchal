@@ -171,7 +171,7 @@ Deno.serve(async (req) => {
           booking_id: bookingId,
           tent_type: selection.tentId.replace('tent-', '') + '-person',
           quantity: selection.quantity,
-          price_per_night: tent?.pricePerNight ?? 0,
+          price_per_night: (tent?.pricePerNight ?? 0) * CRC_RATE,
         };
       });
 
@@ -191,7 +191,7 @@ Deno.serve(async (req) => {
           booking_id: bookingId,
           addon_type: addOnId,
           quantity: 1,
-          price: addon?.price ?? 0,
+          price: (addon?.price ?? 0) * CRC_RATE,
         };
       });
 

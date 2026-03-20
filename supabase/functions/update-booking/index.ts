@@ -5,10 +5,12 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 }
 
+const CRC_RATE = 500
+
 const TENT_OPTIONS = [
-  { id: 'tent-2', pricePerNight: 25 },
-  { id: 'tent-4', pricePerNight: 40 },
-  { id: 'tent-6', pricePerNight: 55 },
+  { id: 'tent-2', pricePerNight: 15 },
+  { id: 'tent-4', pricePerNight: 25 },
+  { id: 'tent-6', pricePerNight: 35 },
 ]
 
 Deno.serve(async (req) => {
@@ -68,7 +70,7 @@ Deno.serve(async (req) => {
           booking_id: bookingId,
           tent_type: t.tentId,
           quantity: t.quantity,
-          price_per_night: tent?.pricePerNight ?? 0,
+          price_per_night: (tent?.pricePerNight ?? 0) * CRC_RATE,
         }
       })
       const { error: tentError } = await supabase.from('booking_tents').insert(tentsToInsert)
@@ -95,10 +97,11 @@ Deno.serve(async (req) => {
 
     if (booking.addOns?.length) {
       const ADD_ONS = [
-        { id: 'breakfast', price: 12 }, { id: 'dinner', price: 18 },
-        { id: 'kayak', price: 25 }, { id: 'bonfire', price: 15 },
-        { id: 'hiking', price: 20 }, { id: 'sunset-cruise', price: 45 },
-        { id: 'yoga', price: 15 }, { id: 'fishing', price: 30 },
+        { id: 'breakfast', price: 12 },
+        { id: 'kayak', price: 35 },
+        { id: 'wildlife', price: 25 },
+        { id: 'bonfire', price: 20 },
+        { id: 'snorkel', price: 15 },
       ]
       const addonsToInsert = booking.addOns.map((addOnId: string) => {
         const addon = ADD_ONS.find(a => a.id === addOnId)
@@ -106,7 +109,7 @@ Deno.serve(async (req) => {
           booking_id: bookingId,
           addon_type: addOnId,
           quantity: 1,
-          price: addon?.price ?? 0,
+          price: (addon?.price ?? 0) * CRC_RATE,
         }
       })
       const { error: addonError } = await supabase.from('booking_addons').insert(addonsToInsert)

@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { useBookingStore } from '@/store/bookingStore';
+import { TENT_OPTIONS, ADD_ONS } from '@/types/booking';
 
 function setupAndCalculate(config: {
   adults?: number;
@@ -157,10 +158,46 @@ describe('Pricing Engine (calculatePricing)', () => {
     expect(pricing.total / 2).toBe(42); // $84 / 2
   });
 
-  // PR-12: CRC conversion
-  it('PR-12: CRC = USD × 500', () => {
+  // PR-12: CRC conversion — all Supabase amounts must be in CRC (×500)
+  it('PR-12: total CRC = USD × 500 (stored in Supabase)', () => {
     const pricing = setupAndCalculate({ adults: 1, nights: 1, bringOwnTent: true });
-    const totalCRC = pricing.total * 500;
-    expect(totalCRC).toBe(14 * 500); // ₡7,000
+    const CRC_RATE = 500;
+    const totalCRC = Math.round(pricing.total * CRC_RATE);
+    expect(totalCRC).toBe(7000); // ₡7,000
+    // Deposit in CRC
+    const depositCRC = Math.round((pricing.total / 2) * CRC_RATE);
+    expect(depositCRC).toBe(3500); // ₡3,500
+  });
+
+  it('PR-12b: tent price_per_night stored in CRC', () => {
+    const CRC_RATE = 500;
+    // tent-2: $15/night → ₡7,500/night in Supabase
+    expect(TENT_OPTIONS.find((t) => t.id === 'tent-2')!.pricePerNight * CRC_RATE).toBe(7500);
+    // tent-4: $25/night → ₡12,500/night
+    expect(TENT_OPTIONS.find((t) => t.id === 'tent-4')!.pricePerNight * CRC_RATE).toBe(12500);
+    // tent-6: $35/night → ₡17,500/night
+    expect(TENT_OPTIONS.find((t) => t.id === 'tent-6')!.pricePerNight * CRC_RATE).toBe(17500);
+  });
+
+  it('PR-12c: addon prices stored in CRC', () => {
+    const CRC_RATE = 500;
+    for (const addon of ADD_ONS) {
+      const crc = addon.price * CRC_RATE;
+      expect(crc, `${addon.id} CRC should be ${addon.price}×500`).toBe(addon.price * 500);
+    }
+  });
+
+  it('PR-12d: full booking total converts correctly to CRC', () => {
+    const CRC_RATE = 500;
+    const pricing = setupAndCalculate({
+      adults: 2,
+      children: 1,
+      nights: 2,
+      rentedTents: [{ tentId: 'tent-4', quantity: 1 }],
+      addOns: ['breakfast'],
+    });
+    // campsite: 3*14*2 = $84, tent: 25*1*2 = $50, breakfast: 12*3 = $36 → total $170
+    expect(pricing.total).toBe(170);
+    expect(Math.round(pricing.total * CRC_RATE)).toBe(85000); // ₡85,000
   });
 });
