@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; }
+  .receipt { width: 400px; padding: 30px; border: 2px solid #ccc; border-radius: 10px; }
+  .header { text-align: center; color: #0088cc; font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+  .subheader { text-align: center; color: #00aaee; font-size: 14px; margin-bottom: 20px; }
+  .row { display: flex; justify-content: space-between; padding: 8px 0; }
+  .label { font-weight: bold; color: #333; font-size: 14px; }
+  .value { color: #333; font-size: 14px; text-align: right; }
+  .divider { border-top: 1px solid #ccc; margin: 10px 0; }
+  .amount { font-weight: bold; font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="receipt" id="receipt">
+  <div class="header">Comprobante</div>
+  <div class="subheader">Transferencia SINPE Móvil</div>
+
+  <div class="row"><span class="label">Documento</span><span class="value">56047773</span></div>
+  <div class="row"><span class="label">Referencia</span><span class="value">20260310152830090560</span></div>
+  <div class="row"><span class="label">Cuenta origen</span><span class="value">FERNANDEZ GONZALEZ OLGA NATALIA</span></div>
+
+  <div class="divider"></div>
+
+  <div class="row"><span class="label">SINPE Móvil destino</span><span class="value">JORGE GERARDO<br>JIMENEZ GRANADOS<br>8303-4342</span></div>
+
+  <div class="divider"></div>
+
+  <div class="row"><span class="label">Monto debitado</span><span class="value amount">₡40,000.00</span></div>
+  <div class="row"><span class="label">Comisión</span><span class="value">₡0.00</span></div>
+  <div class="row"><span class="label">Monto transferido</span><span class="value amount">₡40,000.00</span></div>
+  <div class="row"><span class="label">Motivo</span><span class="value">Reservac Sem Sta</span></div>
+</div>
+</body>
+</html>
