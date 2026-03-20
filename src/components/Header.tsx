@@ -308,6 +308,24 @@ const Header = () => {
                   {t('nav.bookNow')}
                 </Button>
               </Link>
+              <button
+                className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors border-t border-border"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsRescheduleModalOpen(true);
+                }}
+              >
+                {t('nav.reschedule')}
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 font-body font-medium text-sm text-foreground hover:text-accent transition-colors border-t border-border"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsCancelModalOpen(true);
+                }}
+              >
+                {t('nav.cancel_booking')}
+              </button>
             </nav>
           </motion.div>
         )}
