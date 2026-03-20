@@ -110,6 +110,17 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
       return;
     }
 
+    // Validate guestInfo is complete before hitting the Edge Function
+    const gi = booking.guestInfo;
+    if (!gi?.firstName?.trim() || !gi?.lastName?.trim() || !gi?.email?.trim() || !gi?.phone?.trim() || !gi?.country?.trim()) {
+      toast({
+        title: t('booking.step5.toastErrorTitle'),
+        description: 'Tu información de contacto está incompleta. Por favor regresa al paso anterior y completa todos los campos requeridos.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsProcessing(true);
 
     // Capacity validation
