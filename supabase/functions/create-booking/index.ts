@@ -52,20 +52,17 @@ interface BookingRequest {
 }
 
 const TENT_OPTIONS = [
-  { id: 'tent-2', pricePerNight: 25 },
-  { id: 'tent-4', pricePerNight: 40 },
-  { id: 'tent-6', pricePerNight: 55 },
+  { id: 'tent-2', pricePerNight: 15 },
+  { id: 'tent-4', pricePerNight: 25 },
+  { id: 'tent-6', pricePerNight: 35 },
 ];
 
 const ADD_ONS = [
   { id: 'breakfast', price: 12 },
-  { id: 'dinner', price: 18 },
-  { id: 'kayak', price: 25 },
-  { id: 'bonfire', price: 15 },
-  { id: 'hiking', price: 20 },
-  { id: 'sunset-cruise', price: 45 },
-  { id: 'yoga', price: 15 },
-  { id: 'fishing', price: 30 },
+  { id: 'kayak', price: 35 },
+  { id: 'wildlife', price: 25 },
+  { id: 'bonfire', price: 20 },
+  { id: 'snorkel', price: 15 },
 ];
 
 Deno.serve(async (req) => {
