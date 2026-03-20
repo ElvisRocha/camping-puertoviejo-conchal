@@ -56,6 +56,38 @@ Deno.serve(async (req) => {
 
     if (updateError) throw updateError
 
+    // Fetch guest info and booking details for n8n notification
+    const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL')
+    if (n8nWebhookUrl) {
+      const { data: bookingData } = await supabase
+        .from('bookings')
+        .select('reference_code, check_in, check_out, total, adults, children')
+        .eq('id', bookingId)
+        .single()
+
+      const { data: guestData } = await supabase
+        .from('guest_info')
+        .select('full_name, email, phone')
+        .eq('booking_id', bookingId)
+        .single()
+
+      if (bookingData && guestData) {
+        fetch(`${n8nWebhookUrl}/reserva-cancelada`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: guestData.email,
+            name: guestData.full_name,
+            phone: guestData.phone,
+            reference_code: bookingData.reference_code,
+            fecha_checkin: bookingData.check_in,
+            fecha_checkout: bookingData.check_out,
+            total: bookingData.total,
+          }),
+        }).catch((err) => console.error('n8n webhook error:', err))
+      }
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

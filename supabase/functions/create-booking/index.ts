@@ -226,6 +226,30 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Notify n8n webhook (fire-and-forget)
+    const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
+    if (n8nWebhookUrl && booking.guestInfo) {
+      const nights = Math.round((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+      fetch(`${n8nWebhookUrl}/nueva-reserva`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: booking.guestInfo.firstName.trim(),
+          last_name: booking.guestInfo.lastName.trim(),
+          email: booking.guestInfo.email.trim(),
+          phone: booking.guestInfo.phone.trim(),
+          fecha_checkin: checkInDate.toISOString().split('T')[0],
+          fecha_checkout: checkOutDate.toISOString().split('T')[0],
+          noches: nights,
+          personas: adults + (booking.guests?.children ?? 0),
+          total: totalCRC,
+          sinpe: referenceCode,
+          notas: booking.guestInfo.specialRequests?.trim() || '',
+          status: 'confirmed',
+        }),
+      }).catch((err) => console.error('n8n webhook error:', err));
+    }
+
     return new Response(
       JSON.stringify({ referenceCode }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
