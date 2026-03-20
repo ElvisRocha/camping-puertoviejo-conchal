@@ -169,7 +169,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Buscar Contacto por Email').item.json.contacts[0].id }}\",\n  \"message\": \"¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅\\n\\n¡Muchas gracias por hospedarte con nosotros en Camping Puerto Viejo Conchal! Esperamos que hayas disfrutado la experiencia al máximo. 🏕️🌴\\n\\nNos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:\\n\\n⭐ Google: https://g.page/r/campingpuertoviejoconchal/review\\n⭐ TripAdvisor: https://www.tripadvisor.com/campingpuertoviejoconchal\\n\\n¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌\"\n}",
+        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Buscar Contacto por Email').item.json.contacts[0].id }}\",\n  \"message\": \"¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅\\n\\n¡Muchas gracias por hospedarte con nosotros en Camping Puerto Viejo Conchal! Esperamos que hayas disfrutado la experiencia al máximo. 🏕️🌴\\n\\nNos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:\\n\\n⭐ Reseña en Google:\\nhttps://www.google.com/travel/search?q=camping%20puerto%20viejo%20conchal%20review%20google&g2lb=4965990%2C72248047%2C72248048%2C72471280%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764&hl=es-CR&gl=cr&cs=1&ssta=1&ts=CAESCgoCCAMKAggDEAAaZwpHEkUyJTB4OGZhNjUwMGNlYjllZGYxNToweDUzZWI4ZWFkYTI5NmI5NDU6HENhbXBpbmcgUHVlcnRvIFZpZWpvIENvbmNoYWwSHBIUCgcI6g8QAxgaEgcI6g8QAxgbGAEyBAgAEAAqBwoFOgNDUkM&qs=CAEyKENob0l1Wlc5dU9lMWtlLW1BUm9OTDJjdk1URnlOMlkzTnpCeU9SQUI4AkIJCblKD3euRd6mQgkJuUoPd65F3qZIAA&ap=KigKEgmtk1URBaIkQBFDySKzF3hVwBISCTRc9nou7iRAEUPJImNCcFXAMAC6AQdyZXZpZXdz&ictx=111&ved=0CAAQ5JsGahcKEwiIraOn1ayTAxUAAAAAHQAAAAAQBA\\n\\n⭐ Reseña en TripAdvisor:\\nhttps://www.tripadvisor.es/UserReviewEdit-g309251-d33316083-Camping_Puerto_Viejo_Conchal-Santa_Cruz_Province_of_Guanacaste.html\\n\\n¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌\"\n}",
         "options": {
           "response": {
             "response": {
@@ -182,7 +182,27 @@
       "name": "WhatsApp Agradecimiento",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1340, 200]
+      "position": [1340, 100]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Buscar Contacto por Email').item.json.contacts[0].email }}",
+        "subject": "=¡Gracias por tu estadía en Camping Puerto Viejo Conchal, {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🏕️",
+        "emailType": "html",
+        "message": "=<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n  <div style=\"background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%); padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">🏕️ Camping Puerto Viejo Conchal</h1>\n  </div>\n  <div style=\"padding: 30px 20px; background-color: #ffffff;\">\n    <h2 style=\"color: #2d5016; margin-top: 0;\">¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅</h2>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">¡Muchas gracias por hospedarte con nosotros en <strong>Camping Puerto Viejo Conchal</strong>! Esperamos que hayas disfrutado la experiencia al máximo. 🌴</p>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">Nos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:</p>\n    <div style=\"text-align: center; margin: 30px 0;\">\n      <a href=\"https://www.google.com/travel/search?q=camping%20puerto%20viejo%20conchal%20review%20google&g2lb=4965990%2C72248047%2C72248048%2C72471280%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764&hl=es-CR&gl=cr&cs=1&ssta=1&ts=CAESCgoCCAMKAggDEAAaZwpHEkUyJTB4OGZhNjUwMGNlYjllZGYxNToweDUzZWI4ZWFkYTI5NmI5NDU6HENhbXBpbmcgUHVlcnRvIFZpZWpvIENvbmNoYWwSHBIUCgcI6g8QAxgaEgcI6g8QAxgbGAEyBAgAEAAqBwoFOgNDUkM&qs=CAEyKENob0l1Wlc5dU9lMWtlLW1BUm9OTDJjdk1URnlOMlkzTnpCeU9SQUI4AkIJCblKD3euRd6mQgkJuUoPd65F3qZIAA&ap=KigKEgmtk1URBaIkQBFDySKzF3hVwBISCTRc9nou7iRAEUPJImNCcFXAMAC6AQdyZXZpZXdz&ictx=111&ved=0CAAQ5JsGahcKEwiIraOn1ayTAxUAAAAAHQAAAAAQBA\" style=\"display: inline-block; background-color: #4285F4; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-size: 16px; font-weight: bold; margin: 8px;\">⭐ Reseña en Google</a>\n    </div>\n    <div style=\"text-align: center; margin: 20px 0;\">\n      <a href=\"https://www.tripadvisor.es/UserReviewEdit-g309251-d33316083-Camping_Puerto_Viejo_Conchal-Santa_Cruz_Province_of_Guanacaste.html\" style=\"display: inline-block; background-color: #34E0A1; color: #000000; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-size: 16px; font-weight: bold; margin: 8px;\">⭐ Reseña en TripAdvisor</a>\n    </div>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6; margin-top: 25px;\">¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌</p>\n  </div>\n  <div style=\"background-color: #f5f5f5; padding: 20px; text-align: center; border-radius: 0 0 8px 8px;\">\n    <p style=\"color: #888; font-size: 13px; margin: 0;\">Camping Puerto Viejo Conchal · Guanacaste, Costa Rica 🇨🇷</p>\n  </div>\n</div>",
+        "options": {}
+      },
+      "id": "gmail-agradecimiento-001",
+      "name": "Gmail Agradecimiento",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1340, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
@@ -266,11 +286,27 @@
             "node": "WhatsApp Agradecimiento",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Gmail Agradecimiento",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
     "WhatsApp Agradecimiento": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Agradecimiento": {
       "main": [
         [
           {
@@ -288,6 +324,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-03-19T00:00:00.000Z",
-  "versionId": "1"
+  "updatedAt": "2026-03-20T00:00:00.000Z",
+  "versionId": "2"
 }
