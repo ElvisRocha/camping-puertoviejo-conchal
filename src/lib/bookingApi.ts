@@ -18,8 +18,6 @@ export async function createBooking({ booking, pricing, paymentReceiptUrl, depos
     const cloudUrl = CLOUD_URL;
     const anonKey = CLOUD_ANON_KEY;
 
-    const requestBody = { booking, pricing, paymentReceiptUrl, depositCRC };
-    console.log('[createBooking] guestInfo being sent:', JSON.stringify(booking.guestInfo));
     const response = await fetch(`${cloudUrl}/functions/v1/create-booking`, {
       method: 'POST',
       headers: {
@@ -27,7 +25,7 @@ export async function createBooking({ booking, pricing, paymentReceiptUrl, depos
         'Authorization': `Bearer ${anonKey}`,
         'apikey': anonKey,
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({ booking, pricing, paymentReceiptUrl, depositCRC }),
     });
 
     if (!response.ok) {
