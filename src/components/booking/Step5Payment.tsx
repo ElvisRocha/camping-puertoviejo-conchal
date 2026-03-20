@@ -112,6 +112,7 @@ export function Step5Payment({ onComplete }: Step5PaymentProps) {
 
     // Validate guestInfo is complete before hitting the Edge Function
     const gi = booking.guestInfo;
+    console.log('[Step5] booking.guestInfo at submit:', JSON.stringify(gi));
     if (!gi?.firstName?.trim() || !gi?.lastName?.trim() || !gi?.email?.trim() || !gi?.phone?.trim() || !gi?.country?.trim()) {
       toast({
         title: t('booking.step5.toastErrorTitle'),
