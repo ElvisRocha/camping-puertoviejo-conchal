@@ -212,7 +212,7 @@ const Footer = () => {
             </svg>
             {' '}Hecho por{' '}
             <a
-              href="https://smartflowautomations.com"
+              href="https://www.smartflow-automations.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-cream transition-colors underline underline-offset-2"
