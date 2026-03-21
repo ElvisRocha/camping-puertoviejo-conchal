@@ -78,6 +78,7 @@ export interface SiteConfig {
   social: {
     instagram: string;
     facebook: string;
+    tiktok?: string;
     tripadvisor?: string;
   };
 }
@@ -91,6 +92,7 @@ export const SITE_CONFIG: SiteConfig = {
   social: {
     instagram: '@campingpuertoviejo',
     facebook: '/campingpuertoviejoconchal',
+    tiktok: '@campingpuertoviejo',
     tripadvisor: 'campingpuertoviejoconchal',
   },
 };
