@@ -201,8 +201,24 @@ const Footer = () => {
           <p className="font-body text-sm text-cream/70 text-center sm:text-left">
             {t('footer.copyright')}
           </p>
-          <p className="font-body text-sm text-cream/70">
-            🌐 {SITE_CONFIG.domain}
+          <p className="font-body text-sm text-cream/70 flex items-center gap-1.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-4 w-4 text-sea-green"
+            >
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 9 12 11 10 14c-1.5 2.25-2.5 4.38-3.09 6.08C5.64 17.78 7 12 17 8z"/>
+            </svg>
+            {' '}Hecho con ♥ por{' '}
+            <a
+              href="https://www.smartflow-automations.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-cream transition-colors underline underline-offset-2"
+            >
+              SmartFlow Automations
+            </a>
           </p>
         </div>
       </div>
