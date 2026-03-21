@@ -90,9 +90,9 @@ export const SITE_CONFIG: SiteConfig = {
   whatsapp: '+506 8303-4342',
   location: 'Puerto Viejo de Conchal, Guanacaste, Costa Rica',
   social: {
-    instagram: '@campingpuertoviejo',
-    facebook: '/campingpuertoviejoconchal',
-    tiktok: '@campingpuertoviejo',
+    instagram: 'https://www.instagram.com/camping.puertoviejo.conchal/',
+    facebook: 'https://www.facebook.com/people/Camping-puerto-viejo-conchal-gunacaste/61580286042366/',
+    tiktok: 'https://www.tiktok.com/@jorgejimenez7728888?_r=1&_t=ZS-94kf0Hv3JSf',
     tripadvisor: 'campingpuertoviejoconchal',
   },
 };

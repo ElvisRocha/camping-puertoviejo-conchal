@@ -123,7 +123,7 @@ const Footer = () => {
             <div className="mt-6">
               <div className="flex gap-4">
                 <a
-                  href={`https://instagram.com/${SITE_CONFIG.social.instagram.replace('@', '')}`}
+                  href={SITE_CONFIG.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-forest-light flex items-center justify-center text-cream hover:bg-sea-green transition-colors"
@@ -131,7 +131,7 @@ const Footer = () => {
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
-                  href={`https://facebook.com${SITE_CONFIG.social.facebook}`}
+                  href={SITE_CONFIG.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-forest-light flex items-center justify-center text-cream hover:bg-sea-green transition-colors"
@@ -140,7 +140,7 @@ const Footer = () => {
                 </a>
                 {SITE_CONFIG.social.tiktok && (
                   <a
-                    href={`https://tiktok.com/${SITE_CONFIG.social.tiktok.replace('@', '@')}`}
+                    href={SITE_CONFIG.social.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-forest-light flex items-center justify-center text-cream hover:bg-sea-green transition-colors"
