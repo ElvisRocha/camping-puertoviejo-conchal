@@ -210,7 +210,7 @@ const Footer = () => {
             >
               <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 9 12 11 10 14c-1.5 2.25-2.5 4.38-3.09 6.08C5.64 17.78 7 12 17 8z"/>
             </svg>
-            {' '}Hecho por{' '}
+            {' '}Hecho con ♥ por{' '}
             <a
               href="https://www.smartflow-automations.com/"
               target="_blank"
