@@ -202,7 +202,6 @@ const Footer = () => {
             {t('footer.copyright')}
           </p>
           <p className="font-body text-sm text-cream/70 flex items-center gap-1.5">
-            Hecho con{' '}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -211,7 +210,7 @@ const Footer = () => {
             >
               <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 9 12 11 10 14c-1.5 2.25-2.5 4.38-3.09 6.08C5.64 17.78 7 12 17 8z"/>
             </svg>
-            {' '}por{' '}
+            {' '}Hecho por{' '}
             <a
               href="https://smartflowautomations.com"
               target="_blank"
