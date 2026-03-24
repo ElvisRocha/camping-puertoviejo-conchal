@@ -204,7 +204,7 @@ const Footer = () => {
       <div>
         <div className="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-sm text-cream/70 text-center sm:text-left">
-            {t('footer.copyright')}
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
           <p className="font-body text-sm text-cream/70 flex items-center gap-1.5">
             {t('footer.madeWith')} <span className="heart-breathe">♥</span> {t('footer.by')}{' '}

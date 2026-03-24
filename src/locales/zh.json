@@ -326,7 +326,7 @@
       "placeholder": "您的邮箱",
       "button": "订阅"
     },
-    "copyright": "© 2025 Camping Puerto Viejo Conchal. 版权所有。在哥斯达黎加用🌴制作。",
+    "copyright": "© {{year}} Camping Puerto Viejo Conchal. 版权所有。",
     "madeWith": "用",
     "by": "由"
   },
