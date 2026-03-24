@@ -88,7 +88,7 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: 'Camping Puerto Viejo Conchal',
   email: 'jj111w559@gmail.com',
   whatsapp: '+506 8303-4342',
-  location: 'Puerto Viejo de Conchal, Guanacaste, Costa Rica',
+  location: 'Camping Puerto Viejo Conchal, Guanacaste, Costa Rica',
   social: {
     instagram: 'https://www.instagram.com/camping.puertoviejo.conchal/',
     facebook: 'https://www.facebook.com/people/Camping-puerto-viejo-conchal-gunacaste/61580286042366/',
