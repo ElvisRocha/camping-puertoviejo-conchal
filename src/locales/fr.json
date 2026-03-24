@@ -415,6 +415,7 @@
           "lastNameRequired": "Le nom de famille est requis",
           "invalidEmail": "Adresse e-mail invalide",
           "phoneRequired": "Le téléphone est requis",
+          "phoneInvalid": "Le téléphone doit contenir exactement 8 chiffres",
           "countryRequired": "Le pays est requis"
         }
       }
