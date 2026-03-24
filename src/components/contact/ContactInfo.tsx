@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SITE_CONFIG } from '@/types/booking';
 
-const WHATSAPP_NUMBER = '50688888888'; // Replace with actual number
 const WHATSAPP_MESSAGE = 'Hello! I have a question about Camping Puerto Viejo Conchal.';
 
 export function ContactInfo() {
@@ -10,7 +10,8 @@ export function ContactInfo() {
 
   const handleWhatsAppClick = () => {
     const encodedMessage = encodeURIComponent(WHATSAPP_MESSAGE);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    const whatsappDigits = SITE_CONFIG.whatsapp.replace(/\D/g, '');
+    window.open(`https://wa.me/${whatsappDigits}?text=${encodedMessage}`, '_blank');
   };
 
   const contactItems = [
@@ -23,14 +24,14 @@ export function ContactInfo() {
     {
       icon: Phone,
       title: t('contact.info.phone'),
-      content: '+506 8888-8888',
-      link: 'tel:+50688888888',
+      content: SITE_CONFIG.whatsapp,
+      link: `tel:${SITE_CONFIG.whatsapp.replace(/\D/g, '')}`,
     },
     {
       icon: Mail,
       title: t('contact.info.email'),
-      content: 'hello@campingpuertoviejoconchal.com',
-      link: 'mailto:hello@campingpuertoviejoconchal.com',
+      content: SITE_CONFIG.email,
+      link: `mailto:${SITE_CONFIG.email}`,
     },
     {
       icon: Clock,
