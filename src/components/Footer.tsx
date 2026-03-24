@@ -207,7 +207,7 @@ const Footer = () => {
             {t('footer.copyright')}
           </p>
           <p className="font-body text-sm text-cream/70 flex items-center gap-1.5">
-            Made with <span className="inline-block animate-heartbeat text-red-400">♥</span> by{' '}
+            Hecho con ♥ por{' '}
             <a
               href="https://www.smartflow-automations.com/"
               target="_blank"
