@@ -415,6 +415,7 @@
           "lastNameRequired": "姓氏为必填项",
           "invalidEmail": "电子邮件地址无效",
           "phoneRequired": "电话为必填项",
+          "phoneInvalid": "电话号码必须是8位数字",
           "countryRequired": "国家为必填项"
         }
       }
