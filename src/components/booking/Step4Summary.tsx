@@ -1,16 +1,18 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { useBookingStore } from '@/store/bookingStore';
 import { TENT_OPTIONS, ADD_ONS, COUNTRIES } from '@/types/booking';
-import { ArrowLeft, ArrowRight, Calendar, Users, Tent, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Users, Tent, Sparkles, Check, ChevronsUpDown } from 'lucide-react';
 import { ContinueFromSummaryButton } from './buttons/ContinueFromSummaryButton';
 import { motion } from 'framer-motion';
 import { z } from 'zod';
 import { useState } from 'react';
 import { formatLocalizedDate } from '@/lib/dateLocale';
 import { formatDualPrice } from '@/lib/priceFormat';
+import { cn } from '@/lib/utils';
 
 export function Step4Summary() {
   const { t, i18n } = useTranslation();
@@ -24,6 +26,7 @@ export function Step4Summary() {
   });
   const { booking, calculatePricing, setGuestInfo, prevStep, nextStep } = useBookingStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [countryOpen, setCountryOpen] = useState(false);
 
   const pricing = calculatePricing();
   const guests = booking.guests || { adults: 0, children: 0, infants: 0 };
@@ -122,30 +125,70 @@ export function Step4Summary() {
 
             <div>
               <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.phone')} *</label>
-              <Input
-                value={guestInfo.phone || ''}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
-                className={errors.phone ? 'border-destructive' : ''}
-              />
+              <div className={cn(
+                'flex items-center h-10 w-full rounded-md border bg-background text-sm ring-offset-background',
+                errors.phone ? 'border-destructive' : 'border-input',
+                'focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2'
+              )}>
+                <span className="flex items-center px-3 text-muted-foreground border-r border-input h-full select-none whitespace-nowrap">
+                  +506
+                </span>
+                <input
+                  type="tel"
+                  value={guestInfo.phone || ''}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
+                  placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
+                  className="flex-1 h-full px-3 bg-transparent outline-none placeholder:text-muted-foreground"
+                />
+              </div>
               {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
             </div>
 
             <div>
               <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.country')} *</label>
-              <Select
-                value={guestInfo.country || ''}
-                onValueChange={(value) => handleInputChange('country', value)}
-              >
-                <SelectTrigger className={errors.country ? 'border-destructive' : ''}>
-                  <SelectValue placeholder={t('booking.step4.guestInfo.countryPlaceholder')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {COUNTRIES.map(country => (
-                    <SelectItem key={country} value={country}>{country}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover open={countryOpen} onOpenChange={setCountryOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={countryOpen}
+                    className={cn(
+                      'w-full h-10 justify-between font-normal',
+                      !guestInfo.country && 'text-muted-foreground',
+                      errors.country && 'border-destructive'
+                    )}
+                  >
+                    {guestInfo.country || t('booking.step4.guestInfo.countryPlaceholder')}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                  <Command>
+                    <CommandInput placeholder={t('booking.step4.guestInfo.countrySearch')} />
+                    <CommandList>
+                      <CommandEmpty>{t('booking.step4.guestInfo.noCountryFound')}</CommandEmpty>
+                      <CommandGroup>
+                        {COUNTRIES.map(country => (
+                          <CommandItem
+                            key={country}
+                            value={country}
+                            onSelect={() => {
+                              handleInputChange('country', country);
+                              setCountryOpen(false);
+                            }}
+                          >
+                            <Check className={cn(
+                              'mr-2 h-4 w-4',
+                              guestInfo.country === country ? 'opacity-100' : 'opacity-0'
+                            )} />
+                            {country}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
             </div>
 
