@@ -326,7 +326,9 @@
       "placeholder": "Ваш email",
       "button": "Подписаться"
     },
-    "copyright": "© 2025 Camping Puerto Viejo Conchal. Все права защищены. Сделано с 🌴 в Коста-Рике."
+    "copyright": "© 2025 Camping Puerto Viejo Conchal. Все права защищены. Сделано с 🌴 в Коста-Рике.",
+    "madeWith": "Сделано с",
+    "by": "от"
   },
   "booking": {
     "steps": {

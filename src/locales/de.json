@@ -326,7 +326,9 @@
       "placeholder": "Ihre E-Mail",
       "button": "Abonnieren"
     },
-    "copyright": "© 2025 Camping Puerto Viejo Conchal. Alle Rechte vorbehalten. Mit 🌴 in Costa Rica gemacht."
+    "copyright": "© 2025 Camping Puerto Viejo Conchal. Alle Rechte vorbehalten. Mit 🌴 in Costa Rica gemacht.",
+    "madeWith": "Gemacht mit",
+    "by": "von"
   },
   "booking": {
     "steps": {
