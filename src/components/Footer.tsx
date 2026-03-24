@@ -75,10 +75,15 @@ const Footer = () => {
                 <Phone className="h-4 w-4" />
                 {SITE_CONFIG.whatsapp}
               </a>
-              <div className="flex items-start gap-3 text-cream/80 font-body text-sm">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Puerto+Viejo+de+Conchal+Guanacaste+Costa+Rica"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 text-cream/80 hover:text-cream font-body text-sm transition-colors"
+              >
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 {SITE_CONFIG.location}
-              </div>
+              </a>
             </div>
           </div>
 
