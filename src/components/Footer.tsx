@@ -207,7 +207,7 @@ const Footer = () => {
             {t('footer.copyright')}
           </p>
           <p className="font-body text-sm text-cream/70 flex items-center gap-1.5">
-            Hecho con ♥ por{' '}
+            Hecho con <span className="heart-breathe">♥</span> por{' '}
             <a
               href="https://www.smartflow-automations.com/"
               target="_blank"
