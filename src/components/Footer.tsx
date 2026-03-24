@@ -76,7 +76,7 @@ const Footer = () => {
                 {SITE_CONFIG.whatsapp}
               </a>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Puerto+Viejo+de+Conchal+Guanacaste+Costa+Rica"
+                href="https://www.google.com/maps/dir/10.33183,-84.489754/10.3902791,-85.8132395/@10.4238761,-86.4566498,378461m/data=!3m2!1e3!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI2MDMyMi4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 text-cream/80 hover:text-cream font-body text-sm transition-colors"
