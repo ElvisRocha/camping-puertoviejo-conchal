@@ -202,8 +202,17 @@ export const ADD_ONS: AddOn[] = [
 ];
 
 export const COUNTRIES = [
-  'United States', 'Canada', 'Mexico', 'Germany', 'France', 'United Kingdom',
-  'Spain', 'Italy', 'Netherlands', 'Belgium', 'Switzerland', 'Austria',
-  'Australia', 'New Zealand', 'Japan', 'China', 'South Korea', 'Brazil',
-  'Argentina', 'Chile', 'Colombia', 'Costa Rica', 'Panama', 'Other',
+  'Costa Rica',
+  'Argentina', 'Australia', 'Austria', 'Belgium', 'Bolivia', 'Brazil',
+  'Canada', 'Chile', 'China', 'Colombia', 'Cuba', 'Czech Republic',
+  'Denmark', 'Dominican Republic', 'Ecuador', 'El Salvador', 'Finland',
+  'France', 'Germany', 'Greece', 'Guatemala', 'Honduras', 'Hungary',
+  'India', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan',
+  'Mexico', 'Netherlands', 'New Zealand', 'Nicaragua', 'Norway',
+  'Panama', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal',
+  'Puerto Rico', 'Romania', 'Russia', 'South Africa', 'South Korea',
+  'Spain', 'Sweden', 'Switzerland', 'Taiwan', 'Thailand',
+  'Trinidad and Tobago', 'Turkey', 'Ukraine', 'United Kingdom',
+  'United States', 'Uruguay', 'Venezuela',
+  'Other',
 ];
