@@ -141,6 +141,13 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        heartbeat: {
+          "0%, 100%": { transform: "scale(1)" },
+          "10%": { transform: "scale(1.15)" },
+          "20%": { transform: "scale(1)" },
+          "30%": { transform: "scale(1.2)" },
+          "40%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -151,6 +158,7 @@ export default {
         float: "float 6s ease-in-out infinite",
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
+        heartbeat: "heartbeat 1.5s ease-in-out infinite",
       },
       spacing: {
         "18": "4.5rem",
