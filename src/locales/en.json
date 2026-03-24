@@ -326,7 +326,7 @@
       "placeholder": "Your email",
       "button": "Subscribe"
     },
-    "copyright": "© 2025 Camping Puerto Viejo Conchal. All rights reserved. Made with 🌴 in Costa Rica.",
+    "copyright": "© {{year}} Camping Puerto Viejo Conchal. All rights reserved.",
     "madeWith": "Made with",
     "by": "by"
   },
