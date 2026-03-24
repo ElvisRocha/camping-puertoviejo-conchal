@@ -166,24 +166,11 @@ test.describe('Full Booking Flow E2E', () => {
     await page.getByPlaceholder('Tu Nombre').fill('Maria');
     await page.getByPlaceholder('Tus Apellidos').fill('Garcia Test');
     await page.getByPlaceholder('juan@ejemplo.com').fill('maria.garcia.e2etest@example.com');
-    await page.getByPlaceholder('+506 8888-8888').fill('+50688881234');
+    await page.getByPlaceholder('8888-8888').fill('88881234');
 
-    // Select country via Radix Select fiber
-    await page.evaluate(() => {
-      const trigger = document.querySelector('button[role="combobox"]') as HTMLElement;
-      if (!trigger) return;
-      const fiberKey = Object.keys(trigger).find(k => k.startsWith('__reactFiber$'));
-      if (!fiberKey) return;
-      let fiber = (trigger as any)[fiberKey];
-      while (fiber) {
-        if (fiber.memoizedProps?.onValueChange) {
-          fiber.memoizedProps.onValueChange('Costa Rica');
-          return;
-        }
-        fiber = fiber.return;
-      }
-    });
-    await page.waitForTimeout(300);
+    // Select country via searchable combobox
+    await page.getByRole('combobox').click();
+    await page.getByRole('option', { name: 'Costa Rica' }).click();
 
     const confirmAndPay = page.getByRole('button', { name: /Confirmar y Pagar/i });
     console.log('✅ Step 3: Summary verified ($84.00), guest info filled');
