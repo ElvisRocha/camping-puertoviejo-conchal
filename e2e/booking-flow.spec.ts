@@ -169,7 +169,7 @@ test.describe('Full Booking Flow E2E', () => {
     await page.getByPlaceholder('8888-8888').fill('88881234');
 
     // Select country via searchable combobox
-    await page.getByRole('combobox').click();
+    await page.getByRole('combobox', { name: /Selecciona tu país/i }).click();
     await page.getByRole('option', { name: 'Costa Rica' }).click();
 
     const confirmAndPay = page.getByRole('button', { name: /Confirmar y Pagar/i });
