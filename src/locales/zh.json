@@ -395,7 +395,7 @@
         "firstName": "名",
         "lastName": "姓",
         "email": "邮箱",
-        "phone": "电话（含国家代码）",
+        "phone": "电话",
         "country": "居住国家",
         "arrivalTime": "预计到达时间",
         "specialRequests": "特殊要求/饮食限制",
@@ -407,6 +407,8 @@
         "countryPlaceholder": "选择国家",
         "countrySearch": "搜索国家...",
         "noCountryFound": "未找到国家",
+        "phoneCodeSearch": "搜索国家代码...",
+        "noPhoneCodeFound": "未找到国家代码",
         "arrivalTimePlaceholder": "选择到达时间",
         "specialRequestsPlaceholder": "饮食限制、过敏症或特殊要求...",
         "celebratingPlaceholder": "生日、周年纪念、蜜月...",
@@ -415,7 +417,7 @@
           "lastNameRequired": "姓氏为必填项",
           "invalidEmail": "电子邮件地址无效",
           "phoneRequired": "电话为必填项",
-          "phoneInvalid": "电话号码必须是8位数字",
+          "phoneInvalid": "请输入有效的电话号码",
           "countryRequired": "国家为必填项"
         }
       }

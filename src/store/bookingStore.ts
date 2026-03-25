@@ -71,6 +71,7 @@ const initialBooking: Partial<Booking> = {
     lastName: '',
     email: '',
     phone: '',
+    phoneCountryCode: '+506',
     country: '',
     arrivalTime: '',
     specialRequests: '',

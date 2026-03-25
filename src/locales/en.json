@@ -395,7 +395,7 @@
         "firstName": "First name",
         "lastName": "Last name",
         "email": "Email",
-        "phone": "Phone (with country code)",
+        "phone": "Phone",
         "country": "Country of residence",
         "arrivalTime": "Estimated arrival time",
         "specialRequests": "Special requests / dietary restrictions",
@@ -407,6 +407,8 @@
         "countryPlaceholder": "Select your country",
         "countrySearch": "Search country...",
         "noCountryFound": "No country found",
+        "phoneCodeSearch": "Search country code...",
+        "noPhoneCodeFound": "No country code found",
         "arrivalTimePlaceholder": "Select an arrival time",
         "specialRequestsPlaceholder": "Any dietary restrictions, allergies, or special requests...",
         "celebratingPlaceholder": "Birthday, anniversary, honeymoon...",
@@ -415,7 +417,7 @@
           "lastNameRequired": "Last name is required",
           "invalidEmail": "Invalid email address",
           "phoneRequired": "Phone is required",
-          "phoneInvalid": "Phone must be exactly 8 digits",
+          "phoneInvalid": "Enter a valid phone number",
           "countryRequired": "Country is required"
         }
       }

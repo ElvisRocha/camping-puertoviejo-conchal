@@ -395,7 +395,7 @@
         "firstName": "Имя",
         "lastName": "Фамилия",
         "email": "Email",
-        "phone": "Телефон (с кодом страны)",
+        "phone": "Телефон",
         "country": "Страна проживания",
         "arrivalTime": "Примерное время прибытия",
         "specialRequests": "Особые пожелания / диетические ограничения",
@@ -407,6 +407,8 @@
         "countryPlaceholder": "Выберите страну",
         "countrySearch": "Поиск страны...",
         "noCountryFound": "Страна не найдена",
+        "phoneCodeSearch": "Поиск кода страны...",
+        "noPhoneCodeFound": "Код страны не найден",
         "arrivalTimePlaceholder": "Выберите время прибытия",
         "specialRequestsPlaceholder": "Диетические ограничения, аллергии или особые пожелания...",
         "celebratingPlaceholder": "День рождения, годовщина, медовый месяц...",
@@ -415,7 +417,7 @@
           "lastNameRequired": "Фамилия обязательна",
           "invalidEmail": "Неверный адрес электронной почты",
           "phoneRequired": "Телефон обязателен",
-          "phoneInvalid": "Номер телефона должен содержать ровно 8 цифр",
+          "phoneInvalid": "Введите действительный номер телефона",
           "countryRequired": "Страна обязательна"
         }
       }
