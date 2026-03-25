@@ -21,7 +21,7 @@ export function Step4Summary() {
     firstName: z.string().min(2, t('booking.step4.guestInfo.errors.firstNameRequired')).max(50),
     lastName: z.string().min(2, t('booking.step4.guestInfo.errors.lastNameRequired')).max(50),
     email: z.string().email(t('booking.step4.guestInfo.errors.invalidEmail')).max(255),
-    phone: z.string().min(4, t('booking.step4.guestInfo.errors.phoneInvalid')).max(15, t('booking.step4.guestInfo.errors.phoneInvalid')).regex(/^\d+$/, t('booking.step4.guestInfo.errors.phoneInvalid')),
+    phone: z.string().length(8, t('booking.step4.guestInfo.errors.phoneInvalid')).regex(/^\d+$/, t('booking.step4.guestInfo.errors.phoneInvalid')),
     country: z.string().min(1, t('booking.step4.guestInfo.errors.countryRequired')),
   });
   const { booking, calculatePricing, setGuestInfo, prevStep, nextStep } = useBookingStore();
@@ -177,9 +177,10 @@ export function Step4Summary() {
                 <Input
                   type="tel"
                   inputMode="numeric"
+                  maxLength={8}
                   value={guestInfo.phone || ''}
                   onChange={(e) => {
-                    const digits = e.target.value.replace(/\D/g, '').slice(0, 15);
+                    const digits = e.target.value.replace(/\D/g, '').slice(0, 8);
                     handleInputChange('phone', digits);
                   }}
                   placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
