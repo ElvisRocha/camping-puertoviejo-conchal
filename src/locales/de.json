@@ -395,7 +395,7 @@
         "firstName": "Vorname",
         "lastName": "Nachname",
         "email": "E-Mail",
-        "phone": "Telefon (mit Ländervorwahl)",
+        "phone": "Telefon",
         "country": "Wohnsitzland",
         "arrivalTime": "Geschätzte Ankunftszeit",
         "specialRequests": "Besondere Wünsche / Ernährungseinschränkungen",
@@ -407,6 +407,8 @@
         "countryPlaceholder": "Land auswählen",
         "countrySearch": "Land suchen...",
         "noCountryFound": "Kein Land gefunden",
+        "phoneCodeSearch": "Ländervorwahl suchen...",
+        "noPhoneCodeFound": "Keine Ländervorwahl gefunden",
         "arrivalTimePlaceholder": "Ankunftszeit auswählen",
         "specialRequestsPlaceholder": "Ernährungseinschränkungen, Allergien oder besondere Wünsche...",
         "celebratingPlaceholder": "Geburtstag, Jahrestag, Flitterwochen...",
@@ -415,7 +417,7 @@
           "lastNameRequired": "Nachname ist erforderlich",
           "invalidEmail": "Ungültige E-Mail-Adresse",
           "phoneRequired": "Telefon ist erforderlich",
-          "phoneInvalid": "Telefonnummer muss genau 8 Ziffern haben",
+          "phoneInvalid": "Geben Sie eine gültige Telefonnummer ein",
           "countryRequired": "Land ist erforderlich"
         }
       }

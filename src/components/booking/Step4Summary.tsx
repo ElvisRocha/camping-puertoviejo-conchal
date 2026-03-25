@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { useBookingStore } from '@/store/bookingStore';
-import { TENT_OPTIONS, ADD_ONS, COUNTRIES } from '@/types/booking';
+import { TENT_OPTIONS, ADD_ONS, COUNTRIES, COUNTRY_PHONE_CODES } from '@/types/booking';
 import { ArrowLeft, ArrowRight, Calendar, Users, Tent, Sparkles, Check, ChevronsUpDown } from 'lucide-react';
 import { ContinueFromSummaryButton } from './buttons/ContinueFromSummaryButton';
 import { motion } from 'framer-motion';
@@ -21,12 +21,16 @@ export function Step4Summary() {
     firstName: z.string().min(2, t('booking.step4.guestInfo.errors.firstNameRequired')).max(50),
     lastName: z.string().min(2, t('booking.step4.guestInfo.errors.lastNameRequired')).max(50),
     email: z.string().email(t('booking.step4.guestInfo.errors.invalidEmail')).max(255),
-    phone: z.string().length(8, t('booking.step4.guestInfo.errors.phoneInvalid')).regex(/^\d{8}$/, t('booking.step4.guestInfo.errors.phoneInvalid')),
+    phone: z.string().min(4, t('booking.step4.guestInfo.errors.phoneInvalid')).max(15, t('booking.step4.guestInfo.errors.phoneInvalid')).regex(/^\d+$/, t('booking.step4.guestInfo.errors.phoneInvalid')),
     country: z.string().min(1, t('booking.step4.guestInfo.errors.countryRequired')),
   });
   const { booking, calculatePricing, setGuestInfo, prevStep, nextStep } = useBookingStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [countryOpen, setCountryOpen] = useState(false);
+  const [phoneCodeOpen, setPhoneCodeOpen] = useState(false);
+  const [selectedPhoneCountry, setSelectedPhoneCountry] = useState(
+    () => COUNTRY_PHONE_CODES.find(c => c.code === (booking.guestInfo?.phoneCountryCode || '+506')) ?? COUNTRY_PHONE_CODES[0]
+  );
 
   const pricing = calculatePricing();
   const guests = booking.guests || { adults: 0, children: 0, infants: 0 };
@@ -35,6 +39,7 @@ export function Step4Summary() {
     lastName: '',
     email: '',
     phone: '',
+    phoneCountryCode: '+506',
     country: '',
     arrivalTime: '',
     specialRequests: '',
@@ -125,25 +130,60 @@ export function Step4Summary() {
 
             <div>
               <label className="block text-sm font-medium mb-1">{t('booking.step4.guestInfo.phone')} *</label>
-              <div className={cn(
-                'flex items-center h-10 w-full rounded-md border bg-background text-sm ring-offset-background',
-                errors.phone ? 'border-destructive' : 'border-input',
-                'focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2'
-              )}>
-                <span className="flex items-center px-3 text-muted-foreground border-r border-input h-full select-none whitespace-nowrap">
-                  +506
-                </span>
-                <input
+              <div className="flex gap-2">
+                <Popover open={phoneCodeOpen} onOpenChange={setPhoneCodeOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={phoneCodeOpen}
+                      className={cn(
+                        'h-10 w-[100px] justify-between font-normal shrink-0 px-3',
+                        errors.phone && 'border-destructive'
+                      )}
+                    >
+                      <span className="truncate">{guestInfo.phoneCountryCode || '+506'}</span>
+                      <ChevronsUpDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[280px] p-0" align="start">
+                    <Command>
+                      <CommandInput placeholder={t('booking.step4.guestInfo.phoneCodeSearch')} />
+                      <CommandList>
+                        <CommandEmpty>{t('booking.step4.guestInfo.noPhoneCodeFound')}</CommandEmpty>
+                        <CommandGroup>
+                          {COUNTRY_PHONE_CODES.map((entry) => (
+                            <CommandItem
+                              key={entry.name}
+                              value={`${entry.name} ${entry.code}`}
+                              onSelect={() => {
+                                setSelectedPhoneCountry(entry);
+                                handleInputChange('phoneCountryCode', entry.code);
+                                setPhoneCodeOpen(false);
+                              }}
+                            >
+                              <Check className={cn(
+                                'mr-2 h-4 w-4 shrink-0',
+                                selectedPhoneCountry.name === entry.name ? 'opacity-100' : 'opacity-0'
+                              )} />
+                              {entry.name} {entry.code}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <Input
                   type="tel"
                   inputMode="numeric"
-                  maxLength={8}
                   value={guestInfo.phone || ''}
                   onChange={(e) => {
-                    const digits = e.target.value.replace(/\D/g, '').slice(0, 8);
+                    const digits = e.target.value.replace(/\D/g, '').slice(0, 15);
                     handleInputChange('phone', digits);
                   }}
                   placeholder={t('booking.step4.guestInfo.phonePlaceholder')}
-                  className="flex-1 h-full px-3 bg-transparent outline-none placeholder:text-muted-foreground"
+                  className={cn('flex-1', errors.phone && 'border-destructive')}
                 />
               </div>
               {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
