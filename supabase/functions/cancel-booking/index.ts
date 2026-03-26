@@ -80,8 +80,8 @@ Deno.serve(async (req) => {
             name: guestData.full_name,
             phone: guestData.phone,
             reference_code: bookingData.reference_code,
-            fecha_checkin: bookingData.check_in,
-            fecha_checkout: bookingData.check_out,
+            fecha_checkin: bookingData.check_in.split('-').reverse().join('/'),
+            fecha_checkout: bookingData.check_out.split('-').reverse().join('/'),
             total: bookingData.total,
           }),
         }).catch((err) => console.error('n8n webhook error:', err))
