@@ -119,7 +119,7 @@ test.describe('Full Booking Flow E2E', () => {
 
     // ─── Navigate to booking page ───
     await page.goto('/book', { waitUntil: 'domcontentloaded', timeout: 30_000 });
-    await page.waitForSelector('text=Continuar a Huéspedes', { timeout: 30_000 });
+    await page.waitForSelector('button:has-text("Continuar")', { timeout: 30_000 });
 
     // ─── STEP 1: Select Dates ───
     const checkInInput = page.locator('input[placeholder="DD/MM/AAAA"]').first();
@@ -136,13 +136,13 @@ test.describe('Full Booking Flow E2E', () => {
     await page.waitForTimeout(500);
 
     await expect(page.locator('text=/2\\s+noche/i')).toBeVisible({ timeout: 5000 });
-    const continueToGuests = page.getByRole('button', { name: /Continuar a Huéspedes/i });
+    const continueToGuests = page.getByRole('button', { name: /^Continuar$/i });
     await expect(continueToGuests).toBeEnabled({ timeout: 5000 });
     console.log('✅ Step 1: Dates selected (Apr 10-12, 2 nights)');
     await reactClick(continueToGuests);
 
     // ─── STEP 2: Select Guests ───
-    await page.waitForSelector('text=Continuar a Extras', { timeout: 10_000 });
+    await page.waitForSelector('button:has-text("Continuar")', { timeout: 10_000 });
 
     const guestCard = page.locator('.card-nature').first();
     const adultPlus = guestCard.locator('button[class*="rounded-full"]').nth(1);
@@ -153,13 +153,13 @@ test.describe('Full Booking Flow E2E', () => {
     await reactClick(adultPlus);
     await page.waitForTimeout(200);
 
-    const continueToExtras = page.getByRole('button', { name: /Continuar a Extras/i });
+    const continueToExtras = page.getByRole('button', { name: /^Continuar$/i });
     await expect(continueToExtras).toBeEnabled({ timeout: 5000 });
     console.log('✅ Step 2: 3 adults, own tent');
     await reactClick(continueToExtras);
 
     // ─── STEP 3: Summary + Guest Info ───
-    await page.waitForSelector('text=Confirmar y Pagar', { timeout: 10_000 });
+    await page.waitForSelector('button:has-text("Continuar")', { timeout: 10_000 });
 
     await expect(page.getByText('$84.00').first()).toBeVisible({ timeout: 5000 });
 
@@ -172,7 +172,7 @@ test.describe('Full Booking Flow E2E', () => {
     await page.getByRole('combobox').filter({ hasText: 'Selecciona tu país' }).click();
     await page.getByRole('option', { name: 'Costa Rica' }).click();
 
-    const confirmAndPay = page.getByRole('button', { name: /Confirmar y Pagar/i });
+    const confirmAndPay = page.getByRole('button', { name: /^Continuar$/i });
     console.log('✅ Step 3: Summary verified ($84.00), guest info filled');
     await reactClick(confirmAndPay);
 
