@@ -7,7 +7,7 @@ export function ContinueFromAddOnsButton() {
 
   return (
     <Button onClick={nextStep} className="btn-cta px-8">
-      Continuar a Resumen
+      Continuar
       <ArrowRight className="ml-2 w-4 h-4" />
     </Button>
   );

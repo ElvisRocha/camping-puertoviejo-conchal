@@ -8,7 +8,7 @@ interface ContinueFromSummaryButtonProps {
 export function ContinueFromSummaryButton({ onClick }: ContinueFromSummaryButtonProps) {
   return (
     <Button onClick={onClick} className="btn-cta px-8">
-      Confirmar y Pagar
+      Continuar
       <ArrowRight className="ml-2 w-4 h-4" />
     </Button>
   );

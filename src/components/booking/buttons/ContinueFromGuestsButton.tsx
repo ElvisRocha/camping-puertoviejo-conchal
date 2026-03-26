@@ -13,7 +13,7 @@ export function ContinueFromGuestsButton() {
       disabled={!canContinue}
       className="btn-cta px-8"
     >
-      Continuar a Extras
+      Continuar
       <ArrowRight className="ml-2 w-4 h-4" />
     </Button>
   );

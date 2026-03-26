@@ -12,7 +12,7 @@ export function ContinueFromDatesButton() {
       disabled={!canContinue}
       className="btn-cta px-8"
     >
-      Continuar a Huéspedes
+      Continuar
       <ArrowRight className="ml-2 w-4 h-4" />
     </Button>
   );
