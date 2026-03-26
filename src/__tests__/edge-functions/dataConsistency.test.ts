@@ -12,6 +12,10 @@ const updateBookingSrc = readFileSync(
   resolve(__dirname, '../../../supabase/functions/update-booking/index.ts'),
   'utf-8'
 );
+const cancelBookingSrc = readFileSync(
+  resolve(__dirname, '../../../supabase/functions/cancel-booking/index.ts'),
+  'utf-8'
+);
 
 function extractTentPrices(source: string): Record<string, number> {
   const prices: Record<string, number> = {};
@@ -155,5 +159,25 @@ describe('Frontend ↔ Backend Data Consistency', () => {
     expect(updateBookingSrc).toMatch(/campsite_fee:\s*Math\.round\(pricing\.campsiteFee\s*\*\s*500\)/);
     expect(updateBookingSrc).toMatch(/tent_rental_fee:\s*Math\.round\(pricing\.tentRental\s*\*\s*500\)/);
     expect(updateBookingSrc).toMatch(/addons_fee:\s*Math\.round\(pricing\.addOns\s*\*\s*500\)/);
+  });
+
+  // --- N8N date format: must be DD/MM/YYYY ---
+
+  it('create-booking sends fecha_checkin/fecha_checkout in DD/MM/YYYY format to n8n', () => {
+    expect(createBookingSrc).toMatch(
+      /fecha_checkin:.*split\('-'\)\.reverse\(\)\.join\('\/'\)/
+    );
+    expect(createBookingSrc).toMatch(
+      /fecha_checkout:.*split\('-'\)\.reverse\(\)\.join\('\/'\)/
+    );
+  });
+
+  it('cancel-booking sends fecha_checkin/fecha_checkout in DD/MM/YYYY format to n8n', () => {
+    expect(cancelBookingSrc).toMatch(
+      /fecha_checkin:.*split\('-'\)\.reverse\(\)\.join\('\/'\)/
+    );
+    expect(cancelBookingSrc).toMatch(
+      /fecha_checkout:.*split\('-'\)\.reverse\(\)\.join\('\/'\)/
+    );
   });
 });
