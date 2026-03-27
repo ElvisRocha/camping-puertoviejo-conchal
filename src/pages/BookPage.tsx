@@ -32,6 +32,7 @@ const BookPage = () => {
   const handleBookingComplete = (code: string, depositCRC = 0, balanceCRC = 0) => {
     setReferenceCode(code);
     setPaymentSummary({ depositCRC, balanceCRC });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const renderStep = () => {
