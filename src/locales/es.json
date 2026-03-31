@@ -366,7 +366,15 @@
       "bringOwnNote": "Solo aplica tarifa de sitio",
       "campsiteRate": "Sitio",
       "sleeps": "Capacidad",
-      "soldOut": "Agotado"
+      "soldOut": "Agotado",
+      "noAvailability": {
+        "title": "Sin disponibilidad",
+        "description": "No hay disponibilidad para las fechas seleccionadas. El camping ha alcanzado su capacidad máxima de {{maxCapacity}} personas.",
+        "suggestion": "Puedes seleccionar otras fechas para encontrar disponibilidad.",
+        "changeDates": "Cambiar fechas",
+        "close": "Cerrar",
+        "checking": "Verificando..."
+      }
     },
     "step3": {
       "title": "Hazlo Inolvidable",

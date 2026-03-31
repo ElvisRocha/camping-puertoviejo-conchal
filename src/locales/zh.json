@@ -366,7 +366,15 @@
       "bringOwnNote": "仅收取营位费",
       "campsiteRate": "营位",
       "sleeps": "容量",
-      "soldOut": "已售罄"
+      "soldOut": "已售罄",
+      "noAvailability": {
+        "title": "无可用名额",
+        "description": "所选日期没有可用名额。营地已达到最大容量{{maxCapacity}}人。",
+        "suggestion": "您可以选择其他日期以查找可用名额。",
+        "changeDates": "更改日期",
+        "close": "关闭",
+        "checking": "正在验证..."
+      }
     },
     "step3": {
       "title": "让它难忘",

@@ -59,6 +59,86 @@ async function reactClick(locator: Locator) {
 
 test.describe('Full Booking Flow E2E', () => {
 
+  test('shows no-availability popup when camping is full and navigates to dates', async ({ page }) => {
+    // Block external fonts
+    await page.route('**/fonts.googleapis.com/**', route => route.abort());
+    await page.route('**/fonts.gstatic.com/**', route => route.abort());
+
+    // Mock Supabase REST API — camping full (capacity 10, 10 already booked)
+    await page.route(`**/${SUPABASE_HOST}/rest/v1/**`, route => {
+      const url = route.request().url();
+
+      if (url.includes('camping_settings')) {
+        return route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({ key: 'max_capacity_persons', value: '10' }),
+        });
+      }
+
+      if (url.includes('bookings')) {
+        return route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify([{ adults: 8, children: 2 }]),
+        });
+      }
+
+      return route.continue();
+    });
+
+    // ─── Navigate to booking page ───
+    await page.goto('/book', { waitUntil: 'domcontentloaded', timeout: 30_000 });
+    await page.waitForSelector('button:has-text("Continuar")', { timeout: 30_000 });
+
+    // ─── STEP 1: Select Dates ───
+    const checkInInput = page.locator('input[placeholder="DD/MM/AAAA"]').first();
+    await setReactInput(checkInInput, '10/04/2026');
+    await page.waitForTimeout(100);
+    await triggerReactBlur(checkInInput);
+    await page.waitForTimeout(500);
+
+    const checkOutInput = page.locator('input[placeholder="DD/MM/AAAA"]').nth(1);
+    await expect(checkOutInput).toBeEnabled({ timeout: 5000 });
+    await setReactInput(checkOutInput, '12/04/2026');
+    await page.waitForTimeout(100);
+    await triggerReactBlur(checkOutInput);
+    await page.waitForTimeout(500);
+
+    await expect(page.locator('text=/2\\s+noche/i')).toBeVisible({ timeout: 5000 });
+    const continueToGuests = page.getByRole('button', { name: /^Continuar$/i });
+    await expect(continueToGuests).toBeEnabled({ timeout: 5000 });
+    await reactClick(continueToGuests);
+
+    // ─── STEP 2: Select Guests and trigger availability check ───
+    await page.waitForSelector('button:has-text("Continuar")', { timeout: 10_000 });
+
+    const guestCard = page.locator('.card-nature').first();
+    const adultPlus = guestCard.locator('button[class*="rounded-full"]').nth(1);
+    await reactClick(adultPlus);
+    await page.waitForTimeout(200);
+
+    const continueBtn = page.getByRole('button', { name: /^Continuar$/i });
+    await expect(continueBtn).toBeEnabled({ timeout: 5000 });
+    await reactClick(continueBtn);
+
+    // ─── Verify no-availability popup appears ───
+    await expect(page.locator('text=/Sin disponibilidad/i')).toBeVisible({ timeout: 10_000 });
+    await expect(page.locator('text=/capacidad máxima/i')).toBeVisible({ timeout: 5000 });
+
+    console.log('✅ No-availability popup displayed correctly');
+
+    // ─── Click "Cambiar fechas" button ───
+    const changeDatesBtn = page.getByRole('button', { name: /Cambiar fechas/i });
+    await expect(changeDatesBtn).toBeVisible({ timeout: 5000 });
+    await reactClick(changeDatesBtn);
+    await page.waitForTimeout(500);
+
+    // ─── Verify we're back at Step 1 (date selection) ───
+    await expect(page.locator('input[placeholder="DD/MM/AAAA"]').first()).toBeVisible({ timeout: 10_000 });
+    console.log('✅ Navigated back to Step 1 (dates) after clicking "Cambiar fechas"');
+  });
+
   test('complete booking: dates → guests → summary → payment → confirmation', async ({ page }) => {
     // Block external fonts
     await page.route('**/fonts.googleapis.com/**', route => route.abort());

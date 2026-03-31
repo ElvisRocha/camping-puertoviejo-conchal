@@ -366,7 +366,15 @@
       "bringOwnNote": "Seuls les frais d'emplacement s'appliquent",
       "campsiteRate": "Emplacement",
       "sleeps": "Capacité",
-      "soldOut": "Épuisé"
+      "soldOut": "Épuisé",
+      "noAvailability": {
+        "title": "Aucune disponibilité",
+        "description": "Il n'y a pas de disponibilité pour les dates sélectionnées. Le camping a atteint sa capacité maximale de {{maxCapacity}} personnes.",
+        "suggestion": "Vous pouvez sélectionner d'autres dates pour trouver une disponibilité.",
+        "changeDates": "Changer les dates",
+        "close": "Fermer",
+        "checking": "Vérification..."
+      }
     },
     "step3": {
       "title": "Rendez-le Inoubliable",
