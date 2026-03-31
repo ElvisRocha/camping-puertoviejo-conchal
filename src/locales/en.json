@@ -366,7 +366,15 @@
       "bringOwnNote": "Campsite fee only",
       "campsiteRate": "Campsite",
       "sleeps": "Sleeps",
-      "soldOut": "Sold out"
+      "soldOut": "Sold out",
+      "noAvailability": {
+        "title": "No availability",
+        "description": "There is no availability for the selected dates. The campsite has reached its maximum capacity of {{maxCapacity}} people.",
+        "suggestion": "You can select different dates to find availability.",
+        "changeDates": "Change dates",
+        "close": "Close",
+        "checking": "Checking..."
+      }
     },
     "step3": {
       "title": "Make It Unforgettable",

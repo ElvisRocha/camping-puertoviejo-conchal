@@ -366,7 +366,15 @@
       "bringOwnNote": "Nur Stellplatzgebühr fällt an",
       "campsiteRate": "Stellplatz",
       "sleeps": "Kapazität",
-      "soldOut": "Ausverkauft"
+      "soldOut": "Ausverkauft",
+      "noAvailability": {
+        "title": "Keine Verfügbarkeit",
+        "description": "Für die ausgewählten Daten ist keine Verfügbarkeit vorhanden. Der Campingplatz hat seine maximale Kapazität von {{maxCapacity}} Personen erreicht.",
+        "suggestion": "Sie können andere Daten auswählen, um Verfügbarkeit zu finden.",
+        "changeDates": "Daten ändern",
+        "close": "Schließen",
+        "checking": "Überprüfung..."
+      }
     },
     "step3": {
       "title": "Machen Sie Es Unvergesslich",
