@@ -50,6 +50,7 @@ export function ContinueFromGuestsButton() {
   const handleChangeDates = () => {
     setShowNoAvailability(false);
     setStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
