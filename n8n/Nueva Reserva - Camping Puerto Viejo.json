@@ -1,0 +1,382 @@
+{
+  "name": "Nueva Reserva - Camping Puerto Viejo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nueva-reserva",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "21b93cdd-7ad0-4ca1-be26-bccff4c96199",
+      "name": "Webhook Nueva Reserva",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1984,
+        144
+      ],
+      "webhookId": "nueva-reserva"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"first_name\": \"{{ $json.body.first_name }}\",\n  \"last_name\": \"{{ $json.body.last_name }}\",\n  \"email\": \"{{ $json.body.email }}\",\n  \"phone\": \"{{ $json.body.phone }}\",\n  \"fecha_checkin\": \"{{ $json.body.fecha_checkin }}\",\n  \"fecha_checkout\": \"{{ $json.body.fecha_checkout }}\",\n  \"noches\": {{ $json.body.noches }},\n  \"personas\": {{ $json.body.personas }},\n  \"total\": {{ $json.body.total }},\n  \"status\": \"{{ $json.body.status }}\"\n}",
+        "options": {}
+      },
+      "id": "4507ccba-c84a-4a98-b800-3a5ae04883c3",
+      "name": "Mapear Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1760,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/contacts/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"locationId\": \"SlVyy8qzlpPfgTjL0sdW\",\n  \"firstName\": \"{{ $json.first_name }}\",\n  \"lastName\": \"{{ $json.last_name }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"customFields\": [\n    { \"id\": \"CJHpeye14wjcKiTeTq3h\", \"value\": \"{{ $json.fecha_checkin.split('/').reverse().join('-') }}\" },\n    { \"id\": \"JY6m7LrB7J9jmUA3pHit\", \"value\": \"{{ $json.fecha_checkout.split('/').reverse().join('-') }}\" },\n    { \"id\": \"ZFLHzQXUGr8jCTQQ3iwy\", \"value\": \"{{ $json.noches }}\" },\n    { \"id\": \"xNOG5SiB5DEmP1jDXE9o\", \"value\": \"{{ $json.personas }}\" },\n    { \"id\": \"y3QMFHLe9cZGUPwmfTcu\", \"value\": \"{{ $json.total }}\" }\n  ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "1ea30a76-d16c-47b0-802d-19caafb42826",
+      "name": "Crear/Actualizar Contacto GHL",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1536,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-contacto-ok",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 400,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d0082e51-d695-4cc2-8123-093be03745e2",
+      "name": "Contacto Creado OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1328,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/opportunities/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"pipelineId\": \"2qRls28RKJBgThKAVara\",\n  \"locationId\": \"SlVyy8qzlpPfgTjL0sdW\",\n  \"name\": \"Reserva {{ $('Mapear Variables').item.json.fecha_checkin }} - {{ $('Mapear Variables').item.json.first_name }} {{ $('Mapear Variables').item.json.last_name }}\",\n  \"pipelineStageId\": \"0e711292-cab4-4ef5-8765-db000af0645a\",\n  \"contactId\": \"{{ $json.body.contact?.id || $json.body.id }}\",\n  \"monetaryValue\": {{ $('Mapear Variables').item.json.total }},\n  \"status\": \"open\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "3034d1fa-993c-4a61-9eed-438277d3a4f9",
+      "name": "Crear Oportunidad Pipeline",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1104,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Crear/Actualizar Contacto GHL').item.json.contact?.id || $('Crear/Actualizar Contacto GHL').item.json.id }}\",\n  \"message\": \"¡Hola {{ $('Mapear Variables').item.json.first_name }}! 🏕️\\n\\n¡Tu reserva en Camping Puerto Viejo Conchal ha sido confirmada! Aquí van los detalles:\\n\\n📅 Check-in: {{ $('Mapear Variables').item.json.fecha_checkin }}\\n📅 Check-out: {{ $('Mapear Variables').item.json.fecha_checkout }}\\n👥 Personas: {{ $('Mapear Variables').item.json.personas }}\\n💰 Total: ₡{{ $('Mapear Variables').item.json.total }}\\n\\n✅ Ya recibimos tu depósito. El saldo restante (si lo hay) lo podés pagar cuando llegués al camping.\\n\\n📲 Para el pago del saldo restante podés usar SINPE Móvil al número +506 83034342.\\n\\n¡Nos vemos pronto! Si tenés alguna pregunta, escribinos por acá. 🌴\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "b5d452c5-ffd8-4b5f-9715-dea0adbe53c8",
+      "name": "WhatsApp Confirmación",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -688,
+        -176
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Mapear Variables').item.json.email }}",
+        "subject": "=¡Reserva confirmada en Camping Puerto Viejo Conchal! 🏕️ - {{ $('Mapear Variables').item.json.first_name }}",
+        "message": "=<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n  <div style=\"background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%); padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">🏕️ Camping Puerto Viejo Conchal</h1>\n  </div>\n  <div style=\"padding: 30px 20px; background-color: #ffffff;\">\n    <h2 style=\"color: #2d5016; margin-top: 0;\">¡Hola {{ $('Mapear Variables').item.json.first_name }}!</h2>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">¡Tu reserva ha sido <strong>confirmada</strong>! Aquí van los detalles:</p>\n    <div style=\"background-color: #f0f7ec; border-left: 4px solid #4a7c23; padding: 20px; border-radius: 4px; margin: 20px 0;\">\n      <table style=\"width: 100%; border-collapse: collapse;\">\n        <tr><td style=\"padding: 8px 0; color: #555; font-size: 15px;\">📅 <strong>Check-in:</strong></td><td style=\"padding: 8px 0; color: #333; font-size: 15px;\">{{ $('Mapear Variables').item.json.fecha_checkin }}</td></tr>\n        <tr><td style=\"padding: 8px 0; color: #555; font-size: 15px;\">📅 <strong>Check-out:</strong></td><td style=\"padding: 8px 0; color: #333; font-size: 15px;\">{{ $('Mapear Variables').item.json.fecha_checkout }}</td></tr>\n        <tr><td style=\"padding: 8px 0; color: #555; font-size: 15px;\">🌙 <strong>Noches:</strong></td><td style=\"padding: 8px 0; color: #333; font-size: 15px;\">{{ $('Mapear Variables').item.json.noches }}</td></tr>\n        <tr><td style=\"padding: 8px 0; color: #555; font-size: 15px;\">👥 <strong>Personas:</strong></td><td style=\"padding: 8px 0; color: #333; font-size: 15px;\">{{ $('Mapear Variables').item.json.personas }}</td></tr>\n        <tr><td style=\"padding: 8px 0; color: #555; font-size: 15px;\">💰 <strong>Total:</strong></td><td style=\"padding: 8px 0; color: #333; font-size: 15px; font-weight: bold;\">₡{{ $('Mapear Variables').item.json.total }}</td></tr>\n      </table>\n    </div>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">✅ Ya recibimos tu depósito. El saldo restante (si lo hay), lo podés pagar cuando llegués al camping.</p>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">📲 Para el pago del saldo restante podés usar <strong>SINPE Móvil</strong> al número <strong>+506 83034342</strong>.</p>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">¡Nos vemos pronto! Si tenés alguna pregunta, respondé a este correo. 🌴</p>\n  </div>\n  <div style=\"background-color: #f5f5f5; padding: 20px; text-align: center; border-radius: 0 0 8px 8px;\">\n    <p style=\"color: #888; font-size: 13px; margin: 0;\">Camping Puerto Viejo Conchal · Guanacaste, Costa Rica 🇨🇷</p>\n  </div>\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "6dfd9277-7aee-4c36-8218-8534672e5086",
+      "name": "Gmail Confirmación",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -880,
+        144
+      ],
+      "webhookId": "17e3a78c-1d53-4607-81b5-40979ecfb5f3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "eLxBeppkOfU6iHy1",
+          "name": "Don Jorge Gmail Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('Error al crear contacto en GHL:', JSON.stringify($input.first().json));\nreturn [{ json: { error: true, message: 'Fallo al crear contacto en GHL', details: $input.first().json } }];"
+      },
+      "id": "4f1a50fe-ddd9-4724-a26b-25583502d298",
+      "name": "Log Error Contacto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1104,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \"success\": true, \"message\": \"Reserva procesada correctamente\" }",
+        "options": {}
+      },
+      "id": "c088cc28-78d1-4dab-8670-fe2ade6c0c7f",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -656,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "CPVC",
+        "remoteJid": "={{ \"506\" + $('Mapear Variables').item.json.phone }}",
+        "messageText": "={{ \"¡Hola \" + $('Mapear Variables').item.json.first_name + \"! 🏕️\\n\\n¡Tu reserva en Camping Puerto Viejo Conchal ha sido confirmada! Aquí van los detalles:\\n\\n🏕 Check-in: \" + $('Mapear Variables').item.json.fecha_checkin + \"\\n🏕 Check-out: \" + $('Mapear Variables').item.json.fecha_checkout + \"\\n👥 Personas: \" + $('Mapear Variables').item.json.personas + \"\\n💰 Total: ₡\" + $('Mapear Variables').item.json.total + \"\\n\\n✅ Ya recibimos tu depósito. El saldo restante (si lo hay) lo podés pagar cuando llegués al camping.\\n\\n💳 Para el pago del saldo restante podés usar SINPE Móvil al número +506 83034342.\\n\\n¡Nos vemos pronto! Si tenés alguna pregunta, escribinos por acá. 🌴\" }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        -64
+      ],
+      "id": "2dd1a95d-a44d-4806-95a0-301ac2832cc0",
+      "name": "WhatsApp Confirmación1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "9UUhtPh7o4Ya2Sns",
+          "name": "Evolution account CPVC"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Nueva Reserva": {
+      "main": [
+        [
+          {
+            "node": "Mapear Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapear Variables": {
+      "main": [
+        [
+          {
+            "node": "Crear/Actualizar Contacto GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear/Actualizar Contacto GHL": {
+      "main": [
+        [
+          {
+            "node": "Contacto Creado OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacto Creado OK?": {
+      "main": [
+        [
+          {
+            "node": "Crear Oportunidad Pipeline",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error Contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Oportunidad Pipeline": {
+      "main": [
+        [
+          {
+            "node": "Gmail Confirmación",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WhatsApp Confirmación1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Confirmación": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail Confirmación": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Confirmación1": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "395d42c9-ca0b-4faf-91ff-df1ee70356ca",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "edb08db1ee99e5e0c3678b395938627915dd6d714cbd4a3de65c47ccf5282a2c"
+  },
+  "id": "AseoY7tM48UzDFLXMs-ry",
+  "tags": [
+    {
+      "updatedAt": "2026-03-11T20:49:57.888Z",
+      "createdAt": "2026-03-11T20:49:57.888Z",
+      "id": "4H7JuVybZsS2K0SN",
+      "name": "CPVC"
+    }
+  ]
+}

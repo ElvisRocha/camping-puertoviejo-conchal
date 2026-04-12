@@ -1,5 +1,5 @@
 {
-  "name": "Cori - Agente Virtual Camping Puerto Viejo Conchal v5",
+  "name": "Cori - Agente Virtual Camping Puerto Viejo Conchal v6",
   "nodes": [
     {
       "parameters": {
@@ -8,27 +8,27 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "62c53f80-63bb-446c-b1b4-e292e32be995",
+      "id": "97f4a21a-73bb-4f85-8f1e-1657d7da739f",
       "name": "Webhook Evolution API",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -656,
-        128
+        -3424,
+        -176
       ],
       "webhookId": "camping-cori-webhook"
     },
     {
       "parameters": {
-        "jsCode": "const body = $input.first().json.body;\nconst data = body.data;\n\nif (!data || !data.key) return [];\nif (data.key.fromMe) return [];\n\nconst remoteJid = data.key.remoteJid;\nconst phoneNumber = remoteJid\n  .replace('@s.whatsapp.net', '')\n  .replace('@g.us', '')\n  .replace('@lid', '');\n\nconst pushName = data.pushName || 'Campista';\nconst messageType = data.messageType || '';\nconst textMessage = data.message?.conversation ||\n  data.message?.extendedTextMessage?.text || '';\nconst isAudio = messageType === 'audioMessage' || messageType === 'pttMessage';\n\nif (!textMessage && !isAudio) return [];\n\nreturn [{\n  json: {\n    phoneNumber,\n    remoteJid,\n    fullBody: body,\n    instanceName: data.instanceId ? 'CPVC' : 'CPVC',\n    pushName,\n    messageType: data.messageType || '',\n    textMessage,\n    isAudio,\n    rawMessage: data.message,\n    messageId: data.key.id,\n    timestamp: new Date().toISOString()\n  }\n}];"
+        "jsCode": "const body = $input.first().json.body;\nconst data = body.data;\n\nif (!data || !data.key) return [];\nif (data.key.fromMe) return [];\n\nconst remoteJid = data.key.remoteJid;\nconst phoneNumber = remoteJid\n  .replace('@s.whatsapp.net', '')\n  .replace('@g.us', '')\n  .replace('@lid', '');\n\nconst pushName = data.pushName || 'Campista';\nconst messageType = data.messageType || '';\nconst textMessage = data.message?.conversation ||\n  data.message?.extendedTextMessage?.text || '';\nconst isAudio = messageType === 'audioMessage' || messageType === 'pttMessage';\nconst isImage = messageType === 'imageMessage';\nconst imageCaption = data.message?.imageMessage?.caption || '';\n\nif (!textMessage && !isAudio && !isImage) return [];\n\n// Get current date from message timestamp\nconst msgTimestamp = data.messageTimestamp;\nconst currentDate = msgTimestamp \n  ? new Date(msgTimestamp * 1000) \n  : new Date();\n\nreturn [{\n  json: {\n    phoneNumber,\n    remoteJid,\n    fullBody: body,\n    instanceName: 'CPVCV2',\n    pushName,\n    messageType,\n    textMessage: isImage ? (imageCaption || '[Imagen enviada]') : textMessage,\n    isAudio,\n    isImage,\n    rawMessage: data.message,\n    messageId: data.key.id,\n    timestamp: currentDate.toISOString(),\n    currentDate: currentDate.toISOString().split('T')[0],\n    currentDayName: currentDate.toLocaleDateString('es-CR', { weekday: 'long' }),\n    currentDateFormatted: currentDate.toLocaleDateString('es-CR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })\n  }\n}];"
       },
-      "id": "8376a8ad-a755-4dcf-b56b-f73bdb2fba7d",
+      "id": "7a60b02b-c622-4af3-ab5a-e6a1379743bc",
       "name": "Detectar tipo de mensaje",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -448,
-        128
+        -3216,
+        -176
       ]
     },
     {
@@ -55,13 +55,13 @@
         },
         "options": {}
       },
-      "id": "b1371446-a2ad-4246-b508-580eaffbdca6",
+      "id": "22cc498b-bcec-4ee1-bfa9-0c6d2a07ec75",
       "name": "¿Es audio?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -224,
-        128
+        -2992,
+        -176
       ]
     },
     {
@@ -73,7 +73,7 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "EVOLUTION_KEY_AQUI"
+              "value": "EVOLUTION_API"
             },
             {
               "name": "Content-Type",
@@ -86,26 +86,26 @@
         "jsonBody": "={\n  \"message\": {\n    \"key\": {\n      \"id\": \"{{ $json.messageId }}\",\n      \"remoteJid\": \"{{ $json.remoteJid }}\",\n      \"fromMe\": false\n    }\n  },\n  \"convertToMp4\": false\n}",
         "options": {}
       },
-      "id": "73d45da6-9616-4f63-990e-a384403ee9c6",
+      "id": "5f09c718-8723-454a-865b-036ff5448fef",
       "name": "Descargar audio (base64)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        0,
-        0
+        -2768,
+        -304
       ]
     },
     {
       "parameters": {
         "jsCode": "const base64Audio = $input.first().json.base64;\nconst phoneNumber = $('Detectar tipo de mensaje').first().json.phoneNumber;\nconst pushName = $('Detectar tipo de mensaje').first().json.pushName;\nconst remoteJid = $('Detectar tipo de mensaje').first().json.remoteJid;\n\nif (!base64Audio) {\n  return [{\n    json: {\n      phoneNumber, remoteJid, pushName,\n      textMessage: '[El cliente envió un audio pero no se pudo procesar]',\n      isAudio: true, audioReady: false\n    }\n  }];\n}\n\nconst audioBuffer = Buffer.from(base64Audio, 'base64');\n\nreturn [{\n  json: { phoneNumber, remoteJid, pushName, isAudio: true, audioReady: true },\n  binary: {\n    audio: { data: audioBuffer, mimeType: 'audio/ogg', fileName: 'audio.ogg' }\n  }\n}];"
       },
-      "id": "269a2f44-f7d5-40e4-bbe6-22524b61e744",
+      "id": "93c0b48c-f4cc-4fcb-8991-968eb4681e18",
       "name": "Preparar audio para Whisper",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        208,
-        0
+        -2560,
+        -304
       ]
     },
     {
@@ -117,7 +117,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer OPENAI_KEY_AQUI"
+              "value": "Bearer OPENAI_API_KEY"
             }
           ]
         },
@@ -142,39 +142,39 @@
         },
         "options": {}
       },
-      "id": "46098a0d-da48-4005-ae69-2d23ca94f9f6",
+      "id": "b4cca2d3-87d6-4199-ae1c-21a5af176194",
       "name": "Whisper - Transcribir audio",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
-        0
+        -2368,
+        -304
       ]
     },
     {
       "parameters": {
-        "jsCode": "let textMessage = '';\nlet phoneNumber = '';\nlet remoteJid = '';\nlet pushName = '';\nlet isTranscribed = false;\n\nconst inputData = $input.first().json;\n\nif (inputData.text) {\n  textMessage = inputData.text;\n  phoneNumber = $('Preparar audio para Whisper').first().json.phoneNumber;\n  remoteJid = $('Preparar audio para Whisper').first().json.remoteJid;\n  pushName = $('Preparar audio para Whisper').first().json.pushName;\n  isTranscribed = true;\n} else {\n  textMessage = $('Detectar tipo de mensaje').first().json.textMessage;\n  phoneNumber = $('Detectar tipo de mensaje').first().json.phoneNumber;\n  remoteJid = $('Detectar tipo de mensaje').first().json.remoteJid;\n  pushName = $('Detectar tipo de mensaje').first().json.pushName;\n}\n\nif (!textMessage || !textMessage.trim()) return [];\n\nreturn [{\n  json: {\n    phoneNumber,\n    remoteJid,\n    pushName,\n    textMessage: textMessage.trim(),\n    isTranscribed,\n    timestamp: new Date().toISOString()\n  }\n}];"
+        "jsCode": "let textMessage = '';\nlet phoneNumber = '';\nlet remoteJid = '';\nlet pushName = '';\nlet isTranscribed = false;\nlet isImage = false;\n\nconst inputData = $input.first().json;\n\nif (inputData.text) {\n  textMessage = inputData.text;\n  phoneNumber = $('Preparar audio para Whisper').first().json.phoneNumber;\n  remoteJid = $('Preparar audio para Whisper').first().json.remoteJid;\n  pushName = $('Preparar audio para Whisper').first().json.pushName;\n  isTranscribed = true;\n} else {\n  textMessage = $('Detectar tipo de mensaje').first().json.textMessage;\n  phoneNumber = $('Detectar tipo de mensaje').first().json.phoneNumber;\n  remoteJid = $('Detectar tipo de mensaje').first().json.remoteJid;\n  pushName = $('Detectar tipo de mensaje').first().json.pushName;\n  isImage = $('Detectar tipo de mensaje').first().json.isImage || false;\n}\n\nif (!textMessage || !textMessage.trim()) {\n  if (!isImage) return [];\n  textMessage = '[Imagen enviada]';\n}\n\nreturn [{\n  json: {\n    phoneNumber, remoteJid, pushName,\n    textMessage: textMessage.trim(),\n    isTranscribed, isImage,\n    messageId: $('Detectar tipo de mensaje').first().json.messageId,\n    timestamp: new Date().toISOString()\n  }\n}];"
       },
-      "id": "278431dd-b685-4ae8-b8b3-1399ad97768b",
+      "id": "0e5b8290-ba77-4695-99fe-b978f9cfad1b",
       "name": "Unificar mensaje",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        208,
-        192
+        -2560,
+        -112
       ]
     },
     {
       "parameters": {
         "jsCode": "// Obtener historial de conversación desde Redis\nconst phoneNumber = $input.first().json.phoneNumber;\nconst redisKey = `cori:conv:${phoneNumber}`;\n\n// Retornar la key para que el nodo Redis la use\nreturn [{\n  json: {\n    ...($input.first().json),\n    redisKey\n  }\n}];"
       },
-      "id": "662474b2-5e9a-419e-8fb2-d889d591a599",
+      "id": "5eb7846c-b635-40c7-bbd1-fbe02804d41d",
       "name": "Preparar clave Redis",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        432,
-        192
+        -2336,
+        -112
       ]
     },
     {
@@ -184,13 +184,13 @@
         "key": "={{ $json.redisKey }}",
         "options": {}
       },
-      "id": "354943b2-52a2-44ce-9bd2-5816c5cf9943",
+      "id": "bbdcafed-6c51-4ac4-972e-2c591f331df6",
       "name": "Redis - Obtener historial",
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        640,
-        192
+        -2128,
+        -112
       ],
       "credentials": {
         "redis": {
@@ -201,15 +201,15 @@
     },
     {
       "parameters": {
-        "jsCode": "// Los datos del mensaje vienen de \"Preparar clave Redis\" (el nodo anterior a Redis)\n// porque Redis - Obtener historial sobreescribe el json con solo {value: \"...\"}\nconst msgData = $('Preparar clave Redis').first().json;\nconst phoneNumber = msgData.phoneNumber;\nconst remoteJid = msgData.remoteJid;\nconst pushName = msgData.pushName;\nconst textMessage = msgData.textMessage;\nconst redisKey = msgData.redisKey;\n\n// El historial viene del $input (resultado directo de Redis - Obtener historial)\nlet historyRaw = $input.first().json.value || null;\nlet conversationHistory = [];\nlet clientName = null;\nlet reservationInfoSent = false;\nlet followUpSent = false;\nlet mediaSentCategories = {};\n\nif (historyRaw) {\n  try {\n    const parsed = JSON.parse(historyRaw);\n    conversationHistory = parsed.messages || [];\n    clientName = parsed.clientName || null;\n    reservationInfoSent = parsed.reservationInfoSent || false;\n    followUpSent = parsed.followUpSent || false;\n    mediaSentCategories = parsed.mediaSentCategories || {};\n  } catch(e) {\n    conversationHistory = [];\n  }\n}\n\n// Si no tenemos nombre guardado, intentar extraerlo del historial\n// buscando patrones en respuestas anteriores de Cori\nif (!clientName && conversationHistory.length > 0) {\n  for (const msg of conversationHistory) {\n    if (msg.role === 'assistant') {\n      const match = msg.content.match(/Gracias\\s+(\\w+)\\s+por/i);\n      if (match) {\n        clientName = match[1];\n        break;\n      }\n    }\n  }\n}\n\n// Agregar mensaje actual al historial\nconversationHistory.push({\n  role: 'user',\n  content: textMessage,\n  timestamp: new Date().toISOString()\n});\n\n// Mantener solo últimos 20 mensajes para no exceder tokens\nif (conversationHistory.length > 20) {\n  conversationHistory = conversationHistory.slice(-20);\n}\n\n// Construir mensajes para Claude — filtrar los que no tienen contenido\nconst claudeMessages = conversationHistory\n  .filter(m => m.content && m.content.trim() !== '')\n  .map(m => ({\n    role: m.role,\n    content: m.content\n  }));\n\n// Garantizar que siempre haya al menos un mensaje válido\nif (claudeMessages.length === 0) {\n  claudeMessages.push({\n    role: 'user',\n    content: textMessage\n  });\n}\n\n// Inyectar contexto interno al inicio si tenemos nombre del cliente\nif (clientName) {\n  claudeMessages.unshift({\n    role: 'user',\n    content: `[CONTEXTO INTERNO — NO MOSTRAR AL CLIENTE: El nombre del cliente es ${clientName}. Ya fue saludado anteriormente. NO pidás el nombre de nuevo. Usalo naturalmente cuando sea apropiado.]`\n  });\n  claudeMessages.splice(1, 0, {\n    role: 'assistant',\n    content: `Entendido, el cliente se llama ${clientName}.`\n  });\n}\n\n// Inyectar contexto de follow-up de reserva si corresponde\nif (reservationInfoSent && !followUpSent) {\n  claudeMessages.push({\n    role: 'user',\n    content: `[CONTEXTO INTERNO — NO MOSTRAR AL CLIENTE: Ya explicaste cómo reservar en un mensaje anterior. Si el cliente no confirmó que reservó, incluí al final de tu respuesta: '¿Pudiste completar tu reserva sin problema? Si tuviste algún inconveniente escribile directamente a Don Jorge al 8303-4342.' Hacé esto solo una vez.]`\n  });\n}\n\n// Inyectar contexto de multimedia ya enviada\nconst sentCats = Object.keys(mediaSentCategories).filter(k => mediaSentCategories[k]);\nif (sentCats.length > 0) {\n  const catNames = { installations: 'instalaciones', beaches: 'playas', location: 'ubicación', reservation: 'reserva', campingVideo: 'video del camping' };\n  const sentList = sentCats.map(k => catNames[k] || k).join(', ');\n  claudeMessages.push({\n    role: 'user',\n    content: `[CONTEXTO INTERNO — NO MOSTRAR AL CLIENTE: Ya se enviaron fotos/videos de: ${sentList}. NO mencionés que vas a enviar material de esos temas a menos que el cliente lo pida explícitamente.]`\n  });\n}\n\nreturn [{\n  json: {\n    phoneNumber,\n    remoteJid,\n    pushName,\n    textMessage,\n    redisKey,\n    clientName,\n    reservationInfoSent,\n    followUpSent,\n    mediaSentCategories,\n    conversationHistory,\n    claudeMessages\n  }\n}];"
+        "jsCode": "const msgData = $('Preparar clave Redis').first().json;\nconst phoneNumber = msgData.phoneNumber;\nconst remoteJid = msgData.remoteJid;\nconst pushName = msgData.pushName;\nconst textMessage = msgData.textMessage;\nconst redisKey = msgData.redisKey;\nconst isImage = msgData.isImage || false;\nconst messageId = msgData.messageId || '';\n\nlet historyRaw = $input.first().json.value || null;\nlet conversationHistory = [];\nlet clientName = null;\nlet reservationInfoSent = false;\nlet followUpSent = false;\nlet mediaSentCategories = {};\nlet bookingState = {\n  phase: 'idle', data: { checkIn:null, checkOut:null, nights:0, adults:0, children:0, infants:0,\n    guestName:null, guestEmail:null, guestPhone:phoneNumber, guestCountry:null, totalCRC:0 },\n  referenceCode:null, receiptAttempts:0, receiptVerified:false, depositCRC:0, lastActionResult:null\n};\nlet lookupState = { active:false, referenceCode:null, bookingData:null, intent:null };\n\nif (historyRaw) {\n  try {\n    const parsed = JSON.parse(historyRaw);\n    conversationHistory = parsed.messages || [];\n    clientName = parsed.clientName || null;\n    reservationInfoSent = parsed.reservationInfoSent || false;\n    followUpSent = parsed.followUpSent || false;\n    mediaSentCategories = parsed.mediaSentCategories || {};\n    if (parsed.bookingState) bookingState = { ...bookingState, ...parsed.bookingState };\n    if (parsed.lookupState) lookupState = { ...lookupState, ...parsed.lookupState };\n  } catch(e) { conversationHistory = []; }\n}\n\nif (!clientName && conversationHistory.length > 0) {\n  for (const msg of conversationHistory) {\n    if (msg.role === 'assistant') {\n      const match = msg.content.match(/Gracias\\s+(\\w+)\\s+por/i);\n      if (match) { clientName = match[1]; break; }\n    }\n  }\n}\n\nconversationHistory.push({ role: 'user', content: textMessage, timestamp: new Date().toISOString() });\nif (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);\n\nconst claudeMessages = conversationHistory.filter(m => m.content && m.content.trim() !== '').map(m => ({ role: m.role, content: m.content }));\nif (claudeMessages.length === 0) claudeMessages.push({ role: 'user', content: textMessage });\n\n// Inject current date so Claude knows what day it is\nconst currentDate = msgData.currentDate || new Date().toISOString().split('T')[0];\nconst currentDateFormatted = msgData.currentDateFormatted || new Date().toLocaleDateString('es-CR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });\nclaudeMessages.unshift({\n  role: 'user',\n  content: '[FECHA ACTUAL: Hoy es ' + currentDateFormatted + ' (' + currentDate + '). Usá esta fecha como referencia cuando el cliente diga \"este fin de semana\", \"mañana\", \"el próximo viernes\", etc.]'\n});\nclaudeMessages.splice(1, 0, {\n  role: 'assistant',\n  content: 'Entendido, hoy es ' + currentDateFormatted + '.'\n});\n\nif (clientName) {\n  claudeMessages.unshift({ role: 'user', content: '[CONTEXTO INTERNO: El nombre del cliente es ' + clientName + '. NO pid\\u00e1s el nombre de nuevo.]' });\n  claudeMessages.splice(1, 0, { role: 'assistant', content: 'Entendido, el cliente se llama ' + clientName + '.' });\n}\n\nif (bookingState.phase !== 'idle') {\n  claudeMessages.push({ role: 'user', content: '[ESTADO RESERVA: Fase=' + bookingState.phase + ' Datos=' + JSON.stringify(bookingState.data) + ' Ref=' + (bookingState.referenceCode||'pendiente') + ' Intentos recibo=' + bookingState.receiptAttempts + '/3 Verificado=' + bookingState.receiptVerified + (bookingState.lastActionResult ? ' UltimoResultado=' + JSON.stringify(bookingState.lastActionResult) : '') + ']' });\n}\n\nif (isImage) {\n  claudeMessages.push({ role: 'user', content: '[CONTEXTO: El cliente envi\\u00f3 una IMAGEN. Si est\\u00e1 en fase awaiting_payment, es el comprobante SINPE. El sistema lo verificar\\u00e1 autom\\u00e1ticamente.]' });\n}\n\nconst sentCats = Object.keys(mediaSentCategories).filter(k => mediaSentCategories[k]);\nif (sentCats.length > 0) {\n  const catNames = { installations:'instalaciones', beaches:'playas', location:'ubicaci\\u00f3n', reservation:'reserva', campingVideo:'video' };\n  claudeMessages.push({ role: 'user', content: '[Ya se enviaron fotos/videos de: ' + sentCats.map(k => catNames[k]||k).join(', ') + ']' });\n}\n\nreturn [{ json: {\n  phoneNumber, remoteJid, pushName, textMessage, redisKey,\n  clientName, reservationInfoSent, followUpSent, mediaSentCategories,\n  conversationHistory, claudeMessages,\n  bookingState, lookupState,\n  isImage, messageId,\n  isFirstMessage: conversationHistory.length === 1\n} }];"
       },
-      "id": "3f9403a4-5f5e-4981-945d-ddf0b369d79d",
+      "id": "3592921e-6e3f-4b9c-917a-5a7e004502e9",
       "name": "Construir contexto conversacional",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        864,
-        192
+        -1904,
+        -112
       ]
     },
     {
@@ -221,7 +221,7 @@
           "parameters": [
             {
               "name": "x-api-key",
-              "value": "ANTHROPHIC_KEY_AQUI"
+              "value": "CLAUDE_API_KEY"
             },
             {
               "name": "anthropic-version",
@@ -235,31 +235,31 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 1024,\n  \"system\": \"Eres Cori, la recepcionista del Camping Puerto Viejo Conchal, en Guanacaste, Costa Rica. Sos amigable, servicial y conocés el camping a la perfección.\\n\\nPERSONALIDAD Y TONO:\\n- Conversacional y natural, no robótica\\n- Emojis SOLO en momentos clave: bienvenida inicial, confirmación de reserva, despedida. En el resto NO usés emojis.\\n- Negritas (*texto*) solo para info importante: precios, pasos, nombres de playas, reglas\\n- Respuestas cortas y directas\\n- Si el idioma es español: voseo tico — 'podés', 'tenés', 'acá', 'tuanis'. NUNCA 'mae' ni expresiones de otros países\\n- Si el idioma es inglés: neutro y amigable\\n\\nNOMBRE DEL CLIENTE — MUY IMPORTANTE:\\n- REGLA DE ORO: SIEMPRE respondé primero la pregunta o consulta del cliente. El nombre se pide AL FINAL del mensaje, nunca al inicio.\\n- Si es el PRIMER mensaje y NO sabés el nombre: Saludá brevemente ('¡Hola! Bienvenido al Camping Puerto Viejo Conchal 🌴 Soy Cori, tu asistente.'), respondé la pregunta o dá la información solicitada, y al final preguntá el nombre de forma natural: 'Por cierto, ¿cómo te llamás para atenderte mejor?'\\n- Si el cliente te da su nombre: agradecé naturalmente: 'Gracias [nombre] por compartir tu nombre.' y continuá la conversación.\\n- Si YA SABÉS el nombre (está en el historial o en el contexto interno): NUNCA lo volvés a pedir. Usalo naturalmente.\\n- Si el cliente no da el nombre y sigue preguntando: respondé normalmente, llamalo 'campista', y NO volvás a pedir el nombre. Una sola vez es suficiente.\\n\\nMEMORIA:\\n- NUNCA repetís el saludo si ya saludaste en esta conversación\\n- Usás el nombre del cliente de forma natural (no en cada mensaje)\\n- Recordás lo que ya se habló y hacés referencias naturales\\n- Si el cliente vuelve después de días: 'Qué bueno saber de vos de nuevo, [nombre]. ¿En qué te puedo ayudar?'\\n\\nFOLLOW-UP DE RESERVA:\\n- Si en esta conversación ya explicaste cómo reservar (reservationInfoSent = true) Y el cliente manda un mensaje nuevo sin confirmar que reservó: incluís naturalmente al final de tu respuesta: '¿Pudiste completar tu reserva sin problema? Si tuviste algún inconveniente escribile directamente a Don Jorge al 8303-4342.'\\n- Solo hacés este follow-up UNA VEZ por conversación (followUpSent = true después de hacerlo)\\n\\nINFO DEL CAMPING:\\n- Ubicación: 800 metros de Playa Puerto Viejo, Guanacaste, Costa Rica\\n- Playas: Puerto Viejo (20 min caminando, 3 min en carro), Conchal (50 min caminando, o 3 min en carro a Puerto Viejo + 30 min caminando), Minas (60 min caminando, 15 min en carro alto — no automóviles), Bahía Piratas/Playa Real (90 min caminando, 20 min en carro)\\n- Web: https://camping-puertoviejo-conchal.com/ | Galería: https://camping-puertoviejo-conchal.com/gallery | Reservas: https://camping-puertoviejo-conchal.com/book\\n- Instagram: @camping.puertoviejo.conchal | Facebook: Camping puerto viejo conchal gunacaste | TikTok: @jorgejimenez7728888\\n\\nTARIFAS:\\n- *₡7,000 por persona por noche* (aprox. $14 USD)\\n- Menores de 5 años: gratis. De 5 en adelante: tarifa completa\\n- Sin descuentos. Capacidad máxima: 25 personas\\n\\nSERVICIOS: Sanitarios (H y M), duchas, WiFi, cocina con gas, rancho comedor, parrillas, congelador, microondas, agua potable, 10 tomacorrientes, espacio vehículo\\n\\nCARPAS: Deben traer la propia. Hay en alquiler (Dúo Acogedor 2p, Expedición Familiar 4p, El Clan Aventurero 6p) pero actualmente TODAS AGOTADAS\\n\\nMASCOTAS: Sí, con correa\\n\\nREGLAS: No fogatas (sí parrillas), música después de 10 PM bajito, prohibido vidrio en playa, supermercado a 5 min en carro\\n\\nPLAYAS — INFO DETALLADA (solo cuando te pidan info específica de una playa):\\n- *Playa Puerto Viejo*: La más cercana, tranquila. Mañanas con marea baja, tardes sube.\\n- *Playa Conchal*: Muy turística, aguas cristalinas.\\n- *Playa Minas*: Tesoro escondido, aguas cristalinas. Solo carro alto.\\n- *Bahía Piratas (Playa Real)*: Espectacular para atardeceres, aguas cristalinas, se ve una isla pequeña en el mar.\\nPara más fotos: https://camping-puertoviejo-conchal.com/gallery\\n\\nPROCESO DE RESERVA (explicá paso a paso cuando pregunten):\\n*Paso 1*: https://camping-puertoviejo-conchal.com/book — elegir fechas. Estadía mínima 1 noche.\\n*Paso 2*: Seleccionar huéspedes (bebés 0-4 gratis).\\n*Paso 3*: Llenar datos personales. Acá ves el resumen y total.\\n*Paso 4*: SINPE Móvil al *8303-4342* (Jorge Gerardo Jiménez Granados) mínimo 50% del total. Podés pagar más — el resto al llegar. Subir comprobante, aceptar términos, clic en Completar Reserva. Te llega código de reserva al correo.\\n\\nPAGO: Solo SINPE Móvil al *8303-4342* (Jorge Gerardo Jiménez Granados)\\n\\nCÓMO LLEGAR:\\n- Página de contacto: https://camping-puertoviejo-conchal.com/contact\\n- Google Maps: https://www.google.com/maps/dir/?api=1&destination=10.390279144185165,-85.81323950164672\\n\\nCUANDO NO SEPAS ALGO: 'Buena pregunta. Te recomiendo contactar directamente a Don Jorge.' WhatsApp/llamada: *8303-4342*\\n\\nMULTIMEDIA — MUY IMPORTANTE:\\n- El sistema envía fotos/videos automáticamente la PRIMERA VEZ que se habla de un tema (instalaciones, playas, ubicación, reservas).\\n- En la primera mención de un tema: mencioná que estás enviando el material visual relevante.\\n- En menciones POSTERIORES del mismo tema: NO mencionés fotos/videos a menos que el cliente LO PIDA EXPLÍCITAMENTE (ejemplo: 'mandame fotos', 'quiero ver', 'enviame el video').\\n- Si el cliente pide fotos/videos explícitamente de un tema ya enviado: mencioná que se los enviás de nuevo con gusto.\\n- Para el video de bienvenida: el sistema lo envía automáticamente solo en el primer mensaje, no lo mencionés en mensajes siguientes a menos que el cliente pida videos del camping.\\n- NUNCA prometás fotos si no hay contexto para enviarlas.\\n\\nNO HAGAS:\\n- Repetir el saludo\\n- Pedir el nombre si ya lo sabés\\n- Inventar información\\n- Usar doble asterisco (**) — WhatsApp usa *texto*\\n- Emojis en cada mensaje\\n- Prometer fotos si no hay contexto para enviarlas\\n- Usar 'mae'\",\n  \"messages\": {{ JSON.stringify($json.claudeMessages) }}\n}",
+        "jsonBody": "={\"model\": \"claude-sonnet-4-6\", \"max_tokens\": 1500, \"system\": \"Eres Cori, la recepcionista del Camping Puerto Viejo Conchal, en Guanacaste, Costa Rica.\\n\\nPERSONALIDAD: Conversacional, voseo tico ('podés','tenés','acá'). NUNCA 'mae'. Emojis SOLO en bienvenida/confirmación/despedida. Negritas *texto* para info clave.\\n\\nNOMBRE: Respondé primero la consulta, pedí nombre AL FINAL del primer mensaje. Si ya lo sabés, NO lo vuelvas a pedir.\\n\\nINFO: ₡7,000/persona/noche. Menores 5: gratis. Max 25 personas. Carpas: traer propia (alquiler agotado). SINPE: *8303-4342* (Jorge Gerardo Jiménez Granados). Web: camping-puertoviejo-conchal.com\\n\\nPLAYAS: Puerto Viejo (20 min), Conchal (50 min), Minas (60 min, 4x4), Bahía Piratas (90 min).\\nSERVICIOS: Sanitarios, duchas, WiFi, cocina, rancho, parrillas, congelador, microondas, agua, tomacorrientes.\\nREGLAS: No fogatas (sí parrillas), música baja después 10 PM.\\nMASCOTAS: Sí, con correa.\\nMaps: https://www.google.com/maps/dir/?api=1&destination=10.390279,-85.813239\\n\\n===== SISTEMA DE RESERVAS =====\\n\\nFORMATO DE RESPUESTA (OBLIGATORIO):\\n---RESPONSE---\\n[Tu mensaje natural para el cliente]\\n---ACTION---\\n[none | check_availability | create_booking | lookup_booking | cancel_booking]\\n---ACTION_DATA---\\n[JSON con datos, o {}]\\n---BOOKING_STATE_UPDATE---\\n[JSON con cambios al estado, o {}]\\n---END---\\n\\nFLUJO NUEVA RESERVA:\\n1. FECHAS: Pedí check-in y check-out. Cuando las tengás → check_availability\\n2. HUÉSPEDES: Adultos, niños (5+), bebés (0-4 gratis). Calculá: (adultos+niños) × ₡7,000 × noches\\n3. DATOS: Nombre completo, email, país. Teléfono ya lo tenés del WhatsApp.\\n4. RESUMEN: Mostrá resumen y pedí confirmación explícita.\\n5. PAGO: Indicá SINPE al *8303-4342* mínimo 50%. Pedí foto del comprobante.\\n6. VERIFICACIÓN: El sistema verifica. Si OK → create_booking. Si falla → pedir reenvío (max 3). Si 3 fallos → redirigir a Don Jorge 8303-4342.\\n\\nCONSULTA: Pedí código CPVC-XXXXX → lookup_booking\\nCANCELACIÓN: Confirmá antes → cancel_booking\\n\\nBOOKING_STATE_UPDATE: Actualizá la fase progresivamente:\\n{\\\"phase\\\":\\\"collecting_dates\\\"} → {\\\"phase\\\":\\\"collecting_guests\\\",\\\"data\\\":{\\\"checkIn\\\":\\\"2026-04-15\\\",\\\"checkOut\\\":\\\"2026-04-17\\\",\\\"nights\\\":2}}\\n{\\\"phase\\\":\\\"collecting_info\\\",\\\"data\\\":{\\\"adults\\\":2,\\\"children\\\":1,\\\"infants\\\":0,\\\"totalCRC\\\":42000}}\\n{\\\"phase\\\":\\\"summary\\\",\\\"data\\\":{\\\"guestName\\\":\\\"Juan Pérez\\\",\\\"guestEmail\\\":\\\"j@mail.com\\\",\\\"guestCountry\\\":\\\"Costa Rica\\\"}}\\n{\\\"phase\\\":\\\"awaiting_payment\\\"} (después de confirmación del resumen)\\n{\\\"phase\\\":\\\"done\\\"} (después de crear reserva exitosamente)\\n\\nNO HAGÁS: Repetir saludo, pedir nombre si ya lo sabés, inventar info, usar **, emojis en cada mensaje, usar 'mae'.\", \"messages\": {{ JSON.stringify($json.claudeMessages) }}}",
         "options": {
           "timeout": 30000
         }
       },
-      "id": "38469137-52d6-41f2-95e2-261616c04e0c",
+      "id": "b51edd89-54ad-4ee1-9ff4-bbd119eb58ea",
       "name": "Claude AI - Cori",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1088,
-        288
+        -1680,
+        48
       ]
     },
     {
       "parameters": {
-        "jsCode": "const claudeResponse = $input.first().json;\nconst responseText = claudeResponse.content[0].text;\nconst context = $('Construir contexto conversacional').first().json;\nconst messageText = context.textMessage.toLowerCase();\nconst remoteJid = context.remoteJid;\nconst phoneNumber = context.phoneNumber;\n\nlet mediaToSend = [];\nconst mediaSentCategories = context.mediaSentCategories || {};\n\n// Solo enviar video de bienvenida en el PRIMER mensaje absoluto\nconst isFirstMessage = context.conversationHistory.length === 1;\n\n// Detectar si el cliente pide fotos/videos explícitamente\nconst explicitMediaRequest = ['foto', 'fotos', 'photo', 'photos', 'imagen', 'imágenes', 'imagenes', 'video', 'videos', 'mostrame', 'mostrá', 'muéstrame', 'muestrame', 'envíame', 'enviame', 'mándame', 'mandame', 'quiero ver', 'enseñame', 'enseñá'].some(t => messageText.includes(t));\n\n// Detectar contextos para multimedia\nconst installationTriggers = ['instalacion', 'instalación', 'baño', 'baños', 'ducha', 'servicio', 'cocina', 'facilities', 'bathroom', 'shower', 'amenities', 'rancho', 'comedor', 'parrilla', 'tomacorriente', 'wifi', 'instalaciones'];\nconst locationTriggers = ['llegar', 'dirección', 'direccion', 'ubicación', 'ubicacion', 'donde queda', 'dónde queda', 'how to get', 'directions', 'location', 'address', 'entrada', 'cómo llego', 'como llego', 'mapa'];\nconst beachTriggers = ['playa', 'playas', 'beach', 'beaches', 'mar', 'ocean', 'conchal', 'minas', 'piratas', 'puerto viejo'];\nconst reservationTriggers = ['reservar', 'reserva', 'booking', 'book', 'cómo reservo', 'como reservo', 'hacer una reserva', 'cómo hago', 'como hago', 'pasos'];\nconst campingVideoTriggers = ['video', 'videos', 'ver el camping', 'cómo es el camping', 'como es el camping', 'fotos del camping', 'mostrame', 'mostrá'];\n\nconst isAskingInstallations = installationTriggers.some(t => messageText.includes(t));\nconst isAskingLocation = locationTriggers.some(t => messageText.includes(t));\nconst isAskingBeach = beachTriggers.some(t => messageText.includes(t));\nconst isAskingReservation = reservationTriggers.some(t => messageText.includes(t));\nconst isAskingCampingVideo = campingVideoTriggers.some(t => messageText.includes(t));\n\n// Video bienvenida — SOLO en el primer mensaje (siempre se envía)\nif (isFirstMessage) {\n  mediaToSend.push({\n    type: 'video',\n    url: 'https://drive.google.com/uc?export=download&id=1FrfuFfpJ76NzWDOHxUoSSMwAujlRV-qM',\n    caption: 'Acá es donde te vas a quedar, te esperamos pronto 🌴'\n  });\n}\n\n// Video del camping — primera vez automático, después solo si lo pide\nif (!isFirstMessage && isAskingCampingVideo && (!mediaSentCategories.campingVideo || explicitMediaRequest)) {\n  mediaToSend.push({\n    type: 'video',\n    url: 'https://drive.google.com/uc?export=download&id=1FrfuFfpJ76NzWDOHxUoSSMwAujlRV-qM',\n    caption: 'Acá te muestro el área de camping'\n  });\n  mediaSentCategories.campingVideo = true;\n}\n\n// Instalaciones — primera vez automático, después solo si lo pide\nif (isAskingInstallations && (!mediaSentCategories.installations || explicitMediaRequest)) {\n  mediaToSend = mediaToSend.concat([\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1StQ4Jjk4y3nKSdfVfZLQ_KgpVmcgPySB', caption: '*Área de Cocina*' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1a7rVzJ27psPYmJb2YEIoDdaZh9XC4-mU', caption: '*Duchas*' },\n    { type: 'video', url: 'https://drive.google.com/uc?export=download&id=1oCbDXLD781_ZEux6t4kiNg6aQ_QFz2MH', caption: '*Rancho / Área de Comedor*' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1Ssyk_db1r2TOLMCcMkr4UXUy0y0Jf2oh', caption: '*Servicio Hombres*' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1n0NVvpVUtD9R8--HBVXGrg-uFNXXPbN_', caption: '*Servicio Mujeres*' }\n  ]);\n  mediaSentCategories.installations = true;\n}\n\n// Playas — primera vez automático, después solo si lo pide\nif (isAskingBeach && (!mediaSentCategories.beaches || explicitMediaRequest)) {\n  mediaToSend = mediaToSend.concat([\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1FWoV9LOQEzmzWqgrnq9OazmH0ea9Dafj', caption: '*Playa Puerto Viejo* — 20 min caminando' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=174PbyQhqU4NdW0ZTw1c-NNnxdSPmxjYQ', caption: '*Playa Conchal* — Aguas cristalinas' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1fYkA8y8Hw6TXP8Ekh3Dr0hLZCKATt_Sd', caption: '*Playa Minas* — Un tesoro escondido' },\n    { type: 'image', url: 'https://drive.google.com/uc?export=download&id=1wbbh2J8S1vsQu6ZRr8bzpMO9jLfPlGMF', caption: '*Bahía Piratas (Playa Real)* — Espectacular para atardeceres' }\n  ]);\n  mediaSentCategories.beaches = true;\n}\n\n// Cómo llegar — primera vez automático, después solo si lo pide\nif (isAskingLocation && (!mediaSentCategories.location || explicitMediaRequest)) {\n  mediaToSend.push({\n    type: 'image',\n    url: 'https://drive.google.com/uc?export=download&id=1W9zKiiHar0QNQLypevHJ4_8d23ybBZzu',\n    caption: '*Entrada del Camping Puerto Viejo Conchal*'\n  });\n  mediaSentCategories.location = true;\n}\n\n// Tutorial de reserva — primera vez automático, después solo si lo pide\nif (isAskingReservation && (!mediaSentCategories.reservation || explicitMediaRequest)) {\n  mediaToSend.push({\n    type: 'video',\n    url: 'https://drive.google.com/uc?export=download&id=1EEackFsKKdMaBH76XbG_wmHt1Ku9YT_K',\n    caption: 'Acá te dejo el tutorial paso a paso para hacer tu reserva'\n  });\n  mediaSentCategories.reservation = true;\n}\n\n// Actualizar historial con respuesta de Cori\nconst updatedHistory = context.conversationHistory;\nupdatedHistory.push({\n  role: 'assistant',\n  content: responseText,\n  timestamp: new Date().toISOString()\n});\n\n// Actualizar flags\nconst newReservationInfoSent = context.reservationInfoSent || isAskingReservation;\n\n// Marcar follow-up como enviado si el responseText lo contiene\nconst followUpPhrase = '¿Pudiste completar tu reserva';\nconst newFollowUpSent = context.followUpSent || responseText.includes(followUpPhrase);\n\n// Extraer nombre del cliente si aún no lo tenemos\n// Detectar cuando el cliente responde con su nombre (mensaje corto sin signos de pregunta)\nlet clientName = context.clientName;\nif (!clientName) {\n  const msg = context.textMessage.trim();\n  const isLikelyName = (\n    msg.length > 1 &&\n    msg.length < 40 &&\n    !msg.includes('?') &&\n    !msg.includes('http') &&\n    msg.split(' ').length <= 4\n  );\n  // Solo asignamos nombre si la respuesta de Cori contiene \"Gracias [nombre]\"\n  const nameMatch = responseText.match(/Gracias\\s+(\\w+)\\s+por/i);\n  if (nameMatch) {\n    clientName = nameMatch[1];\n  }\n}\n\n// Datos a guardar en Redis (TTL: 48 horas = 172800 segundos)\nconst redisData = JSON.stringify({\n  messages: updatedHistory.slice(-20),\n  clientName,\n  reservationInfoSent: newReservationInfoSent,\n  followUpSent: newFollowUpSent,\n  mediaSentCategories,\n  lastInteraction: new Date().toISOString()\n});\n\nreturn [{\n  json: {\n    phoneNumber,\n    remoteJid,\n    responseText,\n    mediaToSend,\n    hasMedia: mediaToSend.length > 0,\n    redisKey: context.redisKey,\n    redisData\n  }\n}];"
+        "jsCode": "// ============================================================\n// PROCESAR RESPUESTA Y ACCIONES — v6 FIXED v2\n// ============================================================\nconst inputData = $input.first().json;\nconst context = $('Construir contexto conversacional').first().json;\nconst messageText = context.textMessage.toLowerCase();\nconst remoteJid = context.remoteJid;\nconst phoneNumber = context.phoneNumber;\nlet bookingState = context.bookingState || { phase: 'idle', data: {} };\n\n// === DETECT IF INPUT COMES FROM RECEIPT PATH OR CLAUDE PATH ===\nconst isReceiptPath = !!inputData.receiptResult;\nlet rawText = '';\nif (!isReceiptPath) {\n  rawText = inputData.content?.[0]?.text || '';\n}\n\n// === PARSE STRUCTURED RESPONSE (only for Claude path) ===\nlet responseText = '';\nlet actionType = 'none';\nlet actionData = {};\nlet bookingStateUpdate = {};\n\nif (!isReceiptPath && rawText) {\n  const rm = rawText.match(/---RESPONSE---\\s*([\\s\\S]*?)\\s*---ACTION---/);\n  const am = rawText.match(/---ACTION---\\s*([\\s\\S]*?)\\s*---ACTION_DATA---/);\n  const adm = rawText.match(/---ACTION_DATA---\\s*([\\s\\S]*?)\\s*---BOOKING_STATE_UPDATE---/);\n  const sum = rawText.match(/---BOOKING_STATE_UPDATE---\\s*([\\s\\S]*?)\\s*---END---/);\n\n  if (rm) {\n    responseText = rm[1].trim();\n  } else {\n    // Fallback: Claude didn't use the format — strip ALL markers and metadata\n    responseText = rawText\n      .replace(/---RESPONSE---/g, '')\n      .replace(/---ACTION---[\\s\\S]*?---END---/g, '')\n      .replace(/---ACTION---/g, '')\n      .replace(/---ACTION_DATA---/g, '')\n      .replace(/---BOOKING_STATE_UPDATE---/g, '')\n      .replace(/---END---/g, '')\n      .trim();\n  }\n\n  // Aggressive cleanup: strip ALL format artifacts\n  responseText = responseText\n    .split('\\n')\n    .filter(line => {\n      const trimmed = line.trim();\n      if (trimmed === '') return true;\n      if (trimmed === 'none') return false;\n      if (trimmed === '{}') return false;\n      if (trimmed === '---') return false;\n      if (trimmed === 'RESPONSE') return false;\n      if (trimmed === 'ACTION') return false;\n      if (trimmed === 'ACTION_DATA') return false;\n      if (trimmed === 'BOOKING_STATE_UPDATE') return false;\n      if (trimmed === 'END') return false;\n      if (trimmed.startsWith('---RESPONSE')) return false;\n      if (trimmed.startsWith('---ACTION')) return false;\n      if (trimmed.startsWith('---BOOKING')) return false;\n      if (trimmed.startsWith('---END')) return false;\n      if (/^\\{.*\"phase\".*\\}$/.test(trimmed)) return false;\n      if (/^\\{.*\"check(In|Out)\".*\\}$/.test(trimmed)) return false;\n      if (trimmed === 'check_availability' || trimmed === 'create_booking' || trimmed === 'lookup_booking' || trimmed === 'cancel_booking') return false;\n      return true;\n    })\n    .join('\\n')\n    .replace(/\\n{3,}/g, '\\n\\n')\n    .trim();\n\n  if (am) actionType = am[1].trim().toLowerCase();\n  if (adm) { try { const j = adm[1].trim(); if (j && j !== '{}') actionData = JSON.parse(j); } catch(e) {} }\n  if (sum) { try { const j = sum[1].trim(); if (j && j !== '{}') bookingStateUpdate = JSON.parse(j); } catch(e) {} }\n}\n\n// Apply state update from Claude\nif (bookingStateUpdate.phase) bookingState.phase = bookingStateUpdate.phase;\nif (bookingStateUpdate.data) bookingState.data = { ...bookingState.data, ...bookingStateUpdate.data };\nif (bookingStateUpdate.referenceCode) bookingState.referenceCode = bookingStateUpdate.referenceCode;\n\n// === RECEIPT RESULT (from image verification path) ===\nif (isReceiptPath) {\n  const rr = inputData.receiptResult;\n  bookingState = inputData.bookingState || bookingState;\n\n  if (rr.datosCorrectos) {\n    actionType = 'create_booking';\n    actionData = {\n      checkIn: bookingState.data.checkIn,\n      checkOut: bookingState.data.checkOut,\n      adults: bookingState.data.adults,\n      children: bookingState.data.children,\n      infants: bookingState.data.infants,\n      guestName: bookingState.data.guestName,\n      guestEmail: bookingState.data.guestEmail,\n      guestPhone: bookingState.data.guestPhone || phoneNumber,\n      guestCountry: bookingState.data.guestCountry || 'Costa Rica',\n      depositCRC: rr.montoDetectado\n    };\n    responseText = '¡Tu comprobante fue verificado correctamente! Estoy creando tu reserva...';\n  } else if (rr.maxAttemptsReached) {\n    responseText = 'No pudimos verificar tu comprobante después de 3 intentos. Por favor contactá directamente a Don Jorge al *8303-4342* para completar tu reserva.';\n  } else {\n    const minMonto = Math.round(bookingState.data.totalCRC / 2);\n    responseText = 'El comprobante no pudo ser verificado.';\n    if (rr.razonFallo) responseText += ' Detalle: ' + rr.razonFallo + '.';\n    responseText += '\\n\\nPor favor verificá que:\\n1. El SINPE sea al *8303-4342* (Jorge Gerardo Jiménez Granados)\\n2. El monto sea al menos *₡' + minMonto.toLocaleString() + '*\\n\\nEnviá de nuevo la foto del comprobante. Te quedan ' + (3 - rr.receiptAttempts) + ' intentos.';\n  }\n}\n\n// === SAFETY: ensure responseText is never empty ===\nif (!responseText || !responseText.trim()) {\n  responseText = '¿En qué más te puedo ayudar?';\n}\n\n// === MULTIMEDIA (existing logic) ===\nlet mediaToSend = [];\nconst mediaSentCategories = context.mediaSentCategories || {};\nconst isFirstMessage = context.isFirstMessage;\nconst explicitMedia = ['foto','fotos','photo','video','videos','mostrame','mandame','quiero ver'].some(t => messageText.includes(t));\n\nif (isFirstMessage) {\n  mediaToSend.push({ type: 'video', url: 'https://drive.google.com/uc?export=download&id=1FrfuFfpJ76NzWDOHxUoSSMwAujlRV-qM', caption: 'Acá es donde te vas a quedar 🌴' });\n}\n\nconst installTriggers = ['instalacion','instalación','baño','ducha','servicio','cocina','rancho','comedor','parrilla','instalaciones'];\nconst beachTriggers = ['playa','playas','beach','conchal','minas','piratas','puerto viejo'];\nconst locTriggers = ['llegar','dirección','ubicación','donde queda','location','cómo llego','mapa'];\n\nif (installTriggers.some(t => messageText.includes(t)) && (!mediaSentCategories.installations || explicitMedia)) {\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1StQ4Jjk4y3nKSdfVfZLQ_KgpVmcgPySB', caption: '*Área de Cocina*' });\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1a7rVzJ27psPYmJb2YEIoDdaZh9XC4-mU', caption: '*Duchas*' });\n  mediaToSend.push({ type: 'video', url: 'https://drive.google.com/uc?export=download&id=1oCbDXLD781_ZEux6t4kiNg6aQ_QFz2MH', caption: '*Rancho*' });\n  mediaSentCategories.installations = true;\n}\nif (beachTriggers.some(t => messageText.includes(t)) && (!mediaSentCategories.beaches || explicitMedia)) {\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1FWoV9LOQEzmzWqgrnq9OazmH0ea9Dafj', caption: '*Playa Puerto Viejo*' });\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=174PbyQhqU4NdW0ZTw1c-NNnxdSPmxjYQ', caption: '*Playa Conchal*' });\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1fYkA8y8Hw6TXP8Ekh3Dr0hLZCKATt_Sd', caption: '*Playa Minas*' });\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1wbbh2J8S1vsQu6ZRr8bzpMO9jLfPlGMF', caption: '*Bahía Piratas*' });\n  mediaSentCategories.beaches = true;\n}\nif (locTriggers.some(t => messageText.includes(t)) && (!mediaSentCategories.location || explicitMedia)) {\n  mediaToSend.push({ type: 'image', url: 'https://drive.google.com/uc?export=download&id=1W9zKiiHar0QNQLypevHJ4_8d23ybBZzu', caption: '*Entrada del Camping*' });\n  mediaSentCategories.location = true;\n}\n\n// === UPDATE HISTORY ===\nconst updatedHistory = context.conversationHistory;\nupdatedHistory.push({ role: 'assistant', content: responseText, timestamp: new Date().toISOString() });\n\nlet clientName = context.clientName;\nif (!clientName) {\n  const nm = responseText.match(/Gracias\\s+(\\w+)\\s+por/i);\n  if (nm) clientName = nm[1];\n}\n\nconst redisData = JSON.stringify({\n  messages: updatedHistory.slice(-20),\n  clientName,\n  reservationInfoSent: context.reservationInfoSent,\n  followUpSent: context.followUpSent,\n  mediaSentCategories,\n  bookingState,\n  lookupState: context.lookupState,\n  lastInteraction: new Date().toISOString()\n});\n\nreturn [{ json: {\n  phoneNumber, remoteJid, responseText,\n  mediaToSend, hasMedia: mediaToSend.length > 0,\n  redisKey: context.redisKey, redisData,\n  actionType, actionData,\n  hasAction: actionType !== 'none' && actionType !== '',\n  bookingState\n} }];"
       },
-      "id": "65028c82-246f-49ba-9020-24d678199de6",
-      "name": "Procesar respuesta y multimedia",
+      "id": "7b3dc755-a06a-4a69-b27f-a3c169b839aa",
+      "name": "Procesar respuesta y acciones",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1312,
-        288
+        -1456,
+        48
       ]
     },
     {
@@ -270,13 +270,13 @@
         "expire": true,
         "ttl": 172800
       },
-      "id": "8c7b8731-b21b-4e30-9c3f-81eae86d7db9",
+      "id": "2e903054-72e9-4162-8f44-5191278b0474",
       "name": "Redis - Guardar historial",
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1520,
-        192
+        -896,
+        -160
       ],
       "credentials": {
         "redis": {
@@ -289,12 +289,15 @@
       "parameters": {
         "conditions": {
           "options": {
-            "caseSensitive": false
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
               "id": "has-media-check",
-              "leftValue": "={{ $('Procesar respuesta y multimedia').first().json.hasMedia }}",
+              "leftValue": "={{ $('Procesar respuesta y acciones').first().json.hasMedia }}",
               "rightValue": true,
               "operator": {
                 "type": "boolean",
@@ -306,26 +309,26 @@
         },
         "options": {}
       },
-      "id": "a4353bd1-eb36-4516-8e97-ee2f38677b15",
+      "id": "a6cff609-8ee7-45bc-bd61-b4cfc4c30163",
       "name": "¿Tiene multimedia?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1520,
-        448
+        -896,
+        160
       ]
     },
     {
       "parameters": {
-        "jsCode": "const data = $('Procesar respuesta y multimedia').first().json;\nconst items = [];\n\nfor (const media of data.mediaToSend) {\n  items.push({\n    json: {\n      remoteJid: data.remoteJid,\n      phoneNumber: data.phoneNumber,\n      mediaType: media.type,\n      mediaUrl: media.url,\n      caption: media.caption || ''\n    }\n  });\n}\n\nreturn items;"
+        "jsCode": "const data = $('Procesar respuesta y acciones').first().json;\nconst items = [];\n\nfor (const media of data.mediaToSend) {\n  items.push({\n    json: {\n      remoteJid: data.remoteJid,\n      phoneNumber: data.phoneNumber,\n      mediaType: media.type,\n      mediaUrl: media.url,\n      caption: media.caption || ''\n    }\n  });\n}\n\nreturn items;"
       },
-      "id": "47bbdd8a-4d11-4986-bb53-244aaba63c1b",
+      "id": "a8685d92-f99a-4092-97b9-19d5ffb65290",
       "name": "Separar items multimedia",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1744,
-        448
+        -656,
+        144
       ]
     },
     {
@@ -337,7 +340,7 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "EVOLUTION_KEY_AQUI"
+              "value": "EVOLUTION_API"
             },
             {
               "name": "Content-Type",
@@ -357,13 +360,13 @@
           }
         }
       },
-      "id": "1b9343e4-e1fd-47e3-8598-0b03457912c3",
+      "id": "91ef0b5d-3df8-4649-8ced-223aa755c435",
       "name": "Enviar multimedia por WhatsApp",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1968,
-        448
+        -400,
+        144
       ]
     },
     {
@@ -372,13 +375,13 @@
         "responseBody": "={ \"status\": \"ok\" }",
         "options": {}
       },
-      "id": "58bce6e5-293f-490e-afee-14bbdd9a966d",
+      "id": "afd6cb58-9701-46d5-83d8-d2e02ced84a6",
       "name": "Responder webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        1520,
-        592
+        -896,
+        544
       ]
     },
     {
@@ -392,10 +395,10 @@
       "type": "n8n-nodes-evolution-api.evolutionApi",
       "typeVersion": 1,
       "position": [
-        1520,
-        320
+        -896,
+        0
       ],
-      "id": "a02825d6-9ede-4e3e-82c3-b02f5d1bf8a4",
+      "id": "c9ef639d-060f-451a-87a6-78e14f88f077",
       "name": "Enviar texto",
       "credentials": {
         "evolutionApi": {
@@ -410,15 +413,15 @@
         "operation": "send-presence",
         "instanceName": "CPVC",
         "remoteJid": "=={{ $json.remoteJid.replace('@s.whatsapp.net', '') }}",
-        "delay": 3000
+        "delay": 6000
       },
       "type": "n8n-nodes-evolution-api.evolutionApi",
       "typeVersion": 1,
       "position": [
-        1088,
-        96
+        -1680,
+        -176
       ],
-      "id": "55710c6a-b198-460c-a943-d1ea1144005f",
+      "id": "14f50715-6e28-4134-bc7e-4c3072be04ca",
       "name": "Typing indicator (está escribiendo)1",
       "credentials": {
         "evolutionApi": {
@@ -427,6 +430,175 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "is-image",
+              "leftValue": "={{ $json.isImage }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            },
+            {
+              "id": "in-payment",
+              "leftValue": "={{ $json.bookingState.phase }}",
+              "rightValue": "awaiting_payment",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7478d371-37fc-4a44-a95c-36bca5d51fd1",
+      "name": "¿Imagen en fase pago?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1680,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://evolution.smartflow-automations.com/chat/getBase64FromMediaMessage/CPVC",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "EVOLUTION_API"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"message\": {\n    \"key\": {\n      \"id\": \"{{ $('Construir contexto conversacional').first().json.messageId }}\",\n      \"remoteJid\": \"{{ $('Construir contexto conversacional').first().json.remoteJid }}\",\n      \"fromMe\": false\n    }\n  },\n  \"convertToMp4\": false\n}",
+        "options": {}
+      },
+      "id": "f80790f2-d624-4522-b645-de7af18004b9",
+      "name": "Descargar imagen recibo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1456,
+        -400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "CLAUDE_API_KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 512,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"image\",\n        \"source\": {\n          \"type\": \"base64\",\n          \"media_type\": \"{{ $json.mimetype || 'image/jpeg' }}\",\n          \"data\": \"{{ $json.base64 }}\"\n        }\n      },\n      {\n        \"type\": \"text\",\n        \"text\": \"Analiza este comprobante de pago SINPE M\\u00f3vil. Extrae exactamente los siguientes datos y devuelve SOLO un JSON v\\u00e1lido sin texto adicional: { \\\"monto\\\": <n\\u00famero, solo cifras>, \\\"nombreDestinatario\\\": \\\"<nombre completo>\\\", \\\"celularDestino\\\": \\\"<solo d\\u00edgitos>\\\" }. Si alg\\u00fan dato no se puede leer, usa null.\"\n      }\n    ]\n  }]\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "4d41974e-859a-4e7e-9ae8-316e0ec56441",
+      "name": "Claude Vision - Verificar recibo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1232,
+        -400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const claudeResponse = $input.first().json;\nconst context = $('Construir contexto conversacional').first().json;\nconst bookingState = context.bookingState;\nconst montoEsperado = bookingState.data.totalCRC / 2;\n\nconst textContent = claudeResponse.content?.[0]?.text || '';\nlet extractedData = { monto: null, nombreDestinatario: null, celularDestino: null };\ntry {\n  const jsonMatch = textContent.match(/\\{[\\s\\S]*?\\}/);\n  if (jsonMatch) extractedData = JSON.parse(jsonMatch[0]);\n} catch (e) { console.error('Parse error:', e.message); }\n\nconst montoDetectado = parseFloat(extractedData.monto) || 0;\nconst nombreDetectado = (extractedData.nombreDestinatario || '').toLowerCase().trim();\nconst celularDetectado = String(extractedData.celularDestino || '').replace(/[^0-9]/g, '');\n\nconst montoValido = montoDetectado >= (montoEsperado - 100) && montoDetectado <= (bookingState.data.totalCRC + 100);\nconst nombreValido = nombreDetectado.includes('jorge') && nombreDetectado.includes('jimenez');\nconst celularValido = celularDetectado === '83034342';\nconst datosCorrectos = montoValido && nombreValido && celularValido;\nconst receiptAttempts = (bookingState.receiptAttempts || 0) + 1;\n\nconst razonFallo = [];\nif (!montoValido) razonFallo.push('monto: \\u20a1' + montoDetectado.toLocaleString() + ' (esperado min \\u20a1' + montoEsperado.toLocaleString() + ')');\nif (!nombreValido) razonFallo.push('nombre: \"' + extractedData.nombreDestinatario + '\"');\nif (!celularValido) razonFallo.push('celular: \"' + extractedData.celularDestino + '\"');\n\nreturn [{\n  json: {\n    ...context,\n    receiptResult: {\n      datosCorrectos, montoDetectado, montoEsperado, montoValido, nombreValido, celularValido,\n      receiptAttempts, maxAttemptsReached: receiptAttempts >= 3,\n      razonFallo: razonFallo.join('; ')\n    },\n    bookingState: {\n      ...bookingState,\n      receiptAttempts,\n      receiptVerified: datosCorrectos,\n      depositCRC: datosCorrectos ? montoDetectado : 0,\n      phase: datosCorrectos ? 'creating_booking' : (receiptAttempts >= 3 ? 'receipt_failed' : 'awaiting_payment')\n    }\n  }\n}];"
+      },
+      "id": "6f2289cf-d16d-4452-a438-6768aaf863c4",
+      "name": "Validar datos recibo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1008,
+        -400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst actionType = data.actionType;\nconst actionData = data.actionData;\n\nconst SUPABASE_URL = 'https://yvmzzgphvfvaovlmmjsa.supabase.co';\nconst SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4';\nconst headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'apikey': SUPABASE_ANON_KEY };\n\nconst http = this.helpers.httpRequest;\n\nlet result = { success: false, error: null, data: null };\ntry {\n  if (actionType === 'check_availability') {\n    const settings = await http({ method: 'GET', url: SUPABASE_URL + '/rest/v1/camping_settings?key=eq.max_capacity_persons&select=value', headers });\n    const maxCap = parseInt(settings?.[0]?.value || '25', 10);\n    const overlapping = await http({ method: 'GET', url: SUPABASE_URL + '/rest/v1/bookings?status=neq.cancelled&check_in=lt.' + actionData.checkOut + '&check_out=gt.' + actionData.checkIn + '&select=adults,children', headers });\n    const occ = (overlapping || []).reduce((s, b) => s + (b.adults||0) + (b.children||0), 0);\n    const req = actionData.guests || 0;\n    result = { success: true, data: { available: (occ + req) <= maxCap, currentOccupancy: occ, maxCapacity: maxCap, spotsLeft: maxCap - occ } };\n\n  } else if (actionType === 'create_booking') {\n    const nights = Math.round((new Date(actionData.checkOut) - new Date(actionData.checkIn)) / 86400000);\n    const totalGuests = (actionData.adults||0) + (actionData.children||0);\n    const totalCRC = totalGuests * 7000 * nights;\n    const depositCRC = actionData.depositCRC || Math.round(totalCRC / 2);\n    const CRC_RATE = 500;\n    const totalUSD = totalCRC / CRC_RATE;\n    const nameParts = (actionData.guestName || 'WhatsApp').split(' ');\n\n    const payload = {\n      booking: {\n        checkIn: actionData.checkIn, checkOut: actionData.checkOut,\n        guests: { adults: actionData.adults||1, children: actionData.children||0, infants: actionData.infants||0 },\n        accommodation: { bringOwnTent: true, rentedTents: [] }, addOns: [],\n        guestInfo: {\n          firstName: nameParts[0]||'', lastName: nameParts.slice(1).join(' ')||'',\n          email: actionData.guestEmail||'', phone: actionData.guestPhone||'',\n          country: actionData.guestCountry||'Costa Rica',\n          specialRequests: 'Reserva creada via WhatsApp (Cori)'\n        }\n      },\n      pricing: { campsiteFee: totalUSD, tentRental: 0, addOns: 0, subtotal: totalUSD, taxes: 0, total: totalUSD },\n      depositCRC\n    };\n\n    const createResult = await http({ method: 'POST', url: SUPABASE_URL + '/functions/v1/create-booking', headers, body: payload, json: true });\n    if (createResult.referenceCode) {\n      result = { success: true, data: { referenceCode: createResult.referenceCode, totalCRC, depositCRC, balanceCRC: Math.max(0, totalCRC - depositCRC), nights } };\n    } else {\n      result = { success: false, error: createResult.error || 'Error creando reserva' };\n    }\n\n  } else if (actionType === 'lookup_booking') {\n    const lookupResult = await http({ method: 'POST', url: SUPABASE_URL + '/functions/v1/lookup-booking', headers, body: { referenceCode: actionData.referenceCode }, json: true });\n    result = { success: true, data: lookupResult };\n\n  } else if (actionType === 'cancel_booking') {\n    const ld = await http({ method: 'POST', url: SUPABASE_URL + '/functions/v1/lookup-booking', headers, body: { referenceCode: actionData.referenceCode }, json: true });\n    if (!ld.found) { result = { success: false, error: 'Reserva no encontrada' }; }\n    else {\n      await http({ method: 'POST', url: SUPABASE_URL + '/functions/v1/cancel-booking', headers, body: { bookingId: ld.booking.id }, json: true });\n      result = { success: true, data: { cancelled: true, referenceCode: actionData.referenceCode } };\n    }\n  }\n} catch (e) { result = { success: false, error: e.message }; }\n\n// Build follow-up text\nlet followUp = '';\nif (result.success) {\n  if (actionType === 'check_availability') {\n    followUp = result.data.available\n      ? '\\n\\n\\u2705 \\u00a1Hay disponibilidad! Quedan ' + result.data.spotsLeft + ' espacios.'\n      : '\\n\\n\\u274c No hay disponibilidad. Capacidad: ' + result.data.maxCapacity + ', ocupados: ' + result.data.currentOccupancy + '.';\n  } else if (actionType === 'create_booking') {\n    followUp = '\\n\\n\\ud83c\\udf89 *\\u00a1Reserva creada!*\\n\\n\\ud83d\\udccb C\\u00f3digo: *' + result.data.referenceCode + '*\\n\\ud83d\\udcb0 Total: \\u20a1' + result.data.totalCRC.toLocaleString() + '\\n\\ud83d\\udcb3 Dep\\u00f3sito: \\u20a1' + result.data.depositCRC.toLocaleString() + '\\n\\ud83d\\udcb5 Saldo: \\u20a1' + result.data.balanceCRC.toLocaleString() + '\\n\\nGuard\\u00e1 tu c\\u00f3digo *' + result.data.referenceCode + '* \\ud83c\\udf34';\n  } else if (actionType === 'lookup_booking' && result.data.found) {\n    const b = result.data.booking;\n    followUp = '\\n\\n\\ud83d\\udccb *Reserva ' + b.reference_code + '*\\n\\ud83d\\udcc5 ' + b.check_in + ' \\u2192 ' + b.check_out + '\\n\\ud83d\\udc65 ' + b.adults + ' adultos, ' + b.children + ' ni\\u00f1os\\n\\ud83d\\udcb0 \\u20a1' + (b.total||0).toLocaleString() + '\\n\\ud83d\\udccc ' + (b.status==='confirmed'?'Confirmada \\u2705':'Pendiente');\n  } else if (actionType === 'cancel_booking') {\n    followUp = '\\n\\n\\u2705 Reserva *' + result.data.referenceCode + '* cancelada.';\n  }\n} else {\n  followUp = '\\n\\n\\u26a0\\ufe0f ' + (result.error || 'Error desconocido') + '. Contact\\u00e1 a Don Jorge: *8303-4342*.';\n}\n\nreturn [{ json: { ...data, responseText: data.responseText + followUp, actionResult: result,\n  bookingState: { ...data.bookingState, lastActionResult: result,\n    referenceCode: result.data?.referenceCode || data.bookingState?.referenceCode,\n    phase: (actionType === 'create_booking' && result.success) ? 'done' : data.bookingState?.phase },\n  // Update redisData with action result\n  redisData: (() => {\n    try {\n      const rd = JSON.parse(data.redisData);\n      rd.bookingState = { ...rd.bookingState, lastActionResult: result,\n        referenceCode: result.data?.referenceCode || rd.bookingState?.referenceCode,\n        phase: (actionType === 'create_booking' && result.success) ? 'done' : rd.bookingState?.phase };\n      // Append follow-up to last assistant message\n      const msgs = rd.messages || [];\n      if (msgs.length > 0 && msgs[msgs.length-1].role === 'assistant') {\n        msgs[msgs.length-1].content += followUp;\n      }\n      return JSON.stringify(rd);\n    } catch(e) { return data.redisData; }\n  })()\n} }];"
+      },
+      "id": "d4d826de-9537-4b5f-b5d9-fe37e62935c0",
+      "name": "Ejecutar acción Supabase",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -656,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "has-action",
+              "leftValue": "={{ $json.hasAction }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "04fa51e3-2a10-433b-8c9e-58c372dbeb54",
+      "name": "¿Tiene acción?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -896,
+        320
+      ]
     }
   ],
   "pinData": {},
@@ -541,7 +713,7 @@
       "main": [
         [
           {
-            "node": "Claude AI - Cori",
+            "node": "¿Imagen en fase pago?",
             "type": "main",
             "index": 0
           },
@@ -553,22 +725,73 @@
         ]
       ]
     },
-    "Claude AI - Cori": {
+    "¿Imagen en fase pago?": {
       "main": [
         [
           {
-            "node": "Procesar respuesta y multimedia",
+            "node": "Descargar imagen recibo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Claude AI - Cori",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Procesar respuesta y multimedia": {
+    "Descargar imagen recibo": {
       "main": [
         [
           {
-            "node": "Redis - Guardar historial",
+            "node": "Claude Vision - Verificar recibo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Vision - Verificar recibo": {
+      "main": [
+        [
+          {
+            "node": "Validar datos recibo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar datos recibo": {
+      "main": [
+        [
+          {
+            "node": "Procesar respuesta y acciones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude AI - Cori": {
+      "main": [
+        [
+          {
+            "node": "Procesar respuesta y acciones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar respuesta y acciones": {
+      "main": [
+        [
+          {
+            "node": "¿Tiene acción?",
             "type": "main",
             "index": 0
           },
@@ -581,9 +804,43 @@
             "node": "Responder webhook",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "¿Tiene acción?": {
+      "main": [
+        [
+          {
+            "node": "Ejecutar acción Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
           {
             "node": "Enviar texto",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Redis - Guardar historial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ejecutar acción Supabase": {
+      "main": [
+        [
+          {
+            "node": "Enviar texto",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Redis - Guardar historial",
             "type": "main",
             "index": 0
           }
@@ -618,7 +875,7 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "e61554d0-be12-4b81-a03a-020ec4b16813",
+  "versionId": "cd21f4f1-8b51-4d26-854e-ad470d1c58d4",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "edb08db1ee99e5e0c3678b395938627915dd6d714cbd4a3de65c47ccf5282a2c"
@@ -632,10 +889,22 @@
       "name": "whatsapp-bot"
     },
     {
-      "name": "redis",
-      "id": "IGfGPrg89LSVX8fO",
       "updatedAt": "2026-03-27T15:51:16.897Z",
-      "createdAt": "2026-03-27T15:51:16.897Z"
+      "createdAt": "2026-03-27T15:51:16.897Z",
+      "id": "IGfGPrg89LSVX8fO",
+      "name": "redis"
+    },
+    {
+      "updatedAt": "2026-03-31T05:28:49.166Z",
+      "createdAt": "2026-03-31T05:28:49.166Z",
+      "id": "UiKkxd7ydpGrblEJ",
+      "name": "booking"
+    },
+    {
+      "updatedAt": "2026-03-31T05:28:49.179Z",
+      "createdAt": "2026-03-31T05:28:49.179Z",
+      "id": "gMtRwAZkC4MMGZu7",
+      "name": "supabase"
     },
     {
       "updatedAt": "2026-03-26T02:05:55.926Z",

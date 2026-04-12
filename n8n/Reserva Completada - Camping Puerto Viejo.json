@@ -1,0 +1,394 @@
+{
+  "name": "Reserva Completada - Camping Puerto Viejo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reserva-completada",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "c978f87d-c60f-40e2-b213-9e5441c3750e",
+      "name": "Webhook Reserva Completada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1856,
+        96
+      ],
+      "webhookId": "reserva-completada"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"locationId\": \"SlVyy8qzlpPfgTjL0sdW\",\n  \"pageLimit\": 20,\n  \"filters\": [\n    {\n      \"field\": \"email\",\n      \"operator\": \"eq\",\n      \"value\": \"{{ $json.body.email }}\"\n    }\n  ]\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "26b2b2d1-e860-4f34-814c-ffd8462cdf1c",
+      "name": "Buscar Contacto por Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1632,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-contacto-found",
+              "leftValue": "={{ $json.contacts?.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "21a7e671-34b8-463a-bda5-4f134cb7b36d",
+      "name": "Contacto Encontrado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1408,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id=SlVyy8qzlpPfgTjL0sdW&pipeline_id=2qRls28RKJBgThKAVara&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "2f7ee3f4-2003-41e2-b058-65c6a94576bb",
+      "name": "Buscar Oportunidad",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1184,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/opportunities/{{ $json.opportunities[0].id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"pipelineStageId\": \"1145c2d1-238c-4feb-98c1-d7c523c84c77\",\n  \"status\": \"won\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "0f50d526-d219-466c-9a85-b7e15f917e6e",
+      "name": "Mover a Completada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -976,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer GHL_API_KEY"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"type\": \"WhatsApp\",\n  \"contactId\": \"{{ $('Buscar Contacto por Email').item.json.contacts[0].id }}\",\n  \"message\": \"¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅\\n\\n¡Muchas gracias por hospedarte con nosotros en Camping Puerto Viejo Conchal! Esperamos que hayas disfrutado la experiencia al máximo. 🏕️🌴\\n\\nNos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:\\n\\n📍 Reseña en Google ⭐⭐⭐⭐⭐:\\nhttps://bit.ly/review-conchal\\n\\n🌴 Reseña en TripAdvisor ⭐⭐⭐⭐⭐:\\nhttps://bit.ly/tripadvisor-conchal\\n\\n¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "7f6c66a5-13b2-49fe-b84e-c8f1d93b8fa7",
+      "name": "WhatsApp Agradecimiento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -512,
+        -256
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Buscar Contacto por Email').item.json.contacts[0].email }}",
+        "subject": "=¡Gracias por tu estadía en Camping Puerto Viejo Conchal, {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🏕️",
+        "message": "=<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n  <div style=\"background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%); padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">🏕️ Camping Puerto Viejo Conchal</h1>\n  </div>\n  <div style=\"padding: 30px 20px; background-color: #ffffff; text-align: center;\">\n    <h2 style=\"color: #2d5016; margin-top: 0;\">¡Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }}! 🌅</h2>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">¡Muchas gracias por hospedarte con nosotros en <strong>Camping Puerto Viejo Conchal</strong>! Esperamos que hayas disfrutado la experiencia al máximo. 🌴</p>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">Nos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:</p>\n    <div style=\"text-align: center; margin: 30px 0;\">\n      <a href=\"https://bit.ly/review-conchal\" style=\"display: inline-block; background-color: #4285F4; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-size: 16px; font-weight: bold; margin: 8px;\">📍 Reseña en Google ⭐⭐⭐⭐⭐</a>\n    </div>\n    <div style=\"text-align: center; margin: 20px 0;\">\n      <a href=\"https://bit.ly/tripadvisor-conchal\" style=\"display: inline-block; background-color: #34E0A1; color: #000000; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-size: 16px; font-weight: bold; margin: 8px;\">🌴 Reseña en TripAdvisor ⭐⭐⭐⭐⭐</a>\n    </div>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6; margin-top: 25px;\">¡Gracias de corazón y esperamos verte de nuevo pronto! 🙌</p>\n  </div>\n  <div style=\"background-color: #f5f5f5; padding: 20px; text-align: center; border-radius: 0 0 8px 8px;\">\n    <p style=\"color: #888; font-size: 13px; margin: 0;\">Camping Puerto Viejo Conchal · Guanacaste, Costa Rica 🇨🇷</p>\n  </div>\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "b1026b5b-4aec-4ac5-b09e-f2e178c28c28",
+      "name": "Gmail Agradecimiento",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -752,
+        96
+      ],
+      "webhookId": "3778b785-edfe-42ca-966f-89dc1a4913c6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "eLxBeppkOfU6iHy1",
+          "name": "Don Jorge Gmail Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('Error: Contacto no encontrado para completar reserva:', JSON.stringify($input.first().json));\nreturn [{ json: { error: true, message: 'Contacto no encontrado en GHL' } }];"
+      },
+      "id": "ab4b5072-d844-45f9-ada3-62b2d8638809",
+      "name": "Log Error No Encontrado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1184,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \"success\": true, \"message\": \"Reserva marcada como completada\" }",
+        "options": {}
+      },
+      "id": "a65c315d-05b8-4b6f-b827-a5a8a9fe65e3",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -528,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "CPVC",
+        "remoteJid": "={{ $json.opportunity.contact.phone.replace('+', '') }}",
+        "messageText": "={{ \"¡Hola \" + $json.opportunity.contact.name.split(' ')[0] + \"! 🏕️\\n\\nMuchas gracias por hospedarte con nosotros en Camping Puerto Viejo Conchal! Esperamos que hayas disfrutado la experiencia al máximo. 🌴\\n\\nNos encantaría que compartieras tu experiencia con otros viajeros. ¿Podrías dejarnos una reseña? Significa mucho para nosotros:\\n\\n⭐ Reseña en Google ⭐⭐⭐⭐⭐:\\nhttps://bit.ly/review-conchal\\n\\n⭐ Reseña en TripAdvisor ⭐⭐⭐⭐⭐:\\nhttps://bit.ly/tripadvisor-conchal\\n\\nGracias de corazón y esperamos verte de nuevo pronto! 😊\" }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        -96
+      ],
+      "id": "c4a3f1f0-4d94-4d13-9001-2cba7581d188",
+      "name": "WhatsApp Agradecimiento1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "9UUhtPh7o4Ya2Sns",
+          "name": "Evolution account CPVC"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Reserva Completada": {
+      "main": [
+        [
+          {
+            "node": "Buscar Contacto por Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Contacto por Email": {
+      "main": [
+        [
+          {
+            "node": "Contacto Encontrado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacto Encontrado?": {
+      "main": [
+        [
+          {
+            "node": "Buscar Oportunidad",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error No Encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Oportunidad": {
+      "main": [
+        [
+          {
+            "node": "Mover a Completada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mover a Completada": {
+      "main": [
+        [
+          {
+            "node": "Gmail Agradecimiento",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WhatsApp Agradecimiento1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Agradecimiento": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail Agradecimiento": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Agradecimiento1": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "4917c2a0-bcf1-4fca-abce-9861c4352bd0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "edb08db1ee99e5e0c3678b395938627915dd6d714cbd4a3de65c47ccf5282a2c"
+  },
+  "id": "5D6ypX1NZu0_bn1jlCq8O",
+  "tags": [
+    {
+      "updatedAt": "2026-03-11T20:49:57.888Z",
+      "createdAt": "2026-03-11T20:49:57.888Z",
+      "id": "4H7JuVybZsS2K0SN",
+      "name": "CPVC"
+    }
+  ]
+}

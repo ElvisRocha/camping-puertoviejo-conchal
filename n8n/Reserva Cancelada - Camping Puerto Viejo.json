@@ -8,23 +8,26 @@
         "responseMode": "lastNode",
         "options": {}
       },
-      "id": "wh-cancelada-001",
+      "id": "6b54a166-c0ec-4936-b9cd-57cb53ca88ed",
       "name": "Webhook Reserva Cancelada",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [240, 300],
+      "position": [
+        -1648,
+        672
+      ],
       "webhookId": "reserva-cancelada"
     },
     {
       "parameters": {
-        "method": "GET",
-        "url": "=https://services.leadconnectorhq.com/contacts/?locationId=REPLACE_WITH_YOUR_GHL_LOCATION_ID&email={{ encodeURIComponent($json.body.email) }}",
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/contacts/search",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+              "value": "=Bearer GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -32,6 +35,9 @@
             }
           ]
         },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"locationId\": \"SlVyy8qzlpPfgTjL0sdW\",\n  \"pageLimit\": 20,\n  \"filters\": [\n    {\n      \"field\": \"email\",\n      \"operator\": \"eq\",\n      \"value\": \"{{ $json.body.email }}\"\n    }\n  ]\n}",
         "options": {
           "response": {
             "response": {
@@ -40,11 +46,14 @@
           }
         }
       },
-      "id": "http-buscar-contacto-canc-001",
+      "id": "5ae6be0b-c7d5-4dad-80de-6fe073dfc472",
       "name": "Buscar Contacto por Email",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [460, 300]
+      "position": [
+        -1440,
+        672
+      ]
     },
     {
       "parameters": {
@@ -52,7 +61,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -69,22 +79,24 @@
         },
         "options": {}
       },
-      "id": "if-contacto-found-canc-001",
+      "id": "b77c370f-65a4-48c8-867b-73f77fa6a829",
       "name": "Contacto Encontrado?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [680, 300]
+      "position": [
+        -1216,
+        672
+      ]
     },
     {
       "parameters": {
-        "method": "GET",
-        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id=REPLACE_WITH_YOUR_GHL_LOCATION_ID&pipeline_id=REPLACE_WITH_YOUR_GHL_PIPELINE_ID&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
+        "url": "=https://services.leadconnectorhq.com/opportunities/search?location_id=SlVyy8qzlpPfgTjL0sdW&pipeline_id=2qRls28RKJBgThKAVara&contact_id={{ $('Buscar Contacto por Email').item.json.contacts[0].id }}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
+              "value": "=Bearer GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -100,11 +112,14 @@
           }
         }
       },
-      "id": "http-buscar-oportunidad-canc-001",
+      "id": "92d3b850-c5e4-4465-b912-511fdd8f13ec",
       "name": "Buscar Oportunidad",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [900, 200]
+      "position": [
+        -992,
+        576
+      ]
     },
     {
       "parameters": {
@@ -115,11 +130,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
+              "value": "=Bearer GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -130,7 +141,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"pipelineStageId\": \"REPLACE_WITH_YOUR_GHL_STAGE_CANCELADA\",\n  \"status\": \"lost\"\n}",
+        "body": "={\n  \"pipelineStageId\": \"0351ba28-d82b-4abb-aed0-d624fe23e067\",\n  \"status\": \"lost\"\n}",
         "options": {
           "response": {
             "response": {
@@ -139,11 +150,14 @@
           }
         }
       },
-      "id": "http-mover-cancelada-001",
+      "id": "367c50fe-e302-4d01-bae3-2cdc7be42f44",
       "name": "Mover a Cancelada",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1120, 200]
+      "position": [
+        -768,
+        576
+      ]
     },
     {
       "parameters": {
@@ -154,11 +168,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer REPLACE_WITH_YOUR_GHL_API_KEY"
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
+              "value": "=Bearer GHL_API_KEY"
             },
             {
               "name": "Version",
@@ -178,29 +188,38 @@
           }
         }
       },
-      "id": "http-whatsapp-cancelacion-001",
+      "id": "33b011ef-96e5-498d-a965-ca3ab3927e79",
       "name": "WhatsApp Cancelación",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1340, 100]
+      "position": [
+        -384,
+        304
+      ],
+      "disabled": true
     },
     {
       "parameters": {
         "sendTo": "={{ $('Buscar Contacto por Email').item.json.contacts[0].email }}",
         "subject": "=Cancelación de reserva - Camping Puerto Viejo Conchal",
-        "emailType": "html",
         "message": "=<div style=\"font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n  <div style=\"background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%); padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">🏕️ Camping Puerto Viejo Conchal</h1>\n  </div>\n  <div style=\"padding: 30px 20px; background-color: #ffffff;\">\n    <h2 style=\"color: #2d5016; margin-top: 0;\">Hola {{ $('Buscar Contacto por Email').item.json.contacts[0].firstName }},</h2>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">Te informamos que tu reserva en <strong>Camping Puerto Viejo Conchal</strong> ha sido cancelada. 😔</p>\n    <div style=\"background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; border-radius: 4px; margin: 20px 0;\">\n      <p style=\"color: #856404; font-size: 15px; margin: 0;\">💰 Tu depósito será devuelto en las próximas <strong>24 horas</strong> al mismo método de pago que usaste.</p>\n    </div>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">Si fue un error o querés hacer una nueva reserva en el futuro, no dudés en escribirnos. ¡Siempre serás bienvenido/a! 🌴</p>\n    <p style=\"color: #333; font-size: 16px; line-height: 1.6;\">Saludos,<br><strong>Equipo Camping Puerto Viejo Conchal</strong></p>\n  </div>\n  <div style=\"background-color: #f5f5f5; padding: 20px; text-align: center; border-radius: 0 0 8px 8px;\">\n    <p style=\"color: #888; font-size: 13px; margin: 0;\">Camping Puerto Viejo Conchal · Guanacaste, Costa Rica 🇨🇷</p>\n  </div>\n</div>",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
-      "id": "gmail-cancelacion-001",
+      "id": "5a01aaec-fdec-45e9-b5b7-1594059fb65c",
       "name": "Gmail Cancelación",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
-      "position": [1340, 300],
+      "position": [
+        -560,
+        672
+      ],
+      "webhookId": "0bae1c1a-9c90-4fb6-8f68-783b09961db4",
       "credentials": {
         "gmailOAuth2": {
-          "id": "REPLACE_WITH_YOUR_GMAIL_CREDENTIAL_ID",
-          "name": "Gmail account"
+          "id": "eLxBeppkOfU6iHy1",
+          "name": "Don Jorge Gmail Account"
         }
       }
     },
@@ -208,11 +227,14 @@
       "parameters": {
         "jsCode": "console.log('Error: Contacto no encontrado para cancelar reserva:', JSON.stringify($input.first().json));\nreturn [{ json: { error: true, message: 'Contacto no encontrado en GHL' } }];"
       },
-      "id": "log-error-canc-001",
+      "id": "78116e94-b97c-4593-8bf0-ee44a31f273b",
       "name": "Log Error No Encontrado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [900, 420]
+      "position": [
+        -992,
+        784
+      ]
     },
     {
       "parameters": {
@@ -220,13 +242,40 @@
         "jsonOutput": "={ \"success\": true, \"message\": \"Reserva marcada como cancelada\" }",
         "options": {}
       },
-      "id": "respuesta-ok-canc-001",
+      "id": "3141ae8a-8d77-4f83-b915-f30751d2c2c6",
       "name": "Respuesta OK",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [1560, 200]
+      "position": [
+        -336,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "=CPVC",
+        "remoteJid": "={{ $json.opportunity.contact.phone.replace('+', '') }}",
+        "messageText": "={{ \"Hola \" + $json.opportunity.contact.name.split(' ')[0] + \",\\n\\nTe informamos que tu reserva en Camping Puerto Viejo Conchal ha sido cancelada. 😔\\n\\nTu depósito será devuelto en las próximas 24 horas al mismo método de pago que usaste.\\n\\nSi fue un error o querés hacer una nueva reserva en el futuro, no dudés en escribirnos. ¡Siempre serás bienvenido/a! 🌴\\n\\nSaludos,\\nEquipo Camping Puerto Viejo Conchal\" }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        416
+      ],
+      "id": "bbf510e7-9fa1-486c-a121-6b1e67686665",
+      "name": "WhatsApp Cancelación1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "9UUhtPh7o4Ya2Sns",
+          "name": "Evolution account CPVC"
+        }
+      }
     }
   ],
+  "pinData": {},
   "connections": {
     "Webhook Reserva Cancelada": {
       "main": [
@@ -283,12 +332,12 @@
       "main": [
         [
           {
-            "node": "WhatsApp Cancelación",
+            "node": "Gmail Cancelación",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Gmail Cancelación",
+            "node": "WhatsApp Cancelación1",
             "type": "main",
             "index": 0
           }
@@ -297,13 +346,7 @@
     },
     "WhatsApp Cancelación": {
       "main": [
-        [
-          {
-            "node": "Respuesta OK",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Gmail Cancelación": {
@@ -316,14 +359,36 @@
           }
         ]
       ]
+    },
+    "WhatsApp Cancelación1": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "availableInMCP": false
   },
-  "staticData": null,
-  "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2026-03-20T00:00:00.000Z",
-  "versionId": "2"
+  "versionId": "38f19b4d-863a-42c2-bf80-92a903af2d04",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "edb08db1ee99e5e0c3678b395938627915dd6d714cbd4a3de65c47ccf5282a2c"
+  },
+  "id": "xjkg91x0cmepWpK6GLVlQ",
+  "tags": [
+    {
+      "updatedAt": "2026-03-11T20:49:57.888Z",
+      "createdAt": "2026-03-11T20:49:57.888Z",
+      "id": "4H7JuVybZsS2K0SN",
+      "name": "CPVC"
+    }
+  ]
 }
