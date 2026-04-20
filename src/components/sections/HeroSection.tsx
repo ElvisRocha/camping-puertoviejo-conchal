@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -32,14 +32,30 @@ const heroImages = [
   },
 ];
 
+const heroFeatures = [
+  { Icon: Palmtree, key: 'hero.features.beachfront' },
+  { Icon: Bird, key: 'hero.features.wildlife' },
+  { Icon: Sun, key: 'hero.features.sunsets' },
+  { Icon: PawPrint, key: 'hero.features.petFriendly' },
+] as const;
+
 const HeroSection = () => {
   const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
     }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFeatureIndex((prev) => (prev + 1) % heroFeatures.length);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -115,23 +131,35 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4 sm:gap-8"
           >
-            <div className="flex items-center gap-2 text-white/90">
-              <Palmtree className="h-5 w-5" />
-              <span className="font-body text-sm sm:text-base">{t('hero.features.beachfront')}</span>
+            <div className="hidden md:flex flex-wrap justify-center gap-4 sm:gap-8">
+              {heroFeatures.map(({ Icon, key }) => (
+                <div key={key} className="flex items-center gap-2 text-white/90">
+                  <Icon className="h-5 w-5" />
+                  <span className="font-body text-sm sm:text-base">{t(key)}</span>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-2 text-white/90">
-              <Bird className="h-5 w-5" />
-              <span className="font-body text-sm sm:text-base">{t('hero.features.wildlife')}</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/90">
-              <Sun className="h-5 w-5" />
-              <span className="font-body text-sm sm:text-base">{t('hero.features.sunsets')}</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/90">
-              <PawPrint className="h-5 w-5" />
-              <span className="font-body text-sm sm:text-base">{t('hero.features.petFriendly')}</span>
+
+            <div className="flex md:hidden justify-center items-center h-7">
+              <AnimatePresence mode="wait">
+                {(() => {
+                  const { Icon, key } = heroFeatures[currentFeatureIndex];
+                  return (
+                    <motion.div
+                      key={key}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex items-center gap-2 text-white/90"
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span className="font-body text-sm">{t(key)}</span>
+                    </motion.div>
+                  );
+                })()}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
