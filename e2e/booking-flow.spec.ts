@@ -13,6 +13,20 @@ const SUPABASE_HOST = 'yvmzzgphvfvaovlmmjsa.supabase.co';
 // Deposit = $42 USD = ₡21,000 CRC
 // Receipt ₡40,000 is between ₡21,000 (100%) and ₡42,000 (200%) → valid
 
+// Always book dates in the future relative to the current run so the
+// `validateAndApply` guard in Step1Dates (`isBefore(parsed, today)`)
+// doesn't roll the input back to empty and leave checkout disabled.
+function daysFromNow(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  return `${dd}/${mm}/${d.getFullYear()}`;
+}
+
+const CHECK_IN_DATE = daysFromNow(30);
+const CHECK_OUT_DATE = daysFromNow(32);
+
 /**
  * Helper: Set a React controlled input value via __reactProps$ fiber.
  */
@@ -93,14 +107,14 @@ test.describe('Full Booking Flow E2E', () => {
 
     // ─── STEP 1: Select Dates ───
     const checkInInput = page.locator('input[placeholder="DD/MM/AAAA"]').first();
-    await setReactInput(checkInInput, '10/04/2026');
+    await setReactInput(checkInInput, CHECK_IN_DATE);
     await page.waitForTimeout(100);
     await triggerReactBlur(checkInInput);
     await page.waitForTimeout(500);
 
     const checkOutInput = page.locator('input[placeholder="DD/MM/AAAA"]').nth(1);
     await expect(checkOutInput).toBeEnabled({ timeout: 5000 });
-    await setReactInput(checkOutInput, '12/04/2026');
+    await setReactInput(checkOutInput, CHECK_OUT_DATE);
     await page.waitForTimeout(100);
     await triggerReactBlur(checkOutInput);
     await page.waitForTimeout(500);
@@ -203,14 +217,14 @@ test.describe('Full Booking Flow E2E', () => {
 
     // ─── STEP 1: Select Dates ───
     const checkInInput = page.locator('input[placeholder="DD/MM/AAAA"]').first();
-    await setReactInput(checkInInput, '10/04/2026');
+    await setReactInput(checkInInput, CHECK_IN_DATE);
     await page.waitForTimeout(100);
     await triggerReactBlur(checkInInput);
     await page.waitForTimeout(500);
 
     const checkOutInput = page.locator('input[placeholder="DD/MM/AAAA"]').nth(1);
     await expect(checkOutInput).toBeEnabled({ timeout: 5000 });
-    await setReactInput(checkOutInput, '12/04/2026');
+    await setReactInput(checkOutInput, CHECK_OUT_DATE);
     await page.waitForTimeout(100);
     await triggerReactBlur(checkOutInput);
     await page.waitForTimeout(500);
@@ -218,7 +232,7 @@ test.describe('Full Booking Flow E2E', () => {
     await expect(page.locator('text=/2\\s+noche/i')).toBeVisible({ timeout: 5000 });
     const continueToGuests = page.getByRole('button', { name: /^Continuar$/i });
     await expect(continueToGuests).toBeEnabled({ timeout: 5000 });
-    console.log('✅ Step 1: Dates selected (Apr 10-12, 2 nights)');
+    console.log(`✅ Step 1: Dates selected (${CHECK_IN_DATE} → ${CHECK_OUT_DATE}, 2 nights)`);
     await reactClick(continueToGuests);
 
     // ─── STEP 2: Select Guests ───
