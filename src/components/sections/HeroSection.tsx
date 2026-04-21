@@ -61,7 +61,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFeatureIndex((prev) => (prev + 1) % heroFeatures.length);
-    }, 3000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);
@@ -138,30 +138,21 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="hidden md:flex flex-wrap justify-center gap-4 sm:gap-8">
-              {heroFeatures.map(({ Icon, key }) => (
-                <div key={key} className="flex items-center gap-2 text-white/90">
-                  <Icon className="h-5 w-5" />
-                  <span className="font-body text-sm sm:text-base">{t(key)}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex md:hidden justify-center items-center h-7">
+            <div className="flex justify-center items-center h-7 overflow-hidden">
               <AnimatePresence mode="wait">
                 {(() => {
                   const { Icon, key } = heroFeatures[currentFeatureIndex];
                   return (
                     <motion.div
                       key={key}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
+                      initial={{ opacity: 0, x: -40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 40 }}
+                      transition={{ duration: 0.5, ease: 'easeInOut' }}
                       className="flex items-center gap-2 text-white/90"
                     >
                       <Icon className="h-5 w-5" />
-                      <span className="font-body text-sm">{t(key)}</span>
+                      <span className="font-body text-sm sm:text-base">{t(key)}</span>
                     </motion.div>
                   );
                 })()}
