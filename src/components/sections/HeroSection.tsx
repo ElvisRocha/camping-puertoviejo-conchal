@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Palmtree, Bird, Sun, PawPrint } from 'lucide-react';
+import { ShowerHead, Toilet, Flame, Car, Wifi, Shield } from 'lucide-react';
 
 declare const fbq: (...args: unknown[]) => void;
 
@@ -33,10 +33,12 @@ const heroImages = [
 ];
 
 const heroFeatures = [
-  { Icon: Palmtree, key: 'hero.features.beachfront' },
-  { Icon: Bird, key: 'hero.features.wildlife' },
-  { Icon: Sun, key: 'hero.features.sunsets' },
-  { Icon: PawPrint, key: 'hero.features.petFriendly' },
+  { Icon: ShowerHead, key: 'amenities.showers.title' },
+  { Icon: Toilet, key: 'amenities.restrooms.title' },
+  { Icon: Flame, key: 'amenities.campfire.title' },
+  { Icon: Car, key: 'amenities.parking.title' },
+  { Icon: Wifi, key: 'amenities.wifi.title' },
+  { Icon: Shield, key: 'amenities.security.title' },
 ] as const;
 
 const HeroSection = () => {
