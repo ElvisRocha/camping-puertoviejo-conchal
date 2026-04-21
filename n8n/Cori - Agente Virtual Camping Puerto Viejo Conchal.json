@@ -599,21 +599,6 @@
         -896,
         320
       ]
-    },
-    {
-      "parameters": {
-        "amount": 10,
-        "unit": "seconds"
-      },
-      "id": "3993301e-7ae1-42d6-948d-8561687eb4c9",
-      "name": "Wait typing (10s)",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -1680.0,
-        -80
-      ],
-      "webhookId": "7d702093-aebb-4b3b-beb9-e8148d94982c"
     }
   ],
   "pinData": {},
@@ -886,17 +871,6 @@
       ]
     },
     "Typing indicator (está escribiendo)1": {
-      "main": [
-        [
-          {
-            "node": "Wait typing (10s)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait typing (10s)": {
       "main": [
         [
           {
