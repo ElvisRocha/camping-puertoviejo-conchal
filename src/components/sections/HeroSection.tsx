@@ -61,7 +61,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFeatureIndex((prev) => (prev + 1) % heroFeatures.length);
-    }, 2500);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, []);
@@ -145,10 +145,10 @@ const HeroSection = () => {
                   return (
                     <motion.div
                       key={key}
-                      initial={{ opacity: 0, x: -40 }}
+                      initial={{ opacity: 0, x: 25 }}
                       animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 40 }}
-                      transition={{ duration: 0.5, ease: 'easeInOut' }}
+                      exit={{ opacity: 0, x: -25 }}
+                      transition={{ duration: 0.7, ease: 'easeInOut' }}
                       className="flex items-center gap-2 text-white/90"
                     >
                       <Icon className="h-5 w-5" />
