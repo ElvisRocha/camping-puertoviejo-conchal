@@ -37,6 +37,103 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "is-opt-out-keyword",
+              "leftValue": "={{ ['STOP','BAJA','NO'].includes(($json.textMessage || '').trim().toUpperCase()) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a8b7c6d5-e4f3-4a2b-9c8d-7e6f5a4b3c2d",
+      "name": "¿Opt-out keyword?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -3088,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://yvmzzgphvfvaovlmmjsa.supabase.co/rest/v1/whatsapp_opt_outs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "resolution=merge-duplicates"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"phone_number\": \"{{ $json.phoneNumber }}\",\n  \"push_name\": {{ JSON.stringify($json.pushName || '') }},\n  \"keyword\": \"{{ ($json.textMessage || '').trim().toUpperCase() }}\"\n}",
+        "options": {}
+      },
+      "id": "b9c8d7e6-f5a4-4b3c-ad9e-8f7a6b5c4d3e",
+      "name": "Registrar opt-out",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2880,
+        48
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "CPVC",
+        "remoteJid": "={{ $('Detectar tipo de mensaje').first().json.phoneNumber }}",
+        "messageText": "Listo, no vas a recibir más mensajes promocionales. Si necesitás hacer una reserva o consulta, escribinos normalmente.",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -2656,
+        48
+      ],
+      "id": "c0d9e8f7-a6b5-4c4d-be0f-9a8b7c6d5e4f",
+      "name": "Confirmar opt-out",
+      "credentials": {
+        "evolutionApi": {
+          "id": "9UUhtPh7o4Ya2Sns",
+          "name": "Evolution account CPVC"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
             "typeValidation": "strict",
             "version": 1
           },
@@ -618,7 +715,47 @@
       "main": [
         [
           {
+            "node": "¿Opt-out keyword?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Opt-out keyword?": {
+      "main": [
+        [
+          {
+            "node": "Registrar opt-out",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "¿Es audio?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar opt-out": {
+      "main": [
+        [
+          {
+            "node": "Confirmar opt-out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmar opt-out": {
+      "main": [
+        [
+          {
+            "node": "Responder webhook",
             "type": "main",
             "index": 0
           }

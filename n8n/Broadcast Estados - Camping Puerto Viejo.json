@@ -1,0 +1,264 @@
+{
+  "name": "Broadcast Estados - Camping Puerto Viejo",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "10a1b2c3-d4e5-4f67-8901-2a3b4c5d6e7f",
+      "name": "When clicking 'Execute workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ast-media-url",
+              "name": "media_url",
+              "value": "https://ejemplo.com/imagen-del-camping.jpg",
+              "type": "string"
+            },
+            {
+              "id": "ast-media-type",
+              "name": "media_type",
+              "value": "image",
+              "type": "string"
+            },
+            {
+              "id": "ast-caption",
+              "name": "caption",
+              "value": "¡Hola campistas! 🏕️ Este fin de semana tenemos espacio disponible. Escribinos si querés reservar.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "21b2c3d4-e5f6-4789-9012-3b4c5d6e7f80",
+      "name": "Input (editar antes de ejecutar)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -576,
+        0
+      ],
+      "notes": "Editá media_url, media_type (image|video) y caption antes de ejecutar."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://evolution.smartflow-automations.com/chat/findChats/CPVC",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "EVOLUTION_API"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": {}
+      },
+      "id": "32c3d4e5-f6a7-4890-a123-4c5d6e7f8091",
+      "name": "Listar chats Evolution",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -352,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://yvmzzgphvfvaovlmmjsa.supabase.co/rest/v1/whatsapp_opt_outs?select=phone_number",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bXp6Z3BodmZ2YW92bG1tanNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzgyNDEsImV4cCI6MjA4NDA1NDI0MX0.PrHpkAE07XXiNLNoNQTxBxcmNSIjAj1t5fu13ibdjY4"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "43d4e5f6-a7b8-4901-b234-5d6e7f809102",
+      "name": "Listar opt-outs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -128,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $('Input (editar antes de ejecutar)').first().json;\nconst chatsRaw = $('Listar chats Evolution').first().json;\nconst optOutsRaw = $('Listar opt-outs').all();\n\n// Evolution API can return an array directly or wrap it in {chats: [...]}; normalize.\nlet chatList = [];\nif (Array.isArray(chatsRaw)) {\n  chatList = chatsRaw;\n} else if (Array.isArray(chatsRaw?.chats)) {\n  chatList = chatsRaw.chats;\n} else if (Array.isArray(chatsRaw?.data)) {\n  chatList = chatsRaw.data;\n}\n\nconst optOutSet = new Set();\nfor (const it of optOutsRaw) {\n  const j = it.json;\n  if (Array.isArray(j)) {\n    for (const row of j) if (row.phone_number) optOutSet.add(row.phone_number);\n  } else if (j?.phone_number) {\n    optOutSet.add(j.phone_number);\n  }\n}\n\nconst totalChats = chatList.length;\nlet excludedGroups = 0;\nlet excludedOptOuts = 0;\nconst recipients = [];\nconst seen = new Set();\n\nfor (const chat of chatList) {\n  const remoteJid = chat.remoteJid || chat.id || '';\n  if (!remoteJid) continue;\n  if (remoteJid.endsWith('@g.us') || remoteJid.endsWith('@lid') || remoteJid === 'status@broadcast') {\n    excludedGroups++;\n    continue;\n  }\n  const phoneNumber = remoteJid.replace('@s.whatsapp.net', '').replace('@g.us', '').replace('@lid', '');\n  if (!phoneNumber) continue;\n  if (seen.has(phoneNumber)) continue;\n  seen.add(phoneNumber);\n  if (optOutSet.has(phoneNumber)) {\n    excludedOptOuts++;\n    continue;\n  }\n  recipients.push({\n    json: {\n      phoneNumber,\n      pushName: chat.pushName || chat.name || '',\n      media_url: input.media_url,\n      media_type: input.media_type,\n      caption: input.caption,\n      _meta: { totalChats, excludedGroups, excludedOptOuts }\n    }\n  });\n}\n\nif (recipients.length === 0) {\n  return [{\n    json: {\n      _no_recipients: true,\n      totalChats,\n      excludedGroups,\n      excludedOptOuts\n    }\n  }];\n}\n\nreturn recipients;"
+      },
+      "id": "54e5f6a7-b8c9-4012-c345-6e7f80910213",
+      "name": "Filtrar destinatarios",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://evolution.smartflow-automations.com/message/sendMedia/CPVC",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "EVOLUTION_API"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ number: $json.phoneNumber, mediatype: $json.media_type, media: $json.media_url, caption: ($json.caption || '') + '\\n\\n— Respondé STOP para no recibir más.' }) }}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 2000
+            }
+          }
+        }
+      },
+      "id": "65f6a7b8-c9d0-4123-d456-7f8091021324",
+      "name": "Enviar media",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst filter = $('Filtrar destinatarios').first().json || {};\nconst meta = filter._meta || {};\n\n// If the filter produced the no-recipients sentinel, items[0] will carry it.\nif (filter._no_recipients || items[0]?.json?._no_recipients) {\n  return [{\n    json: {\n      status: 'no_recipients',\n      total_chats: filter.totalChats ?? items[0]?.json?.totalChats ?? 0,\n      groups_excluidos: filter.excludedGroups ?? items[0]?.json?.excludedGroups ?? 0,\n      opt_outs_excluidos: filter.excludedOptOuts ?? items[0]?.json?.excludedOptOuts ?? 0,\n      enviados_ok: 0,\n      enviados_error: 0,\n      mensaje: 'No hay destinatarios elegibles.'\n    }\n  }];\n}\n\nlet ok = 0;\nlet err = 0;\nfor (const it of items) {\n  const j = it.json || {};\n  const isError = j.error || j.status === 'error' || (typeof j.statusCode === 'number' && j.statusCode >= 400);\n  if (isError) err++;\n  else ok++;\n}\n\nreturn [{\n  json: {\n    status: 'done',\n    total_chats: meta.totalChats ?? 0,\n    groups_excluidos: meta.excludedGroups ?? 0,\n    opt_outs_excluidos: meta.excludedOptOuts ?? 0,\n    enviados_ok: ok,\n    enviados_error: err,\n    total_procesados: items.length\n  }\n}];"
+      },
+      "id": "76a7b8c9-d0e1-4234-e567-809102132435",
+      "name": "Resumen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Input (editar antes de ejecutar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Input (editar antes de ejecutar)": {
+      "main": [
+        [
+          {
+            "node": "Listar chats Evolution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listar chats Evolution": {
+      "main": [
+        [
+          {
+            "node": "Listar opt-outs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listar opt-outs": {
+      "main": [
+        [
+          {
+            "node": "Filtrar destinatarios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar destinatarios": {
+      "main": [
+        [
+          {
+            "node": "Enviar media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar media": {
+      "main": [
+        [
+          {
+            "node": "Resumen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1a2b3c4d-5e6f-4789-0a1b-2c3d4e5f6a7b",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "broadcast-cpvc-2026",
+  "tags": [
+    {
+      "name": "whatsapp-bot"
+    },
+    {
+      "name": "broadcast"
+    }
+  ]
+}
