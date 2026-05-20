@@ -49,7 +49,10 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
 import AdminCalendar from '@/components/admin/AdminCalendar';
+import { useQueryClient } from '@tanstack/react-query';
+import { SITE_OFFLINE_QUERY_KEY } from '@/hooks/useSiteOfflineStatus';
 
 interface Booking {
   id: string;
@@ -146,6 +149,7 @@ function getPaymentBadge(booking: Booking) {
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -170,6 +174,8 @@ export default function AdminDashboard() {
   const [capacityInput, setCapacityInput] = useState('');
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [isLoadingSettings, setIsLoadingSettings] = useState(false);
+  const [siteOffline, setSiteOffline] = useState(false);
+  const [isSavingOffline, setIsSavingOffline] = useState(false);
 
   // Check auth and admin status
   useEffect(() => {
@@ -222,20 +228,60 @@ export default function AdminDashboard() {
     try {
       const { data, error } = await supabase
         .from('camping_settings')
-        .select('value, updated_at')
-        .eq('key', 'max_capacity_persons')
-        .single();
+        .select('key, value, updated_at')
+        .in('key', ['max_capacity_persons', 'site_offline']);
 
       if (error) throw error;
 
-      const val = parseInt(data.value, 10);
-      setMaxCapacity(val);
-      setCapacityInput(String(val));
-      setCapacityUpdatedAt(data.updated_at);
+      const capacityRow = data?.find((r) => r.key === 'max_capacity_persons');
+      if (capacityRow) {
+        const val = parseInt(capacityRow.value, 10);
+        setMaxCapacity(val);
+        setCapacityInput(String(val));
+        setCapacityUpdatedAt(capacityRow.updated_at);
+      }
+
+      const offlineRow = data?.find((r) => r.key === 'site_offline');
+      setSiteOffline(offlineRow?.value === 'true');
     } catch {
       // Table may not exist yet; leave fields empty
     } finally {
       setIsLoadingSettings(false);
+    }
+  };
+
+  const handleToggleOffline = async (next: boolean) => {
+    setIsSavingOffline(true);
+    const previous = siteOffline;
+    setSiteOffline(next);
+    try {
+      const now = new Date().toISOString();
+      const { error } = await supabase
+        .from('camping_settings')
+        .upsert(
+          { key: 'site_offline', value: next ? 'true' : 'false', updated_at: now },
+          { onConflict: 'key' }
+        );
+
+      if (error) throw error;
+
+      queryClient.invalidateQueries({ queryKey: SITE_OFFLINE_QUERY_KEY });
+      toast({
+        title: next ? 'Sitio offline' : 'Sitio online',
+        description: next
+          ? 'Los visitantes ven una página de "No disponible". /admin y /auth siguen accesibles.'
+          : 'El sitio público vuelve a estar visible para los visitantes.',
+      });
+    } catch (err: unknown) {
+      console.error('[settings] offline toggle error:', err);
+      setSiteOffline(previous);
+      toast({
+        variant: 'destructive',
+        title: 'Error al guardar',
+        description: 'No se pudo actualizar el estado del sitio. Intente de nuevo.',
+      });
+    } finally {
+      setIsSavingOffline(false);
     }
   };
 
@@ -976,7 +1022,26 @@ export default function AdminDashboard() {
                     <span className="text-sm">Cargando configuración…</span>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
+                    <div className="space-y-2 border-b pb-6">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="space-y-1">
+                          <label htmlFor="site-offline" className="text-sm font-medium text-foreground">
+                            Sitio offline
+                          </label>
+                          <p className="text-xs text-muted-foreground">
+                            Cuando está activo, los visitantes ven una página de "No disponible". El admin y login siguen accesibles.
+                          </p>
+                        </div>
+                        <Switch
+                          id="site-offline"
+                          checked={siteOffline}
+                          disabled={isSavingOffline}
+                          onCheckedChange={handleToggleOffline}
+                        />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
                       <label htmlFor="max-capacity" className="text-sm font-medium text-foreground">
                         Capacidad máxima de personas por noche

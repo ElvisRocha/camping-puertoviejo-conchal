@@ -811,5 +811,9 @@
       "description": "您的预订 {{code}} 已成功取消。期待再次见到您。",
       "closeButton": "关闭"
     }
+  },
+  "offline": {
+    "title": "网站不可用",
+    "subtitle": "此页面目前未启用。"
   }
 }

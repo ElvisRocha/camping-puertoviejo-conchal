@@ -1,11 +1,13 @@
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { useSiteOfflineStatus } from "./hooks/useSiteOfflineStatus";
+import OfflinePage from "./pages/OfflinePage";
 
 // Retry wrapper for lazy imports: if a JS chunk fails to download (flaky
 // network, CDN hiccup), retry once before propagating the error. This is the
@@ -33,6 +35,18 @@ const TermsAndConditionsPage = lazyWithRetry(() => import("./pages/TermsAndCondi
 const CancellationPolicyPage = lazyWithRetry(() => import("./pages/CancellationPolicyPage"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
+const OFFLINE_BYPASS_PATHS = ["/admin", "/auth"];
+
+function OfflineGate({ children }: { children: ReactNode }) {
+  const { isOffline, isLoading } = useSiteOfflineStatus();
+  const { pathname } = useLocation();
+  const isBypass = OFFLINE_BYPASS_PATHS.some((p) => pathname.startsWith(p));
+
+  if (isLoading) return <PageLoader />;
+  if (isOffline && !isBypass) return <OfflinePage />;
+  return <>{children}</>;
+}
+
 // Minimal loading fallback for better perceived performance
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-background">
@@ -56,20 +70,22 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/book" element={<BookPage />} />
-                <Route path="/gallery" element={<GalleryPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/privacy" element={<PrivacyPolicyPage />} />
-                <Route path="/terms" element={<TermsAndConditionsPage />} />
-                <Route path="/cancellation" element={<CancellationPolicyPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <OfflineGate>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/book" element={<BookPage />} />
+                  <Route path="/gallery" element={<GalleryPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/auth" element={<AuthPage />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                  <Route path="/terms" element={<TermsAndConditionsPage />} />
+                  <Route path="/cancellation" element={<CancellationPolicyPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </OfflineGate>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>

@@ -811,5 +811,9 @@
       "description": "Ihre Buchung {{code}} wurde erfolgreich storniert. Wir hoffen, Sie bald wiederzusehen.",
       "closeButton": "Schließen"
     }
+  },
+  "offline": {
+    "title": "Seite nicht verfügbar",
+    "subtitle": "Diese Seite ist derzeit nicht aktiv."
   }
 }

@@ -811,5 +811,9 @@
       "description": "Your booking {{code}} has been cancelled successfully. We hope to see you soon.",
       "closeButton": "Close"
     }
+  },
+  "offline": {
+    "title": "Site unavailable",
+    "subtitle": "This page is not active at the moment."
   }
 }
