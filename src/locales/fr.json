@@ -811,5 +811,9 @@
       "description": "Votre réservation {{code}} a été annulée avec succès. Nous espérons vous revoir bientôt.",
       "closeButton": "Fermer"
     }
+  },
+  "offline": {
+    "title": "Site indisponible",
+    "subtitle": "Cette page n'est pas active pour le moment."
   }
 }
